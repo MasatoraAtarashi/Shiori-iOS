@@ -13,7 +13,35 @@
 		62215594232B79B900DD4AB4 /* Shiori.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 62215592232B79B900DD4AB4 /* Shiori.xcdatamodeld */; };
 		62215596232B79BA00DD4AB4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62215595232B79BA00DD4AB4 /* Assets.xcassets */; };
 		62215599232B79BA00DD4AB4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62215597232B79BA00DD4AB4 /* LaunchScreen.storyboard */; };
+		622155A7232B7A2F00DD4AB4 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622155A6232B7A2F00DD4AB4 /* ShareViewController.swift */; };
+		622155AA232B7A2F00DD4AB4 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 622155A8232B7A2F00DD4AB4 /* MainInterface.storyboard */; };
+		622155AE232B7A2F00DD4AB4 /* Share.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 622155A4232B7A2E00DD4AB4 /* Share.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		622155B6232B944200DD4AB4 /* GetData.js in Resources */ = {isa = PBXBuildFile; fileRef = 622155B5232B944200DD4AB4 /* GetData.js */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		622155AC232B7A2F00DD4AB4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 62215580232B79B900DD4AB4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 622155A3232B7A2E00DD4AB4;
+			remoteInfo = Share;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		622155B2232B7A2F00DD4AB4 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				622155AE232B7A2F00DD4AB4 /* Share.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		62215588232B79B900DD4AB4 /* Shiori.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shiori.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -24,10 +52,24 @@
 		62215595232B79BA00DD4AB4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		62215598232B79BA00DD4AB4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6221559A232B79BA00DD4AB4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		622155A4232B7A2E00DD4AB4 /* Share.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Share.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		622155A6232B7A2F00DD4AB4 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
+		622155A9232B7A2F00DD4AB4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		622155AB232B7A2F00DD4AB4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		622155B3232B7A8D00DD4AB4 /* Share.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Share.entitlements; sourceTree = "<group>"; };
+		622155B4232B7AD100DD4AB4 /* Shiori.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Shiori.entitlements; sourceTree = "<group>"; };
+		622155B5232B944200DD4AB4 /* GetData.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = GetData.js; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		62215585232B79B900DD4AB4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		622155A1232B7A2E00DD4AB4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -41,6 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				6221558A232B79B900DD4AB4 /* Shiori */,
+				622155A5232B7A2E00DD4AB4 /* Share */,
 				62215589232B79B900DD4AB4 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -49,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				62215588232B79B900DD4AB4 /* Shiori.app */,
+				622155A4232B7A2E00DD4AB4 /* Share.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -56,6 +100,7 @@
 		6221558A232B79B900DD4AB4 /* Shiori */ = {
 			isa = PBXGroup;
 			children = (
+				622155B4232B7AD100DD4AB4 /* Shiori.entitlements */,
 				6221558B232B79B900DD4AB4 /* AppDelegate.swift */,
 				6221558D232B79B900DD4AB4 /* ViewController.swift */,
 				6221558F232B79B900DD4AB4 /* Main.storyboard */,
@@ -65,6 +110,18 @@
 				62215592232B79B900DD4AB4 /* Shiori.xcdatamodeld */,
 			);
 			path = Shiori;
+			sourceTree = "<group>";
+		};
+		622155A5232B7A2E00DD4AB4 /* Share */ = {
+			isa = PBXGroup;
+			children = (
+				622155B3232B7A8D00DD4AB4 /* Share.entitlements */,
+				622155A6232B7A2F00DD4AB4 /* ShareViewController.swift */,
+				622155A8232B7A2F00DD4AB4 /* MainInterface.storyboard */,
+				622155AB232B7A2F00DD4AB4 /* Info.plist */,
+				622155B5232B944200DD4AB4 /* GetData.js */,
+			);
+			path = Share;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -77,15 +134,34 @@
 				62215584232B79B900DD4AB4 /* Sources */,
 				62215585232B79B900DD4AB4 /* Frameworks */,
 				62215586232B79B900DD4AB4 /* Resources */,
+				622155B2232B7A2F00DD4AB4 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				622155AD232B7A2F00DD4AB4 /* PBXTargetDependency */,
 			);
 			name = Shiori;
 			productName = Shiori;
 			productReference = 62215588232B79B900DD4AB4 /* Shiori.app */;
 			productType = "com.apple.product-type.application";
+		};
+		622155A3232B7A2E00DD4AB4 /* Share */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 622155AF232B7A2F00DD4AB4 /* Build configuration list for PBXNativeTarget "Share" */;
+			buildPhases = (
+				622155A0232B7A2E00DD4AB4 /* Sources */,
+				622155A1232B7A2E00DD4AB4 /* Frameworks */,
+				622155A2232B7A2E00DD4AB4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Share;
+			productName = Share;
+			productReference = 622155A4232B7A2E00DD4AB4 /* Share.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -99,6 +175,25 @@
 				TargetAttributes = {
 					62215587232B79B900DD4AB4 = {
 						CreatedOnToolsVersion = 10.3;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
+					};
+					622155A3232B7A2E00DD4AB4 = {
+						CreatedOnToolsVersion = 10.3;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -116,6 +211,7 @@
 			projectRoot = "";
 			targets = (
 				62215587232B79B900DD4AB4 /* Shiori */,
+				622155A3232B7A2E00DD4AB4 /* Share */,
 			);
 		};
 /* End PBXProject section */
@@ -128,6 +224,15 @@
 				62215599232B79BA00DD4AB4 /* LaunchScreen.storyboard in Resources */,
 				62215596232B79BA00DD4AB4 /* Assets.xcassets in Resources */,
 				62215591232B79B900DD4AB4 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		622155A2232B7A2E00DD4AB4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				622155AA232B7A2F00DD4AB4 /* MainInterface.storyboard in Resources */,
+				622155B6232B944200DD4AB4 /* GetData.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -144,7 +249,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		622155A0232B7A2E00DD4AB4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				622155A7232B7A2F00DD4AB4 /* ShareViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		622155AD232B7A2F00DD4AB4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 622155A3232B7A2E00DD4AB4 /* Share */;
+			targetProxy = 622155AC232B7A2F00DD4AB4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		6221558F232B79B900DD4AB4 /* Main.storyboard */ = {
@@ -161,6 +282,14 @@
 				62215598232B79BA00DD4AB4 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		622155A8232B7A2F00DD4AB4 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				622155A9232B7A2F00DD4AB4 /* Base */,
+			);
+			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -285,7 +414,9 @@
 		6221559E232B79BA00DD4AB4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Shiori/Shiori.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = PMRC683Z7N;
 				INFOPLIST_FILE = Shiori/Info.plist;
@@ -303,7 +434,9 @@
 		6221559F232B79BA00DD4AB4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Shiori/Shiori.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = PMRC683Z7N;
 				INFOPLIST_FILE = Shiori/Info.plist;
@@ -313,6 +446,46 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.masatoraatarashi.Shiori;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		622155B0232B7A2F00DD4AB4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Share/Share.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = PMRC683Z7N;
+				INFOPLIST_FILE = Share/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.masatoraatarashi.Shiori.Share;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		622155B1232B7A2F00DD4AB4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Share/Share.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = PMRC683Z7N;
+				INFOPLIST_FILE = Share/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.masatoraatarashi.Shiori.Share;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -335,6 +508,15 @@
 			buildConfigurations = (
 				6221559E232B79BA00DD4AB4 /* Debug */,
 				6221559F232B79BA00DD4AB4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		622155AF232B7A2F00DD4AB4 /* Build configuration list for PBXNativeTarget "Share" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				622155B0232B7A2F00DD4AB4 /* Debug */,
+				622155B1232B7A2F00DD4AB4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
