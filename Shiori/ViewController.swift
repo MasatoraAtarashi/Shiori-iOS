@@ -8,43 +8,64 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     let suiteName: String = "group.com.masatoraatarashi.Shiori"
     let keyName: String = "shareData"
     
-    @IBOutlet weak var unkoLabel: UILabel!
+    var pageTitle: String = ""
+    var link: String = ""
+    var positionX: Int = 0
+    var positionY: Int = 0
     
-    @IBAction func unko(_ sender: Any) {
-        getStoredDataFromUserDefault()
-    }
+    @IBOutlet weak var tableView: UITableView!
+    
+    fileprivate let refreshCtl = UIRefreshControl()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         getStoredDataFromUserDefault()
+        
+        self.tableView.refreshControl = refreshCtl
+        self.tableView.refreshControl?.addTarget(self, action: #selector(ViewController.getStoredDataFromUserDefault), for: .valueChanged)
     }
     
-    func getStoredDataFromUserDefault() {
+    @objc func getStoredDataFromUserDefault() {
         let sharedDefaults: UserDefaults = UserDefaults(suiteName: self.suiteName)!
-        if let url = sharedDefaults.object(forKey: self.keyName) as? String {
+        let results = sharedDefaults.dictionary(forKey: self.keyName)
             // Safari を起動してそのURLに飛ぶ
 //            print(url)
-            displayStoredData(url)
+        self.link = results?["url"] as? String ?? ""
+        self.pageTitle = results?["time"] as? String ?? "ばぁ"
+        self.positionX = Int(results?["positionX"] as? String ?? "0") ?? 0
+        self.positionY = Int(results?["positionY"] as? String ?? "0") ?? 0
+        print(positionY)
 //            UIApplication.shared.open(URL(string: url)!)
             // データの削除
             //sharedDefaults.removeObject(forKey: keyName)
-        } else {
-            print("失敗")
-        }
+        tableView.reloadData()
+        self.tableView.refreshControl?.endRefreshing()
     }
     
-    func displayStoredData(_ url: String = "") {
-        print(url)
-        if unkoLabel != nil {
-         unkoLabel.text = url
-        } else {
-            print("nil")
-        }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+  
+        let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        cell.textLabel!.text = self.pageTitle
+        return cell
+        
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let webViewController = WebViewController()
+        webViewController.targetUrl = self.link
+        webViewController.positionX = self.positionX
+        webViewController.positionY = self.positionY
+        parent!.navigationController!.pushViewController(webViewController , animated: true)
     }
 }
 

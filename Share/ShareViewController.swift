@@ -15,6 +15,21 @@ class ShareViewController: SLComposeServiceViewController {
     let suiteName: String = "group.com.masatoraatarashi.Shiori"
     let keyName: String = "shareData"
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // titleName
+        self.title = "テスト"
+        
+        // color
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+        self.navigationController?.navigationBar.backgroundColor = UIColor(red:1.0, green:0.75, blue:0.5, alpha:1.0)
+        
+        // postName
+        let controller: UIViewController = self.navigationController!.viewControllers.first!
+        controller.navigationItem.rightBarButtonItem!.title = "保存"
+    }
+    
     override func isContentValid() -> Bool {
         // Do validation of contentText and/or NSExtensionContext attachments here
         return true
@@ -82,25 +97,22 @@ class ShareViewController: SLComposeServiceViewController {
 //                                    println(results["url"]);
 //                                    println(results["title"]);
                                     let sharedDefaults: UserDefaults = UserDefaults(suiteName: self.suiteName)!
-                                    if let result = results["position"] {
-                                        sharedDefaults.set(result, forKey: self.keyName)  // そのページのURL保存
+                                    if let result = results["url"] {
+                                        let resultsDic = ["url": results["url"], "title": results["title"], "positionX": results["positionX"], "positionY": results["positionY"], "time": results["time"]]
+                                        sharedDefaults.set(resultsDic, forKey: self.keyName)  // そのページのURL保存
                                         sharedDefaults.synchronize()
+                                        self.extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
                                     } else {
-                                        sharedDefaults.set("失敗", forKey: self.keyName)  // そのページのURL保存
-                                        sharedDefaults.synchronize()
+                                        self.extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
                                     }
                                 })
                             } else {
-                                let sharedDefaults: UserDefaults = UserDefaults(suiteName: self.suiteName)!
-                                sharedDefaults.set("けつ", forKey: self.keyName)  // そのページのURL保存
-                                sharedDefaults.synchronize()
+                                self.extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
                             }
                             
                         })
                     } else {
-                        let sharedDefaults: UserDefaults = UserDefaults(suiteName: self.suiteName)!
-                        sharedDefaults.set("うんこ", forKey: self.keyName)  // そのページのURL保存
-                        sharedDefaults.synchronize()
+                        self.extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
                     }
                 }
                 
@@ -108,6 +120,8 @@ class ShareViewController: SLComposeServiceViewController {
         }
 
     }
+    
+    
 
     override func configurationItems() -> [Any]! {
         // To add configuration options via table cells at the bottom of the sheet, return an array of SLComposeSheetConfigurationItem here.
