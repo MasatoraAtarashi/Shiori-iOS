@@ -40,7 +40,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.pageTitle = results?["time"] as? String ?? "ばぁ"
         self.positionX = Int(results?["positionX"] as? String ?? "0") ?? 0
         self.positionY = Int(results?["positionY"] as? String ?? "0") ?? 0
-        print(positionY)
+        print(pageTitle)
 //            UIApplication.shared.open(URL(string: url)!)
             // データの削除
             //sharedDefaults.removeObject(forKey: keyName)
