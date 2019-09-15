@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -18,12 +19,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var positionX: Int = 0
     var positionY: Int = 0
     
+    var articles: [Entry] = []
+    
     @IBOutlet weak var tableView: UITableView!
     
     fileprivate let refreshCtl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.tableView.register(UINib(nibName: "FeedTableViewCell", bundle: nil), forCellReuseIdentifier: "FeedTableViewCell")
+        
         // Do any additional setup after loading the view.
         getStoredDataFromUserDefault()
         
@@ -32,40 +38,50 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     @objc func getStoredDataFromUserDefault() {
+        self.articles = []
         let sharedDefaults: UserDefaults = UserDefaults(suiteName: self.suiteName)!
-        let results = sharedDefaults.dictionary(forKey: self.keyName)
+//        let results = sharedDefaults.dictionary(forKey: self.keyName)
             // Safari を起動してそのURLに飛ぶ
 //            print(url)
-        self.link = results?["url"] as? String ?? ""
-        self.pageTitle = results?["url"] as? String ?? "ばぁ"
-        self.positionX = Int(results?["positionX"] as? String ?? "0") ?? 0
-        self.positionY = Int(results?["positionY"] as? String ?? "0") ?? 0
-        print(pageTitle)
-//            UIApplication.shared.open(URL(string: url)!)
-            // データの削除
-            //sharedDefaults.removeObject(forKey: keyName)
+//        self.link = results?["url"] as? String ?? ""
+//        self.pageTitle = results?["title"] as? String ?? ""
+//        print(self.pageTitle)
+//        self.positionX = Int(results?["positionX"] as? String ?? "0") ?? 0
+//        self.positionY = Int(results?["positionY"] as? String ?? "0") ?? 0
+        var storedArray: [Dictionary<String, String>] = sharedDefaults.array(forKey: self.keyName) as? [Dictionary<String, String>] ?? []
+        for result in storedArray {
+            self.articles.append(Entry(
+                title: result["title"]!,
+                link: result["url"]!,
+                imageURL: result["image"]!,
+                positionX: result["positionX"]!,
+                positionY: result["positionY"]!
+            ))
+        }
         tableView.reloadData()
         self.tableView.refreshControl?.endRefreshing()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        print(articles.count)
+        return articles.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
   
-        let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel!.text = self.pageTitle
+        let cell = tableView.dequeueReusableCell(withIdentifier: "FeedTableViewCell", for: indexPath as IndexPath) as! FeedTableViewCell
+        let entry = self.articles[indexPath.row]
+        cell.title.text = entry.title
+        cell.thumbnail.sd_setImage(with: URL(string: entry.imageURL))
         return cell
         
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let webViewController = WebViewController()
-        webViewController.targetUrl = self.link
-        webViewController.positionX = self.positionX
-        webViewController.positionY = self.positionY
+        webViewController.targetUrl = self.articles[indexPath.row].link
+        webViewController.positionX = Int(self.articles[indexPath.row].positionX) ?? 0
+        webViewController.positionY = Int(self.articles[indexPath.row].positionY) ?? 0
         parent!.navigationController!.pushViewController(webViewController , animated: true)
     }
 }
-

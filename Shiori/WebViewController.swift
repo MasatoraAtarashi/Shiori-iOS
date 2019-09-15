@@ -40,8 +40,6 @@ class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
         webView = WKWebView(frame: .zero, configuration: webConfiguration)
         webView.uiDelegate = self
         webView.navigationDelegate = self
-        //        print(self.view)
-        //        view.addSubview(webView)
         view = webView
         
         webView.allowsBackForwardNavigationGestures = true
@@ -149,12 +147,13 @@ extension WebViewController {
     
     func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
         webView.evaluateJavaScript("window.scrollTo(\(positionX),\(positionY))", completionHandler: nil)
-        positionX = 0
-        positionY = 0
         print("遷移開始")
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        webView.evaluateJavaScript("window.scrollTo(\(positionX),\(positionY))", completionHandler: nil)
+        positionX = 0
+        positionY = 0
         print("loaded")
         self.refreshControll.endRefreshing()
         //        backButton.isHidden = (webView.canGoBack) ? false : true

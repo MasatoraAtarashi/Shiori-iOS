@@ -22,9 +22,17 @@ MyPreprocessor.prototype = {
                 video_id = video_id.substring(0, ampersandPosition);
             }
             url = "https://youtu.be/" + video_id + "?t=" + time;
+        } else if (url.match(/pornhub/) && time != "0") {
+            url = url + "&t=" + time
+        } else if (url.match(/nicovideo/) && time != "0") {
+            url = url + "?from=" + time
+        } else if (url.match(/dailymotion/) && time != "0") {
+            url = url + "?start=" + time
         }
         
-        arguments.completionFunction({"url": url, "title": document.title, "positionX": positionLeft, "positionY": positionTop, "time": time});
+        var image = document.images[0].src;
+        
+        arguments.completionFunction({"url": url, "title": document.title, "positionX": positionLeft, "positionY": positionTop, "time": time, "image": image});
         //arguments.completionFunction({"URL": document.URL, "pageSource": document.documentElement.outerHTML, "title": document.title, "selection": window.getSelection().toString()});
     },
     
