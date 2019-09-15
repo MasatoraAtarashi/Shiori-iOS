@@ -37,7 +37,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             // Safari を起動してそのURLに飛ぶ
 //            print(url)
         self.link = results?["url"] as? String ?? ""
-        self.pageTitle = results?["time"] as? String ?? "ばぁ"
+        self.pageTitle = results?["url"] as? String ?? "ばぁ"
         self.positionX = Int(results?["positionX"] as? String ?? "0") ?? 0
         self.positionY = Int(results?["positionY"] as? String ?? "0") ?? 0
         print(pageTitle)
