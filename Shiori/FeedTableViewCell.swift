@@ -7,10 +7,10 @@
 //
 
 import UIKit
+import SwipeCellKit
 
-class FeedTableViewCell: UITableViewCell {
-    
-    
+
+class FeedTableViewCell: SwipeTableViewCell {
     
     @IBOutlet weak var thumbnail: UIImageView!
     @IBOutlet weak var title: UILabel!

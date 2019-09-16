@@ -8,8 +8,9 @@
 
 import UIKit
 import SDWebImage
+import SwipeCellKit
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SwipeTableViewCellDelegate {
     
     let suiteName: String = "group.com.masatoraatarashi.Shiori"
     let keyName: String = "shareData"
@@ -33,26 +34,25 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // Do any additional setup after loading the view.
         getStoredDataFromUserDefault()
         
-        self.tableView.refreshControl = refreshCtl
-        self.tableView.refreshControl?.addTarget(self, action: #selector(ViewController.getStoredDataFromUserDefault), for: .valueChanged)
+        tableView.refreshControl = refreshCtl
+        tableView.refreshControl?.addTarget(self, action: #selector(ViewController.getStoredDataFromUserDefault), for: .valueChanged)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setToolbarHidden(true, animated: true)
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        let screenRect = UIScreen.main.bounds
+        tableView.frame = CGRect(x: 0, y: 0, width: screenRect.width, height: screenRect.height)
+    }
+    
     @objc func getStoredDataFromUserDefault() {
         self.articles = []
         let sharedDefaults: UserDefaults = UserDefaults(suiteName: self.suiteName)!
-//        let results = sharedDefaults.dictionary(forKey: self.keyName)
-            // Safari を起動してそのURLに飛ぶ
-//            print(url)
-//        self.link = results?["url"] as? String ?? ""
-//        self.pageTitle = results?["title"] as? String ?? ""
-//        print(self.pageTitle)
-//        self.positionX = Int(results?["positionX"] as? String ?? "0") ?? 0
-//        self.positionY = Int(results?["positionY"] as? String ?? "0") ?? 0
-        var storedArray: [Dictionary<String, String>] = sharedDefaults.array(forKey: self.keyName) as? [Dictionary<String, String>] ?? []
+        var storedArray: [Dictionary<String, String>] = sharedDefaults.array(forKey: self.keyName) as? [Dictionary<String, String>] ?? [["title": "うんこ", "url": "", "image": "https://publicdomainq.net/images/201707/22s/publicdomainq-0011380lby.jpg", "positionX": "", "positionY": ""], ["title": "ｆｊをえｆじゃじぇｆｊふぁおじぇｆじゃｊふぇ", "url": "", "image": "https://publicdomainq.net/images/201707/22s/publicdomainq-0011380lby.jpg", "positionX": "", "positionY": ""]]
         for result in storedArray {
             self.articles.append(Entry(
                 title: result["title"]!,
@@ -75,6 +75,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
   
         let cell = tableView.dequeueReusableCell(withIdentifier: "FeedTableViewCell", for: indexPath as IndexPath) as! FeedTableViewCell
         let entry = self.articles[indexPath.row]
+        cell.delegate = self
         cell.title.text = entry.title
         cell.thumbnail.sd_setImage(with: URL(string: entry.imageURL))
         return cell
@@ -103,4 +104,37 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 200
     }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
+        guard orientation == .right else { return nil }
+        
+        let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
+            self.deleteCell(at: indexPath)
+        }
+        
+        // customize the action appearance
+        deleteAction.image = UIImage(named: "delete")
+        
+        return [deleteAction]
+    }
+    
+//    func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeOptions {
+//        var options = SwipeOptions()
+//        unkoCell(at: indexPath)
+////        options.expansionStyle = .destructive
+//        return options
+//    }
+    
+    func deleteCell(at indexPath: IndexPath) {
+        self.articles.remove(at: indexPath.row)
+        let sharedDefaults: UserDefaults = UserDefaults(suiteName: self.suiteName)!
+        var storedArray: [Dictionary<String, String>] = sharedDefaults.array(forKey: self.keyName) as? [Dictionary<String, String>] ?? []
+        storedArray.remove(at: indexPath.row)
+        sharedDefaults.set(storedArray, forKey: self.keyName)
+        tableView.reloadData()
+    }
+    
+//    func unkoCell(at indexPath: IndexPath) {
+//        print("あば")
+//    }
 }

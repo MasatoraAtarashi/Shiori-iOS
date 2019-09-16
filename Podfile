@@ -15,6 +15,7 @@ target 'Shiori' do
 
   # Pods for Shiori
   pod 'SDWebImage'
-  pod 'SwipeCellKit', :git => 'https://github.com/SwipeCellKit/SwipeCellKit.git', :branch => 'develop'
+  pod 'SwipeCellKit', '2.6.0'
+  pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chameleon.git'
 
 end
