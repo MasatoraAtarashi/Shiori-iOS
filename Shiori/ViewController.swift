@@ -118,12 +118,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return [deleteAction]
     }
     
-//    func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeOptions {
-//        var options = SwipeOptions()
-//        unkoCell(at: indexPath)
-////        options.expansionStyle = .destructive
-//        return options
-//    }
+    func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeOptions {
+        var options = SwipeOptions()
+        options.expansionStyle = .destructive(automaticallyDelete: false)
+        return options
+    }
     
     func deleteCell(at indexPath: IndexPath) {
         self.articles.remove(at: indexPath.row)
@@ -134,7 +133,5 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         tableView.reloadData()
     }
     
-//    func unkoCell(at indexPath: IndexPath) {
-//        print("あば")
-//    }
+
 }
