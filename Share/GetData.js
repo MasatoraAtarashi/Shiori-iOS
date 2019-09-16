@@ -32,7 +32,14 @@ MyPreprocessor.prototype = {
         
         var image = document.images[0].src;
         
-        arguments.completionFunction({"url": url, "title": document.title, "positionX": positionLeft, "positionY": positionTop, "time": time, "image": image});
+        var dateString = ""
+        var date = new Date();
+        var year = String(date.getFullYear());
+        var month = String(date.getMonth() + 1);
+        var day = String(date.getDate());
+        dateString = year + "." + month + "." + day
+        
+        arguments.completionFunction({"url": url, "title": document.title, "positionX": positionLeft, "positionY": positionTop, "time": time, "image": image, "date": dateString});
         //arguments.completionFunction({"URL": document.URL, "pageSource": document.documentElement.outerHTML, "title": document.title, "selection": window.getSelection().toString()});
     },
     

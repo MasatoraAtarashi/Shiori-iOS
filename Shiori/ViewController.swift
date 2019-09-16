@@ -52,14 +52,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @objc func getStoredDataFromUserDefault() {
         self.articles = []
         let sharedDefaults: UserDefaults = UserDefaults(suiteName: self.suiteName)!
-        var storedArray: [Dictionary<String, String>] = sharedDefaults.array(forKey: self.keyName) as? [Dictionary<String, String>] ?? [["title": "うんこ", "url": "", "image": "https://publicdomainq.net/images/201707/22s/publicdomainq-0011380lby.jpg", "positionX": "", "positionY": ""], ["title": "ｆｊをえｆじゃじぇｆｊふぁおじぇｆじゃｊふぇ", "url": "", "image": "https://publicdomainq.net/images/201707/22s/publicdomainq-0011380lby.jpg", "positionX": "", "positionY": ""]]
+        var storedArray: [Dictionary<String, String>] = sharedDefaults.array(forKey: self.keyName) as? [Dictionary<String, String>] ?? []
         for result in storedArray {
             self.articles.append(Entry(
                 title: result["title"]!,
                 link: result["url"]!,
                 imageURL: result["image"]!,
                 positionX: result["positionX"]!,
-                positionY: result["positionY"]!
+                positionY: result["positionY"]!,
+                date: result["date"]!
             ))
         }
         tableView.reloadData()
@@ -77,6 +78,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let entry = self.articles[indexPath.row]
         cell.delegate = self
         cell.title.text = entry.title
+        cell.subContent.text = entry.link
         cell.thumbnail.sd_setImage(with: URL(string: entry.imageURL))
         return cell
         

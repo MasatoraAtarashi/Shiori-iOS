@@ -14,4 +14,5 @@ struct Entry {
     var imageURL : String
     var positionX : String
     var positionY : String
+    var date : String
 }
