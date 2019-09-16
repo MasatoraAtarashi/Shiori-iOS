@@ -37,6 +37,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.tableView.refreshControl?.addTarget(self, action: #selector(ViewController.getStoredDataFromUserDefault), for: .valueChanged)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setToolbarHidden(true, animated: true)
+    }
+    
     @objc func getStoredDataFromUserDefault() {
         self.articles = []
         let sharedDefaults: UserDefaults = UserDefaults(suiteName: self.suiteName)!
@@ -82,6 +86,21 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         webViewController.targetUrl = self.articles[indexPath.row].link
         webViewController.positionX = Int(self.articles[indexPath.row].positionX) ?? 0
         webViewController.positionY = Int(self.articles[indexPath.row].positionY) ?? 0
-        parent!.navigationController!.pushViewController(webViewController , animated: true)
+        self.navigationController!.pushViewController(webViewController , animated: true)
+        tableView.deselectRow(at: indexPath as IndexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 40)) // assuming 40 height for footer.
+        return footerView
+    }
+    
+    // set height for footer
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 200
     }
 }
