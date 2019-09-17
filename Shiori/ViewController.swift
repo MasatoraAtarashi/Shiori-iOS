@@ -10,7 +10,8 @@ import UIKit
 import SDWebImage
 import SwipeCellKit
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SwipeTableViewCellDelegate {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SwipeTableViewCellDelegate, UISearchBarDelegate, UISearchResultsUpdating {
+    
     
     let suiteName: String = "group.com.masatoraatarashi.Shiori"
     let keyName: String = "shareData"
@@ -21,10 +22,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var positionY: Int = 0
     
     var articles: [Entry] = []
+    var searchResults:[Entry] = []
+    
+    var searchController = UISearchController()
     
     @IBOutlet weak var tableView: UITableView!
     
     var unreadMode: Bool = false
+    
     
     @IBAction func changeViewForReaded(_ sender: UIBarButtonItem) {
         if tableView.isEditing {
@@ -82,6 +87,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         tableView.refreshControl = refreshCtl
         tableView.refreshControl?.addTarget(self, action: #selector(ViewController.getStoredDataFromUserDefault), for: .valueChanged)
+        
+        searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.hidesNavigationBarDuringPresentation = false
+        self.navigationItem.searchController = searchController
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -133,20 +145,30 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(articles.count)
-        return articles.count
+        if searchController.isActive {
+            return searchResults.count
+        } else {
+            return articles.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
   
         let cell = tableView.dequeueReusableCell(withIdentifier: "FeedTableViewCell", for: indexPath as IndexPath) as! FeedTableViewCell
-        let entry = self.articles[indexPath.row]
-        cell.delegate = self
-        cell.title.text = entry.title
-        cell.subContent.text = entry.link
-        cell.thumbnail.sd_setImage(with: URL(string: entry.imageURL))
+        if searchController.isActive {
+            let entry = self.searchResults[indexPath.row]
+            cell.delegate = self
+            cell.title.text = entry.title
+            cell.subContent.text = entry.link
+            cell.thumbnail.sd_setImage(with: URL(string: entry.imageURL))
+        } else {
+            let entry = self.articles[indexPath.row]
+            cell.delegate = self
+            cell.title.text = entry.title
+            cell.subContent.text = entry.link
+            cell.thumbnail.sd_setImage(with: URL(string: entry.imageURL))
+        }
         return cell
-        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -239,6 +261,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         super.setEditing(editing, animated: animated)
         //tableViewの編集モードを切り替える
         tableView.isEditing = editing //editingはBool型でeditButtonに依存する変数
+    }
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        self.searchResults = articles.filter{
+            // 大文字と小文字を区別せずに検索
+            $0.title.lowercased().contains(searchController.searchBar.text!.lowercased())
+        }
+        self.tableView.reloadData()
     }
 
 }

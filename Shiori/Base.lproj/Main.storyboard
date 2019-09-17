@@ -56,11 +56,7 @@
                             </connections>
                         </barButtonItem>
                     </toolbarItems>
-                    <navigationItem key="navigationItem" title="My List" id="ErQ-jg-9sG">
-                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="FAz-wa-9xZ">
-                            <color key="tintColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="My List" id="ErQ-jg-9sG"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="bottomToolbarLeftItem" destination="XGY-6s-5gq" id="Ws2-mx-1dr"/>
