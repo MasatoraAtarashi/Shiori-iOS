@@ -164,6 +164,17 @@ extension WebViewController {
         //        backButton.isHidden = (webView.canGoBack) ? false : true
         //        forwadButton.isHidden = (webView.canGoForward) ? false : true
     }
+    
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        
+        // リンククリックは全部Safariに飛ばしたい
+        if navigationAction.navigationType == WKNavigationType.linkActivated {
+            UIApplication.shared.open(navigationAction.request.url!)
+            decisionHandler(.cancel)
+        } else {
+            decisionHandler(.allow)
+        }
+    }
 }
 
 // target=_blank対策
