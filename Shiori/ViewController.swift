@@ -9,6 +9,7 @@
 import UIKit
 import SDWebImage
 import SwipeCellKit
+import CoreData
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SwipeTableViewCellDelegate, UISearchBarDelegate, UISearchResultsUpdating {
     
@@ -21,8 +22,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var positionX: Int = 0
     var positionY: Int = 0
     
-    var articles: [Entry] = []
-    var searchResults:[Entry] = []
+    var articles: [Article] = []
+    var searchResults:[Article] = []
     
     var searchController = UISearchController()
     
@@ -123,22 +124,52 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.articles = []
         let sharedDefaults: UserDefaults = UserDefaults(suiteName: self.suiteName)!
         var storedArray: [Dictionary<String, String>] = sharedDefaults.array(forKey: self.keyName) as? [Dictionary<String, String>] ?? []
+        
+        
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
         for result in storedArray {
-            if unreadMode {
-                if !Bool(result["haveRead"]!)! {
-                    continue
-                }
-            }
-            self.articles.append(Entry(
-                title: result["title"]!,
-                link: result["url"]!,
-                imageURL: result["image"]!,
-                positionX: result["positionX"]!,
-                positionY: result["positionY"]!,
-                date: result["date"]!,
-                haveRead: Bool(result["haveRead"]!)!
-            ))
+            let article = Article(context: context)
+            article.title = result["title"]!
+            article.link = result["url"]!
+            article.imageURL = result["image"]!
+            article.positionX = result["positionX"]!
+            article.positionY = result["positionY"]!
+            article.date = result["date"]!
+            article.haveRead = Bool(result["haveRead"]!)!
+            (UIApplication.shared.delegate as! AppDelegate).saveContext()
         }
+        
+        sharedDefaults.set([], forKey: self.keyName)
+        
+        let readContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        do {
+            let fetchRequest: NSFetchRequest<Article> = Article.fetchRequest()
+            if unreadMode {
+                fetchRequest.predicate = NSPredicate(format: "haveRead = true")
+            }
+            self.articles = try readContext.fetch(fetchRequest)
+            
+        } catch {
+            print("Error")
+        }
+        
+//        for result in storedArray {
+//            if unreadMode {
+//                if !Bool(result["haveRead"]!)! {
+//                    continue
+//                }
+//            }
+//            self.articles.append(Entry(
+//                title: result["title"]!,
+//                link: result["url"]!,
+//                imageURL: result["image"]!,
+//                positionX: result["positionX"]!,
+//                positionY: result["positionY"]!,
+//                date: result["date"]!,
+//                haveRead: Bool(result["haveRead"]!)!
+//            ))
+//        }
         tableView.reloadData()
         self.tableView.refreshControl?.endRefreshing()
         hiddenToolbarButtonEdit()
@@ -160,13 +191,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             cell.delegate = self
             cell.title.text = entry.title
             cell.subContent.text = entry.link
-            cell.thumbnail.sd_setImage(with: URL(string: entry.imageURL))
+            cell.thumbnail.sd_setImage(with: URL(string: entry.imageURL ?? ""))
         } else {
             let entry = self.articles[indexPath.row]
             cell.delegate = self
             cell.title.text = entry.title
             cell.subContent.text = entry.link
-            cell.thumbnail.sd_setImage(with: URL(string: entry.imageURL))
+            cell.thumbnail.sd_setImage(with: URL(string: entry.imageURL ?? ""))
         }
         return cell
     }
@@ -175,8 +206,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if !tableView.isEditing {
             let webViewController = WebViewController()
             webViewController.targetUrl = self.articles[indexPath.row].link
-            webViewController.positionX = Int(self.articles[indexPath.row].positionX) ?? 0
-            webViewController.positionY = Int(self.articles[indexPath.row].positionY) ?? 0
+            webViewController.positionX = Int(self.articles[indexPath.row].positionX ?? "0") ?? 0
+            webViewController.positionY = Int(self.articles[indexPath.row].positionY ?? "0") ?? 0
             self.navigationController!.pushViewController(webViewController , animated: true)
             tableView.deselectRow(at: indexPath as IndexPath, animated: true)
         }
@@ -234,24 +265,48 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func deleteCell(at indexPath: IndexPath) {
         self.articles.remove(at: indexPath.row)
-        let sharedDefaults: UserDefaults = UserDefaults(suiteName: self.suiteName)!
-        var storedArray: [Dictionary<String, String>] = sharedDefaults.array(forKey: self.keyName) as? [Dictionary<String, String>] ?? []
-        storedArray.remove(at: indexPath.row)
-        sharedDefaults.set(storedArray, forKey: self.keyName)
+        let readContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let fetchRequest: NSFetchRequest<Article> = Article.fetchRequest()
+        if unreadMode {
+            fetchRequest.predicate = NSPredicate(format: "haveRead = true")
+        }
+        do {
+            let article = try readContext.fetch(fetchRequest)
+            readContext.delete(article[indexPath.row])
+        } catch {
+            print("Error")
+        }
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()
         tableView.reloadData()
     }
     
     func haveReadCell(at indexPath: IndexPath) {
-        let sharedDefaults: UserDefaults = UserDefaults(suiteName: self.suiteName)!
-        var storedArray: [Dictionary<String, String>] = sharedDefaults.array(forKey: self.keyName) as? [Dictionary<String, String>] ?? []
-        if storedArray[indexPath.row]["haveRead"] == "true" {
-            self.articles[indexPath.row].haveRead = false
-            storedArray[indexPath.row]["haveRead"] = "false"
-        } else {
-            self.articles[indexPath.row].haveRead = true
-            storedArray[indexPath.row]["haveRead"] = "true"
+//        let sharedDefaults: UserDefaults = UserDefaults(suiteName: self.suiteName)!
+//        var storedArray: [Dictionary<String, String>] = sharedDefaults.array(forKey: self.keyName) as? [Dictionary<String, String>] ?? []
+//        if storedArray[indexPath.row]["haveRead"] == "true" {
+//            self.articles[indexPath.row].haveRead = false
+//            storedArray[indexPath.row]["haveRead"] = "false"
+//        } else {
+//            self.articles[indexPath.row].haveRead = true
+//            storedArray[indexPath.row]["haveRead"] = "true"
+//        }
+//        sharedDefaults.set(storedArray, forKey: self.keyName)
+        
+        let readContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let fetchRequest: NSFetchRequest<Article> = Article.fetchRequest()
+        do {
+            let article = try readContext.fetch(fetchRequest)
+            if article[indexPath.row].haveRead {
+                self.articles[indexPath.row].haveRead = false
+                article[indexPath.row].haveRead = false
+            } else {
+                self.articles[indexPath.row].haveRead = true
+                article[indexPath.row].haveRead = true
+            }
+        } catch {
+            print("Error")
         }
-        sharedDefaults.set(storedArray, forKey: self.keyName)
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()
         getStoredDataFromUserDefault()
     }
     
@@ -266,7 +321,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func updateSearchResults(for searchController: UISearchController) {
         self.searchResults = articles.filter{
             // 大文字と小文字を区別せずに検索
-            $0.title.lowercased().contains(searchController.searchBar.text!.lowercased())
+            $0.title?.lowercased().contains(searchController.searchBar.text!.lowercased()) ?? true
         }
         self.tableView.reloadData()
     }
