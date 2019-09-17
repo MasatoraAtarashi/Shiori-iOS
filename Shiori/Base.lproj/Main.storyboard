@@ -41,13 +41,30 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <toolbarItems>
+                        <barButtonItem title="未読のみ表示" id="XGY-6s-5gq">
+                            <color key="tintColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                            <connections>
+                                <action selector="changeViewForReaded:" destination="BYZ-38-t0r" id="zbc-UB-Ylq"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="EL6-ya-k4K"/>
+                        <barButtonItem title="編集" id="P1i-mP-qrN">
+                            <color key="tintColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                            <connections>
+                                <action selector="changeToEditMode:" destination="BYZ-38-t0r" id="sHo-YP-snD"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" title="My List" id="ErQ-jg-9sG">
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="FAz-wa-9xZ">
                             <color key="tintColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                         </barButtonItem>
                     </navigationItem>
-                    <nil key="simulatedBottomBarMetrics"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="bottomToolbarLeftItem" destination="XGY-6s-5gq" id="Ws2-mx-1dr"/>
+                        <outlet property="bottomToolbarRightItem" destination="P1i-mP-qrN" id="F7w-1g-bxn"/>
                         <outlet property="tableView" destination="O8m-K1-a1R" id="eKM-rb-u10"/>
                     </connections>
                 </viewController>

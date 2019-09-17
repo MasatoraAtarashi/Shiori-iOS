@@ -23,6 +23,35 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var articles: [Entry] = []
     
     @IBOutlet weak var tableView: UITableView!
+    @IBAction func changeViewForReaded(_ sender: UIBarButtonItem) {
+        if tableView.isEditing {
+            if tableView.indexPathsForSelectedRows != nil {
+                if let sortedIndexPaths = tableView.indexPathsForSelectedRows?.sorted(by: { $0.row > $1.row }) {
+                    for indexPathList in sortedIndexPaths {
+                        deleteCell(at: indexPathList)
+                    }
+                }
+            }
+        } else {
+            
+        }
+        
+    }
+    
+    @IBOutlet weak var bottomToolbarLeftItem: UIBarButtonItem!
+    @IBOutlet weak var bottomToolbarRightItem: UIBarButtonItem!
+    
+    @IBAction func changeToEditMode(_ sender: UIBarButtonItem) {
+        if tableView.isEditing {
+            sender.title = "編集"
+            bottomToolbarLeftItem.title = "未読のみ表示"
+            setEditing(false, animated: true)
+        } else {
+            sender.title = "完了"
+            bottomToolbarLeftItem.title = "削除"
+            setEditing(true, animated: true)
+        }
+    }
     
     fileprivate let refreshCtl = UIRefreshControl()
     
@@ -39,7 +68,19 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.setToolbarHidden(true, animated: true)
+        self.navigationController?.setToolbarHidden(false, animated: true)
+        self.navigationController?.toolbar.barTintColor = UIColor.white
+        hiddenToolbarButtonEdit()
+    }
+    
+    func hiddenToolbarButtonEdit() {
+        if self.articles.count == 0 {
+            bottomToolbarRightItem.isEnabled = false
+            bottomToolbarRightItem.title = ""
+        } else if self.articles.count != 0 && !tableView.isEditing {
+            bottomToolbarRightItem.isEnabled = true
+            bottomToolbarRightItem.title = "編集"
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -65,6 +106,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         tableView.reloadData()
         self.tableView.refreshControl?.endRefreshing()
+        hiddenToolbarButtonEdit()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -85,12 +127,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let webViewController = WebViewController()
-        webViewController.targetUrl = self.articles[indexPath.row].link
-        webViewController.positionX = Int(self.articles[indexPath.row].positionX) ?? 0
-        webViewController.positionY = Int(self.articles[indexPath.row].positionY) ?? 0
-        self.navigationController!.pushViewController(webViewController , animated: true)
-        tableView.deselectRow(at: indexPath as IndexPath, animated: true)
+        if !tableView.isEditing {
+            let webViewController = WebViewController()
+            webViewController.targetUrl = self.articles[indexPath.row].link
+            webViewController.positionX = Int(self.articles[indexPath.row].positionX) ?? 0
+            webViewController.positionY = Int(self.articles[indexPath.row].positionY) ?? 0
+            self.navigationController!.pushViewController(webViewController , animated: true)
+            tableView.deselectRow(at: indexPath as IndexPath, animated: true)
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -133,7 +177,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         storedArray.remove(at: indexPath.row)
         sharedDefaults.set(storedArray, forKey: self.keyName)
         tableView.reloadData()
+        changeToEditMode(bottomToolbarRightItem)
+        hiddenToolbarButtonEdit()
     }
     
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        tableView.allowsMultipleSelectionDuringEditing = true
+        //override前の処理を継続してさせる
+        super.setEditing(editing, animated: animated)
+        //tableViewの編集モードを切り替える
+        tableView.isEditing = editing //editingはBool型でeditButtonに依存する変数
+    }
 
 }
