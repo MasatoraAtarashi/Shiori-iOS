@@ -91,4 +91,5 @@
             <point key="canvasLocation" x="131.8840579710145" y="68.973214285714278"/>
         </scene>
     </scenes>
+    <color key="tintColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
 </document>

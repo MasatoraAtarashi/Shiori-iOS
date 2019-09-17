@@ -30,11 +30,11 @@ class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
         let webConfiguration = WKWebViewConfiguration()
         
         
-        segment.sizeToFit()
-        segment.tintColor = UIColor.white
-        segment.selectedSegmentIndex = 0;
-        segment.addTarget(self, action: "segmentChanged", for: .valueChanged)
-        self.navigationItem.titleView = segment
+//        segment.sizeToFit()
+//        segment.tintColor = UIColor.white
+//        segment.selectedSegmentIndex = 0;
+//        segment.addTarget(self, action: "segmentChanged", for: .valueChanged)
+//        self.navigationItem.titleView = segment
         
         webConfiguration.preferences = preferences
         webView = WKWebView(frame: .zero, configuration: webConfiguration)
@@ -57,14 +57,17 @@ class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
         }
         
         shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(sharePage))
+        shareButton.tintColor = UIColor.init(red: 77/255, green: 77/255, blue: 77/255, alpha: 1)
         self.navigationItem.rightBarButtonItem = shareButton
         
         self.navigationController?.setToolbarHidden(false, animated: true)
         backButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem(rawValue: 101)!, target: self, action: #selector(goBack))
+        backButton.tintColor = UIColor.init(red: 77/255, green: 77/255, blue: 77/255, alpha: 1)
         let flexibleItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
         let fixedItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.fixedSpace, target: nil, action: nil)
         fixedItem.width = 100
         forwadButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem(rawValue: 102)!, target: self, action: #selector(goForward))
+        forwadButton.tintColor = UIColor.init(red: 77/255, green: 77/255, blue: 77/255, alpha: 1)
         self.toolbarItems = [flexibleItem,backButton,fixedItem,forwadButton,flexibleItem]
         
         refreshControll = UIRefreshControl()
@@ -151,7 +154,9 @@ extension WebViewController {
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        webView.evaluateJavaScript("window.scrollTo(\(positionX),\(positionY))", completionHandler: nil)
+        if !(targetUrl?.contains("https") ?? true) {
+            webView.evaluateJavaScript("window.scrollTo(\(positionX),\(positionY))", completionHandler: nil)
+        }
         positionX = 0
         positionY = 0
         print("loaded")
