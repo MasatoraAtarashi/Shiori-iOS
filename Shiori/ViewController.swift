@@ -204,12 +204,21 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if !tableView.isEditing {
-            let webViewController = WebViewController()
-            webViewController.targetUrl = self.articles[indexPath.row].link
-            webViewController.positionX = Int(self.articles[indexPath.row].positionX ?? "0") ?? 0
-            webViewController.positionY = Int(self.articles[indexPath.row].positionY ?? "0") ?? 0
-            self.navigationController!.pushViewController(webViewController , animated: true)
-            tableView.deselectRow(at: indexPath as IndexPath, animated: true)
+            if searchController.isActive {
+                let webViewController = WebViewController()
+                webViewController.targetUrl = self.searchResults[indexPath.row].link
+                webViewController.positionX = Int(self.searchResults[indexPath.row].positionX ?? "0") ?? 0
+                webViewController.positionY = Int(self.searchResults[indexPath.row].positionY ?? "0") ?? 0
+                self.navigationController!.pushViewController(webViewController , animated: true)
+                tableView.deselectRow(at: indexPath as IndexPath, animated: true)
+            } else {
+                let webViewController = WebViewController()
+                webViewController.targetUrl = self.articles[indexPath.row].link
+                webViewController.positionX = Int(self.articles[indexPath.row].positionX ?? "0") ?? 0
+                webViewController.positionY = Int(self.articles[indexPath.row].positionY ?? "0") ?? 0
+                self.navigationController!.pushViewController(webViewController , animated: true)
+                tableView.deselectRow(at: indexPath as IndexPath, animated: true)
+            }
         }
     }
     
@@ -294,6 +303,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         let readContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         let fetchRequest: NSFetchRequest<Article> = Article.fetchRequest()
+        if unreadMode {
+            fetchRequest.predicate = NSPredicate(format: "haveRead = true")
+        }
         do {
             let article = try readContext.fetch(fetchRequest)
             if article[indexPath.row].haveRead {
