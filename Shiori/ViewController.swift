@@ -23,17 +23,30 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var articles: [Entry] = []
     
     @IBOutlet weak var tableView: UITableView!
+    
+    var unreadMode: Bool = false
+    
     @IBAction func changeViewForReaded(_ sender: UIBarButtonItem) {
         if tableView.isEditing {
             if tableView.indexPathsForSelectedRows != nil {
                 if let sortedIndexPaths = tableView.indexPathsForSelectedRows?.sorted(by: { $0.row > $1.row }) {
                     for indexPathList in sortedIndexPaths {
                         deleteCell(at: indexPathList)
+                        changeToEditMode(bottomToolbarRightItem)
+                        hiddenToolbarButtonEdit()
                     }
                 }
             }
         } else {
-            
+            if unreadMode {
+                unreadMode = false
+                sender.title = "未読のみ表示"
+                getStoredDataFromUserDefault()
+            } else {
+                unreadMode = true
+                sender.title = "すべて表示"
+                getStoredDataFromUserDefault()
+            }
         }
         
     }
@@ -44,7 +57,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBAction func changeToEditMode(_ sender: UIBarButtonItem) {
         if tableView.isEditing {
             sender.title = "編集"
-            bottomToolbarLeftItem.title = "未読のみ表示"
+            if unreadMode {
+                bottomToolbarLeftItem.title = "すべて表示"
+            } else {
+                bottomToolbarLeftItem.title = "未読のみ表示"
+            }
             setEditing(false, animated: true)
         } else {
             sender.title = "完了"
@@ -95,13 +112,19 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let sharedDefaults: UserDefaults = UserDefaults(suiteName: self.suiteName)!
         var storedArray: [Dictionary<String, String>] = sharedDefaults.array(forKey: self.keyName) as? [Dictionary<String, String>] ?? []
         for result in storedArray {
+            if unreadMode {
+                if !Bool(result["haveRead"]!)! {
+                    continue
+                }
+            }
             self.articles.append(Entry(
                 title: result["title"]!,
                 link: result["url"]!,
                 imageURL: result["image"]!,
                 positionX: result["positionX"]!,
                 positionY: result["positionY"]!,
-                date: result["date"]!
+                date: result["date"]!,
+                haveRead: Bool(result["haveRead"]!)!
             ))
         }
         tableView.reloadData()
@@ -152,16 +175,33 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
-        guard orientation == .right else { return nil }
-        
-        let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
-            self.deleteCell(at: indexPath)
+        if orientation == .right {
+            let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
+                self.deleteCell(at: indexPath)
+            }
+            
+            // customize the action appearance
+            deleteAction.image = UIImage(named: "delete")
+            
+            return [deleteAction]
+        } else {
+            let readAction: SwipeAction
+            if articles[indexPath.row].haveRead {
+                readAction = SwipeAction(style: .default, title: "既読にする") { action, indexPath in
+                    self.haveReadCell(at: indexPath)
+                }
+            } else {
+                readAction = SwipeAction(style: .default, title: "未読にする") { action, indexPath in
+                    self.haveReadCell(at: indexPath)
+                }
+            }
+            // customize the action appearance
+            readAction.image = UIImage(named: "mail")
+            readAction.backgroundColor = UIColor.init(red: 27/255, green: 156/255, blue: 252/255, alpha: 1)
+            
+            return [readAction]
         }
         
-        // customize the action appearance
-        deleteAction.image = UIImage(named: "delete")
-        
-        return [deleteAction]
     }
     
     func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeOptions {
@@ -177,8 +217,20 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         storedArray.remove(at: indexPath.row)
         sharedDefaults.set(storedArray, forKey: self.keyName)
         tableView.reloadData()
-        changeToEditMode(bottomToolbarRightItem)
-        hiddenToolbarButtonEdit()
+    }
+    
+    func haveReadCell(at indexPath: IndexPath) {
+        let sharedDefaults: UserDefaults = UserDefaults(suiteName: self.suiteName)!
+        var storedArray: [Dictionary<String, String>] = sharedDefaults.array(forKey: self.keyName) as? [Dictionary<String, String>] ?? []
+        if storedArray[indexPath.row]["haveRead"] == "true" {
+            self.articles[indexPath.row].haveRead = false
+            storedArray[indexPath.row]["haveRead"] = "false"
+        } else {
+            self.articles[indexPath.row].haveRead = true
+            storedArray[indexPath.row]["haveRead"] = "true"
+        }
+        sharedDefaults.set(storedArray, forKey: self.keyName)
+        getStoredDataFromUserDefault()
     }
     
     override func setEditing(_ editing: Bool, animated: Bool) {
