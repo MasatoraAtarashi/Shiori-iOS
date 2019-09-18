@@ -10,8 +10,9 @@ import UIKit
 import SDWebImage
 import SwipeCellKit
 import CoreData
+import Firebase
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SwipeTableViewCellDelegate, UISearchBarDelegate, UISearchResultsUpdating {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SwipeTableViewCellDelegate, UISearchBarDelegate, UISearchResultsUpdating, TutorialDelegate {
     
     
     let suiteName: String = "group.com.masatoraatarashi.Shiori"
@@ -31,6 +32,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     var unreadMode: Bool = false
     
+    @IBOutlet weak var bannerView: GADBannerView!
+    
+    
+    @IBOutlet weak var text: UILabel!
+    @IBOutlet weak var text2: UILabel!
+    @IBOutlet weak var button: UIButton!
+    
+    @IBAction func goToTutorialPage(_ sender: Any) {
+        performSegue(withIdentifier: "TutorialSegue", sender: nil)
+    }
     
     @IBAction func changeViewForReaded(_ sender: UIBarButtonItem) {
         if tableView.isEditing {
@@ -81,6 +92,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        bannerView.adUnitID = "ca-app-pub-3503963096402837/1680525403"
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+        self.view.bringSubviewToFront(bannerView)
+        
         self.tableView.register(UINib(nibName: "FeedTableViewCell", bundle: nil), forCellReuseIdentifier: "FeedTableViewCell")
         
         // Do any additional setup after loading the view.
@@ -94,7 +110,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         searchController.dimsBackgroundDuringPresentation = false
         searchController.hidesNavigationBarDuringPresentation = false
         self.navigationItem.searchController = searchController
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -174,6 +189,22 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         tableView.reloadData()
         self.tableView.refreshControl?.endRefreshing()
         hiddenToolbarButtonEdit()
+        
+        if articles.count == 0 {
+            self.view.bringSubviewToFront(text)
+            self.view.bringSubviewToFront(text2)
+            self.view.bringSubviewToFront(button)
+            button.backgroundColor = UIColor.init(red: 27/255, green: 156/255, blue: 252/255, alpha: 1)
+            text.isHidden = false
+            text2.isHidden = false
+            button.isHidden = false
+            button.isEnabled = true
+        } else {
+            text.isHidden = true
+            text2.isHidden = true
+            button.isHidden = true
+            button.isEnabled = false
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -234,7 +265,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // set height for footer
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 200
+        return 50
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
@@ -339,4 +370,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.tableView.reloadData()
     }
 
+    var viewControllerNameFrom: String = ""
+    func viewControllerFrom(viewController: String) {
+        viewControllerNameFrom = viewController
+    }
 }

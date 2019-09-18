@@ -20,6 +20,11 @@
 		622155AE232B7A2F00DD4AB4 /* Share.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 622155A4232B7A2E00DD4AB4 /* Share.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		622155B6232B944200DD4AB4 /* GetData.js in Resources */ = {isa = PBXBuildFile; fileRef = 622155B5232B944200DD4AB4 /* GetData.js */; };
 		622155B8232CBF8400DD4AB4 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622155B7232CBF8400DD4AB4 /* WebViewController.swift */; };
+		624FE69623321297004E271B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 624FE69523321297004E271B /* GoogleService-Info.plist */; };
+		624FE69723321297004E271B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 624FE69523321297004E271B /* GoogleService-Info.plist */; };
+		624FE69F233228A3004E271B /* IMG_3203.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 624FE69D233228A2004E271B /* IMG_3203.jpg */; };
+		624FE6A0233228A3004E271B /* IMG_3205.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 624FE69E233228A2004E271B /* IMG_3205.jpg */; };
+		624FE6A323323C56004E271B /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624FE6A223323C56004E271B /* TutorialViewController.swift */; };
 		62B12335232E75D9007E6F61 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6221558B232B79B900DD4AB4 /* AppDelegate.swift */; };
 		62B1234C232E8215007E6F61 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B1234B232E8215007E6F61 /* Entry.swift */; };
 		909E9FA550C96476D4E86C62 /* Pods_Shiori.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98B1316EC4BD7BAAF68C16D6 /* Pods_Shiori.framework */; };
@@ -81,6 +86,10 @@
 		622155B4232B7AD100DD4AB4 /* Shiori.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Shiori.entitlements; sourceTree = "<group>"; };
 		622155B5232B944200DD4AB4 /* GetData.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = GetData.js; sourceTree = "<group>"; };
 		622155B7232CBF8400DD4AB4 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		624FE69523321297004E271B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		624FE69D233228A2004E271B /* IMG_3203.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_3203.jpg; sourceTree = "<group>"; };
+		624FE69E233228A2004E271B /* IMG_3205.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_3205.jpg; sourceTree = "<group>"; };
+		624FE6A223323C56004E271B /* TutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		62B1234B232E8215007E6F61 /* Entry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
 		6EC70B92298E46BA5986AED1 /* Pods_Share.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Share.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E5478B8CD8CA0C6ECE6036A /* Pods-Share.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Share.release.xcconfig"; path = "Target Support Files/Pods-Share/Pods-Share.release.xcconfig"; sourceTree = "<group>"; };
@@ -137,12 +146,16 @@
 				6203169D232E9CF30065ADE9 /* FeedTableViewCell.swift */,
 				6203169B232E9C740065ADE9 /* FeedTableViewCell.xib */,
 				622155B7232CBF8400DD4AB4 /* WebViewController.swift */,
+				624FE6A223323C56004E271B /* TutorialViewController.swift */,
 				62B1234B232E8215007E6F61 /* Entry.swift */,
 				6221558F232B79B900DD4AB4 /* Main.storyboard */,
 				62215595232B79BA00DD4AB4 /* Assets.xcassets */,
 				62215597232B79BA00DD4AB4 /* LaunchScreen.storyboard */,
 				6221559A232B79BA00DD4AB4 /* Info.plist */,
+				624FE69523321297004E271B /* GoogleService-Info.plist */,
 				62215592232B79B900DD4AB4 /* Shiori.xcdatamodeld */,
+				624FE69D233228A2004E271B /* IMG_3203.jpg */,
+				624FE69E233228A2004E271B /* IMG_3205.jpg */,
 			);
 			path = Shiori;
 			sourceTree = "<group>";
@@ -193,6 +206,7 @@
 				622155B2232B7A2F00DD4AB4 /* Embed App Extensions */,
 				62B12347232E7801007E6F61 /* Embed Frameworks */,
 				321C5EC86011DA18EF99FD26 /* [CP] Embed Pods Frameworks */,
+				624FE698233214EF004E271B /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -280,8 +294,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				624FE6A0233228A3004E271B /* IMG_3205.jpg in Resources */,
 				62215599232B79BA00DD4AB4 /* LaunchScreen.storyboard in Resources */,
 				6203169C232E9C740065ADE9 /* FeedTableViewCell.xib in Resources */,
+				624FE69623321297004E271B /* GoogleService-Info.plist in Resources */,
+				624FE69F233228A3004E271B /* IMG_3203.jpg in Resources */,
 				62215596232B79BA00DD4AB4 /* Assets.xcassets in Resources */,
 				62215591232B79B900DD4AB4 /* Main.storyboard in Resources */,
 			);
@@ -292,6 +309,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				622155AA232B7A2F00DD4AB4 /* MainInterface.storyboard in Resources */,
+				624FE69723321297004E271B /* GoogleService-Info.plist in Resources */,
 				622155B6232B944200DD4AB4 /* GetData.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -315,6 +333,24 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Shiori/Pods-Shiori-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		624FE698233214EF004E271B /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/Fabric/run\"\n";
 		};
 		A2D17E4072D655C4FEFA07F7 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -368,6 +404,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				62215594232B79B900DD4AB4 /* Shiori.xcdatamodeld in Sources */,
+				624FE6A323323C56004E271B /* TutorialViewController.swift in Sources */,
 				6203169E232E9CF30065ADE9 /* FeedTableViewCell.swift in Sources */,
 				6221558E232B79B900DD4AB4 /* ViewController.swift in Sources */,
 				6221558C232B79B900DD4AB4 /* AppDelegate.swift in Sources */,

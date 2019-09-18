@@ -4,7 +4,9 @@ platform :ios, '9.0'
 target 'Share' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
-
+  pod 'Firebase/Core'
+  pod 'Firebase/Analytics'
+  pod 'Firebase/AdMob'
   # Pods for Share
 
 end
@@ -17,5 +19,10 @@ target 'Shiori' do
   pod 'SDWebImage'
   pod 'SwipeCellKit', '2.6.0'
   pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chameleon.git'
-
+  pod 'Firebase/Core'
+  pod 'Firebase/AdMob'
+  pod 'Firebase/Analytics'
+  pod 'OpenGraph'
+  pod 'Fabric', '~> 1.10.2'
+  pod 'Crashlytics', '~> 3.13.4'
 end

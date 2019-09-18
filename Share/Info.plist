@@ -43,5 +43,7 @@
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.share-services</string>
 	</dict>
+    <key>GADApplicationIdentifier</key>
+    <string>ca-app-pub-3503963096402837~9559015423</string>
 </dict>
 </plist>
