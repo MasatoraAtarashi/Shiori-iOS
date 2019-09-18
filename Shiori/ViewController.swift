@@ -49,9 +49,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 if let sortedIndexPaths = tableView.indexPathsForSelectedRows?.sorted(by: { $0.row > $1.row }) {
                     for indexPathList in sortedIndexPaths {
                         deleteCell(at: indexPathList)
-                        changeToEditMode(bottomToolbarRightItem)
-                        hiddenToolbarButtonEdit()
                     }
+                    changeToEditMode(bottomToolbarRightItem)
+                    hiddenToolbarButtonEdit()
+                    
                 }
             }
         } else {
@@ -200,6 +201,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             button.isHidden = false
             button.isEnabled = true
         } else {
+            self.view.bringSubviewToFront(text)
+            self.view.bringSubviewToFront(text2)
+            self.view.bringSubviewToFront(button)
             text.isHidden = true
             text2.isHidden = true
             button.isHidden = true
@@ -318,7 +322,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             print("Error")
         }
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
-        tableView.reloadData()
+        getStoredDataFromUserDefault()
     }
     
     func haveReadCell(at indexPath: IndexPath) {

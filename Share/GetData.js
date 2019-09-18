@@ -31,6 +31,9 @@ MyPreprocessor.prototype = {
         }
         
         var image = document.images[0].src;
+        if !image {
+            image = ""
+        }
         
         var dateString = ""
         var date = new Date();
