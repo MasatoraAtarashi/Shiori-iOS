@@ -170,6 +170,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 //                haveRead: Bool(result["haveRead"]!)!
 //            ))
 //        }
+        articles.reverse()
         tableView.reloadData()
         self.tableView.refreshControl?.endRefreshing()
         hiddenToolbarButtonEdit()
@@ -281,7 +282,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         do {
             let article = try readContext.fetch(fetchRequest)
-            readContext.delete(article[indexPath.row])
+            readContext.delete(article[article.count - indexPath.row - 1])
         } catch {
             print("Error")
         }
@@ -308,12 +309,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         do {
             let article = try readContext.fetch(fetchRequest)
-            if article[indexPath.row].haveRead {
+            if article[article.count - indexPath.row - 1].haveRead {
                 self.articles[indexPath.row].haveRead = false
-                article[indexPath.row].haveRead = false
+                article[article.count - indexPath.row - 1].haveRead = false
             } else {
-                self.articles[indexPath.row].haveRead = true
-                article[indexPath.row].haveRead = true
+                self.articles[article.count - indexPath.row - 1].haveRead = true
+                article[article.count - indexPath.row - 1].haveRead = true
             }
         } catch {
             print("Error")

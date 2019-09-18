@@ -53,7 +53,7 @@ class ShareViewController: SLComposeServiceViewController {
                                     if results["url"] != nil {
                                         let resultsDic = ["url": results["url"], "title": results["title"], "positionX": results["positionX"], "positionY": results["positionY"], "time": results["time"], "image": results["image"], "date": results["date"], "haveRead": "true"]
                                         
-                                        storedArray.insert(resultsDic as! [String : String], at: 0)
+                                        storedArray.append(resultsDic as! [String : String])
                                         sharedDefaults.set(storedArray, forKey: self.keyName)
                                         
                                         self.extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
