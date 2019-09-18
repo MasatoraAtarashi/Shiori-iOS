@@ -173,7 +173,7 @@
                                     <constraint firstAttribute="width" constant="374" id="au2-oX-zPh"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="※「Shiori」が表示されない場合は「その他(More)」より「Shiori」をオンにしてください" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cka-hI-r5n">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="※「Shiori」が表示されない場合は「その他(More)」から「Shiori」をオンにしてください" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cka-hI-r5n">
                                 <rect key="frame" x="20" y="496" width="374" height="59"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="59" id="qEY-ed-zc1"/>

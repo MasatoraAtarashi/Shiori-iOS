@@ -30,7 +30,17 @@ MyPreprocessor.prototype = {
             url = url + "?start=" + time
         }
         
-        var image = document.images[1].src;
+//        var image = document.images[0].src;
+        var pi = document.getElementsByTagName('meta');
+        var image = "";
+        for(i=0;i<pi.length;i++){
+            if(pi[i].getAttribute("property")=="og:image"){
+                 image = pi[i].getAttribute("content");
+            }
+        }
+        if(image == "") {
+            image = document.images[0].src;
+        }
         
         var dateString = ""
         var date = new Date();
