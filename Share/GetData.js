@@ -30,10 +30,7 @@ MyPreprocessor.prototype = {
             url = url + "?start=" + time
         }
         
-        var image = document.images[0].src;
-        if !image {
-            image = ""
-        }
+        var image = document.images[1].src;
         
         var dateString = ""
         var date = new Date();
