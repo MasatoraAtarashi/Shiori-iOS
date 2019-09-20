@@ -36,7 +36,7 @@ class ShareViewController: SLComposeServiceViewController {
         for item: Any in self.extensionContext!.inputItems {
             let inputItem = item as! NSExtensionItem
             
-            if let attachments = inputItem.attachments as? [NSItemProvider] {
+            if let attachments = inputItem.attachments {
                 for itemProvider : NSItemProvider in attachments {
                     if itemProvider.hasItemConformingToTypeIdentifier("public.data") {
                         itemProvider.loadItem(forTypeIdentifier: "public.data", options: nil, completionHandler: {

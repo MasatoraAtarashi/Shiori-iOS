@@ -5,7 +5,7 @@ MyPreprocessor.prototype = {
         var positionTop = String(document.body.scrollTop);
         var positionLeft = String(document.body.scrollLeft);
 
-        
+
         var htmlVideoPlayer = document.getElementsByTagName('video')[0];
         var time = "0";
         if(htmlVideoPlayer) {
@@ -13,7 +13,7 @@ MyPreprocessor.prototype = {
             time = parseInt(time);
             time = String(time);
         }
-        
+
         var url = document.URL
         if (url.match(/youtube/) && time != "0") {
             var video_id = document.URL.split('v=')[1];
@@ -30,7 +30,6 @@ MyPreprocessor.prototype = {
             url = url + "?start=" + time
         }
         
-//        var image = document.images[0].src;
         var pi = document.getElementsByTagName('meta');
         var image = "";
         for(i=0;i<pi.length;i++){
@@ -41,16 +40,19 @@ MyPreprocessor.prototype = {
         if(image == "") {
             image = document.images[0].src;
         }
-        
+
         var dateString = ""
         var date = new Date();
         var year = String(date.getFullYear());
         var month = String(date.getMonth() + 1);
         var day = String(date.getDate());
         dateString = year + "." + month + "." + day
-        
-        arguments.completionFunction({"url": url, "title": document.title, "positionX": positionLeft, "positionY": positionTop, "time": time, "image": image, "date": dateString});
-        //arguments.completionFunction({"URL": document.URL, "pageSource": document.documentElement.outerHTML, "title": document.title, "selection": window.getSelection().toString()});
+
+        var title = "";
+        if(document.title) {
+         title = document.title;
+        }
+        arguments.completionFunction({"url": url, "title": title, "positionX": positionLeft, "positionY": positionTop, "time": time, "image": image, "date": dateString});
     },
     
     finalize: function(arguments) {
