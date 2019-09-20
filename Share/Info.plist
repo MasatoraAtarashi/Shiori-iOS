@@ -19,25 +19,25 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>1.0.2</string>
+	<key>GADApplicationIdentifier</key>
+	<string>ca-app-pub-3503963096402837~9559015423</string>
 	<key>NSExtension</key>
 	<dict>
 		<key>NSExtensionAttributes</key>
 		<dict>
 			<key>NSExtensionActivationRule</key>
 			<dict>
-                <key>NSExtensionActivationSupportsWebPageWithMaxCount</key>
-                <integer>1</integer>
+				<key>NSExtensionActivationSupportsWebPageWithMaxCount</key>
+				<integer>1</integer>
 			</dict>
-            <key>NSExtensionJavaScriptPreprocessingFile</key>
-            <string>GetData</string>
+			<key>NSExtensionJavaScriptPreprocessingFile</key>
+			<string>GetData</string>
 		</dict>
 		<key>NSExtensionMainStoryboard</key>
 		<string>MainInterface</string>
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.share-services</string>
 	</dict>
-	<key>GADApplicationIdentifier</key>
-	<string>ca-app-pub-3503963096402837~9559015423</string>
 </dict>
 </plist>

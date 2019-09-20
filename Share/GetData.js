@@ -2,8 +2,8 @@ var MyPreprocessor = function() {};
 
 MyPreprocessor.prototype = {
     run: function(arguments) {
-        var positionTop = String(document.body.scrollTop);
-        var positionLeft = String(document.body.scrollLeft);
+        var positionTop = String(Math.max(window.pageYOffset, document.documentElement.scrollTop, document.body.scrollTop));
+        var positionLeft = String(Math.max(window.pageXOffset, document.documentElement.scrollLeft, document.body.scrollLeft));
 
 
         var htmlVideoPlayer = document.getElementsByTagName('video')[0];

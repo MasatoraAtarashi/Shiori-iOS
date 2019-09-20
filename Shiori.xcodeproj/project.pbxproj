@@ -20,11 +20,13 @@
 		622155AE232B7A2F00DD4AB4 /* Share.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 622155A4232B7A2E00DD4AB4 /* Share.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		622155B6232B944200DD4AB4 /* GetData.js in Resources */ = {isa = PBXBuildFile; fileRef = 622155B5232B944200DD4AB4 /* GetData.js */; };
 		622155B8232CBF8400DD4AB4 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622155B7232CBF8400DD4AB4 /* WebViewController.swift */; };
+		624411012334EA6300C1C411 /* CustomActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624411002334EA6300C1C411 /* CustomActivity.swift */; };
 		624FE69623321297004E271B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 624FE69523321297004E271B /* GoogleService-Info.plist */; };
 		624FE69723321297004E271B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 624FE69523321297004E271B /* GoogleService-Info.plist */; };
 		624FE69F233228A3004E271B /* IMG_3203.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 624FE69D233228A2004E271B /* IMG_3203.jpg */; };
 		624FE6A0233228A3004E271B /* IMG_3205.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 624FE69E233228A2004E271B /* IMG_3205.jpg */; };
 		624FE6A323323C56004E271B /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624FE6A223323C56004E271B /* TutorialViewController.swift */; };
+		6268C3E62334EC2800E86ECC /* ks_safari_activity_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6268C3E52334EC2800E86ECC /* ks_safari_activity_icon.png */; };
 		62B12335232E75D9007E6F61 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6221558B232B79B900DD4AB4 /* AppDelegate.swift */; };
 		62B1234C232E8215007E6F61 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B1234B232E8215007E6F61 /* Entry.swift */; };
 		909E9FA550C96476D4E86C62 /* Pods_Shiori.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98B1316EC4BD7BAAF68C16D6 /* Pods_Shiori.framework */; };
@@ -86,10 +88,12 @@
 		622155B4232B7AD100DD4AB4 /* Shiori.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Shiori.entitlements; sourceTree = "<group>"; };
 		622155B5232B944200DD4AB4 /* GetData.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = GetData.js; sourceTree = "<group>"; };
 		622155B7232CBF8400DD4AB4 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		624411002334EA6300C1C411 /* CustomActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomActivity.swift; sourceTree = "<group>"; };
 		624FE69523321297004E271B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		624FE69D233228A2004E271B /* IMG_3203.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_3203.jpg; sourceTree = "<group>"; };
 		624FE69E233228A2004E271B /* IMG_3205.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_3205.jpg; sourceTree = "<group>"; };
 		624FE6A223323C56004E271B /* TutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
+		6268C3E52334EC2800E86ECC /* ks_safari_activity_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ks_safari_activity_icon.png; sourceTree = "<group>"; };
 		62B1234B232E8215007E6F61 /* Entry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
 		6EC70B92298E46BA5986AED1 /* Pods_Share.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Share.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E5478B8CD8CA0C6ECE6036A /* Pods-Share.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Share.release.xcconfig"; path = "Target Support Files/Pods-Share/Pods-Share.release.xcconfig"; sourceTree = "<group>"; };
@@ -142,20 +146,14 @@
 			children = (
 				622155B4232B7AD100DD4AB4 /* Shiori.entitlements */,
 				6221558B232B79B900DD4AB4 /* AppDelegate.swift */,
-				6221558D232B79B900DD4AB4 /* ViewController.swift */,
-				6203169D232E9CF30065ADE9 /* FeedTableViewCell.swift */,
-				6203169B232E9C740065ADE9 /* FeedTableViewCell.xib */,
-				622155B7232CBF8400DD4AB4 /* WebViewController.swift */,
-				624FE6A223323C56004E271B /* TutorialViewController.swift */,
-				62B1234B232E8215007E6F61 /* Entry.swift */,
-				6221558F232B79B900DD4AB4 /* Main.storyboard */,
+				6268C3E32334EAE000E86ECC /* Controller */,
+				6268C3E22334EAD400E86ECC /* View */,
+				624411022334EA7A00C1C411 /* Class */,
 				62215595232B79BA00DD4AB4 /* Assets.xcassets */,
-				62215597232B79BA00DD4AB4 /* LaunchScreen.storyboard */,
 				6221559A232B79BA00DD4AB4 /* Info.plist */,
 				624FE69523321297004E271B /* GoogleService-Info.plist */,
 				62215592232B79B900DD4AB4 /* Shiori.xcdatamodeld */,
-				624FE69D233228A2004E271B /* IMG_3203.jpg */,
-				624FE69E233228A2004E271B /* IMG_3205.jpg */,
+				6268C3E42334EAEF00E86ECC /* Images */,
 			);
 			path = Shiori;
 			sourceTree = "<group>";
@@ -170,6 +168,46 @@
 				622155B5232B944200DD4AB4 /* GetData.js */,
 			);
 			path = Share;
+			sourceTree = "<group>";
+		};
+		624411022334EA7A00C1C411 /* Class */ = {
+			isa = PBXGroup;
+			children = (
+				624411002334EA6300C1C411 /* CustomActivity.swift */,
+				62B1234B232E8215007E6F61 /* Entry.swift */,
+			);
+			path = Class;
+			sourceTree = "<group>";
+		};
+		6268C3E22334EAD400E86ECC /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6203169B232E9C740065ADE9 /* FeedTableViewCell.xib */,
+				6221558F232B79B900DD4AB4 /* Main.storyboard */,
+				62215597232B79BA00DD4AB4 /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6268C3E32334EAE000E86ECC /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				6221558D232B79B900DD4AB4 /* ViewController.swift */,
+				6203169D232E9CF30065ADE9 /* FeedTableViewCell.swift */,
+				622155B7232CBF8400DD4AB4 /* WebViewController.swift */,
+				624FE6A223323C56004E271B /* TutorialViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		6268C3E42334EAEF00E86ECC /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				6268C3E52334EC2800E86ECC /* ks_safari_activity_icon.png */,
+				624FE69D233228A2004E271B /* IMG_3203.jpg */,
+				624FE69E233228A2004E271B /* IMG_3205.jpg */,
+			);
+			path = Images;
 			sourceTree = "<group>";
 		};
 		A7F17AA72CB685FA65F6E95E /* Pods */ = {
@@ -299,6 +337,7 @@
 				6203169C232E9C740065ADE9 /* FeedTableViewCell.xib in Resources */,
 				624FE69623321297004E271B /* GoogleService-Info.plist in Resources */,
 				624FE69F233228A3004E271B /* IMG_3203.jpg in Resources */,
+				6268C3E62334EC2800E86ECC /* ks_safari_activity_icon.png in Resources */,
 				62215596232B79BA00DD4AB4 /* Assets.xcassets in Resources */,
 				62215591232B79B900DD4AB4 /* Main.storyboard in Resources */,
 			);
@@ -410,6 +449,7 @@
 				6221558C232B79B900DD4AB4 /* AppDelegate.swift in Sources */,
 				622155B8232CBF8400DD4AB4 /* WebViewController.swift in Sources */,
 				62B1234C232E8215007E6F61 /* Entry.swift in Sources */,
+				624411012334EA6300C1C411 /* CustomActivity.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -494,7 +534,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
