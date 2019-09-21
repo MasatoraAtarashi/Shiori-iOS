@@ -146,9 +146,9 @@
 			children = (
 				622155B4232B7AD100DD4AB4 /* Shiori.entitlements */,
 				6221558B232B79B900DD4AB4 /* AppDelegate.swift */,
-				6268C3E32334EAE000E86ECC /* Controller */,
-				6268C3E22334EAD400E86ECC /* View */,
-				624411022334EA7A00C1C411 /* Model */,
+				6268C3E32334EAE000E86ECC /* Controllers */,
+				6268C3E22334EAD400E86ECC /* Views */,
+				624411022334EA7A00C1C411 /* Data Model */,
 				62215595232B79BA00DD4AB4 /* Assets.xcassets */,
 				6221559A232B79BA00DD4AB4 /* Info.plist */,
 				624FE69523321297004E271B /* GoogleService-Info.plist */,
@@ -170,26 +170,26 @@
 			path = Share;
 			sourceTree = "<group>";
 		};
-		624411022334EA7A00C1C411 /* Model */ = {
+		624411022334EA7A00C1C411 /* Data Model */ = {
 			isa = PBXGroup;
 			children = (
 				624411002334EA6300C1C411 /* CustomActivity.swift */,
 				62B1234B232E8215007E6F61 /* Entry.swift */,
 			);
-			path = Model;
+			path = "Data Model";
 			sourceTree = "<group>";
 		};
-		6268C3E22334EAD400E86ECC /* View */ = {
+		6268C3E22334EAD400E86ECC /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				6203169B232E9C740065ADE9 /* FeedTableViewCell.xib */,
 				6221558F232B79B900DD4AB4 /* Main.storyboard */,
 				62215597232B79BA00DD4AB4 /* LaunchScreen.storyboard */,
 			);
-			path = View;
+			path = Views;
 			sourceTree = "<group>";
 		};
-		6268C3E32334EAE000E86ECC /* Controller */ = {
+		6268C3E32334EAE000E86ECC /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				6221558D232B79B900DD4AB4 /* ViewController.swift */,
@@ -197,7 +197,7 @@
 				622155B7232CBF8400DD4AB4 /* WebViewController.swift */,
 				624FE6A223323C56004E271B /* TutorialViewController.swift */,
 			);
-			path = Controller;
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		6268C3E42334EAEF00E86ECC /* Images */ = {
