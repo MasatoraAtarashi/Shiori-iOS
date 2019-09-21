@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
-        GADMobileAds.configure(withApplicationID: "ca-app-pub-3503963096402837~9559015423")
+        GADMobileAds.sharedInstance().start()
         return true
     }
 

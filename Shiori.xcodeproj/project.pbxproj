@@ -148,7 +148,7 @@
 				6221558B232B79B900DD4AB4 /* AppDelegate.swift */,
 				6268C3E32334EAE000E86ECC /* Controller */,
 				6268C3E22334EAD400E86ECC /* View */,
-				624411022334EA7A00C1C411 /* Class */,
+				624411022334EA7A00C1C411 /* Model */,
 				62215595232B79BA00DD4AB4 /* Assets.xcassets */,
 				6221559A232B79BA00DD4AB4 /* Info.plist */,
 				624FE69523321297004E271B /* GoogleService-Info.plist */,
@@ -170,13 +170,13 @@
 			path = Share;
 			sourceTree = "<group>";
 		};
-		624411022334EA7A00C1C411 /* Class */ = {
+		624411022334EA7A00C1C411 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				624411002334EA6300C1C411 /* CustomActivity.swift */,
 				62B1234B232E8215007E6F61 /* Entry.swift */,
 			);
-			path = Class;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		6268C3E22334EAD400E86ECC /* View */ = {
@@ -624,6 +624,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Shiori/Shiori.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1.0.5;
 				DEVELOPMENT_TEAM = PMRC683Z7N;
 				INFOPLIST_FILE = Shiori/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -645,6 +646,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Shiori/Shiori.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1.0.5;
 				DEVELOPMENT_TEAM = PMRC683Z7N;
 				INFOPLIST_FILE = Shiori/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -664,6 +666,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Share/Share.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1.0.5;
 				DEVELOPMENT_TEAM = PMRC683Z7N;
 				INFOPLIST_FILE = Share/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -685,6 +688,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Share/Share.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1.0.5;
 				DEVELOPMENT_TEAM = PMRC683Z7N;
 				INFOPLIST_FILE = Share/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
