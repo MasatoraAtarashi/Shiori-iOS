@@ -28,6 +28,20 @@ MyPreprocessor.prototype = {
             url = url + "?from=" + time
         } else if (url.match(/dailymotion/) && time != "0") {
             url = url + "?start=" + time
+//        } else if (url.match(/bilibili/) && time != "0") {
+//            //機能しない
+//            var video_id = document.URL.split('video/')[1];
+//            video_id = video_id.split('.html')[0];
+//            url = 'https://www.bilibili.com/video/' + video_id + "?t=" + time
+        } else if (url.match(/redtube/) && time != "0") {
+            url = url + "?t=" + time
+        } else if (url.match(/xhamster/) && time != "0") {
+            //アプリでは機能しない。safariで開くと機能する
+            time = parseFloat(time)
+            time = time.toFixed(2)
+            url = url + "?t=" + time
+        } else if (url.match(/tube8/) && time != "0") {
+            url = url + "?t=" + time
         }
         
         var pi = document.getElementsByTagName('meta');
