@@ -43,6 +43,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         performSegue(withIdentifier: "TutorialSegue", sender: nil)
     }
     
+    @IBAction func goToSettingPage(_ sender: Any) {
+        performSegue(withIdentifier: "SettingSegue", sender: nil)
+    }
+
     @IBAction func changeViewForReaded(_ sender: UIBarButtonItem) {
         if tableView.isEditing {
             if tableView.indexPathsForSelectedRows != nil {
