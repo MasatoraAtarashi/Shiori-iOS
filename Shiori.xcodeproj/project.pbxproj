@@ -28,6 +28,7 @@
 		624FE6A323323C56004E271B /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624FE6A223323C56004E271B /* TutorialViewController.swift */; };
 		6268C3E62334EC2800E86ECC /* ks_safari_activity_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6268C3E52334EC2800E86ECC /* ks_safari_activity_icon.png */; };
 		6280BC09242399FA00EEDB3C /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 6280BC08242399FA00EEDB3C /* settings.png */; };
+		62A1E834242F9A0000113A10 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62A1E833242F9A0000113A10 /* MessageUI.framework */; };
 		62A3AF5F242E350A004BD808 /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A3AF5E242E350A004BD808 /* SettingTableViewController.swift */; };
 		62B12335232E75D9007E6F61 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6221558B232B79B900DD4AB4 /* AppDelegate.swift */; };
 		62B1234C232E8215007E6F61 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B1234B232E8215007E6F61 /* Entry.swift */; };
@@ -97,6 +98,7 @@
 		624FE6A223323C56004E271B /* TutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		6268C3E52334EC2800E86ECC /* ks_safari_activity_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ks_safari_activity_icon.png; sourceTree = "<group>"; };
 		6280BC08242399FA00EEDB3C /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
+		62A1E833242F9A0000113A10 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		62A3AF5E242E350A004BD808 /* SettingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
 		62B1234B232E8215007E6F61 /* Entry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
 		6EC70B92298E46BA5986AED1 /* Pods_Share.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Share.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -110,6 +112,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62A1E834242F9A0000113A10 /* MessageUI.framework in Frameworks */,
 				909E9FA550C96476D4E86C62 /* Pods_Shiori.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -230,6 +233,7 @@
 		B09494A8CAC8586A118C22FA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				62A1E833242F9A0000113A10 /* MessageUI.framework */,
 				6EC70B92298E46BA5986AED1 /* Pods_Share.framework */,
 				98B1316EC4BD7BAAF68C16D6 /* Pods_Shiori.framework */,
 			);

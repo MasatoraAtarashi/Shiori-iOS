@@ -8,8 +8,9 @@
 
 import UIKit
 import StoreKit
+import MessageUI
 
-class SettingTableViewController: UITableViewController {
+class SettingTableViewController: UITableViewController, MFMailComposeViewControllerDelegate {
     
     @IBOutlet weak var switchAdvertisementDisplay: UISwitch!
 
@@ -66,9 +67,44 @@ class SettingTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath == [1, 2] {
             SKStoreReviewController.requestReview()
+        } else if indexPath == [1, 1] {
+            sendMail()
         }
 
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
+    }
+    
+    func sendMail() {
+        if MFMailComposeViewController.canSendMail() {
+            let mail = MFMailComposeViewController()
+            mail.mailComposeDelegate = self as? MFMailComposeViewControllerDelegate
+            mail.setToRecipients(["atarashi.masatora@gmail.com"]) // 宛先アドレス
+            let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
+            mail.setSubject("Shiori web \(version ?? "") feedback") // 件名
+            mail.setMessageBody("""
+                
+                
+                ---
+                version: \(version ?? "")
+            """, isHTML: false) // 本文
+            present(mail, animated: true, completion: nil)
+        } else {
+            print("送信できません")
+        }
+    }
+
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        switch result {
+        case .cancelled:
+            print("キャンセル")
+        case .saved:
+            print("下書き保存")
+        case .sent:
+            print("送信成功")
+        default:
+            print("送信失敗")
+        }
+        dismiss(animated: true, completion: nil)
     }
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
