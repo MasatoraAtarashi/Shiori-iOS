@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         FirebaseApp.configure()
         GADMobileAds.sharedInstance().start()
+        UserDefaults.standard.register(defaults: ["isAdvertisementOn" : true])
         return true
     }
 

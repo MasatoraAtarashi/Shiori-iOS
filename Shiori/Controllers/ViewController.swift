@@ -32,8 +32,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     var unreadMode: Bool = false
     
-    @IBOutlet weak var bannerView: GADBannerView!
-    
+    @IBOutlet var bannerView: GADBannerView?
     
     @IBOutlet weak var text: UILabel!
     @IBOutlet weak var text2: UILabel!
@@ -97,10 +96,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        bannerView.adUnitID = "ca-app-pub-3503963096402837/1680525403"
-        bannerView.rootViewController = self
-        bannerView.load(GADRequest())
-        self.view.bringSubviewToFront(bannerView)
+        bannerView?.adUnitID = "ca-app-pub-3503963096402837/1680525403"
+        bannerView?.rootViewController = self
+        bannerView?.load(GADRequest())
+        changeDisplayAdvertisement()
         
         self.tableView.register(UINib(nibName: "FeedTableViewCell", bundle: nil), forCellReuseIdentifier: "FeedTableViewCell")
         
@@ -120,7 +119,29 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setToolbarHidden(false, animated: true)
         self.navigationController?.toolbar.barTintColor = UIColor.white
+        changeDisplayAdvertisement()
         hiddenToolbarButtonEdit()
+    }
+    
+    func changeDisplayAdvertisement() {
+        if UserDefaults.standard.bool(forKey: "isAdvertisementOn") {
+            if bannerView != nil {
+                self.view.addSubview(bannerView!)
+                let constraints = [
+                    bannerView!.centerXAnchor.constraint(equalTo: self.view!.centerXAnchor),
+//                    bannerView!.widthAnchor.constraint(equalToConstant: CGFloat(320)),
+                    bannerView!.heightAnchor.constraint(equalToConstant: CGFloat(50)),
+                    bannerView!.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: CGFloat(-50))
+                ]
+                NSLayoutConstraint.activate(constraints)
+                self.view.bringSubviewToFront(bannerView!)
+            }
+        } else {
+            if bannerView != nil {
+                bannerView!.removeFromSuperview()
+            }
+        }
+        
     }
 
     
