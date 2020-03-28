@@ -20,7 +20,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         FirebaseApp.configure()
         GADMobileAds.sharedInstance().start()
-        UserDefaults.standard.register(defaults: ["isAdvertisementOn" : true])
+        UserDefaults.standard.register(defaults: ["isAdvertisementOn" : true, "launchCount" : 0])
+        let currentCount = UserDefaults.standard.integer(forKey: "launchCount")
+        UserDefaults.standard.set(currentCount+1, forKey:"launchCount")
+        if UserDefaults.standard.integer(forKey: "launchCount") == 10 {
+            SKStoreReviewController.requestReview()
+        }
         return true
     }
 
