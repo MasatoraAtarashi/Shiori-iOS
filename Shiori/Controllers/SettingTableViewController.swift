@@ -12,11 +12,21 @@ class SettingTableViewController: UITableViewController {
     
     @IBOutlet weak var switchAdvertisementDisplay: UISwitch!
 
+    @IBOutlet weak var versionLabel: UILabel!
+    @IBOutlet weak var copyRightLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         switchAdvertisementDisplay.isOn = !UserDefaults.standard.bool(forKey: "isAdvertisementOn")
         switchAdvertisementDisplay.addTarget(self, action: #selector(self.onClickMySwicth(sender:)), for: UIControl.Event.valueChanged)
+        
+        //バージョンを表示
+        if let version: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String {
+          versionLabel.text = version
+        }
+        //コピーライトを表示
+        copyRightLabel.text = "©Masatora Atarashi"
     }
     
     @objc func onClickMySwicth(sender: UISwitch) {
