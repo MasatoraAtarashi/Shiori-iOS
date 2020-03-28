@@ -12,8 +12,7 @@ import SwipeCellKit
 import CoreData
 import Firebase
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SwipeTableViewCellDelegate, UISearchBarDelegate, UISearchResultsUpdating, TutorialDelegate {
-    
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SwipeTableViewCellDelegate, UISearchBarDelegate, UISearchResultsUpdating, TutorialDelegate, UIViewControllerPreviewingDelegate {
     
     let suiteName: String = "group.com.masatoraatarashi.Shiori"
     let keyName: String = "shareData"
@@ -114,6 +113,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.hidesNavigationBarDuringPresentation = false
         self.navigationItem.searchController = searchController
+        
+        self.registerForPreviewing(with: self, sourceView: tableView)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -265,6 +266,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("unko")
+        print("unko")
+        print(indexPath)
+        print("unko")
+        print("unko")
         if !tableView.isEditing {
             if searchController.isActive {
                 let webViewController = WebViewController()
@@ -403,5 +409,23 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var viewControllerNameFrom: String = ""
     func viewControllerFrom(viewController: String) {
         viewControllerNameFrom = viewController
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        guard let indexPath = tableView.indexPathForRow(at: location) else {
+            return nil
+        }
+        
+        print("unko")
+        let webViewController = WebViewController()
+        webViewController.targetUrl = self.articles[indexPath.row].link
+        webViewController.positionX = Int(self.articles[indexPath.row].positionX ?? "0") ?? 0
+        webViewController.positionY = Int(self.articles[indexPath.row].positionY ?? "0") ?? 0
+
+        return webViewController
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        self.navigationController?.pushViewController(viewControllerToCommit, animated: true)
     }
 }
