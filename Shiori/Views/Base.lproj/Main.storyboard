@@ -148,8 +148,33 @@
                         <sections>
                             <tableViewSection headerTitle="appearance" id="iVl-ox-kA2">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="E6l-Fk-f2e">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="D8h-Nu-xJZ">
                                         <rect key="frame" x="20" y="55.5" width="374" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="D8h-Nu-xJZ" id="icb-Ll-hMa">
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bordered" translatesAutoresizingMaskIntoConstraints="NO" id="YD1-Pl-oFz">
+                                                    <rect key="frame" x="20" y="6" width="334" height="32.5"/>
+                                                    <segments>
+                                                        <segment title=""/>
+                                                        <segment title=""/>
+                                                        <segment title=""/>
+                                                        <segment title=""/>
+                                                    </segments>
+                                                </segmentedControl>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="YD1-Pl-oFz" secondAttribute="bottom" constant="6.5" id="1DH-4B-B8l"/>
+                                                <constraint firstItem="YD1-Pl-oFz" firstAttribute="leading" secondItem="icb-Ll-hMa" secondAttribute="leading" constant="20" id="7O2-9C-Iqu"/>
+                                                <constraint firstItem="YD1-Pl-oFz" firstAttribute="top" secondItem="icb-Ll-hMa" secondAttribute="top" constant="6" id="Oxm-1D-PoO"/>
+                                                <constraint firstAttribute="trailing" secondItem="YD1-Pl-oFz" secondAttribute="trailing" constant="20" id="ddO-kZ-Jc4"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="E6l-Fk-f2e">
+                                        <rect key="frame" x="20" y="99" width="374" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="E6l-Fk-f2e" id="0wn-4D-yCt">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
@@ -175,30 +200,6 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="zVj-Hp-XOb" detailTextLabel="pWH-ks-tsq" style="IBUITableViewCellStyleValue2" id="D8h-Nu-xJZ">
-                                        <rect key="frame" x="20" y="99" width="374" height="43.5"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="D8h-Nu-xJZ" id="icb-Ll-hMa">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zVj-Hp-XOb">
-                                                    <rect key="frame" x="20" y="14" width="91" height="16"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pWH-ks-tsq">
-                                                    <rect key="frame" x="117" y="14" width="35" height="16"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -317,13 +318,14 @@
                     <navigationItem key="navigationItem" title="Setting" id="bi0-zg-pEH"/>
                     <connections>
                         <outlet property="copyRightLabel" destination="1e0-4g-QaV" id="rkw-Y3-4lQ"/>
+                        <outlet property="segmentControl" destination="YD1-Pl-oFz" id="kgE-Rc-1eo"/>
                         <outlet property="switchAdvertisementDisplay" destination="jle-fp-BSy" id="MV4-wm-QiP"/>
                         <outlet property="versionLabel" destination="jUI-3L-Aew" id="xgr-f0-CLJ"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gKw-7e-I2U" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2432" y="-153"/>
+            <point key="canvasLocation" x="2430.434782608696" y="-153.34821428571428"/>
         </scene>
         <!--Usage-->
         <scene sceneID="Qyf-UQ-JQ9">

@@ -17,6 +17,7 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
     @IBOutlet weak var versionLabel: UILabel!
     @IBOutlet weak var copyRightLabel: UILabel!
     
+    @IBOutlet weak var segmentControl: UISegmentedControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +31,39 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
         }
         //コピーライトを表示
         copyRightLabel.text = "©Masatora Atarashi"
+        
+        (segmentControl.subviews[0] as UIView).backgroundColor = UIColor.white
+        (segmentControl.subviews[1] as UIView).backgroundColor = UIColor(red: 250 / 255.0, green: 240 / 255.0, blue: 230 / 255.0, alpha: 0.5)
+        (segmentControl.subviews[2] as UIView).backgroundColor = UIColor.lightGray
+        (segmentControl.subviews[3] as UIView).backgroundColor = UIColor.black
+        segmentControl.addTarget(self, action: #selector(self.segmentChanged), for: UIControl.Event.valueChanged)
+        segmentControl.layer.borderWidth = 0.5
+        segmentControl.layer.borderColor = UIColor(red: 169 / 255.0, green: 169 / 255.0, blue: 169 / 255.0, alpha: 0.5).cgColor
+    }
+    
+     @objc func segmentChanged(segcon: UISegmentedControl){
+        switch segcon.selectedSegmentIndex {
+        case 0:
+//            segmentControl.subviews[0].layer.borderColor = UIColor.green.cgColor
+//            ViewController.view.backgroundColor = UIColor.black
+//            ViewController().bgColor = UIColor.blue
+//            navigationController?.navigationBar.barTintColor = UIColor.green
+            print("Error")
+            
+        case 1:
+//            segmentControl.subviews[1].layer.borderColor = UIColor.green.cgColor
+            print("Error")
+            
+        case 2:
+//            segmentControl.subviews[2].layer.borderColor = UIColor.green.cgColor
+            print("Error")
+            
+        case 3:
+//            segmentControl.subviews[3].layer.borderColor = UIColor.green.cgColor
+            print("Error")
+        default:
+            print("Error")
+        }
     }
     
     @objc func onClickMySwicth(sender: UISwitch) {

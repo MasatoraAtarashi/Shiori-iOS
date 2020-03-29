@@ -31,6 +31,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     var unreadMode: Bool = false
     
+    var bgColor: UIColor = UIColor.black
+    
     @IBOutlet var bannerView: GADBannerView?
     
     @IBOutlet weak var text: UILabel!
@@ -116,11 +118,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
 //        3dtouch
         self.registerForPreviewing(with: self, sourceView: tableView)
-        
-//        長押し
-//        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.cellLongPressed))
-//        longPressRecognizer.delegate = self
-//        tableView.addGestureRecognizer(longPressRecognizer)
 
         
         
@@ -129,6 +126,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setToolbarHidden(false, animated: true)
         self.navigationController?.toolbar.barTintColor = UIColor.white
+//        tableView.backgroundColor = self.bgColor
         changeDisplayAdvertisement()
         hiddenToolbarButtonEdit()
     }
@@ -430,7 +428,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         webViewController.targetUrl = self.articles[indexPath.row].link
         webViewController.positionX = Int(self.articles[indexPath.row].positionX ?? "0") ?? 0
         webViewController.positionY = Int(self.articles[indexPath.row].positionY ?? "0") ?? 0
-
         return webViewController
     }
     
@@ -441,7 +438,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 //    長押し
     @available(iOS 13.0, *)
     func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
-        
+
         let previewProvider: () -> WebViewController? = { [unowned self] in
             let webViewController = WebViewController()
             webViewController.targetUrl = self.articles[indexPath.row].link
@@ -450,8 +447,41 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             return webViewController
         }
         
+        let actionProvider: ([UIMenuElement]) -> UIMenu? = { _ in
+            let share = UIAction(title: "共有", image: UIImage(systemName: "square.and.arrow.up")) { _ in
+                let shareText = self.articles[indexPath.row].title
+                let shareWebsite: NSURL
+                if let shareURL = URL(string: self.articles[indexPath.row].link!) {
+                    shareWebsite = shareURL as NSURL
+                } else {
+                    return
+                }
+                
+                let activityItems = [shareText, shareWebsite] as [Any]
+                
+                // 初期化処理
+                let activityVC = UIActivityViewController(activityItems: activityItems, applicationActivities: [CustomActivity(title: shareText ?? "", url: shareWebsite as URL)])
+                
+                // 使用しないアクティビティタイプ
+                //        let excludedActivityTypes = [
+                //            UIActivity.ActivityType.postToFacebook,
+                //            UIActivity.ActivityType.postToTwitter,
+                //            UIActivity.ActivityType.message,
+                //            UIActivity.ActivityType.saveToCameraRoll,
+                //            UIActivity.ActivityType.print
+                //        ]
+                ////
+                //        activityVC.excludedActivityTypes = excludedActivityTypes
+                
+                // UIActivityViewControllerを表示
+                self.present(activityVC, animated: true, completion: nil)
+            }
+
+            return UIMenu(__title: "Edit..", image: nil, identifier: nil, children: [share])
+        }
+
         return UIContextMenuConfiguration(identifier: nil,
-        previewProvider: previewProvider)
+        previewProvider: previewProvider, actionProvider: actionProvider)
     }
     
 }
