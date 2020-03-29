@@ -114,7 +114,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         searchController.hidesNavigationBarDuringPresentation = false
         self.navigationItem.searchController = searchController
         
+//        3dtouch
         self.registerForPreviewing(with: self, sourceView: tableView)
+        
+//        長押し
+//        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.cellLongPressed))
+//        longPressRecognizer.delegate = self
+//        tableView.addGestureRecognizer(longPressRecognizer)
+
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -411,12 +420,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         viewControllerNameFrom = viewController
     }
     
+//    3dtouch
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         guard let indexPath = tableView.indexPathForRow(at: location) else {
             return nil
         }
         
-        print("unko")
         let webViewController = WebViewController()
         webViewController.targetUrl = self.articles[indexPath.row].link
         webViewController.positionX = Int(self.articles[indexPath.row].positionX ?? "0") ?? 0
@@ -428,4 +437,21 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
         self.navigationController?.pushViewController(viewControllerToCommit, animated: true)
     }
+    
+//    長押し
+    @available(iOS 13.0, *)
+    func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        
+        let previewProvider: () -> WebViewController? = { [unowned self] in
+            let webViewController = WebViewController()
+            webViewController.targetUrl = self.articles[indexPath.row].link
+            webViewController.positionX = Int(self.articles[indexPath.row].positionX ?? "0") ?? 0
+            webViewController.positionY = Int(self.articles[indexPath.row].positionY ?? "0") ?? 0
+            return webViewController
+        }
+        
+        return UIContextMenuConfiguration(identifier: nil,
+        previewProvider: previewProvider)
+    }
+    
 }
