@@ -28,4 +28,10 @@ class FeedTableViewCell: SwipeTableViewCell {
         
         // Configure the view for the selected state
     }
+    
+    func changeTextColor(color: UIColor) {
+        self.title.textColor = color
+        self.subContent.textColor = color
+    }
+    
 }

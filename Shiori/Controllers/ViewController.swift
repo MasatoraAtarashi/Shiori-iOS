@@ -31,7 +31,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     var unreadMode: Bool = false
     
-    var bgColor: UIColor = UIColor.black
+    var r: Int = UserDefaults.standard.integer(forKey: "r")
+    var g: Int = UserDefaults.standard.integer(forKey: "g")
+    var b: Int = UserDefaults.standard.integer(forKey: "b")
     
     @IBOutlet var bannerView: GADBannerView?
     
@@ -124,11 +126,30 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        r = UserDefaults.standard.integer(forKey: "r")
+        b = UserDefaults.standard.integer(forKey: "b")
+        g = UserDefaults.standard.integer(forKey: "g")
+        var bgColor: UIColor = UIColor(red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: 1)
         self.navigationController?.setToolbarHidden(false, animated: true)
-        self.navigationController?.toolbar.barTintColor = UIColor.white
-//        tableView.backgroundColor = self.bgColor
+//        footer color
+        self.navigationController?.toolbar.barTintColor = bgColor
+//        header color
+        self.navigationController?.navigationBar.barTintColor = bgColor
+//        背景
+        tableView.backgroundColor = bgColor
+        tableView.reloadData()
         changeDisplayAdvertisement()
         hiddenToolbarButtonEdit()
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        r = UserDefaults.standard.integer(forKey: "r")
+//        b = UserDefaults.standard.integer(forKey: "b")
+//        g = UserDefaults.standard.integer(forKey: "g")
+//        var bgColor: UIColor = UIColor(red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: 1)
+//        cell.backgroundColor = bgColor
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "FeedTableViewCell", for: indexPath as IndexPath) as! FeedTableViewCell
+//        cell.title.textColor = UIColor.white
     }
     
     func changeDisplayAdvertisement() {
@@ -268,6 +289,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             cell.title.text = entry.title
             cell.subContent.text = entry.link
             cell.thumbnail.sd_setImage(with: URL(string: entry.imageURL ?? ""))
+        }
+        r = UserDefaults.standard.integer(forKey: "r")
+        b = UserDefaults.standard.integer(forKey: "b")
+        g = UserDefaults.standard.integer(forKey: "g")
+        var bgColor: UIColor = UIColor(red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: 1)
+        cell.backgroundColor = bgColor
+        if r == 0 || r == 60 {
+            cell.title.textColor = UIColor.white
+//            cell.subContent.textColor = UIColor.white
         }
         return cell
     }

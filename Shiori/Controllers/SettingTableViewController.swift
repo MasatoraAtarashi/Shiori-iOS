@@ -34,7 +34,7 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
         
         (segmentControl.subviews[0] as UIView).backgroundColor = UIColor.white
         (segmentControl.subviews[1] as UIView).backgroundColor = UIColor(red: 250 / 255.0, green: 240 / 255.0, blue: 230 / 255.0, alpha: 0.5)
-        (segmentControl.subviews[2] as UIView).backgroundColor = UIColor.lightGray
+        (segmentControl.subviews[2] as UIView).backgroundColor = UIColor(red: 169 / 255.0, green: 169 / 255.0, blue: 169 / 255.0, alpha: 0.5)
         (segmentControl.subviews[3] as UIView).backgroundColor = UIColor.black
         segmentControl.addTarget(self, action: #selector(self.segmentChanged), for: UIControl.Event.valueChanged)
         segmentControl.layer.borderWidth = 0.5
@@ -44,26 +44,33 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
      @objc func segmentChanged(segcon: UISegmentedControl){
         switch segcon.selectedSegmentIndex {
         case 0:
-//            segmentControl.subviews[0].layer.borderColor = UIColor.green.cgColor
-//            ViewController.view.backgroundColor = UIColor.black
-//            ViewController().bgColor = UIColor.blue
-//            navigationController?.navigationBar.barTintColor = UIColor.green
-            print("Error")
-            
+            UserDefaults.standard.set(255, forKey: "r")
+            UserDefaults.standard.set(255, forKey: "g")
+            UserDefaults.standard.set(255, forKey: "b")
         case 1:
-//            segmentControl.subviews[1].layer.borderColor = UIColor.green.cgColor
-            print("Error")
-            
+            UserDefaults.standard.set(250, forKey: "r")
+            UserDefaults.standard.set(240, forKey: "g")
+            UserDefaults.standard.set(230, forKey: "b")
         case 2:
-//            segmentControl.subviews[2].layer.borderColor = UIColor.green.cgColor
-            print("Error")
-            
+            UserDefaults.standard.set(60, forKey: "r")
+            UserDefaults.standard.set(60, forKey: "g")
+            UserDefaults.standard.set(60, forKey: "b")
         case 3:
-//            segmentControl.subviews[3].layer.borderColor = UIColor.green.cgColor
-            print("Error")
+            UserDefaults.standard.set(0, forKey: "r")
+            UserDefaults.standard.set(0, forKey: "g")
+            UserDefaults.standard.set(0, forKey: "b")
         default:
             print("Error")
         }
+        let r = UserDefaults.standard.integer(forKey: "r")
+        let b = UserDefaults.standard.integer(forKey: "b")
+        let g = UserDefaults.standard.integer(forKey: "g")
+        let bgColor: UIColor = UIColor(red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: 1)
+//        self.view.backgroundColor = bgColor
+        self.navigationController?.toolbar.barTintColor = bgColor
+        self.navigationController?.navigationBar.barTintColor = bgColor
+//        self.navigationController?.title.co = bgColor
+//        tableView.reloadData()
     }
     
     @objc func onClickMySwicth(sender: UISwitch) {
@@ -76,9 +83,21 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
     }
     
     override func viewWillAppear(_ animated: Bool) {
-//        self.view.frame = CGRect(x: 0, y: 0, width: 200, height: 200);
+//        let r = UserDefaults.standard.integer(forKey: "r")
+//        let b = UserDefaults.standard.integer(forKey: "b")
+//        let g = UserDefaults.standard.integer(forKey: "g")
+//        let bgColor: UIColor = UIColor(red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: 1)
+//        self.view.backgroundColor = bgColor
     }
 
+//    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        let r = UserDefaults.standard.integer(forKey: "r")
+//        let b = UserDefaults.standard.integer(forKey: "b")
+//        let g = UserDefaults.standard.integer(forKey: "g")
+//        let bgColor: UIColor = UIColor(red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: 1)
+//        cell.backgroundColor = bgColor
+//    }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
