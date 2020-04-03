@@ -15,9 +15,30 @@ protocol TutorialDelegate {
 class TutorialViewController: UIViewController {
     var delegate : TutorialDelegate?
     
-    override func viewWillDisappear(_ animated: Bool) {
-        let viewControllerName = "TutorialViewController"
+    @IBOutlet weak var text1: UILabel!
+    @IBOutlet weak var text2: UILabel!
+    
+    override func viewWillAppear(_ animated: Bool) {
         
+        let r = UserDefaults.standard.integer(forKey: "r")
+        let b = UserDefaults.standard.integer(forKey: "b")
+        let g = UserDefaults.standard.integer(forKey: "g")
+        var bgColor: UIColor = UIColor(red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: 1)
+        self.view.backgroundColor = bgColor
+        if r == 0 || r == 60 {
+            text1.textColor = UIColor.white
+            text2.textColor = UIColor.white
+        } else {
+            text1.textColor = UIColor.black
+            text2.textColor = UIColor.black
+        }
+        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        
+        let viewControllerName = "TutorialViewController"
         delegate?.viewControllerFrom(viewController: viewControllerName)
+        
     }
 }

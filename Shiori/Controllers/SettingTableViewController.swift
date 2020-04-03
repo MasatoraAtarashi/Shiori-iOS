@@ -33,7 +33,7 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
         copyRightLabel.text = "©Masatora Atarashi"
         
         (segmentControl.subviews[0] as UIView).backgroundColor = UIColor.white
-        (segmentControl.subviews[1] as UIView).backgroundColor = UIColor(red: 250 / 255.0, green: 240 / 255.0, blue: 230 / 255.0, alpha: 0.5)
+        (segmentControl.subviews[1] as UIView).backgroundColor = UIColor(red: 255 / 255.0, green: 222 / 255.0, blue: 173 / 255.0, alpha: 0.5)
         (segmentControl.subviews[2] as UIView).backgroundColor = UIColor(red: 169 / 255.0, green: 169 / 255.0, blue: 169 / 255.0, alpha: 0.5)
         (segmentControl.subviews[3] as UIView).backgroundColor = UIColor.black
         segmentControl.addTarget(self, action: #selector(self.segmentChanged), for: UIControl.Event.valueChanged)
@@ -48,9 +48,9 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
             UserDefaults.standard.set(255, forKey: "g")
             UserDefaults.standard.set(255, forKey: "b")
         case 1:
-            UserDefaults.standard.set(250, forKey: "r")
-            UserDefaults.standard.set(240, forKey: "g")
-            UserDefaults.standard.set(230, forKey: "b")
+            UserDefaults.standard.set(255, forKey: "r")
+            UserDefaults.standard.set(222, forKey: "g")
+            UserDefaults.standard.set(173, forKey: "b")
         case 2:
             UserDefaults.standard.set(60, forKey: "r")
             UserDefaults.standard.set(60, forKey: "g")
@@ -66,11 +66,13 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
         let b = UserDefaults.standard.integer(forKey: "b")
         let g = UserDefaults.standard.integer(forKey: "g")
         let bgColor: UIColor = UIColor(red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: 1)
-//        self.view.backgroundColor = bgColor
         self.navigationController?.toolbar.barTintColor = bgColor
         self.navigationController?.navigationBar.barTintColor = bgColor
-//        self.navigationController?.title.co = bgColor
-//        tableView.reloadData()
+        if r == 0 || r == 60 {
+            self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont(name: "Baskerville-Bold", size: 22)!]
+        } else {
+            self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont(name: "Baskerville-Bold", size: 22)!]
+        }
     }
     
     @objc func onClickMySwicth(sender: UISwitch) {
@@ -83,20 +85,7 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
     }
     
     override func viewWillAppear(_ animated: Bool) {
-//        let r = UserDefaults.standard.integer(forKey: "r")
-//        let b = UserDefaults.standard.integer(forKey: "b")
-//        let g = UserDefaults.standard.integer(forKey: "g")
-//        let bgColor: UIColor = UIColor(red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: 1)
-//        self.view.backgroundColor = bgColor
     }
-
-//    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        let r = UserDefaults.standard.integer(forKey: "r")
-//        let b = UserDefaults.standard.integer(forKey: "b")
-//        let g = UserDefaults.standard.integer(forKey: "g")
-//        let bgColor: UIColor = UIColor(red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: 1)
-//        cell.backgroundColor = bgColor
-//    }
     
     // MARK: - Table view data source
 
