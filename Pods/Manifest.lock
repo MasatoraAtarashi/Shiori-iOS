@@ -75,6 +75,7 @@ PODS:
   - SDWebImage (5.1.1):
     - SDWebImage/Core (= 5.1.1)
   - SDWebImage/Core (5.1.1)
+  - SideMenu (5.0.1)
   - SwipeCellKit (2.6.0)
 
 DEPENDENCIES:
@@ -85,10 +86,11 @@ DEPENDENCIES:
   - Firebase/Core
   - OpenGraph
   - SDWebImage
+  - SideMenu
   - SwipeCellKit (= 2.6.0)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
     - Crashlytics
     - Fabric
     - Firebase
@@ -105,6 +107,7 @@ SPEC REPOS:
     - nanopb
     - OpenGraph
     - SDWebImage
+    - SideMenu
     - SwipeCellKit
 
 SPEC CHECKSUMS:
@@ -124,8 +127,9 @@ SPEC CHECKSUMS:
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   OpenGraph: b467158726b640d3c08083ab830be955c4ad6259
   SDWebImage: 96d7f03415ccb28d299d765f93557ff8a617abd8
+  SideMenu: 87efd943737bb83aedf0358884d09fcf5576636d
   SwipeCellKit: 935ca28c187ec6e1ffb2b578cf8ddca842bfdcbb
 
-PODFILE CHECKSUM: 23c46e59c1ce4f229ce9bce637e3c640ba0d6ab6
+PODFILE CHECKSUM: b07716fe150df4aa6e315bbe3bccebb0ae8e8108
 
-COCOAPODS: 1.7.5
+COCOAPODS: 1.9.1
