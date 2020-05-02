@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1xK-az-WOH">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1xK-az-WOH">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -64,7 +64,6 @@
                             <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B7j-xN-GSF">
                                 <rect key="frame" x="137.5" y="322.5" width="100" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="a1G-Lk-cYC"/>
                                     <constraint firstAttribute="height" constant="30" id="yU7-m7-21m"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -323,6 +322,12 @@
                         <outlet property="copyRightLabel" destination="1e0-4g-QaV" id="rkw-Y3-4lQ"/>
                         <outlet property="segmentControl" destination="YD1-Pl-oFz" id="kgE-Rc-1eo"/>
                         <outlet property="switchAdvertisementDisplay" destination="jle-fp-BSy" id="MV4-wm-QiP"/>
+                        <outlet property="text1" destination="tmr-IP-ELz" id="wZI-b9-FkL"/>
+                        <outlet property="text2" destination="CDH-lK-A65" id="ZzJ-bE-tuz"/>
+                        <outlet property="text3" destination="DZZ-uO-BOR" id="2iT-u0-KUL"/>
+                        <outlet property="text4" destination="Qvx-pd-gU4" id="fwi-kE-Dnv"/>
+                        <outlet property="text5" destination="GF0-28-EyF" id="Py6-iI-ZuA"/>
+                        <outlet property="text6" destination="Rf0-Wg-0ob" id="CLu-1O-1a5"/>
                         <outlet property="versionLabel" destination="jUI-3L-Aew" id="xgr-f0-CLJ"/>
                     </connections>
                 </tableViewController>
@@ -418,13 +423,13 @@
             <point key="canvasLocation" x="131.8840579710145" y="68.973214285714278"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="9Vi-OO-DHj"/>
+    </inferredMetricsTieBreakers>
+    <color key="tintColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
     <resources>
         <image name="IMG_3203.jpg" width="750" height="135"/>
         <image name="IMG_3205.jpg" width="750" height="666"/>
         <image name="settings.png" width="18" height="18"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="RrE-4R-PV5"/>
-    </inferredMetricsTieBreakers>
-    <color key="tintColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
 </document>

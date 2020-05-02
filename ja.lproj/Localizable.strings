@@ -1,0 +1,37 @@
+/* 
+  Localizable.strings
+  Shiori
+
+  Created by あたらしまさとら on 2020/05/02.
+  Copyright © 2020 Masatora Atarashi. All rights reserved.
+*/
+
+//ViewController
+"Edit" = "編集";
+"Done" = "完了";
+"Delete" = "削除";
+"Show all" = "すべて表示";
+"Show only unread" = "未読のみ表示";
+
+"Mark as read" = "既読にする";
+"Unread" = "未読にする";
+
+//Share
+"Save" = "保存";
+
+//記事がゼロのときの
+"List is empty" = "リストは空です";
+"Adding articles is easy. Tap below to get started." = "記事を追加するのは簡単です。以下をタップして始めましょう。";
+"Learn how to save" = "保存方法を学ぶ";
+
+//チュートリアル
+"Tap the 'Share' button on Mobile Safari" = "Mobile Safariの「共有」ボタンをタップ";
+"* If 'Shiori' is not displayed, turn on 'Shiori' from 'More'" = "※「Shiori」が表示されない場合は「その他(More)」から「Shiori」をオンにしてください";
+
+//設定
+"Hide ads" = "広告を非表示";
+"Usage" = "保存方法";
+"Send feedback" = "フィードバックを送信";
+"Rate Shiori web" = "Shiori webを評価する";
+"Version" = "バージョン";
+"Copyright" = "コピーライト";

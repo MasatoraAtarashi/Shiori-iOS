@@ -69,15 +69,38 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         } else {
             if unreadMode {
                 unreadMode = false
-                sender.title = "未読のみ表示"
+                sender.title = NSLocalizedString("Show only unread", comment: "")
                 getStoredDataFromUserDefault()
             } else {
                 unreadMode = true
-                sender.title = "すべて表示"
+                sender.title = NSLocalizedString("Show all", comment: "")
                 getStoredDataFromUserDefault()
             }
         }
         
+    }
+    
+    //言語変更
+    func changeViewLanguage() {
+        //なんもないときのやつ
+        text.text = NSLocalizedString("List is empty", comment: "")
+        text2.text = NSLocalizedString("Adding articles is easy. Tap below to get started.", comment: "")
+        button.setTitle(NSLocalizedString("Learn how to save", comment: ""), for: UIControl.State())
+        button.sizeToFit()
+        button.layer.cornerRadius = 10.0
+        
+        //フッターのボタン
+        if !tableView.isEditing {
+            bottomToolbarRightItem.title = NSLocalizedString("Edit", comment: "")
+            if unreadMode {
+                bottomToolbarLeftItem.title = NSLocalizedString("Show all", comment: "")
+            } else {
+                bottomToolbarLeftItem.title = NSLocalizedString("Show only unread", comment: "")
+            }
+        } else {
+            bottomToolbarRightItem.title = NSLocalizedString("Done", comment: "")
+            bottomToolbarLeftItem.title = NSLocalizedString("Delete", comment: "")
+        }
     }
     
     @IBOutlet weak var bottomToolbarLeftItem: UIBarButtonItem!
@@ -85,22 +108,22 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBAction func changeToEditMode(_ sender: UIBarButtonItem) {
         if tableView.isEditing {
-            sender.title = "編集"
+            sender.title = NSLocalizedString("Edit", comment: "")
             if unreadMode {
-                bottomToolbarLeftItem.title = "すべて表示"
+                bottomToolbarLeftItem.title = NSLocalizedString("Show all", comment: "")
             } else {
-                bottomToolbarLeftItem.title = "未読のみ表示"
+                bottomToolbarLeftItem.title = NSLocalizedString("Show only unread", comment: "")
             }
             setEditing(false, animated: true)
         } else {
-            sender.title = "完了"
-            bottomToolbarLeftItem.title = "削除"
+            sender.title = NSLocalizedString("Done", comment: "")
+            bottomToolbarLeftItem.title = NSLocalizedString("Delete", comment: "")
             setEditing(true, animated: true)
         }
     }
     
     fileprivate let refreshCtl = UIRefreshControl()
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -113,6 +136,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         // Do any additional setup after loading the view.
         getStoredDataFromUserDefault()
+        
+        //起動時に言語を変更する
+        changeViewLanguage()
         
         tableView.refreshControl = refreshCtl
         tableView.refreshControl?.addTarget(self, action: #selector(ViewController.getStoredDataFromUserDefault), for: .valueChanged)
@@ -193,7 +219,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         
     }
-
     
     func hiddenToolbarButtonEdit() {
         if self.articles.count == 0 {
@@ -201,7 +226,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             bottomToolbarRightItem.title = ""
         } else if self.articles.count != 0 && !tableView.isEditing {
             bottomToolbarRightItem.isEnabled = true
-            bottomToolbarRightItem.title = "編集"
+            bottomToolbarRightItem.title = NSLocalizedString("Edit", comment: "")
         }
     }
     
@@ -362,7 +387,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
         if orientation == .right {
-            let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
+            let deleteAction = SwipeAction(style: .destructive, title: NSLocalizedString("Delete", comment: "")) { action, indexPath in
                 self.deleteCell(at: indexPath)
             }
             
@@ -373,11 +398,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         } else {
             let readAction: SwipeAction
             if articles[indexPath.row].haveRead {
-                readAction = SwipeAction(style: .default, title: "既読にする") { action, indexPath in
+                readAction = SwipeAction(style: .default, title: NSLocalizedString("Mark as read", comment: "")) { action, indexPath in
                     self.haveReadCell(at: indexPath)
                 }
             } else {
-                readAction = SwipeAction(style: .default, title: "未読にする") { action, indexPath in
+                readAction = SwipeAction(style: .default, title: NSLocalizedString("Unread", comment: "")) { action, indexPath in
                     self.haveReadCell(at: indexPath)
                 }
             }

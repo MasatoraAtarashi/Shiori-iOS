@@ -1,0 +1,36 @@
+/* 
+  Localizable.strings
+  Shiori
+
+  Created by あたらしまさとら on 2020/05/03.
+  Copyright © 2020 Masatora Atarashi. All rights reserved.
+*/
+//ViewController
+"Edit" = "編輯";
+"Done" = "完成了";
+"Delete" = "刪除";
+"Show all" = "顯示所有";
+"Show only unread" = "僅顯示未讀";
+
+"Mark as read" = "標記為已讀";
+"Unread" = "未讀";
+
+//Share
+"Save" = "保存";
+
+//記事がゼロのときの
+"List is empty" = "清單為空";
+"Adding articles is easy. Tap below to get started." = "添加文章很容易。 點擊下面開始。";
+"Learn how to save" = "了解如何保存";
+
+//チュートリアル
+"Tap the 'Share' button on Mobile Safari" = "在Mobile Safari上點擊“共享”按鈕";
+"* If 'Shiori' is not displayed, turn on 'Shiori' from 'More'" = "*如果未顯示“ Shiori”，請從“更多”中打開“ Shiori”";
+
+//設定
+"Hide ads" = "隱藏廣告";
+"Usage" = "用法";
+"Send feedback" = "發送反饋";
+"Rate Shiori web" = "評價Shiori網站";
+"Version" = "版";
+"Copyright" = "版權";
