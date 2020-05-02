@@ -140,7 +140,7 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
         if MFMailComposeViewController.canSendMail() {
             let mail = MFMailComposeViewController()
             mail.mailComposeDelegate = self as? MFMailComposeViewControllerDelegate
-            mail.setToRecipients(["atarashi.masatora@gmail.com"]) // 宛先アドレス
+            mail.setToRecipients(["shiori.web.forsafari@gmail.com"]) // 宛先アドレス
             let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
             mail.setSubject("Shiori web \(version ?? "") feedback") // 件名
             mail.setMessageBody("""
