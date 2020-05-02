@@ -19,11 +19,31 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
     
     @IBOutlet weak var segmentControl: UISegmentedControl!
     
+    @IBOutlet weak var text1: UILabel!
+    @IBOutlet weak var text2: UILabel!
+    @IBOutlet weak var text3: UILabel!
+    @IBOutlet weak var text4: UILabel!
+    @IBOutlet weak var text5: UILabel!
+    @IBOutlet weak var text6: UILabel!
+    
+    //言語を変更
+    func changeLanguage() {
+        text1.text = NSLocalizedString("Hide ads", comment: "")
+        text2.text = NSLocalizedString("Usage", comment: "")
+        text3.text = NSLocalizedString("Send feedback", comment: "")
+        text4.text = NSLocalizedString("Rate Shiori web", comment: "")
+        text5.text = NSLocalizedString("Version", comment: "")
+        text6.text = NSLocalizedString("Copyright", comment: "")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         switchAdvertisementDisplay.isOn = !UserDefaults.standard.bool(forKey: "isAdvertisementOn")
         switchAdvertisementDisplay.addTarget(self, action: #selector(self.onClickMySwicth(sender:)), for: UIControl.Event.valueChanged)
+        
+        //言語を変更
+        changeLanguage()
         
         //バージョンを表示
         if let version: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String {
