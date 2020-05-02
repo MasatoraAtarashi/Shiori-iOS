@@ -22,7 +22,7 @@ class ShareViewController: SLComposeServiceViewController {
         self.title = "Shiori"
         // postName
         let controller: UIViewController = self.navigationController!.viewControllers.first!
-        controller.navigationItem.rightBarButtonItem!.title = "保存"
+        controller.navigationItem.rightBarButtonItem!.title = NSLocalizedString("Save", comment: "")
     }
     
     override func isContentValid() -> Bool {

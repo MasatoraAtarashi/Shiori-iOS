@@ -387,7 +387,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
         if orientation == .right {
-            let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
+            let deleteAction = SwipeAction(style: .destructive, title: NSLocalizedString("Delete", comment: "")) { action, indexPath in
                 self.deleteCell(at: indexPath)
             }
             

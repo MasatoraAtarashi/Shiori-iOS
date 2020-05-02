@@ -1,0 +1,54 @@
+
+/* Class = "UILabel"; text = "リストは空です"; ObjectID = "5Fg-qv-8wz"; */
+"5Fg-qv-8wz.text" = "リストは空です";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "70B-Dh-cxL"; */
+"70B-Dh-cxL.title" = "Item";
+
+/* Class = "UILabel"; text = "Mobile Safariの「共有」ボタンをタップ"; ObjectID = "72j-7g-tkS"; */
+"72j-7g-tkS.text" = "Mobile Safariの「共有」ボタンをタップ";
+
+/* Class = "UIButton"; normalTitle = "保存方法を学ぶ"; ObjectID = "B7j-xN-GSF"; */
+"B7j-xN-GSF.normalTitle" = "保存方法を学ぶ";
+
+/* Class = "UINavigationItem"; title = "Usage"; ObjectID = "Bbl-jh-gzk"; */
+"Bbl-jh-gzk.title" = "Usage";
+
+/* Class = "UITableViewSection"; headerTitle = "other"; ObjectID = "Bdh-yu-WBq"; */
+"Bdh-yu-WBq.headerTitle" = "other";
+
+/* Class = "UILabel"; text = "保存方法"; ObjectID = "CDH-lK-A65"; */
+"CDH-lK-A65.text" = "保存方法";
+
+/* Class = "UILabel"; text = "※「Shiori」が表示されない場合は「その他(More)」から「Shiori」をオンにしてください"; ObjectID = "Cka-hI-r5n"; */
+"Cka-hI-r5n.text" = "※「Shiori」が表示されない場合は「その他(More)」から「Shiori」をオンにしてください";
+
+/* Class = "UILabel"; text = "フィードバックを送信"; ObjectID = "DZZ-uO-BOR"; */
+"DZZ-uO-BOR.text" = "フィードバックを送信";
+
+/* Class = "UINavigationItem"; title = "My List"; ObjectID = "ErQ-jg-9sG"; */
+"ErQ-jg-9sG.title" = "My List";
+
+/* Class = "UILabel"; text = "バージョン"; ObjectID = "GF0-28-EyF"; */
+"GF0-28-EyF.text" = "バージョン";
+
+/* Class = "UIBarButtonItem"; title = "編集"; ObjectID = "P1i-mP-qrN"; */
+"P1i-mP-qrN.title" = "編集";
+
+/* Class = "UILabel"; text = "Shiori webを評価する"; ObjectID = "Qvx-pd-gU4"; */
+"Qvx-pd-gU4.text" = "Shiori webを評価する";
+
+/* Class = "UILabel"; text = "コピーライト"; ObjectID = "Rf0-Wg-0ob"; */
+"Rf0-Wg-0ob.text" = "コピーライト";
+
+/* Class = "UIBarButtonItem"; title = "未読のみ表示"; ObjectID = "XGY-6s-5gq"; */
+"XGY-6s-5gq.title" = "未読のみ表示";
+
+/* Class = "UINavigationItem"; title = "Setting"; ObjectID = "bi0-zg-pEH"; */
+"bi0-zg-pEH.title" = "Setting";
+
+/* Class = "UITableViewSection"; headerTitle = "appearance"; ObjectID = "iVl-ox-kA2"; */
+"iVl-ox-kA2.headerTitle" = "appearance";
+
+/* Class = "UILabel"; text = "広告非表示"; ObjectID = "tmr-IP-ELz"; */
+"tmr-IP-ELz.text" = "広告非表示";
