@@ -168,6 +168,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.navigationController?.toolbar.barTintColor = bgColor
 //        header color
         self.navigationController?.navigationBar.barTintColor = bgColor
+        
 //        背景
         tableView.backgroundColor = bgColor
         tableView.reloadData()
