@@ -736,7 +736,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = ADC9E03ECD8878BFC17B9338 /* Pods-Shiori.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Shiori/Shiori.entitlements;
 				CODE_SIGN_STYLE = Automatic;
@@ -759,7 +759,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 18860B705E04B1046708118B /* Pods-Shiori.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Shiori/Shiori.entitlements;
 				CODE_SIGN_STYLE = Automatic;
