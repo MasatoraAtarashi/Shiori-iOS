@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UserDefaults.standard.register(defaults: ["isAdvertisementOn" : true, "launchCount" : 0, "r" : 255, "g" : 255, "b" : 255])
         let currentCount = UserDefaults.standard.integer(forKey: "launchCount")
         UserDefaults.standard.set(currentCount+1, forKey:"launchCount")
-        if UserDefaults.standard.integer(forKey: "launchCount") == 10 {
+        if [3, 10].contains(UserDefaults.standard.integer(forKey: "launchCount")) {
             SKStoreReviewController.requestReview()
         }
         return true

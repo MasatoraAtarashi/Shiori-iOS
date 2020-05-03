@@ -26,16 +26,6 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
     @IBOutlet weak var text5: UILabel!
     @IBOutlet weak var text6: UILabel!
     
-    //言語を変更
-    func changeLanguage() {
-        text1.text = NSLocalizedString("Hide ads", comment: "")
-        text2.text = NSLocalizedString("Usage", comment: "")
-        text3.text = NSLocalizedString("Send feedback", comment: "")
-        text4.text = NSLocalizedString("Rate Shiori web", comment: "")
-        text5.text = NSLocalizedString("Version", comment: "")
-        text6.text = NSLocalizedString("Copyright", comment: "")
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -120,7 +110,7 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
         case 0: // 「設定」のセクション
           return 2
         case 1: // 「その他」のセクション
-          return 5
+          return 6
         default: // ここが実行されることはないはず
           return 0
         }
@@ -128,7 +118,9 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath == [1, 2] {
-            SKStoreReviewController.requestReview()
+            guard let writeReviewURL = URL(string: "https://itunes.apple.com/app/id1480539987?action=write-review")
+            else { fatalError("Expected a valid URL") }
+            UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)
         } else if indexPath == [1, 1] {
             sendMail()
         }
@@ -136,6 +128,7 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
     }
     
+    //フィードバックのメールを送信
     func sendMail() {
         if MFMailComposeViewController.canSendMail() {
             let mail = MFMailComposeViewController()
@@ -168,6 +161,17 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
         }
         dismiss(animated: true, completion: nil)
     }
+    
+    //言語を変更
+    func changeLanguage() {
+        text1.text = NSLocalizedString("Hide ads", comment: "")
+        text2.text = NSLocalizedString("Usage", comment: "")
+        text3.text = NSLocalizedString("Send feedback", comment: "")
+        text4.text = NSLocalizedString("Rate Shiori web", comment: "")
+        text5.text = NSLocalizedString("Version", comment: "")
+        text6.text = NSLocalizedString("Copyright", comment: "")
+    }
+    
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
