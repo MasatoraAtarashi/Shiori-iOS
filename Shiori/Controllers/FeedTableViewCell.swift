@@ -15,7 +15,7 @@ class FeedTableViewCell: SwipeTableViewCell {
     @IBOutlet weak var thumbnail: UIImageView!
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var subContent: UILabel!
-    
+    @IBOutlet weak var date: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -32,6 +32,7 @@ class FeedTableViewCell: SwipeTableViewCell {
     func changeTextColor(color: UIColor) {
         self.title.textColor = color
         self.subContent.textColor = color
+        self.date.textColor = color
     }
     
 }
