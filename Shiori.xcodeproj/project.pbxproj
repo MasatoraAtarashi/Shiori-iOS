@@ -37,6 +37,7 @@
 		6272B35C245DC32D005727D8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6272B35E245DC32D005727D8 /* Localizable.strings */; };
 		6272B366245DC4EA005727D8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6272B369245DC4EA005727D8 /* Localizable.strings */; };
 		6272B367245DC4EA005727D8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6272B369245DC4EA005727D8 /* Localizable.strings */; };
+		6272B36B245E9FEC005727D8 /* SupportedServicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6272B36A245E9FEB005727D8 /* SupportedServicesViewController.swift */; };
 		6280BC09242399FA00EEDB3C /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 6280BC08242399FA00EEDB3C /* settings.png */; };
 		62A1E834242F9A0000113A10 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62A1E833242F9A0000113A10 /* MessageUI.framework */; };
 		62A3AF5F242E350A004BD808 /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A3AF5E242E350A004BD808 /* SettingTableViewController.swift */; };
@@ -124,6 +125,7 @@
 		6272B360245DC4BC005727D8 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		6272B361245DC4BC005727D8 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/MainInterface.strings"; sourceTree = "<group>"; };
 		6272B368245DC4EA005727D8 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		6272B36A245E9FEB005727D8 /* SupportedServicesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportedServicesViewController.swift; sourceTree = "<group>"; };
 		6280BC08242399FA00EEDB3C /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
 		62A1E833242F9A0000113A10 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		62A3AF5E242E350A004BD808 /* SettingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
@@ -236,6 +238,7 @@
 				622155B7232CBF8400DD4AB4 /* WebViewController.swift */,
 				624FE6A223323C56004E271B /* TutorialViewController.swift */,
 				62A3AF5E242E350A004BD808 /* SettingTableViewController.swift */,
+				6272B36A245E9FEB005727D8 /* SupportedServicesViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -506,6 +509,7 @@
 				6221558C232B79B900DD4AB4 /* AppDelegate.swift in Sources */,
 				622155B8232CBF8400DD4AB4 /* WebViewController.swift in Sources */,
 				62A3AF5F242E350A004BD808 /* SettingTableViewController.swift in Sources */,
+				6272B36B245E9FEC005727D8 /* SupportedServicesViewController.swift in Sources */,
 				62B1234C232E8215007E6F61 /* Entry.swift in Sources */,
 				624411012334EA6300C1C411 /* CustomActivity.swift in Sources */,
 			);

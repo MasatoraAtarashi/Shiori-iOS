@@ -110,7 +110,7 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
         case 0: // 「設定」のセクション
           return 2
         case 1: // 「その他」のセクション
-          return 5
+          return 6
         default: // ここが実行されることはないはず
           return 0
         }
