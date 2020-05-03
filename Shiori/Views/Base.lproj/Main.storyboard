@@ -348,6 +348,7 @@
                         <outlet property="text4" destination="Qvx-pd-gU4" id="fwi-kE-Dnv"/>
                         <outlet property="text5" destination="GF0-28-EyF" id="Py6-iI-ZuA"/>
                         <outlet property="text6" destination="Rf0-Wg-0ob" id="CLu-1O-1a5"/>
+                        <outlet property="text7" destination="9sv-Kh-PQA" id="fnL-9C-fS7"/>
                         <outlet property="versionLabel" destination="jUI-3L-Aew" id="xgr-f0-CLJ"/>
                     </connections>
                 </tableViewController>

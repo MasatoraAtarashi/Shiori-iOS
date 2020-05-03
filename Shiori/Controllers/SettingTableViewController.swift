@@ -25,6 +25,7 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
     @IBOutlet weak var text4: UILabel!
     @IBOutlet weak var text5: UILabel!
     @IBOutlet weak var text6: UILabel!
+    @IBOutlet weak var text7: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -170,6 +171,7 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
         text4.text = NSLocalizedString("Rate Shiori web", comment: "")
         text5.text = NSLocalizedString("Version", comment: "")
         text6.text = NSLocalizedString("Copyright", comment: "")
+        text7.text = NSLocalizedString("Supported video sites", comment: "")
     }
     
     /*
