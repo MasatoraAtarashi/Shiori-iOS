@@ -142,6 +142,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         tableView.refreshControl = refreshCtl
         tableView.refreshControl?.addTarget(self, action: #selector(ViewController.getStoredDataFromUserDefault), for: .valueChanged)
+        tableView.refreshControl?.attributedTitle = NSAttributedString(string: NSLocalizedString("Pull to refresh", comment: ""))
         
 //        検索
         searchController = UISearchController(searchResultsController: nil)
@@ -328,12 +329,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             cell.delegate = self
             cell.title.text = entry.title
             cell.subContent.text = entry.link
+            cell.date.text = entry.date
             cell.thumbnail.sd_setImage(with: URL(string: entry.imageURL ?? ""))
         } else {
             let entry = self.articles[indexPath.row]
             cell.delegate = self
             cell.title.text = entry.title
             cell.subContent.text = entry.link
+            cell.date.text = entry.date
             cell.thumbnail.sd_setImage(with: URL(string: entry.imageURL ?? ""))
         }
         r = UserDefaults.standard.integer(forKey: "r")
@@ -344,9 +347,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if r == 0 || r == 60 {
             cell.title.textColor = UIColor.white
             cell.subContent.textColor = UIColor.white
+            cell.date.textColor = UIColor.white
         } else {
             cell.title.textColor = UIColor.black
             cell.subContent.textColor = UIColor.lightGray
+            cell.date.textColor = UIColor.lightGray
         }
         return cell
     }
