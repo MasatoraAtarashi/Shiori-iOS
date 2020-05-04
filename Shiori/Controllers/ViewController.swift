@@ -69,11 +69,19 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         } else {
             if unreadMode {
                 unreadMode = false
-                sender.title = NSLocalizedString("Show only unread", comment: "")
+                if #available(iOS 13.0, *) {
+                    sender.image = UIImage(systemName: "line.horizontal.3.decrease.circle")
+                } else {
+                    sender.title = NSLocalizedString("Show only unread", comment: "")
+                }
                 getStoredDataFromUserDefault()
             } else {
                 unreadMode = true
-                sender.title = NSLocalizedString("Show all", comment: "")
+                if #available(iOS 13.0, *) {
+                    sender.image = UIImage(systemName: "line.horizontal.3.decrease.circle.fill")
+                } else {
+                    sender.title = NSLocalizedString("Show all", comment: "")
+                }
                 getStoredDataFromUserDefault()
             }
         }
@@ -86,11 +94,20 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBAction func changeToEditMode(_ sender: UIBarButtonItem) {
         if tableView.isEditing {
             sender.title = NSLocalizedString("Edit", comment: "")
-            reorderArticles()
             if unreadMode {
-                bottomToolbarLeftItem.title = NSLocalizedString("Show all", comment: "")
+                if #available(iOS 13.0, *) {
+                    bottomToolbarLeftItem.image = UIImage(systemName: "line.horizontal.3.decrease.circle")
+                } else {
+                    // Fallback on earlier versions
+                    bottomToolbarLeftItem.title = NSLocalizedString("Show all", comment: "")
+                }
             } else {
-                bottomToolbarLeftItem.title = NSLocalizedString("Show only unread", comment: "")
+                if #available(iOS 13.0, *) {
+                    bottomToolbarLeftItem.image = UIImage(systemName: "line.horizontal.3.decrease.circle.fill")
+                } else {
+                    // Fallback on earlier versions
+                    bottomToolbarLeftItem.title = NSLocalizedString("Show only unread", comment: "")
+                }
             }
             setEditing(false, animated: true)
         } else {
@@ -542,20 +559,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         previewProvider: previewProvider, actionProvider: actionProvider)
     }
     
-    //これでセルを入れ替えできるようになる
-    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-//        return true
-        return false
-    }
-    
-    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        // TODO: 入れ替え時の処理を実装する（データ制御など）
-    }
-    
-    //編集が終わったときの処理
-    func reorderArticles() {
-        print("編集が終わったよ")
-    }
     
     func deleteAllRecords() {
         let delegate = UIApplication.shared.delegate as! AppDelegate
@@ -585,9 +588,19 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if !tableView.isEditing {
             bottomToolbarRightItem.title = NSLocalizedString("Edit", comment: "")
             if unreadMode {
-                bottomToolbarLeftItem.title = NSLocalizedString("Show all", comment: "")
+                if #available(iOS 13.0, *) {
+                    bottomToolbarLeftItem.image = UIImage(systemName: "line.horizontal.3.decrease.circle.fill")
+                } else {
+                    // Fallback on earlier versions
+                    bottomToolbarLeftItem.title = NSLocalizedString("Show all", comment: "")
+                }
             } else {
-                bottomToolbarLeftItem.title = NSLocalizedString("Show only unread", comment: "")
+                if #available(iOS 13.0, *) {
+                    bottomToolbarLeftItem.image = UIImage(systemName: "line.horizontal.3.decrease.circle")
+                } else {
+                    // Fallback on earlier versions
+                    bottomToolbarLeftItem.title = NSLocalizedString("Show only unread", comment: "")
+                }
             }
         } else {
             bottomToolbarRightItem.title = NSLocalizedString("Done", comment: "")
