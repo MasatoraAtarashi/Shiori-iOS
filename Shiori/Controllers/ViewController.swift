@@ -80,35 +80,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
     }
     
-    //言語変更
-    func changeViewLanguage() {
-        //なんもないときのやつ
-        text.text = NSLocalizedString("List is empty", comment: "")
-        text2.text = NSLocalizedString("Adding articles is easy. Tap below to get started.", comment: "")
-        button.setTitle(NSLocalizedString("Learn how to save", comment: ""), for: UIControl.State())
-        button.sizeToFit()
-        button.layer.cornerRadius = 10.0
-        
-        //フッターのボタン
-        if !tableView.isEditing {
-            bottomToolbarRightItem.title = NSLocalizedString("Edit", comment: "")
-            if unreadMode {
-                bottomToolbarLeftItem.title = NSLocalizedString("Show all", comment: "")
-            } else {
-                bottomToolbarLeftItem.title = NSLocalizedString("Show only unread", comment: "")
-            }
-        } else {
-            bottomToolbarRightItem.title = NSLocalizedString("Done", comment: "")
-            bottomToolbarLeftItem.title = NSLocalizedString("Delete", comment: "")
-        }
-    }
-    
     @IBOutlet weak var bottomToolbarLeftItem: UIBarButtonItem!
     @IBOutlet weak var bottomToolbarRightItem: UIBarButtonItem!
     
     @IBAction func changeToEditMode(_ sender: UIBarButtonItem) {
         if tableView.isEditing {
             sender.title = NSLocalizedString("Edit", comment: "")
+            reorderArticles()
             if unreadMode {
                 bottomToolbarLeftItem.title = NSLocalizedString("Show all", comment: "")
             } else {
@@ -206,11 +184,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 NSLayoutConstraint.activate(constraints)
                 let deviceData = getDeviceInfo()
                 if deviceData == "Simulator" {
-                    bannerView!.bottomAnchor.constraint(equalTo: (self.view.bottomAnchor), constant: CGFloat(-80)).isActive = true
+                    bannerView!.bottomAnchor.constraint(equalTo: (self.view.bottomAnchor), constant: CGFloat(-30)).isActive = true
                 } else if deviceData == "iPhone 11" {
                     bannerView!.bottomAnchor.constraint(equalTo: (self.view.bottomAnchor), constant: CGFloat(-80)).isActive = true
                 } else if deviceData == "iPhone X" {
                     bannerView!.bottomAnchor.constraint(equalTo: (self.view.bottomAnchor), constant: CGFloat(-80)).isActive = true
+                } else if deviceData == "iPhone SE" {
+                    bannerView!.bottomAnchor.constraint(equalTo: (self.view.bottomAnchor), constant: CGFloat(-30)).isActive = true
                 }
                 self.view.bringSubviewToFront(bannerView!)
             }
@@ -427,6 +407,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return options
     }
     
+    //cellを削除する
     func deleteCell(at indexPath: IndexPath) {
         self.articles.remove(at: indexPath.row)
         let readContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -561,6 +542,58 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         previewProvider: previewProvider, actionProvider: actionProvider)
     }
     
+    //これでセルを入れ替えできるようになる
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+//        return true
+        return false
+    }
+    
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        // TODO: 入れ替え時の処理を実装する（データ制御など）
+    }
+    
+    //編集が終わったときの処理
+    func reorderArticles() {
+        print("編集が終わったよ")
+    }
+    
+    func deleteAllRecords() {
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        let context = delegate.persistentContainer.viewContext
+
+        let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Article")
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: deleteFetch)
+
+        do {
+            try context.execute(deleteRequest)
+            try context.save()
+        } catch {
+            print ("There was an error")
+        }
+    }
+    
+    //言語変更
+    func changeViewLanguage() {
+        //なんもないときのやつ
+        text.text = NSLocalizedString("List is empty", comment: "")
+        text2.text = NSLocalizedString("Adding articles is easy. Tap below to get started.", comment: "")
+        button.setTitle(NSLocalizedString("Learn how to save", comment: ""), for: UIControl.State())
+        button.sizeToFit()
+        button.layer.cornerRadius = 10.0
+        
+        //フッターのボタン
+        if !tableView.isEditing {
+            bottomToolbarRightItem.title = NSLocalizedString("Edit", comment: "")
+            if unreadMode {
+                bottomToolbarLeftItem.title = NSLocalizedString("Show all", comment: "")
+            } else {
+                bottomToolbarLeftItem.title = NSLocalizedString("Show only unread", comment: "")
+            }
+        } else {
+            bottomToolbarRightItem.title = NSLocalizedString("Done", comment: "")
+            bottomToolbarLeftItem.title = NSLocalizedString("Delete", comment: "")
+        }
+    }
 }
 
 extension ViewController {
