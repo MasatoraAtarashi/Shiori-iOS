@@ -8,6 +8,8 @@
 import UIKit
 
 class SubTableViewController: UITableViewController {
+    
+    var categories = ["ホーム", "お気に入り"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,24 +25,66 @@ class SubTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return categories.count
     }
 
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellForSub", for: indexPath)
 
         // Configure the cell...
-
+        cell.textLabel!.text = categories[indexPath.row]
         return cell
     }
-    */
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        print(indexPath.row)
+//        print(self.navigationController)
+//        print(self.navigationController?.presentingViewController)
+        let preNC = self.navigationController?.presentingViewController as! UINavigationController
+        let preVC = preNC.viewControllers[preNC.viewControllers.count - 1] as! ViewController
+        preVC.folderInt = indexPath.row
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    //カテゴリを追加する
+    @IBAction func addCategory(_ sender: Any) {
+        var alertTextField: UITextField?
+        print("アラート")
 
+        let alert = UIAlertController(
+            title: "フォルダを追加",
+            message: "フォルダを使用し、保存済みの記事を整理してください。",
+            preferredStyle: UIAlertController.Style.alert)
+        alert.addTextField(
+            configurationHandler: {(textField: UITextField!) in
+                alertTextField = textField
+                 textField.placeholder = "例: レシピ、政治..."
+        })
+        alert.addAction(
+            UIAlertAction(
+                title: "Cancel",
+                style: UIAlertAction.Style.cancel,
+                handler: nil))
+        alert.addAction(
+            UIAlertAction(
+                title: "OK",
+                style: UIAlertAction.Style.default) { _ in
+                if let text = alertTextField?.text {
+                    self.categories.append(text)
+                    self.tableView.reloadData()
+                }
+            }
+        )
+
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
