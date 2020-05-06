@@ -418,17 +418,48 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 // Fallback on earlier versions
             }
             
-            let favoriteAction = SwipeAction(style: .default, title: "お気に入り") { action, indexPath in
-                self.favoriteCell(at: indexPath)
+            
+            //お気に入り
+            var favoriteAction: SwipeAction
+//            let favoriteAction = SwipeAction(style: .default, title: "お気に入り") { action, indexPath in
+//                self.favoriteCell(at: indexPath)
+//            }
+            let fetchRequest: NSFetchRequest<Article> = Article.fetchRequest()
+            if unreadMode {
+                fetchRequest.predicate = NSPredicate(format: "haveRead = true")
+            }
+               
+            var filteredArticles: Array<Article>
+            if searchController.isActive {
+                filteredArticles = self.searchResults.filter({ ($0.folderInt ?? ["ホーム"]).contains(folderInt) })
+            } else {
+                filteredArticles = self.articles.filter({ ($0.folderInt ?? ["ホーム"]).contains(folderInt) })
             }
             
-            // customize the action appearance
-            if #available(iOS 13.0, *) {
-                favoriteAction.image = UIImage(systemName: "heart.fill")
+            if filteredArticles[indexPath.row].folderInt?.contains("お気に入り") ?? false {
+                favoriteAction = SwipeAction(style: .default, title: "解除") { action, indexPath in
+                    self.favoriteCell(at: indexPath)
+                }
+                
+                if #available(iOS 13.0, *) {
+                    favoriteAction.image = UIImage(systemName: "heart.fill")
+                } else {
+                    // Fallback on earlier versions
+                }
             } else {
-                // Fallback on earlier versions
+                favoriteAction = SwipeAction(style: .default, title: "お気に入り") { action, indexPath in
+                    self.favoriteCell(at: indexPath)
+                }
+
+                if #available(iOS 13.0, *) {
+                    favoriteAction.image = UIImage(systemName: "heart")
+                } else {
+                    // Fallback on earlier versions
+                }
             }
             favoriteAction.backgroundColor = UIColor.init(red: 255/255, green: 165/255, blue: 0/255, alpha: 1)
+            
+            
             
             let folderAction = SwipeAction(style: .default, title: "追加") { action, indexPath in
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -448,7 +479,23 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             return [deleteAction, favoriteAction, folderAction]
         } else {
             let readAction: SwipeAction
-            if articles[indexPath.row].haveRead {
+            
+            
+            let fetchRequest: NSFetchRequest<Article> = Article.fetchRequest()
+            if unreadMode {
+                fetchRequest.predicate = NSPredicate(format: "haveRead = true")
+            }
+               
+            var filteredArticles: Array<Article>
+            if searchController.isActive {
+                filteredArticles = self.searchResults.filter({ ($0.folderInt ?? ["ホーム"]).contains(folderInt) })
+            } else {
+                filteredArticles = self.articles.filter({ ($0.folderInt ?? ["ホーム"]).contains(folderInt) })
+            }
+            
+            
+            
+            if filteredArticles[indexPath.row].haveRead {
                 readAction = SwipeAction(style: .default, title: NSLocalizedString("Mark as read", comment: "")) { action, indexPath in
                     self.haveReadCell(at: indexPath)
                 }
@@ -459,7 +506,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             }
             // customize the action appearance
             if #available(iOS 13.0, *) {
-                if articles[indexPath.row].haveRead {
+                if filteredArticles[indexPath.row].haveRead {
                     readAction.image = UIImage(systemName: "chevron.down.circle.fill")
                 } else {
                     readAction.image = UIImage(systemName: "chevron.down.circle")
