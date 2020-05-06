@@ -6,10 +6,9 @@
 //
 
 import UIKit
+import SwipeCellKit
 
-class SubTableViewController: UITableViewController {
-    
-    var categories = ["ホーム", "お気に入り"]
+class SubTableViewController: UITableViewController, SwipeTableViewCellDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,16 +29,23 @@ class SubTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return categories.count
+        return UserDefaults.standard.array(forKey: "categories")?.count ?? 2
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellForSub", for: indexPath)
-
-        // Configure the cell...
-        cell.textLabel!.text = categories[indexPath.row]
-        return cell
+        if indexPath.row == 0 || indexPath.row == 1 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cellForSub", for: indexPath)
+            // Configure the cell...
+            cell.textLabel!.text = UserDefaults.standard.array(forKey: "categories")![indexPath.row] as? String
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cellForSub", for: indexPath) as! SwipeTableViewCell
+            cell.delegate = self
+            // Configure the cell...
+            cell.textLabel!.text = UserDefaults.standard.array(forKey: "categories")![indexPath.row] as? String
+            return cell
+        }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -48,11 +54,44 @@ class SubTableViewController: UITableViewController {
 //        print(self.navigationController?.presentingViewController)
         let preNC = self.navigationController?.presentingViewController as! UINavigationController
         let preVC = preNC.viewControllers[preNC.viewControllers.count - 1] as! ViewController
-        preVC.folderInt = indexPath.row
+        preVC.folderInt = UserDefaults.standard.array(forKey: "categories")?[indexPath.row] as! String
         self.dismiss(animated: true, completion: nil)
     }
     
-    //カテゴリを追加する
+    func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeOptions {
+        var options = SwipeOptions()
+        options.expansionStyle = .destructive(automaticallyDelete: false)
+        return options
+    }
+    
+    //swipeしたときの処理
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
+        
+        guard orientation == .right else { return nil }
+        
+        let deleteAction = SwipeAction(style: .destructive, title: NSLocalizedString("Delete", comment: "")) { action, indexPath in
+            self.deleteFolder(at: indexPath)
+        }
+        // customize the action appearance
+        if #available(iOS 13.0, *) {
+            deleteAction.image = UIImage(systemName: "trash.fill")
+        } else {
+            // Fallback on earlier versions
+        }
+        return [deleteAction]
+    }
+    
+    //フォルダ(カテゴリー)を削除する
+    func deleteFolder(at indexPath: IndexPath) {
+        print(UserDefaults.standard.array(forKey: "categories")![indexPath.row] as? String)
+        var categories = UserDefaults.standard.array(forKey: "categories") as! Array<String>
+        if let i = categories.firstIndex(of: categories[indexPath.row]) {
+            categories.remove(at: i)
+        }
+        UserDefaults.standard.set(categories, forKey:"categories")
+        self.tableView.reloadData()
+    }
+    //フォルダを追加する
     @IBAction func addCategory(_ sender: Any) {
         var alertTextField: UITextField?
         print("アラート")
@@ -76,7 +115,9 @@ class SubTableViewController: UITableViewController {
                 title: "OK",
                 style: UIAlertAction.Style.default) { _ in
                 if let text = alertTextField?.text {
-                    self.categories.append(text)
+                    var categories = UserDefaults.standard.array(forKey: "categories")
+                    categories?.append(text)
+                    UserDefaults.standard.set(categories, forKey:"categories")
                     self.tableView.reloadData()
                 }
             }

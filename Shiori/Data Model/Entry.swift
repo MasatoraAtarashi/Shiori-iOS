@@ -16,5 +16,5 @@ struct Entry {
     var positionY : String
     var date : String
     var haveRead : Bool
-    var folderInd : Array = [] as [Int]
+    var folderInd : Array = [] as [String]
 }

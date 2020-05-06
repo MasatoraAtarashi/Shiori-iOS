@@ -28,7 +28,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var searchController = UISearchController()
     
     //フォルダ
-    var folderInt: Int = 0
+    var folderInt: String = "ホーム"
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -157,7 +157,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 //        3dtouch
         self.registerForPreviewing(with: self, sourceView: tableView)
 
-        
         
     }
     
@@ -323,11 +322,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if searchController.isActive {
 //            return searchResults.count
-            let filteredArticles = searchResults.filter({ ($0.folderInt ?? [0]).contains(folderInt) })
+            let filteredArticles = searchResults.filter({ ($0.folderInt ?? ["ホーム"]).contains(folderInt) })
             return filteredArticles.count
         } else {
 //            return articles.count
-            let filteredArticles = articles.filter({ ($0.folderInt ?? [0]).contains(folderInt) })
+            let filteredArticles = articles.filter({ ($0.folderInt ?? ["ホーム"]).contains(folderInt) })
             return filteredArticles.count
         }
     }
@@ -336,7 +335,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
   
         let cell = tableView.dequeueReusableCell(withIdentifier: "FeedTableViewCell", for: indexPath as IndexPath) as! FeedTableViewCell
         if searchController.isActive {
-            let filteredArticles = self.searchResults.filter({ ($0.folderInt ?? [0]).contains(folderInt) })
+            let filteredArticles = self.searchResults.filter({ ($0.folderInt ?? ["ホーム"]).contains(folderInt) })
             let entry = filteredArticles[indexPath.row]
             cell.delegate = self
             cell.title.text = entry.title
@@ -344,7 +343,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             cell.date.text = entry.date
             cell.thumbnail.sd_setImage(with: URL(string: entry.imageURL ?? ""))
         } else {
-            let filteredArticles = articles.filter({ ($0.folderInt ?? [0]).contains(folderInt) })
+            let filteredArticles = articles.filter({ ($0.folderInt ?? ["ホーム"]).contains(folderInt) })
             let entry = filteredArticles[indexPath.row]
             cell.delegate = self
             cell.title.text = entry.title
@@ -372,7 +371,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if !tableView.isEditing {
             if searchController.isActive {
-                let filteredArticles = self.searchResults.filter({ ($0.folderInt ?? [0]).contains(folderInt) })
+                let filteredArticles = self.searchResults.filter({ ($0.folderInt ?? ["ホーム"]).contains(folderInt) })
                 let webViewController = WebViewController()
                 webViewController.targetUrl = filteredArticles[indexPath.row].link
                 webViewController.positionX = Int(filteredArticles[indexPath.row].positionX ?? "0") ?? 0
@@ -380,7 +379,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 self.navigationController!.pushViewController(webViewController , animated: true)
                 tableView.deselectRow(at: indexPath as IndexPath, animated: true)
             } else {
-                let filteredArticles = articles.filter({ ($0.folderInt ?? [0]).contains(folderInt) })
+                let filteredArticles = articles.filter({ ($0.folderInt ?? ["ホーム"]).contains(folderInt) })
                 let webViewController = WebViewController()
                 webViewController.targetUrl = filteredArticles[indexPath.row].link
                 webViewController.positionX = Int(filteredArticles[indexPath.row].positionX ?? "0") ?? 0
@@ -431,7 +430,22 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             }
             favoriteAction.backgroundColor = UIColor.init(red: 255/255, green: 165/255, blue: 0/255, alpha: 1)
             
-            return [deleteAction, favoriteAction]
+            let folderAction = SwipeAction(style: .default, title: "追加") { action, indexPath in
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "myVCID") as! UINavigationController
+                let selectFolderTableViewController = vc.viewControllers.first as! SelectFolderTableViewController
+                selectFolderTableViewController.selectedIndexPath = indexPath.row
+                self.present(vc, animated: true)
+            }
+            // customize the action appearance
+            if #available(iOS 13.0, *) {
+                folderAction.image = UIImage(systemName: "folder.fill")
+            } else {
+                // Fallback on earlier versions
+            }
+            folderAction.backgroundColor = UIColor.init(red: 176/255, green: 196/255, blue: 222/255, alpha: 1)
+            
+            return [deleteAction, favoriteAction, folderAction]
         } else {
             let readAction: SwipeAction
             if articles[indexPath.row].haveRead {
@@ -475,10 +489,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             fetchRequest.predicate = NSPredicate(format: "haveRead = true")
         }
         if searchController.isActive {
-            let filteredArticles = self.searchResults.filter({ ($0.folderInt ?? [0]).contains(folderInt) })
+            let filteredArticles = self.searchResults.filter({ ($0.folderInt ?? ["ホーム"]).contains(folderInt) })
             readContext.delete(filteredArticles[indexPath.row])
         } else {
-            let filteredArticles = self.articles.filter({ ($0.folderInt ?? [0]).contains(folderInt) })
+            let filteredArticles = self.articles.filter({ ($0.folderInt ?? ["ホーム"]).contains(folderInt) })
             readContext.delete(filteredArticles[indexPath.row])
         }
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
@@ -494,31 +508,31 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             
         if searchController.isActive {
             
-            let filteredArticles = self.searchResults.filter({ ($0.folderInt ?? [0]).contains(folderInt) })
+            let filteredArticles = self.searchResults.filter({ ($0.folderInt ?? ["ホーム"]).contains(folderInt) })
             
             if filteredArticles[indexPath.row].folderInt == nil {
-                filteredArticles[indexPath.row].folderInt = [0]
+                filteredArticles[indexPath.row].folderInt = ["ホーム"]
             }
             
-            if filteredArticles[indexPath.row].folderInt!.contains(1) {
-                filteredArticles[indexPath.row].folderInt?.remove(at: filteredArticles[indexPath.row].folderInt!.firstIndex(of: 1)!)
+            if filteredArticles[indexPath.row].folderInt!.contains("お気に入り") {
+                filteredArticles[indexPath.row].folderInt?.remove(at: filteredArticles[indexPath.row].folderInt!.firstIndex(of: "お気に入り")!)
             } else {
-                filteredArticles[indexPath.row].folderInt?.append(1)
+                filteredArticles[indexPath.row].folderInt?.append("お気に入り")
             }
             print(filteredArticles[indexPath.row].folderInt!)
             print(filteredArticles[indexPath.row].title!)
         } else {
             
-            let filteredArticles = self.articles.filter({ ($0.folderInt ?? [0]).contains(folderInt) })
+            let filteredArticles = self.articles.filter({ ($0.folderInt ?? ["ホーム"]).contains(folderInt) })
             
             if filteredArticles[indexPath.row].folderInt == nil {
-                filteredArticles[indexPath.row].folderInt = [0]
+                filteredArticles[indexPath.row].folderInt = ["ホーム"]
             }
             
-            if filteredArticles[indexPath.row].folderInt!.contains(1) {
-                filteredArticles[indexPath.row].folderInt!.remove(at: filteredArticles[indexPath.row].folderInt!.firstIndex(of: 1)!)
+            if filteredArticles[indexPath.row].folderInt!.contains("お気に入り") {
+                filteredArticles[indexPath.row].folderInt!.remove(at: filteredArticles[indexPath.row].folderInt!.firstIndex(of: "お気に入り")!)
             } else {
-                filteredArticles[indexPath.row].folderInt!.append(1)
+                filteredArticles[indexPath.row].folderInt!.append("お気に入り")
             }
 //            print(filteredArticles[indexPath.row].folderInt!)
 //            print(filteredArticles[indexPath.row].title!)
@@ -536,18 +550,55 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
             
         if searchController.isActive {
-            let filteredArticles = searchResults.filter({ ($0.folderInt ?? [0]).contains(folderInt) })
+            let filteredArticles = searchResults.filter({ ($0.folderInt ?? ["ホーム"]).contains(folderInt) })
             if filteredArticles[indexPath.row].haveRead {
                 filteredArticles[indexPath.row].haveRead = false
             } else {
                 filteredArticles[indexPath.row].haveRead = true
             }
         } else {
-            let filteredArticles = self.articles.filter({ ($0.folderInt ?? [0]).contains(folderInt) })
+            let filteredArticles = self.articles.filter({ ($0.folderInt ?? ["ホーム"]).contains(folderInt) })
             if filteredArticles[indexPath.row].haveRead {
                 filteredArticles[indexPath.row].haveRead = false
             } else {
                 filteredArticles[indexPath.row].haveRead = true
+            }
+        }
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()
+        getStoredDataFromUserDefault()
+    }
+    
+    func addArticleToFolder(_ ArticleindexPathRow: Int, _ folderName: String) {
+        let fetchRequest: NSFetchRequest<Article> = Article.fetchRequest()
+        if unreadMode {
+            fetchRequest.predicate = NSPredicate(format: "haveRead = true")
+        }
+                    
+        if searchController.isActive {
+            
+            let filteredArticles = self.searchResults.filter({ ($0.folderInt ?? ["ホーム"]).contains(folderInt) })
+            
+            if filteredArticles[ArticleindexPathRow].folderInt == nil {
+                filteredArticles[ArticleindexPathRow].folderInt = ["ホーム"]
+            }
+            
+            if filteredArticles[ArticleindexPathRow].folderInt!.contains(folderName) {
+                filteredArticles[ArticleindexPathRow].folderInt?.remove(at: filteredArticles[ArticleindexPathRow].folderInt!.firstIndex(of: folderName)!)
+            } else {
+                filteredArticles[ArticleindexPathRow].folderInt?.append(folderName)
+            }
+        } else {
+            
+            let filteredArticles = self.articles.filter({ ($0.folderInt ?? ["ホーム"]).contains(folderInt) })
+            
+            if filteredArticles[ArticleindexPathRow].folderInt == nil {
+                filteredArticles[ArticleindexPathRow].folderInt = ["ホーム"]
+            }
+            
+            if filteredArticles[ArticleindexPathRow].folderInt!.contains(folderName) {
+                filteredArticles[ArticleindexPathRow].folderInt!.remove(at: filteredArticles[ArticleindexPathRow].folderInt!.firstIndex(of: folderName)!)
+            } else {
+                filteredArticles[ArticleindexPathRow].folderInt!.append(folderName)
             }
         }
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
@@ -563,7 +614,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func updateSearchResults(for searchController: UISearchController) {
-        let filteredArticles = self.articles.filter({ ($0.folderInt ?? [0]).contains(folderInt) })
+        let filteredArticles = self.articles.filter({ ($0.folderInt ?? ["ホーム"]).contains(folderInt) })
         self.searchResults = filteredArticles.filter{
             // 大文字と小文字を区別せずに検索
             $0.title?.lowercased().contains(searchController.searchBar.text!.lowercased()) ?? true
@@ -583,14 +634,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         
         if searchController.isActive {
-            let filteredArticles = self.searchResults.filter({ ($0.folderInt ?? [0]).contains(folderInt) })
+            let filteredArticles = self.searchResults.filter({ ($0.folderInt ?? ["ホーム"]).contains(folderInt) })
             let webViewController = WebViewController()
             webViewController.targetUrl = filteredArticles[indexPath.row].link
             webViewController.positionX = Int(filteredArticles[indexPath.row].positionX ?? "0") ?? 0
             webViewController.positionY = Int(filteredArticles[indexPath.row].positionY ?? "0") ?? 0
             return webViewController
         } else {
-            let filteredArticles = self.articles.filter({ ($0.folderInt ?? [0]).contains(folderInt) })
+            let filteredArticles = self.articles.filter({ ($0.folderInt ?? ["ホーム"]).contains(folderInt) })
             let webViewController = WebViewController()
             webViewController.targetUrl = filteredArticles[indexPath.row].link
             webViewController.positionX = Int(filteredArticles[indexPath.row].positionX ?? "0") ?? 0
@@ -610,12 +661,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let previewProvider: () -> WebViewController? = { [unowned self] in
             let webViewController = WebViewController()
             if self.searchController.isActive {
-                let filteredArticles = self.searchResults.filter({ ($0.folderInt ?? [0]).contains(self.folderInt) })
+                let filteredArticles = self.searchResults.filter({ ($0.folderInt ?? ["ホーム"]).contains(self.folderInt) })
                 webViewController.targetUrl = filteredArticles[indexPath.row].link
                 webViewController.positionX = Int(filteredArticles[indexPath.row].positionX ?? "0") ?? 0
                 webViewController.positionY = Int(filteredArticles[indexPath.row].positionY ?? "0") ?? 0
             } else {
-                let filteredArticles = self.articles.filter({ ($0.folderInt ?? [0]).contains(self.folderInt) })
+                let filteredArticles = self.articles.filter({ ($0.folderInt ?? ["ホーム"]).contains(self.folderInt) })
                 webViewController.targetUrl = filteredArticles[indexPath.row].link
                 webViewController.positionX = Int(filteredArticles[indexPath.row].positionX ?? "0") ?? 0
                 webViewController.positionY = Int(filteredArticles[indexPath.row].positionY ?? "0") ?? 0
@@ -629,7 +680,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 var shareURL: NSURL
                 var shareWebsite: NSURL
                 if self.searchController.isActive {
-                    let filteredArticles = self.searchResults.filter({ ($0.folderInt ?? [0]).contains(self.folderInt) })
+                    let filteredArticles = self.searchResults.filter({ ($0.folderInt ?? ["ホーム"]).contains(self.folderInt) })
                     shareText = filteredArticles[indexPath.row].title!
                     if let shareURL = URL(string: filteredArticles[indexPath.row].link!) {
                         shareWebsite = shareURL as NSURL
@@ -637,7 +688,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                         return
                     }
                 } else {
-                    let filteredArticles = self.articles.filter({ ($0.folderInt ?? [0]).contains(self.folderInt) })
+                    let filteredArticles = self.articles.filter({ ($0.folderInt ?? ["ホーム"]).contains(self.folderInt) })
                     shareText = filteredArticles[indexPath.row].title!
                     if let shareURL = URL(string: filteredArticles[indexPath.row].link!) {
                         shareWebsite = shareURL as NSURL

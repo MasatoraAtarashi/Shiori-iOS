@@ -2,7 +2,7 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19E287" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Article" representedClassName="Article" syncable="YES" codeGenerationType="class">
         <attribute name="date" optional="YES" attributeType="String"/>
-        <attribute name="folderInt" optional="YES" attributeType="Transformable" customClassName="[Int]"/>
+        <attribute name="folderInt" optional="YES" attributeType="Transformable" customClassName="[String]"/>
         <attribute name="haveRead" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="imageURL" optional="YES" attributeType="String"/>
         <attribute name="link" optional="YES" attributeType="String"/>
