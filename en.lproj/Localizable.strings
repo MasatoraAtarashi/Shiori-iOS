@@ -39,3 +39,22 @@
 
 //サポート動画サイト
 "Supported video sites" = "Supported video sites";
+
+//スワイプ
+"Cancel" = "Cancel";
+"Add" = "Add";
+
+//サイドメニュー
+"Home" = "Home";
+"Liked" = "Liked";
+
+//フォルダ
+"Add Folder" = "Add Folder";
+"Use folders to organize your saved articles." = "Use folders to organize your saved articles.";
+"Examples: recipes, politics ..." = "Examples: recipes, politics ...";
+"Add to folder" = "Add to folder";
+
+//ポップアップ
+"Deleted from folder" = "Deleted from folder";
+"Added" = "Added";
+"(Added)" = "(Added)";

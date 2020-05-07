@@ -20,11 +20,15 @@
 		622155AE232B7A2F00DD4AB4 /* Share.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 622155A4232B7A2E00DD4AB4 /* Share.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		622155B6232B944200DD4AB4 /* GetData.js in Resources */ = {isa = PBXBuildFile; fileRef = 622155B5232B944200DD4AB4 /* GetData.js */; };
 		622155B8232CBF8400DD4AB4 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622155B7232CBF8400DD4AB4 /* WebViewController.swift */; };
+		6226B08724610B1200A5E541 /* SubTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6226B08624610B1200A5E541 /* SubTableViewController.swift */; };
+		6226B0892461172100A5E541 /* delete.png in Resources */ = {isa = PBXBuildFile; fileRef = 6226B0882461172100A5E541 /* delete.png */; };
+		6226B08B24611DB500A5E541 /* garbage.png in Resources */ = {isa = PBXBuildFile; fileRef = 6226B08A24611DB400A5E541 /* garbage.png */; };
 		622DA52F245D7EE1001FDFEE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 622DA532245D7EE1001FDFEE /* Localizable.strings */; };
 		622DA530245D7EE1001FDFEE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 622DA532245D7EE1001FDFEE /* Localizable.strings */; };
 		622DA536245D7F0A001FDFEE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 622DA539245D7F0A001FDFEE /* Localizable.strings */; };
 		622DA537245D7F0A001FDFEE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 622DA539245D7F0A001FDFEE /* Localizable.strings */; };
 		624411012334EA6300C1C411 /* CustomActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624411002334EA6300C1C411 /* CustomActivity.swift */; };
+		624AAFE32461AA3F00265D71 /* SelectFolderTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624AAFE22461AA3F00265D71 /* SelectFolderTableViewController.swift */; };
 		624FE69623321297004E271B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 624FE69523321297004E271B /* GoogleService-Info.plist */; };
 		624FE69723321297004E271B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 624FE69523321297004E271B /* GoogleService-Info.plist */; };
 		624FE69F233228A3004E271B /* IMG_3203.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 624FE69D233228A2004E271B /* IMG_3203.jpg */; };
@@ -102,12 +106,16 @@
 		622155B4232B7AD100DD4AB4 /* Shiori.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Shiori.entitlements; sourceTree = "<group>"; };
 		622155B5232B944200DD4AB4 /* GetData.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = GetData.js; sourceTree = "<group>"; };
 		622155B7232CBF8400DD4AB4 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		6226B08624610B1200A5E541 /* SubTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SubTableViewController.swift; path = /Users/MasatoraAtarashi/environment/apps/Shiori/Shiori/Controllers/SubTableViewController.swift; sourceTree = "<absolute>"; };
+		6226B0882461172100A5E541 /* delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete.png; sourceTree = "<group>"; };
+		6226B08A24611DB400A5E541 /* garbage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = garbage.png; sourceTree = "<group>"; };
 		622DA529245D7ECE001FDFEE /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
 		622DA52A245D7ECE001FDFEE /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		622DA52B245D7ECE001FDFEE /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/MainInterface.strings; sourceTree = "<group>"; };
 		622DA531245D7EE1001FDFEE /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		622DA538245D7F0A001FDFEE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		624411002334EA6300C1C411 /* CustomActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomActivity.swift; sourceTree = "<group>"; };
+		624AAFE22461AA3F00265D71 /* SelectFolderTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFolderTableViewController.swift; sourceTree = "<group>"; };
 		624FE69523321297004E271B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		624FE69D233228A2004E271B /* IMG_3203.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_3203.jpg; sourceTree = "<group>"; };
 		624FE69E233228A2004E271B /* IMG_3205.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_3205.jpg; sourceTree = "<group>"; };
@@ -191,6 +199,8 @@
 				6268C3E22334EAD400E86ECC /* Views */,
 				624411022334EA7A00C1C411 /* Data Model */,
 				62215595232B79BA00DD4AB4 /* Assets.xcassets */,
+				6226B08A24611DB400A5E541 /* garbage.png */,
+				6226B0882461172100A5E541 /* delete.png */,
 				6221559A232B79BA00DD4AB4 /* Info.plist */,
 				624FE69523321297004E271B /* GoogleService-Info.plist */,
 				62215592232B79B900DD4AB4 /* Shiori.xcdatamodeld */,
@@ -233,12 +243,14 @@
 		6268C3E32334EAE000E86ECC /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				6226B08624610B1200A5E541 /* SubTableViewController.swift */,
 				6221558D232B79B900DD4AB4 /* ViewController.swift */,
 				6203169D232E9CF30065ADE9 /* FeedTableViewCell.swift */,
 				622155B7232CBF8400DD4AB4 /* WebViewController.swift */,
 				624FE6A223323C56004E271B /* TutorialViewController.swift */,
 				62A3AF5E242E350A004BD808 /* SettingTableViewController.swift */,
 				6272B36A245E9FEB005727D8 /* SupportedServicesViewController.swift */,
+				624AAFE22461AA3F00265D71 /* SelectFolderTableViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -384,9 +396,11 @@
 				624FE6A0233228A3004E271B /* IMG_3205.jpg in Resources */,
 				6272B350245DC06F005727D8 /* Localizable.strings in Resources */,
 				62215599232B79BA00DD4AB4 /* LaunchScreen.storyboard in Resources */,
+				6226B0892461172100A5E541 /* delete.png in Resources */,
 				6272B366245DC4EA005727D8 /* Localizable.strings in Resources */,
 				622DA536245D7F0A001FDFEE /* Localizable.strings in Resources */,
 				6280BC09242399FA00EEDB3C /* settings.png in Resources */,
+				6226B08B24611DB500A5E541 /* garbage.png in Resources */,
 				6203169C232E9C740065ADE9 /* FeedTableViewCell.xib in Resources */,
 				624FE69623321297004E271B /* GoogleService-Info.plist in Resources */,
 				622DA52F245D7EE1001FDFEE /* Localizable.strings in Resources */,
@@ -507,11 +521,13 @@
 				6203169E232E9CF30065ADE9 /* FeedTableViewCell.swift in Sources */,
 				6221558E232B79B900DD4AB4 /* ViewController.swift in Sources */,
 				6221558C232B79B900DD4AB4 /* AppDelegate.swift in Sources */,
+				6226B08724610B1200A5E541 /* SubTableViewController.swift in Sources */,
 				622155B8232CBF8400DD4AB4 /* WebViewController.swift in Sources */,
 				62A3AF5F242E350A004BD808 /* SettingTableViewController.swift in Sources */,
 				6272B36B245E9FEC005727D8 /* SupportedServicesViewController.swift in Sources */,
 				62B1234C232E8215007E6F61 /* Entry.swift in Sources */,
 				624411012334EA6300C1C411 /* CustomActivity.swift in Sources */,
+				624AAFE32461AA3F00265D71 /* SelectFolderTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

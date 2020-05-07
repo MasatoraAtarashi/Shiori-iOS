@@ -39,3 +39,22 @@
 
 //サポート動画サイト
 "Supported video sites" = "支持的視頻網站";
+
+//スワイプ
+"Cancel" = "取消";
+"Add" = "加";
+
+//サイドメニュー
+"Home" = "家";
+"Liked" = "喜欢了";
+
+//フォルダ
+"Add Folder" = "新增文件夹";
+"Use folders to organize your saved articles." = "使用文件夾來組織您保存的文章。";
+"Examples: recipes, politics ..." = "例如：食谱，政治...";
+"Add to folder" = "添加到文件夹";
+
+//ポップアップ
+"Deleted from folder" = "从文件夹中删除";
+"Added" = "添加";
+"(Added)" = "(添加)";
