@@ -90,8 +90,11 @@ class SelectFolderTableViewController: UITableViewController {
         // Configure the cell...
         var categories = UserDefaults.standard.array(forKey: "categories")?.dropFirst(2)
         cell.textLabel!.text = categories![indexPath.row + 2] as? String
-        if (articles[selectedIndexPath].folderInt?.contains((categories![indexPath.row + 2] as? String)!))! {
-            cell.textLabel!.text! += NSLocalizedString("(Added)", comment: "")
+        
+        if let folderName = categories?[indexPath.row + 2] {
+            if articles[selectedIndexPath].folderInt?.contains(folderName as! String) ?? false {
+                cell.textLabel!.text! += NSLocalizedString("(Added)", comment: "")
+            }
         }
         return cell
     }
