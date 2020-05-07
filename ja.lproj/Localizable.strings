@@ -40,3 +40,22 @@
 
 //サポート動画サイト
 "Supported video sites" = "対応済動画サイト";
+
+//スワイプ
+"Cancel" = "解除";
+"Add" = "追加";
+
+//サイドメニュー
+"Home" = "ホーム";
+"Liked" = "お気に入り";
+
+//フォルダ
+"Add Folder" = "フォルダを追加";
+"Use folders to organize your saved articles." = "フォルダを使用し、保存済みの記事を整理してください。";
+"Examples: recipes, politics ..." = "例: レシピ、政治...";
+"Add to folder" = "フォルダに追加";
+
+//ポップアップ
+"Deleted from folder" = "フォルダから削除しました";
+"Added" = "追加しました";
+"(Added)" = "(追加済み)";

@@ -13,7 +13,7 @@ class SubTableViewController: UITableViewController, SwipeTableViewCellDelegate 
     var r: Int = UserDefaults.standard.integer(forKey: "r")
     var b: Int = UserDefaults.standard.integer(forKey: "r")
     var g: Int = UserDefaults.standard.integer(forKey: "r")
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -35,6 +35,7 @@ class SubTableViewController: UITableViewController, SwipeTableViewCellDelegate 
         self.navigationController?.toolbar.barTintColor = bgColor
     //        header color
         self.navigationController?.navigationBar.barTintColor = bgColor
+        
     }
 
     // MARK: - Table view data source
@@ -128,16 +129,15 @@ class SubTableViewController: UITableViewController, SwipeTableViewCellDelegate 
     //フォルダを追加する
     @IBAction func addCategory(_ sender: Any) {
         var alertTextField: UITextField?
-        print("アラート")
 
         let alert = UIAlertController(
-            title: "フォルダを追加",
-            message: "フォルダを使用し、保存済みの記事を整理してください。",
+            title: NSLocalizedString("Add Folder", comment: ""),
+            message: NSLocalizedString("Use folders to organize your saved articles.", comment: ""),
             preferredStyle: UIAlertController.Style.alert)
         alert.addTextField(
             configurationHandler: {(textField: UITextField!) in
                 alertTextField = textField
-                 textField.placeholder = "例: レシピ、政治..."
+                 textField.placeholder = NSLocalizedString("Examples: recipes, politics ...", comment: "")
         })
         alert.addAction(
             UIAlertAction(

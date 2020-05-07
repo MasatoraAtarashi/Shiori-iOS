@@ -11,6 +11,10 @@ import UIKit
 class SelectFolderTableViewController: UITableViewController {
     
     var selectedIndexPath: Int = 0
+    var articles: Array<Article> = []
+    
+    @IBOutlet weak var navTitle: UINavigationItem!
+    
 
     @IBAction func cancel(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
@@ -18,16 +22,14 @@ class SelectFolderTableViewController: UITableViewController {
 
     @IBAction func addFolder(_ sender: Any) {
         var alertTextField: UITextField?
-        print("アラート")
-
         let alert = UIAlertController(
-            title: "フォルダを追加",
-            message: "フォルダを使用し、保存済みの記事を整理してください。",
+            title: NSLocalizedString("Add Folder", comment: ""),
+            message: NSLocalizedString("Use folders to organize your saved articles.", comment: ""),
             preferredStyle: UIAlertController.Style.alert)
         alert.addTextField(
             configurationHandler: {(textField: UITextField!) in
                 alertTextField = textField
-                 textField.placeholder = "例: レシピ、政治..."
+                 textField.placeholder = NSLocalizedString("Examples: recipes, politics ...", comment: "")
         })
         alert.addAction(
             UIAlertAction(
@@ -59,6 +61,10 @@ class SelectFolderTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navTitle.title = NSLocalizedString("Add to folder", comment: "")
+    }
 
     // MARK: - Table view data source
 
@@ -84,6 +90,9 @@ class SelectFolderTableViewController: UITableViewController {
         // Configure the cell...
         var categories = UserDefaults.standard.array(forKey: "categories")?.dropFirst(2)
         cell.textLabel!.text = categories![indexPath.row + 2] as? String
+        if (articles[selectedIndexPath].folderInt?.contains((categories![indexPath.row + 2] as? String)!))! {
+            cell.textLabel!.text! += NSLocalizedString("(Added)", comment: "")
+        }
         return cell
     }
     

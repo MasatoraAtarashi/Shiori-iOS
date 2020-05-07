@@ -80,6 +80,9 @@ PODS:
     - SDWebImage/Core (= 5.7.3)
   - SDWebImage/Core (5.7.3)
   - SideMenu (5.0.1)
+  - SwiftMessages (7.0.1):
+    - SwiftMessages/App (= 7.0.1)
+  - SwiftMessages/App (7.0.1)
   - SwipeCellKit (2.6.0)
 
 DEPENDENCIES:
@@ -91,6 +94,7 @@ DEPENDENCIES:
   - OpenGraph
   - SDWebImage
   - SideMenu
+  - SwiftMessages
   - SwipeCellKit (= 2.6.0)
 
 SPEC REPOS:
@@ -113,6 +117,7 @@ SPEC REPOS:
     - PromisesObjC
     - SDWebImage
     - SideMenu
+    - SwiftMessages
     - SwipeCellKit
 
 SPEC CHECKSUMS:
@@ -134,8 +139,9 @@ SPEC CHECKSUMS:
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
   SDWebImage: 97351f6582ceca541ea294ba66a1fcb342a331c2
   SideMenu: 87efd943737bb83aedf0358884d09fcf5576636d
+  SwiftMessages: b577dc7043be8b299857ab35bb663dbff6483bd0
   SwipeCellKit: 935ca28c187ec6e1ffb2b578cf8ddca842bfdcbb
 
-PODFILE CHECKSUM: b07716fe150df4aa6e315bbe3bccebb0ae8e8108
+PODFILE CHECKSUM: 88a1c9aee787dab366f31dc14385648b137e54dc
 
 COCOAPODS: 1.9.1
