@@ -794,7 +794,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 self.present(activityVC, animated: true, completion: nil)
             }
 
-            return UIMenu(__title: "Edit..", image: nil, identifier: nil, children: [share])
+            return UIMenu(title: "Edit..", image: nil, identifier: nil, children: [share])
         }
 
         return UIContextMenuConfiguration(identifier: nil,
