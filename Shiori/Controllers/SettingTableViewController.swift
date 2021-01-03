@@ -19,11 +19,22 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
     
     @IBOutlet weak var segmentControl: UISegmentedControl!
     
+    @IBOutlet weak var text1: UILabel!
+    @IBOutlet weak var text2: UILabel!
+    @IBOutlet weak var text3: UILabel!
+    @IBOutlet weak var text4: UILabel!
+    @IBOutlet weak var text5: UILabel!
+    @IBOutlet weak var text6: UILabel!
+    @IBOutlet weak var text7: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         switchAdvertisementDisplay.isOn = !UserDefaults.standard.bool(forKey: "isAdvertisementOn")
         switchAdvertisementDisplay.addTarget(self, action: #selector(self.onClickMySwicth(sender:)), for: UIControl.Event.valueChanged)
+        
+        //言語を変更
+        changeLanguage()
         
         //バージョンを表示
         if let version: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String {
@@ -100,7 +111,7 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
         case 0: // 「設定」のセクション
           return 2
         case 1: // 「その他」のセクション
-          return 5
+          return 6
         default: // ここが実行されることはないはず
           return 0
         }
@@ -108,7 +119,9 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath == [1, 2] {
-            SKStoreReviewController.requestReview()
+            guard let writeReviewURL = URL(string: "https://itunes.apple.com/app/id1480539987?action=write-review")
+            else { fatalError("Expected a valid URL") }
+            UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)
         } else if indexPath == [1, 1] {
             sendMail()
         }
@@ -116,11 +129,12 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
     }
     
+    //フィードバックのメールを送信
     func sendMail() {
         if MFMailComposeViewController.canSendMail() {
             let mail = MFMailComposeViewController()
             mail.mailComposeDelegate = self as? MFMailComposeViewControllerDelegate
-            mail.setToRecipients(["atarashi.masatora@gmail.com"]) // 宛先アドレス
+            mail.setToRecipients(["shiori.web.forsafari@gmail.com"]) // 宛先アドレス
             let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
             mail.setSubject("Shiori web \(version ?? "") feedback") // 件名
             mail.setMessageBody("""
@@ -148,6 +162,18 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
         }
         dismiss(animated: true, completion: nil)
     }
+    
+    //言語を変更
+    func changeLanguage() {
+        text1.text = NSLocalizedString("Hide ads", comment: "")
+        text2.text = NSLocalizedString("Usage", comment: "")
+        text3.text = NSLocalizedString("Send feedback", comment: "")
+        text4.text = NSLocalizedString("Rate Shiori web", comment: "")
+        text5.text = NSLocalizedString("Version", comment: "")
+        text6.text = NSLocalizedString("Copyright", comment: "")
+        text7.text = NSLocalizedString("Supported video sites", comment: "")
+    }
+    
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -38,20 +38,30 @@
                         <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sxb-7u-z5G">
+                        <rect key="frame" x="16" y="46" width="21.5" height="12"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                        <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="0bA-jF-ks1" firstAttribute="width" secondItem="mmu-Pl-K94" secondAttribute="width" id="0B6-K0-cV2"/>
                     <constraint firstItem="Orz-Io-3W4" firstAttribute="trailing" secondItem="CPZ-D5-bP5" secondAttribute="trailingMargin" id="DqN-u8-2cC"/>
-                    <constraint firstItem="0bA-jF-ks1" firstAttribute="leading" secondItem="CPZ-D5-bP5" secondAttribute="leading" constant="16" id="Idm-di-yYI"/>
+                    <constraint firstItem="mmu-Pl-K94" firstAttribute="leading" secondItem="CPZ-D5-bP5" secondAttribute="leadingMargin" id="RBe-km-wFH"/>
                     <constraint firstItem="Orz-Io-3W4" firstAttribute="centerY" secondItem="CPZ-D5-bP5" secondAttribute="centerY" id="WQg-GV-DRf"/>
                     <constraint firstItem="mmu-Pl-K94" firstAttribute="top" secondItem="CPZ-D5-bP5" secondAttribute="topMargin" constant="15" id="ZlE-fs-BlZ"/>
                     <constraint firstItem="mmu-Pl-K94" firstAttribute="leading" secondItem="CPZ-D5-bP5" secondAttribute="leading" constant="16" id="cCe-Gw-qQM"/>
+                    <constraint firstItem="0bA-jF-ks1" firstAttribute="leading" secondItem="CPZ-D5-bP5" secondAttribute="leading" constant="16" id="cYO-NK-dTp"/>
                     <constraint firstItem="Orz-Io-3W4" firstAttribute="leading" secondItem="mmu-Pl-K94" secondAttribute="trailing" constant="20" id="iu5-Xe-ftG"/>
+                    <constraint firstItem="sxb-7u-z5G" firstAttribute="leading" secondItem="CPZ-D5-bP5" secondAttribute="leading" constant="16" id="jxg-9R-hAl"/>
                     <constraint firstItem="0bA-jF-ks1" firstAttribute="top" secondItem="mmu-Pl-K94" secondAttribute="bottom" constant="17.5" id="kvZ-cF-opg"/>
+                    <constraint firstItem="sxb-7u-z5G" firstAttribute="top" secondItem="mmu-Pl-K94" secondAttribute="bottom" constant="2" id="wg6-df-hbj"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="45H-Ub-iRX"/>
             <connections>
+                <outlet property="date" destination="sxb-7u-z5G" id="9kR-va-8fo"/>
                 <outlet property="subContent" destination="0bA-jF-ks1" id="uHb-eR-kFR"/>
                 <outlet property="thumbnail" destination="Orz-Io-3W4" id="EQ1-mv-V1T"/>
                 <outlet property="title" destination="mmu-Pl-K94" id="Ujj-bT-xed"/>

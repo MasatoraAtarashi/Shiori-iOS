@@ -20,13 +20,28 @@
 		622155AE232B7A2F00DD4AB4 /* Share.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 622155A4232B7A2E00DD4AB4 /* Share.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		622155B6232B944200DD4AB4 /* GetData.js in Resources */ = {isa = PBXBuildFile; fileRef = 622155B5232B944200DD4AB4 /* GetData.js */; };
 		622155B8232CBF8400DD4AB4 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622155B7232CBF8400DD4AB4 /* WebViewController.swift */; };
+		6226B08724610B1200A5E541 /* SubTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6226B08624610B1200A5E541 /* SubTableViewController.swift */; };
+		6226B0892461172100A5E541 /* delete.png in Resources */ = {isa = PBXBuildFile; fileRef = 6226B0882461172100A5E541 /* delete.png */; };
+		6226B08B24611DB500A5E541 /* garbage.png in Resources */ = {isa = PBXBuildFile; fileRef = 6226B08A24611DB400A5E541 /* garbage.png */; };
+		622DA52F245D7EE1001FDFEE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 622DA532245D7EE1001FDFEE /* Localizable.strings */; };
+		622DA530245D7EE1001FDFEE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 622DA532245D7EE1001FDFEE /* Localizable.strings */; };
+		622DA536245D7F0A001FDFEE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 622DA539245D7F0A001FDFEE /* Localizable.strings */; };
+		622DA537245D7F0A001FDFEE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 622DA539245D7F0A001FDFEE /* Localizable.strings */; };
 		624411012334EA6300C1C411 /* CustomActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624411002334EA6300C1C411 /* CustomActivity.swift */; };
+		624AAFE32461AA3F00265D71 /* SelectFolderTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624AAFE22461AA3F00265D71 /* SelectFolderTableViewController.swift */; };
 		624FE69623321297004E271B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 624FE69523321297004E271B /* GoogleService-Info.plist */; };
 		624FE69723321297004E271B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 624FE69523321297004E271B /* GoogleService-Info.plist */; };
 		624FE69F233228A3004E271B /* IMG_3203.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 624FE69D233228A2004E271B /* IMG_3203.jpg */; };
 		624FE6A0233228A3004E271B /* IMG_3205.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 624FE69E233228A2004E271B /* IMG_3205.jpg */; };
 		624FE6A323323C56004E271B /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624FE6A223323C56004E271B /* TutorialViewController.swift */; };
 		6268C3E62334EC2800E86ECC /* ks_safari_activity_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6268C3E52334EC2800E86ECC /* ks_safari_activity_icon.png */; };
+		6272B350245DC06F005727D8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6272B353245DC06F005727D8 /* Localizable.strings */; };
+		6272B351245DC06F005727D8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6272B353245DC06F005727D8 /* Localizable.strings */; };
+		6272B35B245DC32D005727D8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6272B35E245DC32D005727D8 /* Localizable.strings */; };
+		6272B35C245DC32D005727D8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6272B35E245DC32D005727D8 /* Localizable.strings */; };
+		6272B366245DC4EA005727D8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6272B369245DC4EA005727D8 /* Localizable.strings */; };
+		6272B367245DC4EA005727D8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6272B369245DC4EA005727D8 /* Localizable.strings */; };
+		6272B36B245E9FEC005727D8 /* SupportedServicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6272B36A245E9FEB005727D8 /* SupportedServicesViewController.swift */; };
 		6280BC09242399FA00EEDB3C /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 6280BC08242399FA00EEDB3C /* settings.png */; };
 		62A1E834242F9A0000113A10 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62A1E833242F9A0000113A10 /* MessageUI.framework */; };
 		62A3AF5F242E350A004BD808 /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A3AF5E242E350A004BD808 /* SettingTableViewController.swift */; };
@@ -91,12 +106,34 @@
 		622155B4232B7AD100DD4AB4 /* Shiori.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Shiori.entitlements; sourceTree = "<group>"; };
 		622155B5232B944200DD4AB4 /* GetData.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = GetData.js; sourceTree = "<group>"; };
 		622155B7232CBF8400DD4AB4 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		6226B08624610B1200A5E541 /* SubTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SubTableViewController.swift; path = /Users/MasatoraAtarashi/environment/apps/Shiori/Shiori/Controllers/SubTableViewController.swift; sourceTree = "<absolute>"; };
+		6226B0882461172100A5E541 /* delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete.png; sourceTree = "<group>"; };
+		6226B08A24611DB400A5E541 /* garbage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = garbage.png; sourceTree = "<group>"; };
+		622DA529245D7ECE001FDFEE /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
+		622DA52A245D7ECE001FDFEE /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		622DA52B245D7ECE001FDFEE /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/MainInterface.strings; sourceTree = "<group>"; };
+		622DA531245D7EE1001FDFEE /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		622DA538245D7F0A001FDFEE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		624411002334EA6300C1C411 /* CustomActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomActivity.swift; sourceTree = "<group>"; };
+		624AAFE22461AA3F00265D71 /* SelectFolderTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFolderTableViewController.swift; sourceTree = "<group>"; };
 		624FE69523321297004E271B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		624FE69D233228A2004E271B /* IMG_3203.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_3203.jpg; sourceTree = "<group>"; };
 		624FE69E233228A2004E271B /* IMG_3205.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_3205.jpg; sourceTree = "<group>"; };
 		624FE6A223323C56004E271B /* TutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		6268C3E52334EC2800E86ECC /* ks_safari_activity_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ks_safari_activity_icon.png; sourceTree = "<group>"; };
+		6272B34D245DC04F005727D8 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Main.strings; sourceTree = "<group>"; };
+		6272B34E245DC04F005727D8 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		6272B34F245DC04F005727D8 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/MainInterface.strings; sourceTree = "<group>"; };
+		6272B352245DC06F005727D8 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6272B357245DC300005727D8 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		6272B358245DC301005727D8 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		6272B359245DC301005727D8 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/MainInterface.strings"; sourceTree = "<group>"; };
+		6272B35D245DC32D005727D8 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		6272B35F245DC4BC005727D8 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
+		6272B360245DC4BC005727D8 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		6272B361245DC4BC005727D8 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/MainInterface.strings"; sourceTree = "<group>"; };
+		6272B368245DC4EA005727D8 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		6272B36A245E9FEB005727D8 /* SupportedServicesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportedServicesViewController.swift; sourceTree = "<group>"; };
 		6280BC08242399FA00EEDB3C /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
 		62A1E833242F9A0000113A10 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		62A3AF5E242E350A004BD808 /* SettingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
@@ -131,6 +168,11 @@
 		6221557F232B79B900DD4AB4 = {
 			isa = PBXGroup;
 			children = (
+				6272B369245DC4EA005727D8 /* Localizable.strings */,
+				6272B35E245DC32D005727D8 /* Localizable.strings */,
+				6272B353245DC06F005727D8 /* Localizable.strings */,
+				622DA539245D7F0A001FDFEE /* Localizable.strings */,
+				622DA532245D7EE1001FDFEE /* Localizable.strings */,
 				6221558A232B79B900DD4AB4 /* Shiori */,
 				622155A5232B7A2E00DD4AB4 /* Share */,
 				62215589232B79B900DD4AB4 /* Products */,
@@ -157,6 +199,8 @@
 				6268C3E22334EAD400E86ECC /* Views */,
 				624411022334EA7A00C1C411 /* Data Model */,
 				62215595232B79BA00DD4AB4 /* Assets.xcassets */,
+				6226B08A24611DB400A5E541 /* garbage.png */,
+				6226B0882461172100A5E541 /* delete.png */,
 				6221559A232B79BA00DD4AB4 /* Info.plist */,
 				624FE69523321297004E271B /* GoogleService-Info.plist */,
 				62215592232B79B900DD4AB4 /* Shiori.xcdatamodeld */,
@@ -199,11 +243,14 @@
 		6268C3E32334EAE000E86ECC /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				6226B08624610B1200A5E541 /* SubTableViewController.swift */,
 				6221558D232B79B900DD4AB4 /* ViewController.swift */,
 				6203169D232E9CF30065ADE9 /* FeedTableViewCell.swift */,
 				622155B7232CBF8400DD4AB4 /* WebViewController.swift */,
 				624FE6A223323C56004E271B /* TutorialViewController.swift */,
 				62A3AF5E242E350A004BD808 /* SettingTableViewController.swift */,
+				6272B36A245E9FEB005727D8 /* SupportedServicesViewController.swift */,
+				624AAFE22461AA3F00265D71 /* SelectFolderTableViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -325,6 +372,10 @@
 			knownRegions = (
 				en,
 				Base,
+				ja,
+				ko,
+				"zh-Hans",
+				"zh-Hant",
 			);
 			mainGroup = 6221557F232B79B900DD4AB4;
 			productRefGroup = 62215589232B79B900DD4AB4 /* Products */;
@@ -343,11 +394,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				624FE6A0233228A3004E271B /* IMG_3205.jpg in Resources */,
+				6272B350245DC06F005727D8 /* Localizable.strings in Resources */,
 				62215599232B79BA00DD4AB4 /* LaunchScreen.storyboard in Resources */,
+				6226B0892461172100A5E541 /* delete.png in Resources */,
+				6272B366245DC4EA005727D8 /* Localizable.strings in Resources */,
+				622DA536245D7F0A001FDFEE /* Localizable.strings in Resources */,
 				6280BC09242399FA00EEDB3C /* settings.png in Resources */,
+				6226B08B24611DB500A5E541 /* garbage.png in Resources */,
 				6203169C232E9C740065ADE9 /* FeedTableViewCell.xib in Resources */,
 				624FE69623321297004E271B /* GoogleService-Info.plist in Resources */,
+				622DA52F245D7EE1001FDFEE /* Localizable.strings in Resources */,
 				624FE69F233228A3004E271B /* IMG_3203.jpg in Resources */,
+				6272B35B245DC32D005727D8 /* Localizable.strings in Resources */,
 				6268C3E62334EC2800E86ECC /* ks_safari_activity_icon.png in Resources */,
 				62215596232B79BA00DD4AB4 /* Assets.xcassets in Resources */,
 				62215591232B79B900DD4AB4 /* Main.storyboard in Resources */,
@@ -358,7 +416,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				622DA537245D7F0A001FDFEE /* Localizable.strings in Resources */,
+				6272B351245DC06F005727D8 /* Localizable.strings in Resources */,
 				622155AA232B7A2F00DD4AB4 /* MainInterface.storyboard in Resources */,
+				6272B35C245DC32D005727D8 /* Localizable.strings in Resources */,
+				622DA530245D7EE1001FDFEE /* Localizable.strings in Resources */,
+				6272B367245DC4EA005727D8 /* Localizable.strings in Resources */,
 				624FE69723321297004E271B /* GoogleService-Info.plist in Resources */,
 				622155B6232B944200DD4AB4 /* GetData.js in Resources */,
 			);
@@ -458,10 +521,13 @@
 				6203169E232E9CF30065ADE9 /* FeedTableViewCell.swift in Sources */,
 				6221558E232B79B900DD4AB4 /* ViewController.swift in Sources */,
 				6221558C232B79B900DD4AB4 /* AppDelegate.swift in Sources */,
+				6226B08724610B1200A5E541 /* SubTableViewController.swift in Sources */,
 				622155B8232CBF8400DD4AB4 /* WebViewController.swift in Sources */,
 				62A3AF5F242E350A004BD808 /* SettingTableViewController.swift in Sources */,
+				6272B36B245E9FEC005727D8 /* SupportedServicesViewController.swift in Sources */,
 				62B1234C232E8215007E6F61 /* Entry.swift in Sources */,
 				624411012334EA6300C1C411 /* CustomActivity.swift in Sources */,
+				624AAFE32461AA3F00265D71 /* SelectFolderTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -489,6 +555,10 @@
 			isa = PBXVariantGroup;
 			children = (
 				62215590232B79B900DD4AB4 /* Base */,
+				622DA529245D7ECE001FDFEE /* ja */,
+				6272B34D245DC04F005727D8 /* ko */,
+				6272B357245DC300005727D8 /* zh-Hans */,
+				6272B35F245DC4BC005727D8 /* zh-Hant */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -497,6 +567,10 @@
 			isa = PBXVariantGroup;
 			children = (
 				62215598232B79BA00DD4AB4 /* Base */,
+				622DA52A245D7ECE001FDFEE /* ja */,
+				6272B34E245DC04F005727D8 /* ko */,
+				6272B358245DC301005727D8 /* zh-Hans */,
+				6272B360245DC4BC005727D8 /* zh-Hant */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -505,8 +579,52 @@
 			isa = PBXVariantGroup;
 			children = (
 				622155A9232B7A2F00DD4AB4 /* Base */,
+				622DA52B245D7ECE001FDFEE /* ja */,
+				6272B34F245DC04F005727D8 /* ko */,
+				6272B359245DC301005727D8 /* zh-Hans */,
+				6272B361245DC4BC005727D8 /* zh-Hant */,
 			);
 			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
+		622DA532245D7EE1001FDFEE /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				622DA531245D7EE1001FDFEE /* ja */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		622DA539245D7F0A001FDFEE /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				622DA538245D7F0A001FDFEE /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		6272B353245DC06F005727D8 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6272B352245DC06F005727D8 /* ko */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		6272B35E245DC32D005727D8 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6272B35D245DC32D005727D8 /* zh-Hans */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		6272B369245DC4EA005727D8 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6272B368245DC4EA005727D8 /* zh-Hant */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -516,6 +634,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -577,6 +696,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -632,18 +752,18 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = ADC9E03ECD8878BFC17B9338 /* Pods-Shiori.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Shiori/Shiori.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = PMRC683Z7N;
 				INFOPLIST_FILE = Shiori/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.masatoraatarashi.Shiori;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -655,18 +775,18 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 18860B705E04B1046708118B /* Pods-Shiori.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Shiori/Shiori.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = PMRC683Z7N;
 				INFOPLIST_FILE = Shiori/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.masatoraatarashi.Shiori;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -680,7 +800,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Share/Share.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = PMRC683Z7N;
 				INFOPLIST_FILE = Share/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -688,7 +808,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.masatoraatarashi.Shiori.Share;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -703,7 +823,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Share/Share.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = PMRC683Z7N;
 				INFOPLIST_FILE = Share/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -711,7 +831,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.masatoraatarashi.Shiori.Share;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

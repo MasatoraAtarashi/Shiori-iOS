@@ -1,0 +1,60 @@
+/* 
+  Localizable.strings
+  Shiori
+
+  Created by あたらしまさとら on 2020/05/03.
+  Copyright © 2020 Masatora Atarashi. All rights reserved.
+*/
+//ViewController
+"Edit" = "編輯";
+"Done" = "完成了";
+"Delete" = "刪除";
+"Show all" = "顯示所有";
+"Show only unread" = "僅顯示未讀";
+
+"Mark as read" = "標記為已讀";
+"Unread" = "未讀";
+
+"Pull to refresh" = "拉刷新";
+
+//Share
+"Save" = "保存";
+
+//記事がゼロのときの
+"List is empty" = "清單為空";
+"Adding articles is easy. Tap below to get started." = "添加文章很容易。 點擊下面開始。";
+"Learn how to save" = "了解如何保存";
+
+//チュートリアル
+"Tap the 'Share' button on Mobile Safari" = "在Mobile Safari上點擊“共享”按鈕";
+"* If 'Shiori' is not displayed, turn on 'Shiori' from 'More'" = "*如果未顯示“ Shiori”，請從“更多”中打開“ Shiori”";
+
+//設定
+"Hide ads" = "隱藏廣告";
+"Usage" = "用法";
+"Send feedback" = "發送反饋";
+"Rate Shiori web" = "評價Shiori網站";
+"Version" = "版";
+"Copyright" = "版權";
+
+//サポート動画サイト
+"Supported video sites" = "支持的視頻網站";
+
+//スワイプ
+"Cancel" = "取消";
+"Add" = "加";
+
+//サイドメニュー
+"Home" = "家";
+"Liked" = "喜欢了";
+
+//フォルダ
+"Add Folder" = "新增文件夹";
+"Use folders to organize your saved articles." = "使用文件夾來組織您保存的文章。";
+"Examples: recipes, politics ..." = "例如：食谱，政治...";
+"Add to folder" = "添加到文件夹";
+
+//ポップアップ
+"Deleted from folder" = "从文件夹中删除";
+"Added" = "添加";
+"(Added)" = "(添加)";

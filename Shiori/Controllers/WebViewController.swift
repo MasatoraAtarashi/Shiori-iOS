@@ -151,7 +151,6 @@ extension WebViewController {
     
     func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
         webView.evaluateJavaScript("window.scrollTo(\(positionX),\(positionY))", completionHandler: nil)
-        print("遷移開始")
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
@@ -160,7 +159,6 @@ extension WebViewController {
         }
         positionX = 0
         positionY = 0
-        print("loaded")
         self.refreshControll.endRefreshing()
         //        backButton.isHidden = (webView.canGoBack) ? false : true
         //        forwadButton.isHidden = (webView.canGoForward) ? false : true
