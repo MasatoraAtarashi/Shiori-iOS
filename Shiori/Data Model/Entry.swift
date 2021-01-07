@@ -9,12 +9,12 @@
 import Foundation
 
 struct Entry {
-    var title : String
-    var link : String
-    var imageURL : String
-    var positionX : String
-    var positionY : String
-    var date : String
-    var haveRead : Bool
-    var folderInd : Array = [] as [String]
+    var title: String
+    var link: String
+    var imageURL: String
+    var positionX: String
+    var positionY: String
+    var date: String
+    var haveRead: Bool
+    var folderInd: Array = [] as [String]
 }

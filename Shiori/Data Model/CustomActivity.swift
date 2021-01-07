@@ -9,22 +9,21 @@
 import UIKit
 
 public class CustomActivity: UIActivity {
-    
+
     var title: String!
     var url: URL!
-    
+
     public init(title: String, url: URL) {
         self.title = title
         self.url = url
         super.init()
-        
+
     }
 
     // タイトル
     override public var activityTitle: String? {
         return "Safariで開く"
     }
-
 
     override public var activityImage: UIImage? {
         return UIImage(contentsOfFile: "ks_safari_activity_icon")

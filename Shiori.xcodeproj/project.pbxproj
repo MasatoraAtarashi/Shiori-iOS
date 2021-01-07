@@ -199,8 +199,6 @@
 				6268C3E22334EAD400E86ECC /* Views */,
 				624411022334EA7A00C1C411 /* Data Model */,
 				62215595232B79BA00DD4AB4 /* Assets.xcassets */,
-				6226B08A24611DB400A5E541 /* garbage.png */,
-				6226B0882461172100A5E541 /* delete.png */,
 				6221559A232B79BA00DD4AB4 /* Info.plist */,
 				624FE69523321297004E271B /* GoogleService-Info.plist */,
 				62215592232B79B900DD4AB4 /* Shiori.xcdatamodeld */,
@@ -258,6 +256,8 @@
 		6268C3E42334EAEF00E86ECC /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				6226B08A24611DB400A5E541 /* garbage.png */,
+				6226B0882461172100A5E541 /* delete.png */,
 				6280BC08242399FA00EEDB3C /* settings.png */,
 				6268C3E52334EC2800E86ECC /* ks_safari_activity_icon.png */,
 				624FE69D233228A2004E271B /* IMG_3203.jpg */,
@@ -463,7 +463,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/Fabric/run\"\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n${PODS_ROOT}/FirebaseCrashlytics/run\n";
 		};
 		A2D17E4072D655C4FEFA07F7 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;

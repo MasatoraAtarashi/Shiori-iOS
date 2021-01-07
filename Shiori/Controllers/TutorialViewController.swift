@@ -13,20 +13,20 @@ protocol TutorialDelegate {
 }
 
 class TutorialViewController: UIViewController {
-    var delegate : TutorialDelegate?
-    
+    var delegate: TutorialDelegate?
+
     @IBOutlet weak var text1: UILabel!
     @IBOutlet weak var text2: UILabel!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         text1.text = NSLocalizedString("Tap the 'Share' button on Mobile Safari", comment: "")
         text2.text = NSLocalizedString("* If 'Shiori' is not displayed, turn on 'Shiori' from 'More'", comment: "")
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
-        
+
         let r = UserDefaults.standard.integer(forKey: "r")
         let b = UserDefaults.standard.integer(forKey: "b")
         let g = UserDefaults.standard.integer(forKey: "g")
@@ -39,13 +39,13 @@ class TutorialViewController: UIViewController {
             text1.textColor = UIColor.black
             text2.textColor = UIColor.black
         }
-        
+
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
-        
+
         let viewControllerName = "TutorialViewController"
         delegate?.viewControllerFrom(viewController: viewControllerName)
-        
+
     }
 }

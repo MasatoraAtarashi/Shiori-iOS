@@ -21,9 +21,9 @@ target 'Shiori' do
   pod 'Firebase/Core'
   pod 'Firebase/AdMob'
   pod 'Firebase/Analytics'
+  pod 'Firebase/Crashlytics'
   pod 'OpenGraph'
-  pod 'Fabric', '~> 1.10.2'
-  pod 'Crashlytics', '~> 3.13.4'
   pod 'SideMenu'
   pod 'SwiftMessages'
+  pod 'NVActivityIndicatorView'
 end

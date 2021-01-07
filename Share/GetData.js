@@ -42,6 +42,12 @@ MyPreprocessor.prototype = {
             url = url + "?t=" + time
         } else if (url.match(/tube8/) && time != "0") {
             url = url + "?t=" + time
+        } else if (url.match(/twitch/) && time != "0") {
+            // PCだといけるけどスマホだと機能しない
+            var h = Math.floor(time / 3600);
+            var m = Math.floor((time % 3600) / 60);
+            var s = time % 60
+            url = url + "?t=" + h + "h" + m + "m" + s + "s"
         }
         
         var pi = document.getElementsByTagName('meta');
