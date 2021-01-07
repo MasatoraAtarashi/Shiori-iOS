@@ -77,6 +77,9 @@ PODS:
     - nanopb/encode (= 1.30906.0)
   - nanopb/decode (1.30906.0)
   - nanopb/encode (1.30906.0)
+  - NVActivityIndicatorView (5.1.1):
+    - NVActivityIndicatorView/Base (= 5.1.1)
+  - NVActivityIndicatorView/Base (5.1.1)
   - OpenGraph (1.2.2)
   - PromisesObjC (1.2.12)
   - SDWebImage (5.10.2):
@@ -93,6 +96,7 @@ DEPENDENCIES:
   - Firebase/Analytics
   - Firebase/Core
   - Firebase/Crashlytics
+  - NVActivityIndicatorView
   - OpenGraph
   - SDWebImage
   - SideMenu
@@ -113,6 +117,7 @@ SPEC REPOS:
     - GoogleUserMessagingPlatform
     - GoogleUtilities
     - nanopb
+    - NVActivityIndicatorView
     - OpenGraph
     - PromisesObjC
     - SDWebImage
@@ -133,6 +138,7 @@ SPEC CHECKSUMS:
   GoogleUserMessagingPlatform: b168e8c46cd8f92aa3e34b584c4ca78a411ce367
   GoogleUtilities: 7f2f5a07f888cdb145101d6042bc4422f57e70b3
   nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
+  NVActivityIndicatorView: 1f6c5687f1171810aa27a3296814dc2d7dec3667
   OpenGraph: 661adce5ccba5d3a57ba16681a9ae2b949bdcc03
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   SDWebImage: b969dcfc02c40a5da71eac0b03b8f1a0c794a86f
@@ -140,6 +146,6 @@ SPEC CHECKSUMS:
   SwiftMessages: 539fd54a766bf08ec667e90aa141c44b8b8aaa55
   SwipeCellKit: 935ca28c187ec6e1ffb2b578cf8ddca842bfdcbb
 
-PODFILE CHECKSUM: 080555a9082b9885a41cc5d8004ac011a4b86639
+PODFILE CHECKSUM: 12c59afeab87ae4eb07bd332b998f115a0fe5853
 
 COCOAPODS: 1.10.0

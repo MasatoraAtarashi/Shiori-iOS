@@ -25,4 +25,5 @@ target 'Shiori' do
   pod 'OpenGraph'
   pod 'SideMenu'
   pod 'SwiftMessages'
+  pod 'NVActivityIndicatorView'
 end
