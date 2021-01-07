@@ -10,7 +10,7 @@ import UIKit
 
 class SupportedServicesViewController: UITableViewController {
 
-    let services = ["Youtube", "nicovideo(ニコニコ動画)", "Dailymotion", "pornhub", "redtube", "tube8"]
+    let services = ["Youtube", "nicovideo(ニコニコ動画)", "Ted.com", "Dailymotion", "pornhub", "redtube", "tube8"]
     let sectionTitles = [NSLocalizedString("Supported video sites", comment: "")]
 
     override func viewDidLoad() {
