@@ -27,6 +27,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var searchResults: [Article] = []
 
     var searchController = UISearchController()
+    
+    @IBOutlet weak var tutorialTextLabel: UILabel!
 
     // フォルダ
     var folderInt: String = NSLocalizedString("Home", comment: "")
@@ -155,6 +157,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
         //        3dtouch
         self.registerForPreviewing(with: self, sourceView: tableView)
+        
+        tutorialTextLabel.text = "記事を追加するのは簡単です。\n以下をタップして始めましょう。"
 
     }
 
