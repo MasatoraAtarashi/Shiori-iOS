@@ -6,9 +6,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <GoogleMobileAds/GoogleMobileAdsDefines.h>
 
-/// Reward information for GADRewardBasedVideoAd ads.
+/// A block to be executed when the user earns a reward.
+typedef void (^GADUserDidEarnRewardHandler)(void);
+
+/// Ad reward information.
 @interface GADAdReward : NSObject
 
 /// Type of the reward.

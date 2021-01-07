@@ -13,7 +13,6 @@
 #import <GoogleMobileAds/GADRequest.h>
 #import <GoogleMobileAds/GADRequestError.h>
 #import <GoogleMobileAds/GADResponseInfo.h>
-#import <GoogleMobileAds/GoogleMobileAdsDefines.h>
 #import <UIKit/UIKit.h>
 
 /// A view that displays banner ads. See https://developers.google.com/admob/ios/banner to get
@@ -73,7 +72,7 @@
 /// ad request succeeds or fails.
 @property(nonatomic, readonly, nullable) GADResponseInfo *responseInfo;
 
-/// Called when ad is estimated to have earned money. Available for whitelisted accounts only.
+/// Called when ad is estimated to have earned money. Available for allowlisted accounts only.
 @property(nonatomic, nullable, copy) GADPaidEventHandler paidEventHandler;
 
 #pragma mark Deprecated

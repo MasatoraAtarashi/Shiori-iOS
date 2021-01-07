@@ -5,9 +5,6 @@
 //  Copyright 2018 Google LLC. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
-#import <GoogleMobileAds/GoogleMobileAdsDefines.h>
 #import <GoogleMobileAds/Mediation/GADMediationAdEventDelegate.h>
 #import <GoogleMobileAds/Mediation/GADMediationBannerAd.h>
 #import <GoogleMobileAds/Mediation/GADMediationInterstitialAd.h>
@@ -15,12 +12,20 @@
 #import <GoogleMobileAds/Mediation/GADMediationRewardedAd.h>
 #import <GoogleMobileAds/Mediation/GADMediationServerConfiguration.h>
 #import <GoogleMobileAds/Mediation/GADVersionNumber.h>
+#import <UIKit/UIKit.h>
 
 /// Called by the adapter after loading the banner ad or encountering an error. Returns an ad
 /// event object to send ad events to the Google Mobile Ads SDK. The block returns nil if a delegate
 /// couldn't be created or if the block has already been called.
 typedef id<GADMediationBannerAdEventDelegate> _Nullable (^GADMediationBannerLoadCompletionHandler)(
     _Nullable id<GADMediationBannerAd> ad, NSError *_Nullable error);
+
+/// Called by the adapter after loading the interscroller ad or encountering an error. Returns an ad
+/// event object to send ad events to the Google Mobile Ads SDK. The block returns nil if a delegate
+/// couldn't be created or if the block has already been called.
+typedef id<GADMediationBannerAdEventDelegate> _Nullable (
+    ^GADMediationInterscrollerAdLoadCompletionHandler)(_Nullable id<GADMediationInterscrollerAd> ad,
+                                                       NSError *_Nullable error);
 
 /// Called by the adapter after loading the interstitial ad or encountering an error. Returns an
 /// ad event delegate to send ad events to the Google Mobile Ads SDK. The block returns nil if a
@@ -63,6 +68,9 @@ typedef void (^GADMediationAdapterSetUpCompletionBlock)(NSError *_Nullable error
 /// Returns Nil if the network doesn't have publisher provided extras.
 + (nullable Class<GADAdNetworkExtras>)networkExtrasClass;
 
+/// Returns an initalized mediation adapter.
+- (nonnull instancetype)init;
+
 @optional
 
 /// Tells the adapter to set up its underlying ad network SDK and perform any necessary prefetching
@@ -77,6 +85,16 @@ typedef void (^GADMediationAdapterSetUpCompletionBlock)(NSError *_Nullable error
 - (void)loadBannerForAdConfiguration:(nonnull GADMediationBannerAdConfiguration *)adConfiguration
                    completionHandler:
                        (nonnull GADMediationBannerLoadCompletionHandler)completionHandler;
+
+/// Asks the adapter to load an interscroller ad with the provided ad configuration. The adapter
+/// must call back completionHandler with the loaded ad, or it may call back with an error. This
+/// method is called on the main thread, and completionHandler must be called back on the main
+/// thread.
+- (void)loadInterscrollerAdForAdConfiguration:
+            (nonnull GADMediationBannerAdConfiguration *)adConfiguration
+                            completionHandler:
+                                (nonnull GADMediationInterscrollerAdLoadCompletionHandler)
+                                    completionHandler;
 
 /// Asks the adapter to load an interstitial ad with the provided ad configuration. The adapter
 /// must call back completionHandler with the loaded ad, or it may call back with an error. This
@@ -101,5 +119,15 @@ typedef void (^GADMediationAdapterSetUpCompletionBlock)(NSError *_Nullable error
             (nonnull GADMediationRewardedAdConfiguration *)adConfiguration
                        completionHandler:
                            (nonnull GADMediationRewardedLoadCompletionHandler)completionHandler;
+
+/// Asks the adapter to load a rewarded interstitial ad with the provided ad configuration. The
+/// adapter must call back completionHandler with the loaded ad, or it may call back with an error.
+/// This method is called on the main thread, and completionHandler must be called back on the main
+/// thread.
+- (void)loadRewardedInterstitialAdForAdConfiguration:
+            (nonnull GADMediationRewardedAdConfiguration *)adConfiguration
+                                   completionHandler:
+                                       (nonnull GADMediationRewardedLoadCompletionHandler)
+                                           completionHandler;
 
 @end

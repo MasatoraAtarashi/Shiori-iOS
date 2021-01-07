@@ -50,8 +50,7 @@ typedef void (^GADRewardedAdLoadCompletionHandler)(GADRequestError *_Nullable er
 @property(nonatomic, readonly, nullable) GADAdReward *reward;
 
 /// Options specified for server-side user reward verification.
-@property(nonatomic, copy, nullable)
-    GADServerSideVerificationOptions *serverSideVerificationOptions;
+@property(nonatomic, nullable) GADServerSideVerificationOptions *serverSideVerificationOptions;
 
 /// The loaded ad's metadata. Is nil if no ad is loaded or the loaded ad doesn't have metadata. Ad
 /// metadata may update after loading. Use the rewardedAdMetadataDidChange: delegate method on
@@ -61,7 +60,7 @@ typedef void (^GADRewardedAdLoadCompletionHandler)(GADRequestError *_Nullable er
 /// Delegate for ad metadata changes.
 @property(nonatomic, weak, nullable) id<GADRewardedAdMetadataDelegate> adMetadataDelegate;
 
-/// Called when the ad is estimated to have earned money. Available for whitelisted accounts only.
+/// Called when the ad is estimated to have earned money. Available for allowlisted accounts only.
 @property(nonatomic, nullable, copy) GADPaidEventHandler paidEventHandler;
 
 /// Returns whether the rewarded ad can be presented from the provided root view controller. Sets

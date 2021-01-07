@@ -108,9 +108,39 @@ static NSString * kSDCGImageDestinationRequestedFileSize = @"kCGImageDestination
 
 #pragma mark - Utils
 
++ (BOOL)canDecodeFromFormat:(SDImageFormat)format {
+    static dispatch_once_t onceToken;
+    static NSSet *imageUTTypeSet;
+    dispatch_once(&onceToken, ^{
+        NSArray *imageUTTypes = (__bridge_transfer NSArray *)CGImageSourceCopyTypeIdentifiers();
+        imageUTTypeSet = [NSSet setWithArray:imageUTTypes];
+    });
+    CFStringRef imageUTType = [NSData sd_UTTypeFromImageFormat:format];
+    if ([imageUTTypeSet containsObject:(__bridge NSString *)(imageUTType)]) {
+        // Can decode from target format
+        return YES;
+    }
+    return NO;
+}
+
++ (BOOL)canEncodeToFormat:(SDImageFormat)format {
+    static dispatch_once_t onceToken;
+    static NSSet *imageUTTypeSet;
+    dispatch_once(&onceToken, ^{
+        NSArray *imageUTTypes = (__bridge_transfer NSArray *)CGImageDestinationCopyTypeIdentifiers();
+        imageUTTypeSet = [NSSet setWithArray:imageUTTypes];
+    });
+    CFStringRef imageUTType = [NSData sd_UTTypeFromImageFormat:format];
+    if ([imageUTTypeSet containsObject:(__bridge NSString *)(imageUTType)]) {
+        // Can encode to target format
+        return YES;
+    }
+    return NO;
+}
+
 + (NSUInteger)imageLoopCountWithSource:(CGImageSourceRef)source {
     NSUInteger loopCount = self.defaultLoopCount;
-    NSDictionary *imageProperties = (__bridge_transfer NSDictionary *)CGImageSourceCopyProperties(source, nil);
+    NSDictionary *imageProperties = (__bridge_transfer NSDictionary *)CGImageSourceCopyProperties(source, NULL);
     NSDictionary *containerProperties = imageProperties[self.dictionaryProperty];
     if (containerProperties) {
         NSNumber *containerLoopCount = containerProperties[self.loopCountProperty];
@@ -182,7 +212,8 @@ static NSString * kSDCGImageDestinationRequestedFileSize = @"kCGImageDestination
         decodingOptions = [NSMutableDictionary dictionary];
     }
     CGImageRef imageRef;
-    if (thumbnailSize.width == 0 || thumbnailSize.height == 0 || pixelWidth == 0 || pixelHeight == 0 || (pixelWidth <= thumbnailSize.width && pixelHeight <= thumbnailSize.height)) {
+    BOOL createFullImage = thumbnailSize.width == 0 || thumbnailSize.height == 0 || pixelWidth == 0 || pixelHeight == 0 || (pixelWidth <= thumbnailSize.width && pixelHeight <= thumbnailSize.height);
+    if (createFullImage) {
         if (isVector) {
             if (thumbnailSize.width == 0 || thumbnailSize.height == 0) {
                 // Provide the default pixel count for vector images, simply just use the screen size
@@ -199,7 +230,7 @@ static NSString * kSDCGImageDestinationRequestedFileSize = @"kCGImageDestination
             NSUInteger rasterizationDPI = maxPixelSize * DPIPerPixel;
             decodingOptions[kSDCGImageSourceRasterizationDPI] = @(rasterizationDPI);
         }
-        imageRef = CGImageSourceCreateImageAtIndex(source, index, (__bridge CFDictionaryRef)decodingOptions);
+        imageRef = CGImageSourceCreateImageAtIndex(source, index, (__bridge CFDictionaryRef)[decodingOptions copy]);
     } else {
         decodingOptions[(__bridge NSString *)kCGImageSourceCreateThumbnailWithTransform] = @(preserveAspectRatio);
         CGFloat maxPixelSize;
@@ -215,14 +246,14 @@ static NSString * kSDCGImageDestinationRequestedFileSize = @"kCGImageDestination
             maxPixelSize = MAX(thumbnailSize.width, thumbnailSize.height);
         }
         decodingOptions[(__bridge NSString *)kCGImageSourceThumbnailMaxPixelSize] = @(maxPixelSize);
-        decodingOptions[(__bridge NSString *)kCGImageSourceCreateThumbnailFromImageIfAbsent] = @(YES);
-        imageRef = CGImageSourceCreateThumbnailAtIndex(source, index, (__bridge CFDictionaryRef)decodingOptions);
+        decodingOptions[(__bridge NSString *)kCGImageSourceCreateThumbnailFromImageAlways] = @(YES);
+        imageRef = CGImageSourceCreateThumbnailAtIndex(source, index, (__bridge CFDictionaryRef)[decodingOptions copy]);
     }
     if (!imageRef) {
         return nil;
     }
-    
-    if (thumbnailSize.width > 0 && thumbnailSize.height > 0) {
+    // Thumbnail image post-process
+    if (!createFullImage) {
         if (preserveAspectRatio) {
             // kCGImageSourceCreateThumbnailWithTransform will apply EXIF transform as well, we should not apply twice
             exifOrientation = kCGImagePropertyOrientationUp;
@@ -468,7 +499,7 @@ static NSString * kSDCGImageDestinationRequestedFileSize = @"kCGImageDestination
     NSUInteger pixelWidth = CGImageGetWidth(imageRef);
     NSUInteger pixelHeight = CGImageGetHeight(imageRef);
     CGFloat finalPixelSize = 0;
-    if (maxPixelSize.width > 0 && maxPixelSize.height > 0 && pixelWidth > 0 && pixelHeight > 0) {
+    if (maxPixelSize.width > 0 && maxPixelSize.height > 0 && pixelWidth > maxPixelSize.width && pixelHeight > maxPixelSize.height) {
         CGFloat pixelRatio = pixelWidth / pixelHeight;
         CGFloat maxPixelSizeRatio = maxPixelSize.width / maxPixelSize.height;
         if (pixelRatio > maxPixelSizeRatio) {
@@ -476,6 +507,7 @@ static NSString * kSDCGImageDestinationRequestedFileSize = @"kCGImageDestination
         } else {
             finalPixelSize = maxPixelSize.height;
         }
+        properties[(__bridge NSString *)kCGImageDestinationImageMaxPixelSize] = @(finalPixelSize);
     }
     NSUInteger maxFileSize = [options[SDImageCoderEncodeMaxFileSize] unsignedIntegerValue];
     if (maxFileSize > 0) {
@@ -483,31 +515,31 @@ static NSString * kSDCGImageDestinationRequestedFileSize = @"kCGImageDestination
         // Remove the quality if we have file size limit
         properties[(__bridge NSString *)kCGImageDestinationLossyCompressionQuality] = nil;
     }
+    BOOL embedThumbnail = NO;
+    if (options[SDImageCoderEncodeEmbedThumbnail]) {
+        embedThumbnail = [options[SDImageCoderEncodeEmbedThumbnail] boolValue];
+    }
+    properties[(__bridge NSString *)kCGImageDestinationEmbedThumbnail] = @(embedThumbnail);
     
     BOOL encodeFirstFrame = [options[SDImageCoderEncodeFirstFrameOnly] boolValue];
     if (encodeFirstFrame || frames.count == 0) {
         // for static single images
-        if (finalPixelSize > 0) {
-            properties[(__bridge NSString *)kCGImageDestinationImageMaxPixelSize] = @(finalPixelSize);
-        }
         CGImageDestinationAddImage(imageDestination, imageRef, (__bridge CFDictionaryRef)properties);
     } else {
         // for animated images
         NSUInteger loopCount = image.sd_imageLoopCount;
-        NSDictionary *containerProperties = @{self.class.loopCountProperty : @(loopCount)};
-        properties[self.class.dictionaryProperty] = containerProperties;
-        CGImageDestinationSetProperties(imageDestination, (__bridge CFDictionaryRef)properties);
+        NSDictionary *containerProperties = @{
+            self.class.dictionaryProperty: @{self.class.loopCountProperty : @(loopCount)}
+        };
+        // container level properties (applies for `CGImageDestinationSetProperties`, not individual frames)
+        CGImageDestinationSetProperties(imageDestination, (__bridge CFDictionaryRef)containerProperties);
         
         for (size_t i = 0; i < frames.count; i++) {
             SDImageFrame *frame = frames[i];
             NSTimeInterval frameDuration = frame.duration;
             CGImageRef frameImageRef = frame.image.CGImage;
-            NSMutableDictionary *frameProperties = [NSMutableDictionary dictionary];
-            frameProperties[self.class.dictionaryProperty] = @{self.class.delayTimeProperty : @(frameDuration)};
-            if (finalPixelSize > 0) {
-                frameProperties[(__bridge NSString *)kCGImageDestinationImageMaxPixelSize] = @(finalPixelSize);
-            }
-            CGImageDestinationAddImage(imageDestination, frameImageRef, (__bridge CFDictionaryRef)frameProperties);
+            properties[self.class.dictionaryProperty] = @{self.class.delayTimeProperty : @(frameDuration)};
+            CGImageDestinationAddImage(imageDestination, frameImageRef, (__bridge CFDictionaryRef)properties);
         }
     }
     // Finalize the destination.
@@ -623,7 +655,7 @@ static NSString * kSDCGImageDestinationRequestedFileSize = @"kCGImageDestination
         return nil;
     }
     image.sd_imageFormat = self.class.imageFormat;
-    image.sd_isDecoded = YES;;
+    image.sd_isDecoded = YES;
     return image;
 }
 
