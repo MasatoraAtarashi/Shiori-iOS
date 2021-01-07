@@ -9,6 +9,7 @@
 import UIKit
 import WebKit
 import Accounts
+import NVActivityIndicatorView
 
 class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
     
@@ -17,6 +18,8 @@ class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
     var shareButton: UIBarButtonItem!
     var backButton: UIBarButtonItem!
     var forwadButton: UIBarButtonItem!
+    
+    var activityIndicatorView: NVActivityIndicatorView?
     
     var targetUrl: String?
     var positionX: Int = 0
@@ -36,12 +39,24 @@ class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
 //        segment.addTarget(self, action: "segmentChanged", for: .valueChanged)
 //        self.navigationItem.titleView = segment
         
+        activityIndicatorView = NVActivityIndicatorView(
+            frame: CGRect(x: 0, y: 0, width: 85, height: 85),
+            type: NVActivityIndicatorType.ballSpinFadeLoader,
+            color: UIColor.darkGray,
+            padding: 0
+        )
+        
         webConfiguration.preferences = preferences
         webView = WKWebView(frame: .zero, configuration: webConfiguration)
         webView.uiDelegate = self
         webView.navigationDelegate = self
         view = webView
         
+        if let activityView = activityIndicatorView {
+            webView.addSubview(activityView)
+            webView.bringSubviewToFront(activityView)
+        }
+    
         webView.allowsBackForwardNavigationGestures = true
     }
     
@@ -73,7 +88,6 @@ class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
         refreshControll = UIRefreshControl()
         self.webView.scrollView.refreshControl = refreshControll
         refreshControll.addTarget(self, action: #selector(WebViewController.refresh(sender:)), for: .valueChanged)
-        
     }
     
     @objc func refresh(sender: UIRefreshControl) {
@@ -150,6 +164,8 @@ class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
 extension WebViewController {
     
     func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
+        activityIndicatorView?.center = webView.center
+        activityIndicatorView?.startAnimating()
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
@@ -160,6 +176,7 @@ extension WebViewController {
         self.refreshControll.endRefreshing()
         //        backButton.isHidden = (webView.canGoBack) ? false : true
         //        forwadButton.isHidden = (webView.canGoForward) ? false : true
+        activityIndicatorView?.stopAnimating()
     }
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
