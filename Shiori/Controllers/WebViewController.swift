@@ -32,13 +32,6 @@ class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
         
         let webConfiguration = WKWebViewConfiguration()
         
-        
-//        segment.sizeToFit()
-//        segment.tintColor = UIColor.white
-//        segment.selectedSegmentIndex = 0;
-//        segment.addTarget(self, action: "segmentChanged", for: .valueChanged)
-//        self.navigationItem.titleView = segment
-        
         activityIndicatorView = NVActivityIndicatorView(
             frame: CGRect(x: 0, y: 0, width: 85, height: 85),
             type: NVActivityIndicatorType.ballSpinFadeLoader,
@@ -91,7 +84,6 @@ class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
     }
     
     @objc func refresh(sender: UIRefreshControl) {
-        print("refresh")
         guard let url = webView.url else {
             return
         }
@@ -127,33 +119,19 @@ class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
         // 初期化処理
         let activityVC = UIActivityViewController(activityItems: activityItems, applicationActivities: [CustomActivity(title: shareText ?? "", url: shareWebsite as URL)])
         
-        // 使用しないアクティビティタイプ
-        //        let excludedActivityTypes = [
-        //            UIActivity.ActivityType.postToFacebook,
-        //            UIActivity.ActivityType.postToTwitter,
-        //            UIActivity.ActivityType.message,
-        //            UIActivity.ActivityType.saveToCameraRoll,
-        //            UIActivity.ActivityType.print
-        //        ]
-        ////
-        //        activityVC.excludedActivityTypes = excludedActivityTypes
-        
         // UIActivityViewControllerを表示
         self.present(activityVC, animated: true, completion: nil)
     }
     
     @objc func segmentChanged() {
-        print("unko")
         //セグメントが変更されたときの処理
         //選択されているセグメントのインデックス
         if self.segment.selectedSegmentIndex == 0 {
             self.preferences.javaScriptEnabled = true
             webView.reload()
-            print("0")
         } else {
             self.preferences.javaScriptEnabled = false
             webView.reload()
-            print("1")
         }
     }
     
@@ -174,8 +152,6 @@ extension WebViewController {
         positionX = 0
         positionY = 0
         self.refreshControll.endRefreshing()
-        //        backButton.isHidden = (webView.canGoBack) ? false : true
-        //        forwadButton.isHidden = (webView.canGoForward) ? false : true
         activityIndicatorView?.stopAnimating()
     }
     
@@ -206,16 +182,3 @@ extension WebViewController {
     
     
 }
-
-
-/*
- // MARK: - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
- // Get the new view controller using segue.destination.
- // Pass the selected object to the new view controller.
- }
- */
-
-
