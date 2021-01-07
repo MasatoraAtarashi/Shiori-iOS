@@ -150,13 +150,11 @@ class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
 extension WebViewController {
     
     func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
-        webView.evaluateJavaScript("window.scrollTo(\(positionX),\(positionY))", completionHandler: nil)
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        if !(targetUrl?.contains("https") ?? true) {
-            webView.evaluateJavaScript("window.scrollTo(\(positionX),\(positionY))", completionHandler: nil)
-        }
+        webView.evaluateJavaScript("window.scrollTo(\(positionX),\(positionY))", completionHandler: nil)
+        // ユーザーがリロードしたときスクロールしないようにpositionを初期化
         positionX = 0
         positionY = 0
         self.refreshControll.endRefreshing()
