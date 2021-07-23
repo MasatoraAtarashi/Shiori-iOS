@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -106,7 +106,7 @@
 		622155B4232B7AD100DD4AB4 /* Shiori.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Shiori.entitlements; sourceTree = "<group>"; };
 		622155B5232B944200DD4AB4 /* GetData.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = GetData.js; sourceTree = "<group>"; };
 		622155B7232CBF8400DD4AB4 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
-		6226B08624610B1200A5E541 /* SubTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SubTableViewController.swift; path = /Users/MasatoraAtarashi/environment/apps/Shiori/Shiori/Controllers/SubTableViewController.swift; sourceTree = "<absolute>"; };
+		6226B08624610B1200A5E541 /* SubTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SubTableViewController.swift; path = "/Users/MasatoraAtarashi/environment/web-shiori/Shiori-iOS/Shiori/Controllers/SubTableViewController.swift"; sourceTree = "<absolute>"; };
 		6226B0882461172100A5E541 /* delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete.png; sourceTree = "<group>"; };
 		6226B08A24611DB400A5E541 /* garbage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = garbage.png; sourceTree = "<group>"; };
 		622DA529245D7ECE001FDFEE /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
@@ -366,7 +366,7 @@
 				};
 			};
 			buildConfigurationList = 62215583232B79B900DD4AB4 /* Build configuration list for PBXProject "Shiori" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 12.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
