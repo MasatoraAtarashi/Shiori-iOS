@@ -59,7 +59,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         performSegue(withIdentifier: "SettingSegue", sender: nil)
     }
 
-    @IBAction func changeViewForReaded(_ sender: UIBarButtonItem) {
+    
+    @IBAction func deleteSelectedArticles(_ sender: UIBarButtonItem) {
         if tableView.isEditing {
             if tableView.indexPathsForSelectedRows != nil {
                 if let sortedIndexPaths = tableView.indexPathsForSelectedRows?.sorted(by: { $0.row > $1.row }) {
@@ -68,29 +69,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                     }
                     changeToEditMode(bottomToolbarRightItem)
                     hiddenToolbarButtonEdit()
-
                 }
-            }
-        } else {
-            if unreadMode {
-                unreadMode = false
-                if #available(iOS 13.0, *) {
-                    sender.image = UIImage(systemName: "line.horizontal.3.decrease.circle")
-                } else {
-                    sender.title = NSLocalizedString("Show only unread", comment: "")
-                }
-                getStoredDataFromUserDefault()
-            } else {
-                unreadMode = true
-                if #available(iOS 13.0, *) {
-                    sender.image = UIImage(systemName: "line.horizontal.3.decrease.circle.fill")
-                } else {
-                    sender.title = NSLocalizedString("Show all", comment: "")
-                }
-                getStoredDataFromUserDefault()
             }
         }
-
     }
 
     @IBOutlet weak var bottomToolbarLeftItem: UIBarButtonItem!
@@ -99,24 +80,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBAction func changeToEditMode(_ sender: UIBarButtonItem) {
         if tableView.isEditing {
             sender.title = NSLocalizedString("Edit", comment: "")
-            if unreadMode {
-                if #available(iOS 13.0, *) {
-                    bottomToolbarLeftItem.image = UIImage(systemName: "line.horizontal.3.decrease.circle.fill")
-                } else {
-                    // Fallback on earlier versions
-                    bottomToolbarLeftItem.title = NSLocalizedString("Show only unread", comment: "")
-                }
-            } else {
-                if #available(iOS 13.0, *) {
-                    bottomToolbarLeftItem.image = UIImage(systemName: "line.horizontal.3.decrease.circle")
-                } else {
-                    // Fallback on earlier versions
-                    bottomToolbarLeftItem.title = NSLocalizedString("Show all", comment: "")
-                }
-            }
+            hiddenToolbarButtonEdit()
             setEditing(false, animated: true)
         } else {
             sender.title = NSLocalizedString("Done", comment: "")
+            
+            bottomToolbarLeftItem.isEnabled = true
             if #available(iOS 13.0, *) {
                 bottomToolbarLeftItem.image = UIImage(systemName: "trash")
             } else {
@@ -234,9 +203,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if self.articles.count == 0 {
             bottomToolbarRightItem.isEnabled = false
             bottomToolbarRightItem.title = ""
-        } else if self.articles.count != 0 && !tableView.isEditing {
-            bottomToolbarRightItem.isEnabled = true
-            bottomToolbarRightItem.title = NSLocalizedString("Edit", comment: "")
+        } else {
+            if tableView.isEditing {
+                bottomToolbarLeftItem.isEnabled = false
+                bottomToolbarLeftItem.image = nil
+            } else {
+                bottomToolbarRightItem.isEnabled = true
+                bottomToolbarRightItem.title = NSLocalizedString("Edit", comment: "")
+            }
         }
     }
 
@@ -821,26 +795,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         button.layer.cornerRadius = 10.0
 
         // フッターのボタン
-        if !tableView.isEditing {
-            bottomToolbarRightItem.title = NSLocalizedString("Edit", comment: "")
-            if unreadMode {
-                if #available(iOS 13.0, *) {
-                    bottomToolbarLeftItem.image = UIImage(systemName: "line.horizontal.3.decrease.circle.fill")
-                } else {
-                    // Fallback on earlier versions
-                    bottomToolbarLeftItem.title = NSLocalizedString("Show all", comment: "")
-                }
-            } else {
-                if #available(iOS 13.0, *) {
-                    bottomToolbarLeftItem.image = UIImage(systemName: "line.horizontal.3.decrease.circle")
-                } else {
-                    // Fallback on earlier versions
-                    bottomToolbarLeftItem.title = NSLocalizedString("Show only unread", comment: "")
-                }
-            }
-        } else {
+        if tableView.isEditing {
             bottomToolbarRightItem.title = NSLocalizedString("Done", comment: "")
             bottomToolbarLeftItem.title = NSLocalizedString("Delete", comment: "")
+        } else {
+            bottomToolbarRightItem.title = NSLocalizedString("Edit", comment: "")
         }
     }
 }
