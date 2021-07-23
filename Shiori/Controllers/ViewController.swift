@@ -36,8 +36,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     @IBOutlet weak var tableView: UITableView!
 
-    var unreadMode: Bool = false
-
     var r: Int = UserDefaults.standard.integer(forKey: "r")
     var g: Int = UserDefaults.standard.integer(forKey: "g")
     var b: Int = UserDefaults.standard.integer(forKey: "b")
@@ -236,7 +234,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             article.positionX = result["positionX"]!
             article.positionY = result["positionY"]!
             article.date = result["date"]!
-            article.haveRead = Bool(result["haveRead"]!)!
             (UIApplication.shared.delegate as! AppDelegate).saveContext()
         }
 
@@ -245,31 +242,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let readContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         do {
             let fetchRequest: NSFetchRequest<Article> = Article.fetchRequest()
-            if unreadMode {
-                fetchRequest.predicate = NSPredicate(format: "haveRead = true")
-            }
             self.articles = try readContext.fetch(fetchRequest)
-
         } catch {
             print("Error")
         }
 
-        //        for result in storedArray {
-        //            if unreadMode {
-        //                if !Bool(result["haveRead"]!)! {
-        //                    continue
-        //                }
-        //            }
-        //            self.articles.append(Entry(
-        //                title: result["title"]!,
-        //                link: result["url"]!,
-        //                imageURL: result["image"]!,
-        //                positionX: result["positionX"]!,
-        //                positionY: result["positionY"]!,
-        //                date: result["date"]!,
-        //                haveRead: Bool(result["haveRead"]!)!
-        //            ))
-        //        }
         articles.reverse()
         tableView.reloadData()
         self.tableView.refreshControl?.endRefreshing()
@@ -308,7 +285,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
         let cell = tableView.dequeueReusableCell(withIdentifier: "FeedTableViewCell", for: indexPath as IndexPath) as! FeedTableViewCell
         if searchController.isActive {
             let filteredArticles = self.searchResults.filter({ ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(folderInt) })
@@ -400,10 +376,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             //                self.favoriteCell(at: indexPath)
             //            }
             let fetchRequest: NSFetchRequest<Article> = Article.fetchRequest()
-            if unreadMode {
-                fetchRequest.predicate = NSPredicate(format: "haveRead = true")
-            }
-
+            
             var filteredArticles: [Article]
             if searchController.isActive {
                 filteredArticles = self.searchResults.filter({ ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(folderInt) })
@@ -440,9 +413,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 let selectFolderTableViewController = vc.viewControllers.first as! SelectFolderTableViewController
                 selectFolderTableViewController.selectedIndexPath = indexPath.row
                 let fetchRequest: NSFetchRequest<Article> = Article.fetchRequest()
-                if self.unreadMode {
-                    fetchRequest.predicate = NSPredicate(format: "haveRead = true")
-                }
+                
                 var filteredArticles: [Article]
                 if self.searchController.isActive {
                     filteredArticles = self.searchResults.filter({ ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(self.folderInt) })
@@ -462,44 +433,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
             return [deleteAction, favoriteAction, folderAction]
         } else {
-            let readAction: SwipeAction
-
-            let fetchRequest: NSFetchRequest<Article> = Article.fetchRequest()
-            if unreadMode {
-                fetchRequest.predicate = NSPredicate(format: "haveRead = true")
-            }
-
-            var filteredArticles: [Article]
-            if searchController.isActive {
-                filteredArticles = self.searchResults.filter({ ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(folderInt) })
-            } else {
-                filteredArticles = self.articles.filter({ ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(folderInt) })
-            }
-
-            if filteredArticles[indexPath.row].haveRead {
-                readAction = SwipeAction(style: .default, title: NSLocalizedString("Mark as read", comment: "")) { _, indexPath in
-                    self.haveReadCell(at: indexPath)
-                }
-            } else {
-                readAction = SwipeAction(style: .default, title: NSLocalizedString("Unread", comment: "")) { _, indexPath in
-                    self.haveReadCell(at: indexPath)
-                }
-            }
-            // customize the action appearance
-            if #available(iOS 13.0, *) {
-                if filteredArticles[indexPath.row].haveRead {
-                    readAction.image = UIImage(systemName: "chevron.down.circle.fill")
-                } else {
-                    readAction.image = UIImage(systemName: "chevron.down.circle")
-                }
-            } else {
-                // Fallback on earlier versions
-            }
-            readAction.backgroundColor = UIColor.init(red: 27/255, green: 156/255, blue: 252/255, alpha: 1)
-
-            return [readAction]
+            return []
         }
-
     }
 
     func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeOptions {
@@ -510,12 +445,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     // cellを削除する
     func deleteCell(at indexPath: IndexPath) {
-        //        self.articles.remove(at: indexPath.row)
         let readContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         let fetchRequest: NSFetchRequest<Article> = Article.fetchRequest()
-        if unreadMode {
-            fetchRequest.predicate = NSPredicate(format: "haveRead = true")
-        }
         if searchController.isActive {
             let filteredArticles = self.searchResults.filter({ ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(folderInt) })
             readContext.delete(filteredArticles[indexPath.row])
@@ -530,9 +461,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // 記事をお気に入りに登録
     func favoriteCell(at indexPath: IndexPath) {
         let fetchRequest: NSFetchRequest<Article> = Article.fetchRequest()
-        if unreadMode {
-            fetchRequest.predicate = NSPredicate(format: "haveRead = true")
-        }
 
         if searchController.isActive {
 
@@ -569,39 +497,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         getStoredDataFromUserDefault()
     }
 
-    // 既読にする
-    func haveReadCell(at indexPath: IndexPath) {
-
-        let fetchRequest: NSFetchRequest<Article> = Article.fetchRequest()
-        if unreadMode {
-            fetchRequest.predicate = NSPredicate(format: "haveRead = true")
-        }
-
-        if searchController.isActive {
-            let filteredArticles = searchResults.filter({ ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(folderInt) })
-            if filteredArticles[indexPath.row].haveRead {
-                filteredArticles[indexPath.row].haveRead = false
-            } else {
-                filteredArticles[indexPath.row].haveRead = true
-            }
-        } else {
-            let filteredArticles = self.articles.filter({ ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(folderInt) })
-            if filteredArticles[indexPath.row].haveRead {
-                filteredArticles[indexPath.row].haveRead = false
-            } else {
-                filteredArticles[indexPath.row].haveRead = true
-            }
-        }
-        (UIApplication.shared.delegate as! AppDelegate).saveContext()
-        getStoredDataFromUserDefault()
-    }
-
     func addArticleToFolder(_ ArticleindexPathRow: Int, _ folderName: String) {
         var alreadyAdded: Bool
         let fetchRequest: NSFetchRequest<Article> = Article.fetchRequest()
-        if unreadMode {
-            fetchRequest.predicate = NSPredicate(format: "haveRead = true")
-        }
 
         if searchController.isActive {
 

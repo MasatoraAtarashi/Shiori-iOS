@@ -49,7 +49,7 @@ class ShareViewController: SLComposeServiceViewController {
                                     var storedArray: [[String: String]] = sharedDefaults.array(forKey: self.keyName) as? [[String: String]] ?? []
 
                                     if results["url"] != nil {
-                                        let resultsDic = ["url": results["url"], "title": results["title"], "positionX": results["positionX"], "positionY": results["positionY"], "time": results["time"], "image": results["image"], "date": results["date"], "haveRead": "true"]
+                                        let resultsDic = ["url": results["url"], "title": results["title"], "positionX": results["positionX"], "positionY": results["positionY"], "time": results["time"], "image": results["image"], "date": results["date"]]
 
                                         storedArray.append(resultsDic as! [String: String])
                                         sharedDefaults.set(storedArray, forKey: self.keyName)
