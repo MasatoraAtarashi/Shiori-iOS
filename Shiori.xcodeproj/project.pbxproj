@@ -45,6 +45,8 @@
 		6280BC09242399FA00EEDB3C /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 6280BC08242399FA00EEDB3C /* settings.png */; };
 		62A1E834242F9A0000113A10 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62A1E833242F9A0000113A10 /* MessageUI.framework */; };
 		62A3AF5F242E350A004BD808 /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A3AF5E242E350A004BD808 /* SettingTableViewController.swift */; };
+		62B08ECD26AB146200CC6B08 /* GoogleDataTransport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62B08ECC26AB146200CC6B08 /* GoogleDataTransport.framework */; };
+		62B08ECF26AB146200CC6B08 /* GoogleUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62B08ECE26AB146200CC6B08 /* GoogleUtilities.framework */; };
 		62B12335232E75D9007E6F61 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6221558B232B79B900DD4AB4 /* AppDelegate.swift */; };
 		62B1234C232E8215007E6F61 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B1234B232E8215007E6F61 /* Entry.swift */; };
 		909E9FA550C96476D4E86C62 /* Pods_Shiori.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98B1316EC4BD7BAAF68C16D6 /* Pods_Shiori.framework */; };
@@ -137,6 +139,8 @@
 		6280BC08242399FA00EEDB3C /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
 		62A1E833242F9A0000113A10 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		62A3AF5E242E350A004BD808 /* SettingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
+		62B08ECC26AB146200CC6B08 /* GoogleDataTransport.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GoogleDataTransport.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		62B08ECE26AB146200CC6B08 /* GoogleUtilities.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GoogleUtilities.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		62B1234B232E8215007E6F61 /* Entry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
 		6EC70B92298E46BA5986AED1 /* Pods_Share.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Share.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E5478B8CD8CA0C6ECE6036A /* Pods-Share.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Share.release.xcconfig"; path = "Target Support Files/Pods-Share/Pods-Share.release.xcconfig"; sourceTree = "<group>"; };
@@ -149,6 +153,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62B08ECD26AB146200CC6B08 /* GoogleDataTransport.framework in Frameworks */,
+				62B08ECF26AB146200CC6B08 /* GoogleUtilities.framework in Frameworks */,
 				62A1E834242F9A0000113A10 /* MessageUI.framework in Frameworks */,
 				909E9FA550C96476D4E86C62 /* Pods_Shiori.framework in Frameworks */,
 			);
@@ -280,6 +286,8 @@
 		B09494A8CAC8586A118C22FA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				62B08ECC26AB146200CC6B08 /* GoogleDataTransport.framework */,
+				62B08ECE26AB146200CC6B08 /* GoogleUtilities.framework */,
 				62A1E833242F9A0000113A10 /* MessageUI.framework */,
 				6EC70B92298E46BA5986AED1 /* Pods_Share.framework */,
 				98B1316EC4BD7BAAF68C16D6 /* Pods_Shiori.framework */,

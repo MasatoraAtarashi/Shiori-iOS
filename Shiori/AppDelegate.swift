@@ -8,7 +8,9 @@
 
 import UIKit
 import CoreData
+import StoreKit
 import Firebase
+import GoogleMobileAds
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

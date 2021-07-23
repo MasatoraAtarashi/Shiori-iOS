@@ -12,6 +12,7 @@ import SwipeCellKit
 import CoreData
 import Firebase
 import SwiftMessages
+import GoogleMobileAds
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SwipeTableViewCellDelegate, UISearchBarDelegate, UISearchResultsUpdating, TutorialDelegate, UIViewControllerPreviewingDelegate {
 
