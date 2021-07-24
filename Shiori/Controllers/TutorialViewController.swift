@@ -39,7 +39,7 @@ class TutorialViewController: UIViewController {
         let r = UserDefaults.standard.integer(forKey: "r")
         let b = UserDefaults.standard.integer(forKey: "b")
         let g = UserDefaults.standard.integer(forKey: "g")
-        var bgColor: UIColor = UIColor(red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: 1)
+        let bgColor: UIColor = UIColor(red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: 1)
         self.view.backgroundColor = bgColor
         if r == 0 || r == 60 {
             text1.textColor = UIColor.white

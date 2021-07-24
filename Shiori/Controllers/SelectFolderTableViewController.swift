@@ -93,7 +93,7 @@ class SelectFolderTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellForFolderSelection", for: indexPath)
 
         // Configure the cell...
-        var categories = UserDefaults.standard.array(forKey: "categories")?.dropFirst(2)
+        let categories = UserDefaults.standard.array(forKey: "categories")?.dropFirst(2)
         cell.textLabel!.text = categories![indexPath.row + 2] as? String
 
         if let folderName = categories?[indexPath.row + 2] {
@@ -107,7 +107,7 @@ class SelectFolderTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let preNC = self.navigationController?.presentingViewController as! UINavigationController
         let preVC = preNC.viewControllers[preNC.viewControllers.count - 1] as! ViewController
-        var categories = UserDefaults.standard.array(forKey: "categories") as! [String]
+        let categories = UserDefaults.standard.array(forKey: "categories") as! [String]
         preVC.addArticleToFolder(self.selectedIndexPath, categories[indexPath.row + 2])
         self.dismiss(animated: true, completion: nil)
     }

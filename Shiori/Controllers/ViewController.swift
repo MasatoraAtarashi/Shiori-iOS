@@ -176,7 +176,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         r = UserDefaults.standard.integer(forKey: "r")
         b = UserDefaults.standard.integer(forKey: "b")
         g = UserDefaults.standard.integer(forKey: "g")
-        var bgColor: UIColor = UIColor(red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: 1)
+        let bgColor: UIColor = UIColor(red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: 1)
         cell.backgroundColor = bgColor
         if r == 0 || r == 60 {
             cell.title.textColor = UIColor.white
@@ -429,7 +429,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         r = UserDefaults.standard.integer(forKey: "r")
         b = UserDefaults.standard.integer(forKey: "b")
         g = UserDefaults.standard.integer(forKey: "g")
-        var bgColor: UIColor = UIColor(red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: 1)
+        let bgColor: UIColor = UIColor(red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: 1)
         self.navigationController?.setToolbarHidden(false, animated: true)
         //        footer color
         self.navigationController?.toolbar.barTintColor = bgColor
@@ -478,7 +478,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @objc func getStoredDataFromUserDefault() {
         self.articles = []
         let sharedDefaults: UserDefaults = UserDefaults(suiteName: self.suiteName)!
-        var storedArray: [[String: String]] = sharedDefaults.array(forKey: self.keyName) as? [[String: String]] ?? []
+        let storedArray: [[String: String]] = sharedDefaults.array(forKey: self.keyName) as? [[String: String]] ?? []
 
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
