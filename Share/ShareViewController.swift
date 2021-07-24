@@ -30,8 +30,8 @@ class ShareViewController: SLComposeServiceViewController {
         return true
     }
 
+    // TODO: リファクタリング
     override func didSelectPost() {
-
         for item: Any in self.extensionContext!.inputItems {
             let inputItem = item as! NSExtensionItem
 

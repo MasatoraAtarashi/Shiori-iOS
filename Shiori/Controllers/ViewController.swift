@@ -49,15 +49,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var footerText1: UIBarButtonItem!
     @IBOutlet weak var footerText2: UIBarButtonItem!
 
+    // チュートリアル画面に遷移
     @IBAction func goToTutorialPage(_ sender: Any) {
         performSegue(withIdentifier: "TutorialSegue", sender: nil)
     }
 
+    // 設定画面に遷移
     @IBAction func goToSettingPage(_ sender: Any) {
         performSegue(withIdentifier: "SettingSegue", sender: nil)
     }
 
-    
+    // 一括編集モードで選択した記事を削除する
     @IBAction func deleteSelectedArticles(_ sender: UIBarButtonItem) {
         if tableView.isEditing {
             if tableView.indexPathsForSelectedRows != nil {
@@ -75,6 +77,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var bottomToolbarLeftItem: UIBarButtonItem!
     @IBOutlet weak var bottomToolbarRightItem: UIBarButtonItem!
 
+    // 一括編集モードにする
     @IBAction func changeToEditMode(_ sender: UIBarButtonItem) {
         if tableView.isEditing {
             sender.title = NSLocalizedString("Edit", comment: "")
@@ -90,8 +93,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
 
     fileprivate let refreshCtl = UIRefreshControl()
-
     override func viewDidLoad() {
+        // TODO: リファクタリング
         super.viewDidLoad()
 
         bannerView?.adUnitID = "ca-app-pub-3503963096402837/1680525403"
@@ -124,6 +127,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     override func viewWillAppear(_ animated: Bool) {
 
+        // TODO: リファクタリング
         r = UserDefaults.standard.integer(forKey: "r")
         b = UserDefaults.standard.integer(forKey: "b")
         g = UserDefaults.standard.integer(forKey: "g")
@@ -189,6 +193,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     }
 
+    // フッターのボタンの表示切り替え
     func hiddenToolbarButtonEdit() {
         if self.articles.count == 0 {
             bottomToolbarRightItem.isEnabled = false
@@ -204,6 +209,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
 
+    // Called to notify the view controller that its view has just laid out its subviews.
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
@@ -211,6 +217,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         tableView.frame = CGRect(x: 0, y: 0, width: screenRect.width, height: screenRect.height)
     }
 
+    // TODO: リファクタリング
+    // ローカルに保存した記事を取得する
     @objc func getStoredDataFromUserDefault() {
         self.articles = []
         let sharedDefaults: UserDefaults = UserDefaults(suiteName: self.suiteName)!
@@ -264,6 +272,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
 
+    // セルの数の設定
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if searchController.isActive {
             //            return searchResults.count
@@ -276,6 +285,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
 
+    // セルの設定
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FeedTableViewCell", for: indexPath as IndexPath) as! FeedTableViewCell
         if searchController.isActive {
@@ -312,6 +322,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return cell
     }
 
+    // セルをタップしたときの処理
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if !tableView.isEditing {
             if searchController.isActive {
@@ -334,10 +345,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
 
+    // セルの高さを設定
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
 
+    // フッターの見た目を設定
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 40)) // assuming 40 height for footer.
         return footerView
@@ -408,6 +421,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
 
+    // 完全にスワイプすると記事を削除する
     func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeOptions {
         var options = SwipeOptions()
         options.expansionStyle = .destructive(automaticallyDelete: false)
@@ -429,6 +443,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         getStoredDataFromUserDefault()
     }
 
+    // TODO: リファクタリング
     // 記事をお気に入りに登録
     func favoriteCell(at indexPath: IndexPath) {
         let fetchRequest: NSFetchRequest<Article> = Article.fetchRequest()
@@ -464,6 +479,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         getStoredDataFromUserDefault()
     }
 
+    // TODO: リファクタリング
+    // 記事をフォルダに追加
     func addArticleToFolder(_ ArticleindexPathRow: Int, _ folderName: String) {
         var alreadyAdded: Bool
         let fetchRequest: NSFetchRequest<Article> = Article.fetchRequest()
@@ -527,14 +544,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
 
+    // tableViewの編集モードを切り替える
     override func setEditing(_ editing: Bool, animated: Bool) {
         tableView.allowsMultipleSelectionDuringEditing = true
         // override前の処理を継続してさせる
         super.setEditing(editing, animated: animated)
-        // tableViewの編集モードを切り替える
         tableView.isEditing = editing // editingはBool型でeditButtonに依存する変数
     }
 
+    
+    // Asks the object to update the search results for a specified controller.
     func updateSearchResults(for searchController: UISearchController) {
         let filteredArticles = self.articles.filter({ ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(folderInt) })
         self.searchResults = filteredArticles.filter {
@@ -543,7 +562,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         self.tableView.reloadData()
     }
-
+    
+    // 何のコードかわからない
     var viewControllerNameFrom: String = ""
     func viewControllerFrom(viewController: String) {
         viewControllerNameFrom = viewController
@@ -608,6 +628,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                                           previewProvider: previewProvider, actionProvider: actionProvider)
     }
 
+    // 使われてなさそう。デバッグ用？
+    // すべての記事を削除
     func deleteAllRecords() {
         let delegate = UIApplication.shared.delegate as! AppDelegate
         let context = delegate.persistentContainer.viewContext
