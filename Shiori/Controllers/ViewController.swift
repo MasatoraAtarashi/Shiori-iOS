@@ -65,14 +65,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // MARK: View Life-Cycle Methods
     fileprivate let refreshCtl = UIRefreshControl()
     override func viewDidLoad() {
-        // TODO: リファクタリング
         super.viewDidLoad()
-
-        bannerView?.adUnitID = "ca-app-pub-3503963096402837/1680525403"
-        bannerView?.rootViewController = self
-        bannerView?.load(GADRequest())
-        changeDisplayAdvertisement()
-
+        
+        // 広告
+        initAdvertisement()
+        
         self.tableView.register(UINib(nibName: "FeedTableViewCell", bundle: nil), forCellReuseIdentifier: "FeedTableViewCell")
 
         // Do any additional setup after loading the view.
@@ -81,16 +78,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // 起動時に言語を変更する
         changeViewLanguage()
 
-        tableView.refreshControl = refreshCtl
-        tableView.refreshControl?.addTarget(self, action: #selector(ViewController.getStoredDataFromUserDefault), for: .valueChanged)
-        tableView.refreshControl?.attributedTitle = NSAttributedString(string: NSLocalizedString("Pull to refresh", comment: ""))
+        // 記事を更新するときにクルクルするやつ
+        initRefreshController()
 
-        //        検索
-        searchController = UISearchController(searchResultsController: nil)
-        searchController.searchResultsUpdater = self
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.hidesNavigationBarDuringPresentation = false
-        self.navigationItem.searchController = searchController
+        // 検索
+        initSearchController()
         
         tutorialTextLabel.text = "記事を追加するのは簡単です。\n以下をタップして始めましょう。"
     }
@@ -411,6 +403,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     
     // MARK: Other Methods
+    // 広告
+    func initAdvertisement() {
+        bannerView?.adUnitID = "ca-app-pub-3503963096402837/1680525403"
+        bannerView?.rootViewController = self
+        bannerView?.load(GADRequest())
+        changeDisplayAdvertisement()
+    }
+    
     // 広告表示
     func changeDisplayAdvertisement() {
         if UserDefaults.standard.bool(forKey: "isAdvertisementOn") {
@@ -440,6 +440,22 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             }
         }
 
+    }
+    
+    // 記事を更新するときにクルクルするやつ
+    func initRefreshController() {
+        tableView.refreshControl = refreshCtl
+        tableView.refreshControl?.addTarget(self, action: #selector(ViewController.getStoredDataFromUserDefault), for: .valueChanged)
+        tableView.refreshControl?.attributedTitle = NSAttributedString(string: NSLocalizedString("Pull to refresh", comment: ""))
+    }
+    
+    // 検索
+    func initSearchController() {
+        searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.hidesNavigationBarDuringPresentation = false
+        self.navigationItem.searchController = searchController
     }
 
     // フッターのボタンの表示切り替え
