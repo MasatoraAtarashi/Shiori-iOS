@@ -6,8 +6,8 @@
 //  Copyright © 2019 Masatora Atarashi. All rights reserved.
 //
 
-import UIKit
 import SwipeCellKit
+import UIKit
 
 class FeedTableViewCell: SwipeTableViewCell {
 
@@ -22,7 +22,6 @@ class FeedTableViewCell: SwipeTableViewCell {
     @IBOutlet weak var subContent: UILabel!
     @IBOutlet weak var date: UILabel!
 
-    
     // MARK: Initializers
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -34,8 +33,7 @@ class FeedTableViewCell: SwipeTableViewCell {
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state
     }
-    
-    
+
     // MARK: Type Methods
     // MARK: View Life-Cycle Methods
     // MARK: IBActions
@@ -45,6 +43,6 @@ class FeedTableViewCell: SwipeTableViewCell {
         self.subContent.textColor = color
         self.date.textColor = color
     }
-    
+
     // MARK: Subscripts
 }

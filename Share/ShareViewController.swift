@@ -6,10 +6,10 @@
 //  Copyright © 2019 Masatora Atarashi. All rights reserved.
 //
 
-import UIKit
-import Social
-import MobileCoreServices
 import CoreData
+import MobileCoreServices
+import Social
+import UIKit
 
 class ShareViewController: SLComposeServiceViewController {
 
@@ -38,34 +38,51 @@ class ShareViewController: SLComposeServiceViewController {
             if let attachments = inputItem.attachments {
                 for itemProvider: NSItemProvider in attachments {
                     if itemProvider.hasItemConformingToTypeIdentifier("public.data") {
-                        itemProvider.loadItem(forTypeIdentifier: "public.data", options: nil, completionHandler: {
-                            (item, _) in
+                        itemProvider.loadItem(
+                            forTypeIdentifier: "public.data", options: nil,
+                            completionHandler: {
+                                (item, _) in
 
-                            if let dictionary = item as? NSDictionary {
-                                DispatchQueue.main.async(execute: { () -> Void in
-                                    let results = dictionary[NSExtensionJavaScriptPreprocessingResultsKey] as! NSDictionary
+                                if let dictionary = item as? NSDictionary {
+                                    DispatchQueue.main.async(execute: { () -> Void in
+                                        let results =
+                                            dictionary[NSExtensionJavaScriptPreprocessingResultsKey]
+                                            as! NSDictionary
 
-                                    let sharedDefaults: UserDefaults = UserDefaults(suiteName: self.suiteName)!
-                                    var storedArray: [[String: String]] = sharedDefaults.array(forKey: self.keyName) as? [[String: String]] ?? []
+                                        let sharedDefaults: UserDefaults = UserDefaults(
+                                            suiteName: self.suiteName)!
+                                        var storedArray: [[String: String]] =
+                                            sharedDefaults.array(forKey: self.keyName)
+                                            as? [[String: String]] ?? []
 
-                                    if results["url"] != nil {
-                                        let resultsDic = ["url": results["url"], "title": results["title"], "positionX": results["positionX"], "positionY": results["positionY"], "time": results["time"], "image": results["image"], "date": results["date"]]
+                                        if results["url"] != nil {
+                                            let resultsDic = [
+                                                "url": results["url"], "title": results["title"],
+                                                "positionX": results["positionX"],
+                                                "positionY": results["positionY"],
+                                                "time": results["time"], "image": results["image"],
+                                                "date": results["date"],
+                                            ]
 
-                                        storedArray.append(resultsDic as! [String: String])
-                                        sharedDefaults.set(storedArray, forKey: self.keyName)
+                                            storedArray.append(resultsDic as! [String: String])
+                                            sharedDefaults.set(storedArray, forKey: self.keyName)
 
-                                        self.extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
-                                    } else {
-                                        self.extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
-                                    }
-                                })
-                            } else {
-                                self.extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
-                            }
+                                            self.extensionContext?.completeRequest(
+                                                returningItems: nil, completionHandler: nil)
+                                        } else {
+                                            self.extensionContext?.completeRequest(
+                                                returningItems: nil, completionHandler: nil)
+                                        }
+                                    })
+                                } else {
+                                    self.extensionContext?.completeRequest(
+                                        returningItems: nil, completionHandler: nil)
+                                }
 
-                        })
+                            })
                     } else {
-                        self.extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
+                        self.extensionContext?.completeRequest(
+                            returningItems: nil, completionHandler: nil)
                     }
                 }
 

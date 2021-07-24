@@ -21,7 +21,6 @@ class SelectFolderTableViewController: UITableViewController {
     // MARK: IBOutlets
     @IBOutlet weak var navTitle: UINavigationItem!
 
-    
     // MARK: Initializers
     // MARK: Type Methods
     // MARK: View Life-Cycle Methods
@@ -33,7 +32,6 @@ class SelectFolderTableViewController: UITableViewController {
         self.navTitle.title = NSLocalizedString("Add to folder", comment: "")
     }
 
-    
     // MARK: IBActions
     @IBAction func cancel(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
@@ -46,9 +44,10 @@ class SelectFolderTableViewController: UITableViewController {
             message: NSLocalizedString("Use folders to organize your saved articles.", comment: ""),
             preferredStyle: UIAlertController.Style.alert)
         alert.addTextField(
-            configurationHandler: {(textField: UITextField!) in
+            configurationHandler: { (textField: UITextField!) in
                 alertTextField = textField
-                textField.placeholder = NSLocalizedString("Examples: recipes, politics ...", comment: "")
+                textField.placeholder = NSLocalizedString(
+                    "Examples: recipes, politics ...", comment: "")
             })
         alert.addAction(
             UIAlertAction(
@@ -58,7 +57,8 @@ class SelectFolderTableViewController: UITableViewController {
         alert.addAction(
             UIAlertAction(
                 title: "OK",
-                style: UIAlertAction.Style.default) { _ in
+                style: UIAlertAction.Style.default
+            ) { _ in
                 if let text = alertTextField?.text {
                     var categories = UserDefaults.standard.array(forKey: "categories")
                     categories?.append(text)
@@ -71,7 +71,6 @@ class SelectFolderTableViewController: UITableViewController {
         self.present(alert, animated: true, completion: nil)
     }
 
-    
     // MARK: Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
@@ -89,8 +88,11 @@ class SelectFolderTableViewController: UITableViewController {
         return count
     }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellForFolderSelection", for: indexPath)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath)
+        -> UITableViewCell
+    {
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: "cellForFolderSelection", for: indexPath)
 
         // Configure the cell...
         let categories = UserDefaults.standard.array(forKey: "categories")?.dropFirst(2)
@@ -111,11 +113,9 @@ class SelectFolderTableViewController: UITableViewController {
         preVC.addArticleToFolder(self.selectedIndexPath, categories[indexPath.row + 2])
         self.dismiss(animated: true, completion: nil)
     }
-    
-    
+
     // MARK: Other Methods
     // MARK: Subscripts
 }
-
 
 // MARK: Extensions

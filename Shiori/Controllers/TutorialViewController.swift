@@ -13,7 +13,7 @@ protocol TutorialDelegate {
 }
 
 class TutorialViewController: UIViewController {
-    
+
     // MARK: Type Aliases
     // MARK: Classes
     // MARK: Structs
@@ -25,13 +25,13 @@ class TutorialViewController: UIViewController {
     @IBOutlet weak var text1: UILabel!
     @IBOutlet weak var text2: UILabel!
 
-    
     // MARK: Initializers
     override func viewDidLoad() {
         super.viewDidLoad()
 
         text1.text = NSLocalizedString("Tap the 'Share' button on Mobile Safari", comment: "")
-        text2.text = NSLocalizedString("* If 'Shiori' is not displayed, turn on 'Shiori' from 'More'", comment: "")
+        text2.text = NSLocalizedString(
+            "* If 'Shiori' is not displayed, turn on 'Shiori' from 'More'", comment: "")
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -39,7 +39,8 @@ class TutorialViewController: UIViewController {
         let r = UserDefaults.standard.integer(forKey: "r")
         let b = UserDefaults.standard.integer(forKey: "b")
         let g = UserDefaults.standard.integer(forKey: "g")
-        let bgColor: UIColor = UIColor(red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: 1)
+        let bgColor: UIColor = UIColor(
+            red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: 1)
         self.view.backgroundColor = bgColor
         if r == 0 || r == 60 {
             text1.textColor = UIColor.white
@@ -55,14 +56,12 @@ class TutorialViewController: UIViewController {
         let viewControllerName = "TutorialViewController"
         delegate?.viewControllerFrom(viewController: viewControllerName)
     }
-    
-    
+
     // MARK: Type Methods
     // MARK: View Life-Cycle Methods
     // MARK: IBActions
     // MARK: Other Methods
     // MARK: Subscripts
 }
-
 
 // MARK: Extensions

@@ -15,10 +15,11 @@ class SupportedServicesViewController: UITableViewController {
     // MARK: Structs
     // MARK: Enums
     // MARK: Properties
-    let services = ["Youtube", "nicovideo(ニコニコ動画)", "Ted.com", "Dailymotion", "pornhub", "redtube", "tube8"]
+    let services = [
+        "Youtube", "nicovideo(ニコニコ動画)", "Ted.com", "Dailymotion", "pornhub", "redtube", "tube8",
+    ]
     let sectionTitles = [NSLocalizedString("Supported video sites", comment: "")]
 
-    
     // MARK: IBOutlets
     // MARK: Initializers
     // MARK: Type Methods
@@ -30,7 +31,6 @@ class SupportedServicesViewController: UITableViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
 
     // MARK: IBActions
     // MARK: Table view data source
@@ -38,7 +38,9 @@ class SupportedServicesViewController: UITableViewController {
         return 1
     }
 
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int)
+        -> String?
+    {
         return sectionTitles[section]
     }
 
@@ -47,15 +49,17 @@ class SupportedServicesViewController: UITableViewController {
     }
 
     // 追加④ セルに値を設定するデータソースメソッド（必須）
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath)
+        -> UITableViewCell
+    {
         // セルを取得する
-        let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let cell: UITableViewCell = tableView.dequeueReusableCell(
+            withIdentifier: "cell", for: indexPath)
         // セルに表示する値を設定する
         cell.textLabel!.text = services[indexPath.row]
         return cell
     }
-    
-    
+
     // MARK: Other Methods
     // MARK: Subscripts
 }

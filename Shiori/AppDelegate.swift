@@ -6,26 +6,34 @@
 //  Copyright © 2019 Masatora Atarashi. All rights reserved.
 //
 
-import UIKit
 import CoreData
-import StoreKit
 import Firebase
 import GoogleMobileAds
+import StoreKit
+import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    func application(
+        _ application: UIApplication,
+        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
+    ) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
         GADMobileAds.sharedInstance().start()
 
         // UserDefaults
-        UserDefaults.standard.register(defaults: ["isAdvertisementOn": true, "launchCount": 0, "categories": [NSLocalizedString("Home", comment: ""), NSLocalizedString("Liked", comment: "")], "r": 255, "g": 255, "b": 255])
+        UserDefaults.standard.register(defaults: [
+            "isAdvertisementOn": true, "launchCount": 0,
+            "categories": [
+                NSLocalizedString("Home", comment: ""), NSLocalizedString("Liked", comment: ""),
+            ], "r": 255, "g": 255, "b": 255,
+        ])
         let currentCount = UserDefaults.standard.integer(forKey: "launchCount")
-        UserDefaults.standard.set(currentCount+1, forKey: "launchCount")
+        UserDefaults.standard.set(currentCount + 1, forKey: "launchCount")
         if [3, 10].contains(UserDefaults.standard.integer(forKey: "launchCount")) {
             SKStoreReviewController.requestReview()
         }
@@ -88,7 +96,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // MARK: - Core Data Saving support
 
-    func saveContext () {
+    func saveContext() {
         let context = persistentContainer.viewContext
         if context.hasChanges {
             do {

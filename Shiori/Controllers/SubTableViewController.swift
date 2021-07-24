@@ -5,11 +5,11 @@
 //  Created by あたらしまさとら on 2020/05/05.
 //
 
-import UIKit
 import SwipeCellKit
+import UIKit
 
 class SubTableViewController: UITableViewController, SwipeTableViewCellDelegate {
-    
+
     // MARK: Type Aliases
     // MARK: Classes
     // MARK: Structs
@@ -18,8 +18,7 @@ class SubTableViewController: UITableViewController, SwipeTableViewCellDelegate 
     var r: Int = UserDefaults.standard.integer(forKey: "r")
     var b: Int = UserDefaults.standard.integer(forKey: "r")
     var g: Int = UserDefaults.standard.integer(forKey: "r")
-    
-    
+
     // MARK: IBOutlets
     // MARK: Initializers
     // MARK: Type Methods
@@ -38,7 +37,8 @@ class SubTableViewController: UITableViewController, SwipeTableViewCellDelegate 
         r = UserDefaults.standard.integer(forKey: "r")
         b = UserDefaults.standard.integer(forKey: "b")
         g = UserDefaults.standard.integer(forKey: "g")
-        let bgColor: UIColor = UIColor(red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: 1)
+        let bgColor: UIColor = UIColor(
+            red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: 1)
         self.view.backgroundColor = bgColor
         self.tableView.backgroundColor = bgColor
         //        footer color
@@ -46,8 +46,7 @@ class SubTableViewController: UITableViewController, SwipeTableViewCellDelegate 
         //        header color
         self.navigationController?.navigationBar.barTintColor = bgColor
     }
-    
-    
+
     // MARK: IBActions
     // MARK: SwipeTableViewCellDelegate
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -60,12 +59,16 @@ class SubTableViewController: UITableViewController, SwipeTableViewCellDelegate 
         return UserDefaults.standard.array(forKey: "categories")?.count ?? 2
     }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let bgColor: UIColor = UIColor(red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: 1)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath)
+        -> UITableViewCell
+    {
+        let bgColor: UIColor = UIColor(
+            red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: 1)
         if indexPath.row == 0 || indexPath.row == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellForSub", for: indexPath)
             // Configure the cell...
-            cell.textLabel!.text = UserDefaults.standard.array(forKey: "categories")![indexPath.row] as? String
+            cell.textLabel!.text =
+                UserDefaults.standard.array(forKey: "categories")![indexPath.row] as? String
 
             cell.backgroundColor = bgColor
             if r == 0 || r == 60 {
@@ -76,10 +79,13 @@ class SubTableViewController: UITableViewController, SwipeTableViewCellDelegate 
 
             return cell
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cellForSub", for: indexPath) as! SwipeTableViewCell
+            let cell =
+                tableView.dequeueReusableCell(withIdentifier: "cellForSub", for: indexPath)
+                as! SwipeTableViewCell
             cell.delegate = self
             // Configure the cell...
-            cell.textLabel!.text = UserDefaults.standard.array(forKey: "categories")![indexPath.row] as? String
+            cell.textLabel!.text =
+                UserDefaults.standard.array(forKey: "categories")![indexPath.row] as? String
 
             cell.backgroundColor = bgColor
             if r == 0 || r == 60 {
@@ -95,29 +101,37 @@ class SubTableViewController: UITableViewController, SwipeTableViewCellDelegate 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let preNC = self.navigationController?.presentingViewController as! UINavigationController
         let preVC = preNC.viewControllers[preNC.viewControllers.count - 1] as! ViewController
-        preVC.folderInt = UserDefaults.standard.array(forKey: "categories")?[indexPath.row] as! String
+        preVC.folderInt =
+            UserDefaults.standard.array(forKey: "categories")?[indexPath.row] as! String
         self.dismiss(animated: true, completion: nil)
     }
 
-    func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeOptions {
+    func tableView(
+        _ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath,
+        for orientation: SwipeActionsOrientation
+    ) -> SwipeOptions {
         var options = SwipeOptions()
         options.expansionStyle = .destructive(automaticallyDelete: false)
         return options
     }
 
     // swipeしたときの処理
-    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
+    func tableView(
+        _ tableView: UITableView, editActionsForRowAt indexPath: IndexPath,
+        for orientation: SwipeActionsOrientation
+    ) -> [SwipeAction]? {
 
         guard orientation == .right else { return nil }
 
-        let deleteAction = SwipeAction(style: .destructive, title: NSLocalizedString("Delete", comment: "")) { _, indexPath in
+        let deleteAction = SwipeAction(
+            style: .destructive, title: NSLocalizedString("Delete", comment: "")
+        ) { _, indexPath in
             self.deleteFolder(at: indexPath)
         }
         deleteAction.image = UIImage(systemName: "trash.fill")
         return [deleteAction]
     }
-    
-    
+
     // MARK: Other Methods
     // フォルダ(カテゴリー)を削除する
     func deleteFolder(at indexPath: IndexPath) {
@@ -137,9 +151,10 @@ class SubTableViewController: UITableViewController, SwipeTableViewCellDelegate 
             message: NSLocalizedString("Use folders to organize your saved articles.", comment: ""),
             preferredStyle: UIAlertController.Style.alert)
         alert.addTextField(
-            configurationHandler: {(textField: UITextField!) in
+            configurationHandler: { (textField: UITextField!) in
                 alertTextField = textField
-                textField.placeholder = NSLocalizedString("Examples: recipes, politics ...", comment: "")
+                textField.placeholder = NSLocalizedString(
+                    "Examples: recipes, politics ...", comment: "")
             })
         alert.addAction(
             UIAlertAction(
@@ -149,7 +164,8 @@ class SubTableViewController: UITableViewController, SwipeTableViewCellDelegate 
         alert.addAction(
             UIAlertAction(
                 title: "OK",
-                style: UIAlertAction.Style.default) { _ in
+                style: UIAlertAction.Style.default
+            ) { _ in
                 if let text = alertTextField?.text {
                     var categories = UserDefaults.standard.array(forKey: "categories")
                     categories?.append(text)
@@ -162,7 +178,6 @@ class SubTableViewController: UITableViewController, SwipeTableViewCellDelegate 
         self.present(alert, animated: true, completion: nil)
     }
 
-    
     // MARK: Subscripts
 }
 
