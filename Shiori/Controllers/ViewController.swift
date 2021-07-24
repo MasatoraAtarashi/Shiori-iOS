@@ -319,7 +319,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let actionProvider: ([UIMenuElement]) -> UIMenu? = { _ in
             let share = UIAction(title: "共有", image: UIImage(systemName: "square.and.arrow.up")) { _ in
                 var shareText: String
-                var shareURL: NSURL
                 var shareWebsite: NSURL
                 if self.searchController.isActive {
                     let filteredArticles = self.searchResults.filter({ ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(self.folderInt) })
