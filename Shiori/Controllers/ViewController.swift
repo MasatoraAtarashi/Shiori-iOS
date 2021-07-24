@@ -242,7 +242,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             //            let favoriteAction = SwipeAction(style: .default, title: NSLocalizedString("Liked", comment: "")) { action, indexPath in
             //                self.favoriteCell(at: indexPath)
             //            }
-            let fetchRequest: NSFetchRequest<Article> = Article.fetchRequest()
+            let _: NSFetchRequest<Article> = Article.fetchRequest()
             
             var filteredArticles: [Article]
             if searchController.isActive {
@@ -269,7 +269,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 let vc = storyboard.instantiateViewController(withIdentifier: "myVCID") as! UINavigationController
                 let selectFolderTableViewController = vc.viewControllers.first as! SelectFolderTableViewController
                 selectFolderTableViewController.selectedIndexPath = indexPath.row
-                let fetchRequest: NSFetchRequest<Article> = Article.fetchRequest()
+                let _: NSFetchRequest<Article> = Article.fetchRequest()
                 
                 var filteredArticles: [Article]
                 if self.searchController.isActive {
@@ -532,7 +532,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // TODO: リファクタリング
     // 記事をお気に入りに登録
     func favoriteCell(at indexPath: IndexPath) {
-        let fetchRequest: NSFetchRequest<Article> = Article.fetchRequest()
+        let _: NSFetchRequest<Article> = Article.fetchRequest()
 
         if searchController.isActive {
 
@@ -569,7 +569,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // 記事をフォルダに追加
     func addArticleToFolder(_ ArticleindexPathRow: Int, _ folderName: String) {
         var alreadyAdded: Bool
-        let fetchRequest: NSFetchRequest<Article> = Article.fetchRequest()
+        let _: NSFetchRequest<Article> = Article.fetchRequest()
 
         if searchController.isActive {
 
@@ -664,7 +664,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // cellを削除する
     func deleteCell(at indexPath: IndexPath) {
         let readContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        let fetchRequest: NSFetchRequest<Article> = Article.fetchRequest()
+        let _: NSFetchRequest<Article> = Article.fetchRequest()
         if searchController.isActive {
             let filteredArticles = self.searchResults.filter({ ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(folderInt) })
             readContext.delete(filteredArticles[indexPath.row])
