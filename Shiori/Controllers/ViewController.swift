@@ -341,7 +341,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 let activityItems = [shareText, shareWebsite] as [Any]
 
                 // 初期化処理
-                let activityVC = UIActivityViewController(activityItems: activityItems, applicationActivities: [CustomActivity(title: shareText ?? "", url: shareWebsite as URL)])
+                let activityVC = UIActivityViewController(activityItems: activityItems, applicationActivities: [CustomActivity(title: shareText , url: shareWebsite as URL)])
 
                 // UIActivityViewControllerを表示
                 self.present(activityVC, animated: true, completion: nil)
