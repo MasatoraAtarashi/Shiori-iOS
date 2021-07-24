@@ -15,7 +15,7 @@ import SwiftMessages
 import GoogleMobileAds
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SwipeTableViewCellDelegate, UISearchBarDelegate, UISearchResultsUpdating, TutorialDelegate {
-
+    
     // MARK: Type Aliases
     // MARK: Classes
     // MARK: Structs
@@ -28,10 +28,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var link: String = ""
     var positionX: Int = 0
     var positionY: Int = 0
-
+    
     var articles: [Article] = []
     var searchResults: [Article] = []
-
+    
     var searchController = UISearchController()
     
     // フォルダ
@@ -40,22 +40,22 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var r: Int = UserDefaults.standard.integer(forKey: "r")
     var g: Int = UserDefaults.standard.integer(forKey: "g")
     var b: Int = UserDefaults.standard.integer(forKey: "b")
-
+    
     
     // MARK: IBOutlets
     @IBOutlet weak var tutorialTextLabel: UILabel!
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet var bannerView: GADBannerView?
-
+    
     @IBOutlet weak var text: UILabel!
     @IBOutlet weak var text2: UILabel!
     
     @IBOutlet weak var button: UIButton!
-
+    
     @IBOutlet weak var footerText1: UIBarButtonItem!
     @IBOutlet weak var footerText2: UIBarButtonItem!
-
+    
     @IBOutlet weak var bottomToolbarLeftItem: UIBarButtonItem!
     @IBOutlet weak var bottomToolbarRightItem: UIBarButtonItem!
     
@@ -79,7 +79,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         initSearchController()
         tutorialTextLabel.text = "記事を追加するのは簡単です。\n以下をタップして始めましょう。"
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         // 背景色を設定
         changeBackgroundColor()
@@ -92,7 +92,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // Called to notify the view controller that its view has just laid out its subviews.
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-
+        
         let screenRect = UIScreen.main.bounds
         tableView.frame = CGRect(x: 0, y: 0, width: screenRect.width, height: screenRect.height)
     }
@@ -103,12 +103,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBAction func goToTutorialPage(_ sender: Any) {
         performSegue(withIdentifier: "TutorialSegue", sender: nil)
     }
-
+    
     // 設定画面に遷移
     @IBAction func goToSettingPage(_ sender: Any) {
         performSegue(withIdentifier: "SettingSegue", sender: nil)
     }
-
+    
     // 一括編集モードで選択した記事を削除する
     @IBAction func deleteSelectedArticles(_ sender: UIBarButtonItem) {
         if tableView.isEditing {
@@ -123,7 +123,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             }
         }
     }
-
+    
     // 一括編集モードにする
     @IBAction func changeToEditMode(_ sender: UIBarButtonItem) {
         if tableView.isEditing {
@@ -152,7 +152,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             return filteredArticles.count
         }
     }
-
+    
     // セルの設定
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FeedTableViewCell", for: indexPath as IndexPath) as! FeedTableViewCell
@@ -189,7 +189,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         return cell
     }
-
+    
     // セルをタップしたときの処理
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if !tableView.isEditing {
@@ -212,23 +212,23 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             }
         }
     }
-
+    
     // セルの高さを設定
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
-
+    
     // フッターの見た目を設定
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 40)) // assuming 40 height for footer.
         return footerView
     }
-
+    
     // set height for footer
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 50
     }
-
+    
     // swipeしたときの処理
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
         if orientation == .right {
@@ -236,7 +236,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 self.deleteCell(at: indexPath)
             }
             deleteAction.image = UIImage(systemName: "trash.fill")
-
+            
             // お気に入り
             var favoriteAction: SwipeAction
             //            let favoriteAction = SwipeAction(style: .default, title: NSLocalizedString("Liked", comment: "")) { action, indexPath in
@@ -250,7 +250,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             } else {
                 filteredArticles = self.articles.filter({ ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(folderInt) })
             }
-
+            
             if filteredArticles[indexPath.row].folderInt?.contains(NSLocalizedString("Liked", comment: "")) ?? false {
                 favoriteAction = SwipeAction(style: .default, title: NSLocalizedString("Cancel", comment: "")) { _, indexPath in
                     self.favoriteCell(at: indexPath)
@@ -263,7 +263,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 favoriteAction.image = UIImage(systemName: "heart")
             }
             favoriteAction.backgroundColor = UIColor.init(red: 255/255, green: 165/255, blue: 0/255, alpha: 1)
-
+            
             let folderAction = SwipeAction(style: .default, title: NSLocalizedString("Add", comment: "")) { _, indexPath in
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let vc = storyboard.instantiateViewController(withIdentifier: "myVCID") as! UINavigationController
@@ -282,13 +282,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             }
             folderAction.image = UIImage(systemName: "folder.fill")
             folderAction.backgroundColor = UIColor.init(red: 176/255, green: 196/255, blue: 222/255, alpha: 1)
-
+            
             return [deleteAction, favoriteAction, folderAction]
         } else {
             return []
         }
     }
-
+    
     // 完全にスワイプすると記事を削除する
     func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeOptions {
         var options = SwipeOptions()
@@ -299,7 +299,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     //    長押し
     @available(iOS 13.0, *)
     func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
-
+        
         let previewProvider: () -> WebViewController? = { [unowned self] in
             let webViewController = WebViewController()
             if self.searchController.isActive {
@@ -315,7 +315,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             }
             return webViewController
         }
-
+        
         let actionProvider: ([UIMenuElement]) -> UIMenu? = { _ in
             let share = UIAction(title: "共有", image: UIImage(systemName: "square.and.arrow.up")) { _ in
                 var shareText: String
@@ -337,19 +337,19 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                         return
                     }
                 }
-
+                
                 let activityItems = [shareText, shareWebsite] as [Any]
-
+                
                 // 初期化処理
                 let activityVC = UIActivityViewController(activityItems: activityItems, applicationActivities: [CustomActivity(title: shareText , url: shareWebsite as URL)])
-
+                
                 // UIActivityViewControllerを表示
                 self.present(activityVC, animated: true, completion: nil)
             }
-
+            
             return UIMenu(title: "Edit..", image: nil, identifier: nil, children: [share])
         }
-
+        
         return UIContextMenuConfiguration(identifier: nil,
                                           previewProvider: previewProvider, actionProvider: actionProvider)
     }
@@ -404,7 +404,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 bannerView!.removeFromSuperview()
             }
         }
-
+        
     }
     
     // 記事を更新するときにクルクルするやつ
@@ -434,11 +434,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.navigationController?.toolbar.barTintColor = bgColor
         //        header color
         self.navigationController?.navigationBar.barTintColor = bgColor
-
+        
         //        背景
         tableView.backgroundColor = bgColor
         tableView.reloadData()
-
+        
         if r == 0 || r == 60 {
             self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont(name: "Baskerville-Bold", size: 22)!]
             text.textColor = UIColor.white
@@ -455,7 +455,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             footerText2.tintColor = UIColor.black
         }
     }
-
+    
     // フッターのボタンの表示切り替え
     func hiddenToolbarButtonEdit() {
         if self.articles.count == 0 {
@@ -471,16 +471,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             }
         }
     }
-
+    
     // TODO: リファクタリング
     // ローカルに保存した記事を取得する
     @objc func getStoredDataFromUserDefault() {
         self.articles = []
         let sharedDefaults: UserDefaults = UserDefaults(suiteName: self.suiteName)!
         let storedArray: [[String: String]] = sharedDefaults.array(forKey: self.keyName) as? [[String: String]] ?? []
-
+        
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-
+        
         for result in storedArray {
             let article = Article(context: context)
             article.title = result["title"]!
@@ -491,9 +491,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             article.date = result["date"]!
             (UIApplication.shared.delegate as! AppDelegate).saveContext()
         }
-
+        
         sharedDefaults.set([], forKey: self.keyName)
-
+        
         let readContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         do {
             let fetchRequest: NSFetchRequest<Article> = Article.fetchRequest()
@@ -501,12 +501,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         } catch {
             print("Error")
         }
-
+        
         articles.reverse()
         tableView.reloadData()
         self.tableView.refreshControl?.endRefreshing()
         hiddenToolbarButtonEdit()
-
+        
         if articles.count == 0 {
             self.view.bringSubviewToFront(text)
             self.view.bringSubviewToFront(text2)
@@ -526,34 +526,34 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             button.isEnabled = false
         }
     }
-
+    
     
     // TODO: リファクタリング
     // 記事をお気に入りに登録
     func favoriteCell(at indexPath: IndexPath) {
         let _: NSFetchRequest<Article> = Article.fetchRequest()
-
+        
         if searchController.isActive {
-
+            
             let filteredArticles = self.searchResults.filter({ ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(folderInt) })
-
+            
             if filteredArticles[indexPath.row].folderInt == nil {
                 filteredArticles[indexPath.row].folderInt = [NSLocalizedString("Home", comment: "")]
             }
-
+            
             if filteredArticles[indexPath.row].folderInt!.contains(NSLocalizedString("Liked", comment: "")) {
                 filteredArticles[indexPath.row].folderInt?.remove(at: filteredArticles[indexPath.row].folderInt!.firstIndex(of: NSLocalizedString("Liked", comment: ""))!)
             } else {
                 filteredArticles[indexPath.row].folderInt?.append(NSLocalizedString("Liked", comment: ""))
             }
         } else {
-
+            
             let filteredArticles = self.articles.filter({ ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(folderInt) })
-
+            
             if filteredArticles[indexPath.row].folderInt == nil {
                 filteredArticles[indexPath.row].folderInt = [NSLocalizedString("Home", comment: "")]
             }
-
+            
             if filteredArticles[indexPath.row].folderInt!.contains(NSLocalizedString("Liked", comment: "")) {
                 filteredArticles[indexPath.row].folderInt!.remove(at: filteredArticles[indexPath.row].folderInt!.firstIndex(of: NSLocalizedString("Liked", comment: ""))!)
             } else {
@@ -563,21 +563,21 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
         getStoredDataFromUserDefault()
     }
-
+    
     // TODO: リファクタリング
     // 記事をフォルダに追加
     func addArticleToFolder(_ ArticleindexPathRow: Int, _ folderName: String) {
         var alreadyAdded: Bool
         let _: NSFetchRequest<Article> = Article.fetchRequest()
-
+        
         if searchController.isActive {
-
+            
             let filteredArticles = self.searchResults.filter({ ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(folderInt) })
-
+            
             if filteredArticles[ArticleindexPathRow].folderInt == nil {
                 filteredArticles[ArticleindexPathRow].folderInt = [NSLocalizedString("Home", comment: "")]
             }
-
+            
             if filteredArticles[ArticleindexPathRow].folderInt!.contains(folderName) {
                 filteredArticles[ArticleindexPathRow].folderInt?.remove(at: filteredArticles[ArticleindexPathRow].folderInt!.firstIndex(of: folderName)!)
                 alreadyAdded = true
@@ -586,13 +586,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 alreadyAdded = false
             }
         } else {
-
+            
             let filteredArticles = self.articles.filter({ ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(folderInt) })
-
+            
             if filteredArticles[ArticleindexPathRow].folderInt == nil {
                 filteredArticles[ArticleindexPathRow].folderInt = [NSLocalizedString("Home", comment: "")]
             }
-
+            
             if filteredArticles[ArticleindexPathRow].folderInt!.contains(folderName) {
                 filteredArticles[ArticleindexPathRow].folderInt!.remove(at: filteredArticles[ArticleindexPathRow].folderInt!.firstIndex(of: folderName)!)
                 alreadyAdded = true
@@ -605,7 +605,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         getStoredDataFromUserDefault()
         showPopUp(alreadyAdded)
     }
-
+    
     // ポップアップを表示
     func showPopUp(_ alreadyAdded: Bool) {
         if alreadyAdded {
@@ -628,7 +628,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             SwiftMessages.show(config: successConfig, view: success)
         }
     }
-
+    
     // tableViewの編集モードを切り替える
     override func setEditing(_ editing: Bool, animated: Bool) {
         tableView.allowsMultipleSelectionDuringEditing = true
@@ -642,16 +642,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func viewControllerFrom(viewController: String) {
         viewControllerNameFrom = viewController
     }
-
+    
     // 使われてなさそう。デバッグ用？
     // すべての記事を削除
     func deleteAllRecords() {
         let delegate = UIApplication.shared.delegate as! AppDelegate
         let context = delegate.persistentContainer.viewContext
-
+        
         let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Article")
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: deleteFetch)
-
+        
         do {
             try context.execute(deleteRequest)
             try context.save()
@@ -674,7 +674,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
         getStoredDataFromUserDefault()
     }
-
+    
     // 言語変更
     func changeViewLanguage() {
         // なんもないときのやつ
@@ -683,7 +683,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         button.setTitle(NSLocalizedString("Learn how to save", comment: ""), for: UIControl.State())
         button.sizeToFit()
         button.layer.cornerRadius = 10.0
-
+        
         // フッターのボタン
         if tableView.isEditing {
             bottomToolbarRightItem.title = NSLocalizedString("Done", comment: "")
@@ -705,7 +705,7 @@ extension ViewController {
         var machine = [CChar](repeating: 0, count: Int(size))
         sysctlbyname("hw.machine", &machine, &size, nil, 0)
         let code: String = String(cString: machine)
-
+        
         let deviceCodeDic: [String: String] = [
             /* Simulator */
             "i386": "Simulator",
@@ -750,7 +750,7 @@ extension ViewController {
             "iPhone11,2": "iPhone XS",                 // iPhone XS A2097,A2098
             "iPhone11,4": "iPhone XS Max",             // iPhone XS Max A1921,A2103
             "iPhone11,6": "iPhone XS Max",             // iPhone XS Max A2104
-
+            
             /* iPad */
             "iPad1,1": "iPad 1 ",                     // iPad 1
             "iPad2,1": "iPad 2 WiFi",                 // iPad 2
@@ -804,7 +804,7 @@ extension ViewController {
             "iPad11,3": "iPad Air 3rd WiFi",           // iPad Air 3rd generation WiFi
             "iPad11,4": "iPad Air 3rd Cell"            // iPad Air 3rd generation Cellular
         ]
-
+        
         if let deviceName = deviceCodeDic[code] {
             return deviceName
         } else {
