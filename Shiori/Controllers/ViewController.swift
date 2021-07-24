@@ -66,60 +66,26 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     fileprivate let refreshCtl = UIRefreshControl()
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // 広告
         initAdvertisement()
-        
         self.tableView.register(UINib(nibName: "FeedTableViewCell", bundle: nil), forCellReuseIdentifier: "FeedTableViewCell")
-
         // Do any additional setup after loading the view.
         getStoredDataFromUserDefault()
-
         // 起動時に言語を変更する
         changeViewLanguage()
-
         // 記事を更新するときにクルクルするやつ
         initRefreshController()
-
         // 検索
         initSearchController()
-        
         tutorialTextLabel.text = "記事を追加するのは簡単です。\n以下をタップして始めましょう。"
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        // TODO: リファクタリング
-        r = UserDefaults.standard.integer(forKey: "r")
-        b = UserDefaults.standard.integer(forKey: "b")
-        g = UserDefaults.standard.integer(forKey: "g")
-        var bgColor: UIColor = UIColor(red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: 1)
-        self.navigationController?.setToolbarHidden(false, animated: true)
-        //        footer color
-        self.navigationController?.toolbar.barTintColor = bgColor
-        //        header color
-        self.navigationController?.navigationBar.barTintColor = bgColor
-
-        //        背景
-        tableView.backgroundColor = bgColor
-        tableView.reloadData()
-
-        if r == 0 || r == 60 {
-            self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont(name: "Baskerville-Bold", size: 22)!]
-            text.textColor = UIColor.white
-            text2.textColor = UIColor.white
-            //            フッターの文字の色
-            footerText1.tintColor = UIColor.white
-            footerText2.tintColor = UIColor.white
-        } else {
-            self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont(name: "Baskerville-Bold", size: 22)!]
-            text.textColor = UIColor.black
-            text2.textColor = UIColor.black
-            //            フッターの文字の色
-            footerText1.tintColor = UIColor.black
-            footerText2.tintColor = UIColor.black
-        }
-
+        // 背景色を設定
+        changeBackgroundColor()
+        // 広告表示
         changeDisplayAdvertisement()
+        // フッターのボタンの表示切り替え
         hiddenToolbarButtonEdit()
     }
     
@@ -456,6 +422,39 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.hidesNavigationBarDuringPresentation = false
         self.navigationItem.searchController = searchController
+    }
+    
+    // 背景色を設定
+    func changeBackgroundColor() {
+        r = UserDefaults.standard.integer(forKey: "r")
+        b = UserDefaults.standard.integer(forKey: "b")
+        g = UserDefaults.standard.integer(forKey: "g")
+        var bgColor: UIColor = UIColor(red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: 1)
+        self.navigationController?.setToolbarHidden(false, animated: true)
+        //        footer color
+        self.navigationController?.toolbar.barTintColor = bgColor
+        //        header color
+        self.navigationController?.navigationBar.barTintColor = bgColor
+
+        //        背景
+        tableView.backgroundColor = bgColor
+        tableView.reloadData()
+
+        if r == 0 || r == 60 {
+            self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont(name: "Baskerville-Bold", size: 22)!]
+            text.textColor = UIColor.white
+            text2.textColor = UIColor.white
+            //            フッターの文字の色
+            footerText1.tintColor = UIColor.white
+            footerText2.tintColor = UIColor.white
+        } else {
+            self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont(name: "Baskerville-Bold", size: 22)!]
+            text.textColor = UIColor.black
+            text2.textColor = UIColor.black
+            //            フッターの文字の色
+            footerText1.tintColor = UIColor.black
+            footerText2.tintColor = UIColor.black
+        }
     }
 
     // フッターのボタンの表示切り替え
