@@ -84,12 +84,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             sender.title = NSLocalizedString("Done", comment: "")
             
             bottomToolbarLeftItem.isEnabled = true
-            if #available(iOS 13.0, *) {
-                bottomToolbarLeftItem.image = UIImage(systemName: "trash")
-            } else {
-                // Fallback on earlier versions
-                bottomToolbarLeftItem.title = NSLocalizedString("Delete", comment: "")
-            }
+            bottomToolbarLeftItem.image = UIImage(systemName: "trash")
             setEditing(true, animated: true)
         }
     }
@@ -362,13 +357,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             let deleteAction = SwipeAction(style: .destructive, title: NSLocalizedString("Delete", comment: "")) { _, indexPath in
                 self.deleteCell(at: indexPath)
             }
-
-            // customize the action appearance
-            if #available(iOS 13.0, *) {
-                deleteAction.image = UIImage(systemName: "trash.fill")
-            } else {
-                // Fallback on earlier versions
-            }
+            deleteAction.image = UIImage(systemName: "trash.fill")
 
             // お気に入り
             var favoriteAction: SwipeAction
@@ -388,22 +377,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 favoriteAction = SwipeAction(style: .default, title: NSLocalizedString("Cancel", comment: "")) { _, indexPath in
                     self.favoriteCell(at: indexPath)
                 }
-
-                if #available(iOS 13.0, *) {
-                    favoriteAction.image = UIImage(systemName: "heart.fill")
-                } else {
-                    // Fallback on earlier versions
-                }
+                favoriteAction.image = UIImage(systemName: "heart.fill")
             } else {
                 favoriteAction = SwipeAction(style: .default, title: NSLocalizedString("Liked", comment: "")) { _, indexPath in
                     self.favoriteCell(at: indexPath)
                 }
-
-                if #available(iOS 13.0, *) {
-                    favoriteAction.image = UIImage(systemName: "heart")
-                } else {
-                    // Fallback on earlier versions
-                }
+                favoriteAction.image = UIImage(systemName: "heart")
             }
             favoriteAction.backgroundColor = UIColor.init(red: 255/255, green: 165/255, blue: 0/255, alpha: 1)
 
@@ -423,12 +402,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 selectFolderTableViewController.articles = filteredArticles
                 self.present(vc, animated: true)
             }
-            // customize the action appearance
-            if #available(iOS 13.0, *) {
-                folderAction.image = UIImage(systemName: "folder.fill")
-            } else {
-                // Fallback on earlier versions
-            }
+            folderAction.image = UIImage(systemName: "folder.fill")
             folderAction.backgroundColor = UIColor.init(red: 176/255, green: 196/255, blue: 222/255, alpha: 1)
 
             return [deleteAction, favoriteAction, folderAction]

@@ -106,12 +106,7 @@ class SubTableViewController: UITableViewController, SwipeTableViewCellDelegate 
         let deleteAction = SwipeAction(style: .destructive, title: NSLocalizedString("Delete", comment: "")) { _, indexPath in
             self.deleteFolder(at: indexPath)
         }
-        // customize the action appearance
-        if #available(iOS 13.0, *) {
-            deleteAction.image = UIImage(systemName: "trash.fill")
-        } else {
-            // Fallback on earlier versions
-        }
+        deleteAction.image = UIImage(systemName: "trash.fill")
         return [deleteAction]
     }
 
