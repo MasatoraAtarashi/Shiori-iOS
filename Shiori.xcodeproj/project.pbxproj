@@ -262,10 +262,10 @@
 		6268C3E42334EAEF00E86ECC /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				6268C3E52334EC2800E86ECC /* ks_safari_activity_icon.png */,
 				6226B08A24611DB400A5E541 /* garbage.png */,
 				6226B0882461172100A5E541 /* delete.png */,
 				6280BC08242399FA00EEDB3C /* settings.png */,
-				6268C3E52334EC2800E86ECC /* ks_safari_activity_icon.png */,
 				624FE69D233228A2004E271B /* IMG_3203.jpg */,
 				624FE69E233228A2004E271B /* IMG_3205.jpg */,
 			);
