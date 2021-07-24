@@ -446,8 +446,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             } else {
                 filteredArticles[indexPath.row].folderInt?.append(NSLocalizedString("Liked", comment: ""))
             }
-            print(filteredArticles[indexPath.row].folderInt!)
-            print(filteredArticles[indexPath.row].title!)
         } else {
 
             let filteredArticles = self.articles.filter({ ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(folderInt) })
@@ -461,8 +459,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             } else {
                 filteredArticles[indexPath.row].folderInt!.append(NSLocalizedString("Liked", comment: ""))
             }
-            //            print(filteredArticles[indexPath.row].folderInt!)
-            //            print(filteredArticles[indexPath.row].title!)
         }
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
         getStoredDataFromUserDefault()

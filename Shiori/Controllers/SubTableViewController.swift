@@ -83,9 +83,6 @@ class SubTableViewController: UITableViewController, SwipeTableViewCellDelegate 
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //        print(indexPath.row)
-        //        print(self.navigationController)
-        //        print(self.navigationController?.presentingViewController)
         let preNC = self.navigationController?.presentingViewController as! UINavigationController
         let preVC = preNC.viewControllers[preNC.viewControllers.count - 1] as! ViewController
         preVC.folderInt = UserDefaults.standard.array(forKey: "categories")?[indexPath.row] as! String
@@ -112,7 +109,6 @@ class SubTableViewController: UITableViewController, SwipeTableViewCellDelegate 
 
     // フォルダ(カテゴリー)を削除する
     func deleteFolder(at indexPath: IndexPath) {
-        print(UserDefaults.standard.array(forKey: "categories")![indexPath.row] as? String)
         var categories = UserDefaults.standard.array(forKey: "categories") as! [String]
         if let i = categories.firstIndex(of: categories[indexPath.row]) {
             categories.remove(at: i)
