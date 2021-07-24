@@ -14,7 +14,7 @@ import Firebase
 import SwiftMessages
 import GoogleMobileAds
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SwipeTableViewCellDelegate, UISearchBarDelegate, UISearchResultsUpdating, TutorialDelegate, UIViewControllerPreviewingDelegate {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SwipeTableViewCellDelegate, UISearchBarDelegate, UISearchResultsUpdating, TutorialDelegate {
 
     let suiteName: String = "group.com.masatoraatarashi.Shiori"
     let keyName: String = "shareData"
@@ -117,9 +117,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.hidesNavigationBarDuringPresentation = false
         self.navigationItem.searchController = searchController
-
-        //        3dtouch
-        self.registerForPreviewing(with: self, sourceView: tableView)
         
         tutorialTextLabel.text = "記事を追加するのは簡単です。\n以下をタップして始めましょう。"
 
@@ -554,33 +551,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var viewControllerNameFrom: String = ""
     func viewControllerFrom(viewController: String) {
         viewControllerNameFrom = viewController
-    }
-
-    //    3dtouch
-    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
-        guard let indexPath = tableView.indexPathForRow(at: location) else {
-            return nil
-        }
-
-        if searchController.isActive {
-            let filteredArticles = self.searchResults.filter({ ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(folderInt) })
-            let webViewController = WebViewController()
-            webViewController.targetUrl = filteredArticles[indexPath.row].link
-            webViewController.positionX = Int(filteredArticles[indexPath.row].positionX ?? "0") ?? 0
-            webViewController.positionY = Int(filteredArticles[indexPath.row].positionY ?? "0") ?? 0
-            return webViewController
-        } else {
-            let filteredArticles = self.articles.filter({ ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(folderInt) })
-            let webViewController = WebViewController()
-            webViewController.targetUrl = filteredArticles[indexPath.row].link
-            webViewController.positionX = Int(filteredArticles[indexPath.row].positionX ?? "0") ?? 0
-            webViewController.positionY = Int(filteredArticles[indexPath.row].positionY ?? "0") ?? 0
-            return webViewController
-        }
-    }
-
-    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
-        self.navigationController?.pushViewController(viewControllerToCommit, animated: true)
     }
 
     //    長押し
