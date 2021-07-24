@@ -16,9 +16,14 @@ import GoogleMobileAds
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SwipeTableViewCellDelegate, UISearchBarDelegate, UISearchResultsUpdating, TutorialDelegate {
 
+    // MARK: Type Aliases
+    // MARK: Classes
+    // MARK: Structs
+    // MARK: Enums
+    // MARK: Properties
     let suiteName: String = "group.com.masatoraatarashi.Shiori"
     let keyName: String = "shareData"
-
+    
     var pageTitle: String = ""
     var link: String = ""
     var positionX: Int = 0
@@ -29,69 +34,35 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     var searchController = UISearchController()
     
-    @IBOutlet weak var tutorialTextLabel: UILabel!
-
     // フォルダ
     var folderInt: String = NSLocalizedString("Home", comment: "")
-
-    @IBOutlet weak var tableView: UITableView!
-
+    
     var r: Int = UserDefaults.standard.integer(forKey: "r")
     var g: Int = UserDefaults.standard.integer(forKey: "g")
     var b: Int = UserDefaults.standard.integer(forKey: "b")
 
+    
+    // MARK: IBOutlets
+    @IBOutlet weak var tutorialTextLabel: UILabel!
+    
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet var bannerView: GADBannerView?
 
     @IBOutlet weak var text: UILabel!
     @IBOutlet weak var text2: UILabel!
+    
     @IBOutlet weak var button: UIButton!
 
     @IBOutlet weak var footerText1: UIBarButtonItem!
     @IBOutlet weak var footerText2: UIBarButtonItem!
 
-    // チュートリアル画面に遷移
-    @IBAction func goToTutorialPage(_ sender: Any) {
-        performSegue(withIdentifier: "TutorialSegue", sender: nil)
-    }
-
-    // 設定画面に遷移
-    @IBAction func goToSettingPage(_ sender: Any) {
-        performSegue(withIdentifier: "SettingSegue", sender: nil)
-    }
-
-    // 一括編集モードで選択した記事を削除する
-    @IBAction func deleteSelectedArticles(_ sender: UIBarButtonItem) {
-        if tableView.isEditing {
-            if tableView.indexPathsForSelectedRows != nil {
-                if let sortedIndexPaths = tableView.indexPathsForSelectedRows?.sorted(by: { $0.row > $1.row }) {
-                    for indexPathList in sortedIndexPaths {
-                        deleteCell(at: indexPathList)
-                    }
-                    changeToEditMode(bottomToolbarRightItem)
-                    hiddenToolbarButtonEdit()
-                }
-            }
-        }
-    }
-
     @IBOutlet weak var bottomToolbarLeftItem: UIBarButtonItem!
     @IBOutlet weak var bottomToolbarRightItem: UIBarButtonItem!
-
-    // 一括編集モードにする
-    @IBAction func changeToEditMode(_ sender: UIBarButtonItem) {
-        if tableView.isEditing {
-            sender.title = NSLocalizedString("Edit", comment: "")
-            hiddenToolbarButtonEdit()
-            setEditing(false, animated: true)
-        } else {
-            sender.title = NSLocalizedString("Done", comment: "")
-            
-            bottomToolbarLeftItem.isEnabled = true
-            bottomToolbarLeftItem.image = UIImage(systemName: "trash")
-            setEditing(true, animated: true)
-        }
-    }
-
+    
+    
+    // MARK: Initializers
+    // MARK: Type Methods
+    // MARK: View Life-Cycle Methods
     fileprivate let refreshCtl = UIRefreshControl()
     override func viewDidLoad() {
         // TODO: リファクタリング
@@ -122,11 +93,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.navigationItem.searchController = searchController
         
         tutorialTextLabel.text = "記事を追加するのは簡単です。\n以下をタップして始めましょう。"
-
     }
 
     override func viewWillAppear(_ animated: Bool) {
-
         // TODO: リファクタリング
         r = UserDefaults.standard.integer(forKey: "r")
         b = UserDefaults.standard.integer(forKey: "b")
@@ -161,54 +130,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         changeDisplayAdvertisement()
         hiddenToolbarButtonEdit()
     }
-
-    //    広告表示
-    func changeDisplayAdvertisement() {
-        if UserDefaults.standard.bool(forKey: "isAdvertisementOn") {
-            if bannerView != nil {
-                self.view.addSubview(bannerView!)
-                let constraints = [
-                    bannerView!.centerXAnchor.constraint(equalTo: self.view!.centerXAnchor),
-                    bannerView!.heightAnchor.constraint(equalToConstant: CGFloat(50)),
-                    bannerView!.bottomAnchor.constraint(equalTo: (self.view.bottomAnchor), constant: CGFloat(-50))
-                ]
-                NSLayoutConstraint.activate(constraints)
-                let deviceData = getDeviceInfo()
-                if deviceData == "Simulator" {
-                    bannerView!.bottomAnchor.constraint(equalTo: (self.view.bottomAnchor), constant: CGFloat(-30)).isActive = true
-                } else if deviceData == "iPhone 11" {
-                    bannerView!.bottomAnchor.constraint(equalTo: (self.view.bottomAnchor), constant: CGFloat(-80)).isActive = true
-                } else if deviceData == "iPhone X" {
-                    bannerView!.bottomAnchor.constraint(equalTo: (self.view.bottomAnchor), constant: CGFloat(-80)).isActive = true
-                } else if deviceData == "iPhone SE" {
-                    bannerView!.bottomAnchor.constraint(equalTo: (self.view.bottomAnchor), constant: CGFloat(-30)).isActive = true
-                }
-                self.view.bringSubviewToFront(bannerView!)
-            }
-        } else {
-            if bannerView != nil {
-                bannerView!.removeFromSuperview()
-            }
-        }
-
-    }
-
-    // フッターのボタンの表示切り替え
-    func hiddenToolbarButtonEdit() {
-        if self.articles.count == 0 {
-            bottomToolbarRightItem.isEnabled = false
-            bottomToolbarRightItem.title = ""
-        } else {
-            if tableView.isEditing {
-                bottomToolbarLeftItem.isEnabled = false
-                bottomToolbarLeftItem.image = nil
-            } else {
-                bottomToolbarRightItem.isEnabled = true
-                bottomToolbarRightItem.title = NSLocalizedString("Edit", comment: "")
-            }
-        }
-    }
-
+    
     // Called to notify the view controller that its view has just laid out its subviews.
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -216,62 +138,50 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let screenRect = UIScreen.main.bounds
         tableView.frame = CGRect(x: 0, y: 0, width: screenRect.width, height: screenRect.height)
     }
+    
+    
+    // MARK: IBActions
+    // チュートリアル画面に遷移
+    @IBAction func goToTutorialPage(_ sender: Any) {
+        performSegue(withIdentifier: "TutorialSegue", sender: nil)
+    }
 
-    // TODO: リファクタリング
-    // ローカルに保存した記事を取得する
-    @objc func getStoredDataFromUserDefault() {
-        self.articles = []
-        let sharedDefaults: UserDefaults = UserDefaults(suiteName: self.suiteName)!
-        var storedArray: [[String: String]] = sharedDefaults.array(forKey: self.keyName) as? [[String: String]] ?? []
+    // 設定画面に遷移
+    @IBAction func goToSettingPage(_ sender: Any) {
+        performSegue(withIdentifier: "SettingSegue", sender: nil)
+    }
 
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-
-        for result in storedArray {
-            let article = Article(context: context)
-            article.title = result["title"]!
-            article.link = result["url"]!
-            article.imageURL = result["image"]!
-            article.positionX = result["positionX"]!
-            article.positionY = result["positionY"]!
-            article.date = result["date"]!
-            (UIApplication.shared.delegate as! AppDelegate).saveContext()
-        }
-
-        sharedDefaults.set([], forKey: self.keyName)
-
-        let readContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        do {
-            let fetchRequest: NSFetchRequest<Article> = Article.fetchRequest()
-            self.articles = try readContext.fetch(fetchRequest)
-        } catch {
-            print("Error")
-        }
-
-        articles.reverse()
-        tableView.reloadData()
-        self.tableView.refreshControl?.endRefreshing()
-        hiddenToolbarButtonEdit()
-
-        if articles.count == 0 {
-            self.view.bringSubviewToFront(text)
-            self.view.bringSubviewToFront(text2)
-            self.view.bringSubviewToFront(button)
-            button.backgroundColor = UIColor.init(red: 27/255, green: 156/255, blue: 252/255, alpha: 1)
-            text.isHidden = false
-            text2.isHidden = false
-            button.isHidden = false
-            button.isEnabled = true
-        } else {
-            self.view.bringSubviewToFront(text)
-            self.view.bringSubviewToFront(text2)
-            self.view.bringSubviewToFront(button)
-            text.isHidden = true
-            text2.isHidden = true
-            button.isHidden = true
-            button.isEnabled = false
+    // 一括編集モードで選択した記事を削除する
+    @IBAction func deleteSelectedArticles(_ sender: UIBarButtonItem) {
+        if tableView.isEditing {
+            if tableView.indexPathsForSelectedRows != nil {
+                if let sortedIndexPaths = tableView.indexPathsForSelectedRows?.sorted(by: { $0.row > $1.row }) {
+                    for indexPathList in sortedIndexPaths {
+                        deleteCell(at: indexPathList)
+                    }
+                    changeToEditMode(bottomToolbarRightItem)
+                    hiddenToolbarButtonEdit()
+                }
+            }
         }
     }
 
+    // 一括編集モードにする
+    @IBAction func changeToEditMode(_ sender: UIBarButtonItem) {
+        if tableView.isEditing {
+            sender.title = NSLocalizedString("Edit", comment: "")
+            hiddenToolbarButtonEdit()
+            setEditing(false, animated: true)
+        } else {
+            sender.title = NSLocalizedString("Done", comment: "")
+            
+            bottomToolbarLeftItem.isEnabled = true
+            bottomToolbarLeftItem.image = UIImage(systemName: "trash")
+            setEditing(true, animated: true)
+        }
+    }
+    
+    // MARK: UITableViewDelegate
     // セルの数の設定
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if searchController.isActive {
@@ -427,22 +337,183 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         options.expansionStyle = .destructive(automaticallyDelete: false)
         return options
     }
+    
+    //    長押し
+    @available(iOS 13.0, *)
+    func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
 
-    // cellを削除する
-    func deleteCell(at indexPath: IndexPath) {
-        let readContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        let fetchRequest: NSFetchRequest<Article> = Article.fetchRequest()
-        if searchController.isActive {
-            let filteredArticles = self.searchResults.filter({ ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(folderInt) })
-            readContext.delete(filteredArticles[indexPath.row])
-        } else {
-            let filteredArticles = self.articles.filter({ ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(folderInt) })
-            readContext.delete(filteredArticles[indexPath.row])
+        let previewProvider: () -> WebViewController? = { [unowned self] in
+            let webViewController = WebViewController()
+            if self.searchController.isActive {
+                let filteredArticles = self.searchResults.filter({ ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(self.folderInt) })
+                webViewController.targetUrl = filteredArticles[indexPath.row].link
+                webViewController.positionX = Int(filteredArticles[indexPath.row].positionX ?? "0") ?? 0
+                webViewController.positionY = Int(filteredArticles[indexPath.row].positionY ?? "0") ?? 0
+            } else {
+                let filteredArticles = self.articles.filter({ ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(self.folderInt) })
+                webViewController.targetUrl = filteredArticles[indexPath.row].link
+                webViewController.positionX = Int(filteredArticles[indexPath.row].positionX ?? "0") ?? 0
+                webViewController.positionY = Int(filteredArticles[indexPath.row].positionY ?? "0") ?? 0
+            }
+            return webViewController
         }
-        (UIApplication.shared.delegate as! AppDelegate).saveContext()
-        getStoredDataFromUserDefault()
+
+        let actionProvider: ([UIMenuElement]) -> UIMenu? = { _ in
+            let share = UIAction(title: "共有", image: UIImage(systemName: "square.and.arrow.up")) { _ in
+                var shareText: String
+                var shareURL: NSURL
+                var shareWebsite: NSURL
+                if self.searchController.isActive {
+                    let filteredArticles = self.searchResults.filter({ ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(self.folderInt) })
+                    shareText = filteredArticles[indexPath.row].title!
+                    if let shareURL = URL(string: filteredArticles[indexPath.row].link!) {
+                        shareWebsite = shareURL as NSURL
+                    } else {
+                        return
+                    }
+                } else {
+                    let filteredArticles = self.articles.filter({ ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(self.folderInt) })
+                    shareText = filteredArticles[indexPath.row].title!
+                    if let shareURL = URL(string: filteredArticles[indexPath.row].link!) {
+                        shareWebsite = shareURL as NSURL
+                    } else {
+                        return
+                    }
+                }
+
+                let activityItems = [shareText, shareWebsite] as [Any]
+
+                // 初期化処理
+                let activityVC = UIActivityViewController(activityItems: activityItems, applicationActivities: [CustomActivity(title: shareText ?? "", url: shareWebsite as URL)])
+
+                // UIActivityViewControllerを表示
+                self.present(activityVC, animated: true, completion: nil)
+            }
+
+            return UIMenu(title: "Edit..", image: nil, identifier: nil, children: [share])
+        }
+
+        return UIContextMenuConfiguration(identifier: nil,
+                                          previewProvider: previewProvider, actionProvider: actionProvider)
+    }
+    
+    
+    // MARK: UISearchBarDelegate
+    // Asks the object to update the search results for a specified controller.
+    func updateSearchResults(for searchController: UISearchController) {
+        let filteredArticles = self.articles.filter({ ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(folderInt) })
+        self.searchResults = filteredArticles.filter {
+            // 大文字と小文字を区別せずに検索
+            $0.title?.lowercased().contains(searchController.searchBar.text!.lowercased()) ?? true
+        }
+        self.tableView.reloadData()
+    }
+    
+    
+    // MARK: Other Methods
+    // 広告表示
+    func changeDisplayAdvertisement() {
+        if UserDefaults.standard.bool(forKey: "isAdvertisementOn") {
+            if bannerView != nil {
+                self.view.addSubview(bannerView!)
+                let constraints = [
+                    bannerView!.centerXAnchor.constraint(equalTo: self.view!.centerXAnchor),
+                    bannerView!.heightAnchor.constraint(equalToConstant: CGFloat(50)),
+                    bannerView!.bottomAnchor.constraint(equalTo: (self.view.bottomAnchor), constant: CGFloat(-50))
+                ]
+                NSLayoutConstraint.activate(constraints)
+                let deviceData = getDeviceInfo()
+                if deviceData == "Simulator" {
+                    bannerView!.bottomAnchor.constraint(equalTo: (self.view.bottomAnchor), constant: CGFloat(-30)).isActive = true
+                } else if deviceData == "iPhone 11" {
+                    bannerView!.bottomAnchor.constraint(equalTo: (self.view.bottomAnchor), constant: CGFloat(-80)).isActive = true
+                } else if deviceData == "iPhone X" {
+                    bannerView!.bottomAnchor.constraint(equalTo: (self.view.bottomAnchor), constant: CGFloat(-80)).isActive = true
+                } else if deviceData == "iPhone SE" {
+                    bannerView!.bottomAnchor.constraint(equalTo: (self.view.bottomAnchor), constant: CGFloat(-30)).isActive = true
+                }
+                self.view.bringSubviewToFront(bannerView!)
+            }
+        } else {
+            if bannerView != nil {
+                bannerView!.removeFromSuperview()
+            }
+        }
+
     }
 
+    // フッターのボタンの表示切り替え
+    func hiddenToolbarButtonEdit() {
+        if self.articles.count == 0 {
+            bottomToolbarRightItem.isEnabled = false
+            bottomToolbarRightItem.title = ""
+        } else {
+            if tableView.isEditing {
+                bottomToolbarLeftItem.isEnabled = false
+                bottomToolbarLeftItem.image = nil
+            } else {
+                bottomToolbarRightItem.isEnabled = true
+                bottomToolbarRightItem.title = NSLocalizedString("Edit", comment: "")
+            }
+        }
+    }
+
+    // TODO: リファクタリング
+    // ローカルに保存した記事を取得する
+    @objc func getStoredDataFromUserDefault() {
+        self.articles = []
+        let sharedDefaults: UserDefaults = UserDefaults(suiteName: self.suiteName)!
+        var storedArray: [[String: String]] = sharedDefaults.array(forKey: self.keyName) as? [[String: String]] ?? []
+
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+
+        for result in storedArray {
+            let article = Article(context: context)
+            article.title = result["title"]!
+            article.link = result["url"]!
+            article.imageURL = result["image"]!
+            article.positionX = result["positionX"]!
+            article.positionY = result["positionY"]!
+            article.date = result["date"]!
+            (UIApplication.shared.delegate as! AppDelegate).saveContext()
+        }
+
+        sharedDefaults.set([], forKey: self.keyName)
+
+        let readContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        do {
+            let fetchRequest: NSFetchRequest<Article> = Article.fetchRequest()
+            self.articles = try readContext.fetch(fetchRequest)
+        } catch {
+            print("Error")
+        }
+
+        articles.reverse()
+        tableView.reloadData()
+        self.tableView.refreshControl?.endRefreshing()
+        hiddenToolbarButtonEdit()
+
+        if articles.count == 0 {
+            self.view.bringSubviewToFront(text)
+            self.view.bringSubviewToFront(text2)
+            self.view.bringSubviewToFront(button)
+            button.backgroundColor = UIColor.init(red: 27/255, green: 156/255, blue: 252/255, alpha: 1)
+            text.isHidden = false
+            text2.isHidden = false
+            button.isHidden = false
+            button.isEnabled = true
+        } else {
+            self.view.bringSubviewToFront(text)
+            self.view.bringSubviewToFront(text2)
+            self.view.bringSubviewToFront(button)
+            text.isHidden = true
+            text2.isHidden = true
+            button.isHidden = true
+            button.isEnabled = false
+        }
+    }
+
+    
     // TODO: リファクタリング
     // 記事をお気に入りに登録
     func favoriteCell(at indexPath: IndexPath) {
@@ -551,81 +622,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         super.setEditing(editing, animated: animated)
         tableView.isEditing = editing // editingはBool型でeditButtonに依存する変数
     }
-
-    
-    // Asks the object to update the search results for a specified controller.
-    func updateSearchResults(for searchController: UISearchController) {
-        let filteredArticles = self.articles.filter({ ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(folderInt) })
-        self.searchResults = filteredArticles.filter {
-            // 大文字と小文字を区別せずに検索
-            $0.title?.lowercased().contains(searchController.searchBar.text!.lowercased()) ?? true
-        }
-        self.tableView.reloadData()
-    }
     
     // 何のコードかわからない
     var viewControllerNameFrom: String = ""
     func viewControllerFrom(viewController: String) {
         viewControllerNameFrom = viewController
-    }
-
-    //    長押し
-    @available(iOS 13.0, *)
-    func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
-
-        let previewProvider: () -> WebViewController? = { [unowned self] in
-            let webViewController = WebViewController()
-            if self.searchController.isActive {
-                let filteredArticles = self.searchResults.filter({ ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(self.folderInt) })
-                webViewController.targetUrl = filteredArticles[indexPath.row].link
-                webViewController.positionX = Int(filteredArticles[indexPath.row].positionX ?? "0") ?? 0
-                webViewController.positionY = Int(filteredArticles[indexPath.row].positionY ?? "0") ?? 0
-            } else {
-                let filteredArticles = self.articles.filter({ ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(self.folderInt) })
-                webViewController.targetUrl = filteredArticles[indexPath.row].link
-                webViewController.positionX = Int(filteredArticles[indexPath.row].positionX ?? "0") ?? 0
-                webViewController.positionY = Int(filteredArticles[indexPath.row].positionY ?? "0") ?? 0
-            }
-            return webViewController
-        }
-
-        let actionProvider: ([UIMenuElement]) -> UIMenu? = { _ in
-            let share = UIAction(title: "共有", image: UIImage(systemName: "square.and.arrow.up")) { _ in
-                var shareText: String
-                var shareURL: NSURL
-                var shareWebsite: NSURL
-                if self.searchController.isActive {
-                    let filteredArticles = self.searchResults.filter({ ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(self.folderInt) })
-                    shareText = filteredArticles[indexPath.row].title!
-                    if let shareURL = URL(string: filteredArticles[indexPath.row].link!) {
-                        shareWebsite = shareURL as NSURL
-                    } else {
-                        return
-                    }
-                } else {
-                    let filteredArticles = self.articles.filter({ ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(self.folderInt) })
-                    shareText = filteredArticles[indexPath.row].title!
-                    if let shareURL = URL(string: filteredArticles[indexPath.row].link!) {
-                        shareWebsite = shareURL as NSURL
-                    } else {
-                        return
-                    }
-                }
-
-                let activityItems = [shareText, shareWebsite] as [Any]
-
-                // 初期化処理
-                let activityVC = UIActivityViewController(activityItems: activityItems, applicationActivities: [CustomActivity(title: shareText ?? "", url: shareWebsite as URL)])
-
-                // UIActivityViewControllerを表示
-                self.present(activityVC, animated: true, completion: nil)
-            }
-
-            return UIMenu(title: "Edit..", image: nil, identifier: nil, children: [share])
-        }
-
-        return UIContextMenuConfiguration(identifier: nil,
-                                          previewProvider: previewProvider, actionProvider: actionProvider)
     }
 
     // 使われてなさそう。デバッグ用？
@@ -643,6 +644,21 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         } catch {
             print("There was an error")
         }
+    }
+    
+    // cellを削除する
+    func deleteCell(at indexPath: IndexPath) {
+        let readContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let fetchRequest: NSFetchRequest<Article> = Article.fetchRequest()
+        if searchController.isActive {
+            let filteredArticles = self.searchResults.filter({ ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(folderInt) })
+            readContext.delete(filteredArticles[indexPath.row])
+        } else {
+            let filteredArticles = self.articles.filter({ ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(folderInt) })
+            readContext.delete(filteredArticles[indexPath.row])
+        }
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()
+        getStoredDataFromUserDefault()
     }
 
     // 言語変更
@@ -662,8 +678,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             bottomToolbarRightItem.title = NSLocalizedString("Edit", comment: "")
         }
     }
+    
+    // MARK: Subscripts
 }
 
+
+// MARK: Extensions
 extension ViewController {
     func getDeviceInfo () -> String {
         var size: Int = 0

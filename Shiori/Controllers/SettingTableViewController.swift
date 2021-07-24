@@ -11,7 +11,13 @@ import StoreKit
 import MessageUI
 
 class SettingTableViewController: UITableViewController, MFMailComposeViewControllerDelegate {
-
+    
+    // MARK: Type Aliases
+    // MARK: Classes
+    // MARK: Structs
+    // MARK: Enums
+    // MARK: Properties
+    // MARK: IBOutlets
     @IBOutlet weak var switchAdvertisementDisplay: UISwitch!
 
     @IBOutlet weak var versionLabel: UILabel!
@@ -27,6 +33,10 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
     @IBOutlet weak var text6: UILabel!
     @IBOutlet weak var text7: UILabel!
 
+    
+    // MARK: Initializers
+    // MARK: Type Methods
+    // MARK: View Life-Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -52,6 +62,59 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
         segmentControl.layer.borderColor = UIColor(red: 169 / 255.0, green: 169 / 255.0, blue: 169 / 255.0, alpha: 0.5).cgColor
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+    }
+    
+    
+    // MARK: IBActions
+    // MARK: - Table view data source
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // #warning Incomplete implementation, return the number of rows
+        switch section {
+        case 0: // 「設定」のセクション
+            return 2
+        case 1: // 「その他」のセクション
+            return 6
+        default: // ここが実行されることはないはず
+            return 0
+        }
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath == [1, 2] {
+            guard let writeReviewURL = URL(string: "https://itunes.apple.com/app/id1480539987?action=write-review")
+            else { fatalError("Expected a valid URL") }
+            UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)
+        } else if indexPath == [1, 1] {
+            sendMail()
+        }
+
+        tableView.deselectRow(at: indexPath as IndexPath, animated: true)
+    }
+
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
+        return 2
+    }
+    
+    
+    // MARK: MFMailComposeViewControllerDelegate
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        switch result {
+        case .cancelled:
+            print("キャンセル")
+        case .saved:
+            print("下書き保存")
+        case .sent:
+            print("送信成功")
+        default:
+            print("送信失敗")
+        }
+        dismiss(animated: true, completion: nil)
+    }
+    
+    
+    // MARK: Other Methods
     @objc func segmentChanged(segcon: UISegmentedControl) {
         switch segcon.selectedSegmentIndex {
         case 0:
@@ -95,40 +158,6 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
         ViewController().changeDisplayAdvertisement()
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-    }
-
-    // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 2
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        switch section {
-        case 0: // 「設定」のセクション
-            return 2
-        case 1: // 「その他」のセクション
-            return 6
-        default: // ここが実行されることはないはず
-            return 0
-        }
-    }
-
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath == [1, 2] {
-            guard let writeReviewURL = URL(string: "https://itunes.apple.com/app/id1480539987?action=write-review")
-            else { fatalError("Expected a valid URL") }
-            UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)
-        } else if indexPath == [1, 1] {
-            sendMail()
-        }
-
-        tableView.deselectRow(at: indexPath as IndexPath, animated: true)
-    }
-
     // フィードバックのメールを送信
     func sendMail() {
         if MFMailComposeViewController.canSendMail() {
@@ -149,20 +178,6 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
         }
     }
 
-    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-        switch result {
-        case .cancelled:
-            print("キャンセル")
-        case .saved:
-            print("下書き保存")
-        case .sent:
-            print("送信成功")
-        default:
-            print("送信失敗")
-        }
-        dismiss(animated: true, completion: nil)
-    }
-
     // 言語を変更
     func changeLanguage() {
         text1.text = NSLocalizedString("Hide ads", comment: "")
@@ -173,4 +188,9 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
         text6.text = NSLocalizedString("Copyright", comment: "")
         text7.text = NSLocalizedString("Supported video sites", comment: "")
     }
+    
+    
+    // MARK: Subscripts
 }
+
+// MARK: Extensions

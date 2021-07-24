@@ -9,11 +9,21 @@ import UIKit
 import SwipeCellKit
 
 class SubTableViewController: UITableViewController, SwipeTableViewCellDelegate {
-
+    
+    // MARK: Type Aliases
+    // MARK: Classes
+    // MARK: Structs
+    // MARK: Enums
+    // MARK: Properties
     var r: Int = UserDefaults.standard.integer(forKey: "r")
     var b: Int = UserDefaults.standard.integer(forKey: "r")
     var g: Int = UserDefaults.standard.integer(forKey: "r")
-
+    
+    
+    // MARK: IBOutlets
+    // MARK: Initializers
+    // MARK: Type Methods
+    // MARK: View Life-Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -35,11 +45,11 @@ class SubTableViewController: UITableViewController, SwipeTableViewCellDelegate 
         self.navigationController?.toolbar.barTintColor = bgColor
         //        header color
         self.navigationController?.navigationBar.barTintColor = bgColor
-
     }
-
-    // MARK: - Table view data source
-
+    
+    
+    // MARK: IBActions
+    // MARK: SwipeTableViewCellDelegate
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
@@ -106,7 +116,9 @@ class SubTableViewController: UITableViewController, SwipeTableViewCellDelegate 
         deleteAction.image = UIImage(systemName: "trash.fill")
         return [deleteAction]
     }
-
+    
+    
+    // MARK: Other Methods
     // フォルダ(カテゴリー)を削除する
     func deleteFolder(at indexPath: IndexPath) {
         var categories = UserDefaults.standard.array(forKey: "categories") as! [String]
@@ -194,5 +206,7 @@ class SubTableViewController: UITableViewController, SwipeTableViewCellDelegate 
      // Pass the selected object to the new view controller.
      }
      */
-
+    // MARK: Subscripts
 }
+
+// MARK: Extensions

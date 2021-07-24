@@ -12,7 +12,12 @@ import Accounts
 import NVActivityIndicatorView
 
 class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
-
+    
+    // MARK: Type Aliases
+    // MARK: Classes
+    // MARK: Structs
+    // MARK: Enums
+    // MARK: Properties
     var webView: WKWebView!
     var refreshControll: UIRefreshControl!
     var shareButton: UIBarButtonItem!
@@ -28,6 +33,11 @@ class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
     let preferences = WKPreferences()
     let segment: UISegmentedControl = UISegmentedControl(items: ["web", "smart"])
 
+    
+    // MARK: IBOutlets
+    // MARK: Initializers
+    // MARK: Type Methods
+    // MARK: View Life-Cycle Methods
     override func loadView() {
 
         let webConfiguration = WKWebViewConfiguration()
@@ -94,7 +104,10 @@ class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
+    
+    // MARK: IBActions
+    // MARK: Other Methods
     @objc private func goBack() {
         webView.goBack()
     }
@@ -133,10 +146,14 @@ class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
             webView.reload()
         }
     }
-
+    
+    
+    // MARK: Subscripts
 }
 
-// MARK: 読み込み
+
+// MARK: Extensions
+// 読み込み
 extension WebViewController {
 
     func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {

@@ -10,9 +10,19 @@ import UIKit
 
 class SupportedServicesViewController: UITableViewController {
 
+    // MARK: Type Aliases
+    // MARK: Classes
+    // MARK: Structs
+    // MARK: Enums
+    // MARK: Properties
     let services = ["Youtube", "nicovideo(ニコニコ動画)", "Ted.com", "Dailymotion", "pornhub", "redtube", "tube8"]
     let sectionTitles = [NSLocalizedString("Supported video sites", comment: "")]
 
+    
+    // MARK: IBOutlets
+    // MARK: Initializers
+    // MARK: Type Methods
+    // MARK: View Life-Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -20,7 +30,10 @@ class SupportedServicesViewController: UITableViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
 
+    // MARK: IBActions
+    // MARK: Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -41,5 +54,10 @@ class SupportedServicesViewController: UITableViewController {
         cell.textLabel!.text = services[indexPath.row]
         return cell
     }
-
+    
+    
+    // MARK: Other Methods
+    // MARK: Subscripts
 }
+
+// MARK: Extensions

@@ -13,11 +13,20 @@ protocol TutorialDelegate {
 }
 
 class TutorialViewController: UIViewController {
+    
+    // MARK: Type Aliases
+    // MARK: Classes
+    // MARK: Structs
+    // MARK: Enums
+    // MARK: Properties
     var delegate: TutorialDelegate?
 
+    // MARK: IBOutlets
     @IBOutlet weak var text1: UILabel!
     @IBOutlet weak var text2: UILabel!
 
+    
+    // MARK: Initializers
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -43,9 +52,17 @@ class TutorialViewController: UIViewController {
     }
 
     override func viewWillDisappear(_ animated: Bool) {
-
         let viewControllerName = "TutorialViewController"
         delegate?.viewControllerFrom(viewController: viewControllerName)
-
     }
+    
+    
+    // MARK: Type Methods
+    // MARK: View Life-Cycle Methods
+    // MARK: IBActions
+    // MARK: Other Methods
+    // MARK: Subscripts
 }
+
+
+// MARK: Extensions

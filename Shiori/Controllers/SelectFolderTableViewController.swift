@@ -10,11 +10,31 @@ import UIKit
 
 class SelectFolderTableViewController: UITableViewController {
 
+    // MARK: Type Aliases
+    // MARK: Classes
+    // MARK: Structs
+    // MARK: Enums
+    // MARK: Properties
     var selectedIndexPath: Int = 0
     var articles: [Article] = []
 
+    // MARK: IBOutlets
     @IBOutlet weak var navTitle: UINavigationItem!
 
+    
+    // MARK: Initializers
+    // MARK: Type Methods
+    // MARK: View Life-Cycle Methods
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        self.navTitle.title = NSLocalizedString("Add to folder", comment: "")
+    }
+
+    
+    // MARK: IBActions
     @IBAction func cancel(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
@@ -51,16 +71,8 @@ class SelectFolderTableViewController: UITableViewController {
         self.present(alert, animated: true, completion: nil)
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        self.navTitle.title = NSLocalizedString("Add to folder", comment: "")
-    }
-
-    // MARK: - Table view data source
-
+    
+    // MARK: Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
@@ -99,4 +111,11 @@ class SelectFolderTableViewController: UITableViewController {
         preVC.addArticleToFolder(self.selectedIndexPath, categories[indexPath.row + 2])
         self.dismiss(animated: true, completion: nil)
     }
+    
+    
+    // MARK: Other Methods
+    // MARK: Subscripts
 }
+
+
+// MARK: Extensions
