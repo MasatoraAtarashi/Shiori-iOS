@@ -62,6 +62,8 @@ class ShareViewController: SLComposeServiceViewController {
                                                 "positionY": results["positionY"],
                                                 "time": results["time"], "image": results["image"],
                                                 "date": results["date"],
+                                                "videoPlaybackPosition": results[
+                                                    "videoPlaybackPosition"],
                                             ]
 
                                             storedArray.append(resultsDic as! [String: String])

@@ -16,4 +16,5 @@ struct Entry {
     var positionY: String
     var date: String
     var folderInd: Array = [] as [String]
+    var videoPlaybackPosition: String
 }

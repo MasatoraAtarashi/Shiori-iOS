@@ -72,7 +72,18 @@ MyPreprocessor.prototype = {
         if(document.title) {
          title = document.title;
         }
-        arguments.completionFunction({"url": url, "title": title, "positionX": positionLeft, "positionY": positionTop, "time": time, "image": image, "date": dateString});
+        arguments.completionFunction(
+            {
+                "url": url,
+                "title": title,
+                "positionX": positionLeft,
+                "positionY": positionTop,
+                "time": time,
+                "image": image,
+                "date": dateString,
+                "videoPlaybackPosition": time
+            }
+         );
     },
     
     finalize: function(arguments) {

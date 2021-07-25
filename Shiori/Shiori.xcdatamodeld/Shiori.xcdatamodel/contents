@@ -9,8 +9,9 @@
         <attribute name="positionY" optional="YES" attributeType="String"/>
         <attribute name="subContent" optional="YES" attributeType="String"/>
         <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="videoPlaybackPosition" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="Article" positionX="-45" positionY="-36" width="128" height="149"/>
+        <element name="Article" positionX="-45" positionY="-36" width="128" height="164"/>
     </elements>
 </model>

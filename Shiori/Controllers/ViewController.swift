@@ -218,6 +218,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                     Int(filteredArticles[indexPath.row].positionX ?? "0") ?? 0
                 webViewController.positionY =
                     Int(filteredArticles[indexPath.row].positionY ?? "0") ?? 0
+                webViewController.videoPlaybackPosition =
+                    Int(filteredArticles[indexPath.row].videoPlaybackPosition ?? "0") ?? 0
                 self.navigationController!.pushViewController(webViewController, animated: true)
                 tableView.deselectRow(at: indexPath as IndexPath, animated: true)
             } else {
@@ -230,6 +232,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                     Int(filteredArticles[indexPath.row].positionX ?? "0") ?? 0
                 webViewController.positionY =
                     Int(filteredArticles[indexPath.row].positionY ?? "0") ?? 0
+                webViewController.videoPlaybackPosition =
+                    Int(filteredArticles[indexPath.row].videoPlaybackPosition ?? "0") ?? 0
                 self.navigationController!.pushViewController(webViewController, animated: true)
                 tableView.deselectRow(at: indexPath as IndexPath, animated: true)
             }
@@ -590,6 +594,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             article.positionX = result["positionX"]!
             article.positionY = result["positionY"]!
             article.date = result["date"]!
+            article.videoPlaybackPosition = result["videoPlaybackPosition"]
             (UIApplication.shared.delegate as! AppDelegate).saveContext()
         }
 

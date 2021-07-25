@@ -29,6 +29,7 @@ class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
     var targetUrl: String?
     var positionX: Int = 0
     var positionY: Int = 0
+    var videoPlaybackPosition: Int = 0
 
     let preferences = WKPreferences()
     let segment: UISegmentedControl = UISegmentedControl(items: ["web", "smart"])
