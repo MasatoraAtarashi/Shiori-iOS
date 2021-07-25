@@ -207,38 +207,36 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     // セルをタップしたときの処理
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // TODO: 1.!tableView.isEditingだったら何もせずにメソッドを終えるように変更する
+        if tableView.isEditing { return }
         // TODO: 2.searchController.isActiveの条件分岐後の処理はもっといい感じに書ける。同じ処理を二度書いてる
-        if !tableView.isEditing {
-            if searchController.isActive {
-                let filteredArticles = self.searchResults.filter({
-                    ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(folderInt)
-                })
-                let webViewController = WebViewController()
-                webViewController.targetUrl = filteredArticles[indexPath.row].link
-                webViewController.positionX =
-                    Int(filteredArticles[indexPath.row].positionX ?? "0") ?? 0
-                webViewController.positionY =
-                    Int(filteredArticles[indexPath.row].positionY ?? "0") ?? 0
-                webViewController.videoPlaybackPosition =
-                    Int(filteredArticles[indexPath.row].videoPlaybackPosition ?? "0") ?? 0
-                self.navigationController!.pushViewController(webViewController, animated: true)
-                tableView.deselectRow(at: indexPath as IndexPath, animated: true)
-            } else {
-                let filteredArticles = articles.filter({
-                    ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(folderInt)
-                })
-                let webViewController = WebViewController()
-                webViewController.targetUrl = filteredArticles[indexPath.row].link
-                webViewController.positionX =
-                    Int(filteredArticles[indexPath.row].positionX ?? "0") ?? 0
-                webViewController.positionY =
-                    Int(filteredArticles[indexPath.row].positionY ?? "0") ?? 0
-                webViewController.videoPlaybackPosition =
-                    Int(filteredArticles[indexPath.row].videoPlaybackPosition ?? "0") ?? 0
-                self.navigationController!.pushViewController(webViewController, animated: true)
-                tableView.deselectRow(at: indexPath as IndexPath, animated: true)
-            }
+        if searchController.isActive {
+            let filteredArticles = self.searchResults.filter({
+                ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(folderInt)
+            })
+            let webViewController = WebViewController()
+            webViewController.targetUrl = filteredArticles[indexPath.row].link
+            webViewController.positionX =
+                Int(filteredArticles[indexPath.row].positionX ?? "0") ?? 0
+            webViewController.positionY =
+                Int(filteredArticles[indexPath.row].positionY ?? "0") ?? 0
+            webViewController.videoPlaybackPosition =
+                Int(filteredArticles[indexPath.row].videoPlaybackPosition ?? "0") ?? 0
+            self.navigationController!.pushViewController(webViewController, animated: true)
+            tableView.deselectRow(at: indexPath as IndexPath, animated: true)
+        } else {
+            let filteredArticles = articles.filter({
+                ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(folderInt)
+            })
+            let webViewController = WebViewController()
+            webViewController.targetUrl = filteredArticles[indexPath.row].link
+            webViewController.positionX =
+                Int(filteredArticles[indexPath.row].positionX ?? "0") ?? 0
+            webViewController.positionY =
+                Int(filteredArticles[indexPath.row].positionY ?? "0") ?? 0
+            webViewController.videoPlaybackPosition =
+                Int(filteredArticles[indexPath.row].videoPlaybackPosition ?? "0") ?? 0
+            self.navigationController!.pushViewController(webViewController, animated: true)
+            tableView.deselectRow(at: indexPath as IndexPath, animated: true)
         }
     }
 
