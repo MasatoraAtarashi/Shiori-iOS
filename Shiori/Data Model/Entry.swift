@@ -9,6 +9,7 @@
 import Foundation
 
 struct Entry {
+    // NOTE: positionX, positionY, videoPlaybackPositionはIntで保存すべきだった。いつか直したい
     var title: String
     var link: String
     var imageURL: String
