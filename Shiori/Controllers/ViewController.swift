@@ -207,6 +207,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     // セルをタップしたときの処理
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // TODO: 1.!tableView.isEditingだったら何もせずにメソッドを終えるように変更する
+        // TODO: 2.searchController.isActiveの条件分岐後の処理はもっといい感じに書ける。同じ処理を二度書いてる
         if !tableView.isEditing {
             if searchController.isActive {
                 let filteredArticles = self.searchResults.filter({
