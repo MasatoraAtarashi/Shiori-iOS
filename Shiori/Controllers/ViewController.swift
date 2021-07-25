@@ -627,27 +627,21 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     // ポップアップを表示
     func showPopUp(_ alreadyAdded: Bool) {
+        let success = MessageView.viewFromNib(layout: .cardView)
         if alreadyAdded {
-            let success = MessageView.viewFromNib(layout: .cardView)
             success.configureTheme(.error)
-            success.configureDropShadow()
             success.configureContent(
                 title: "Delete", body: NSLocalizedString("Deleted from folder", comment: ""))
-            success.button?.isHidden = true
-            var successConfig = SwiftMessages.defaultConfig
-            successConfig.presentationContext = .window(windowLevel: UIWindow.Level.normal)
-            SwiftMessages.show(config: successConfig, view: success)
         } else {
-            let success = MessageView.viewFromNib(layout: .cardView)
             success.configureTheme(.success)
-            success.configureDropShadow()
             success.configureContent(
                 title: "Success", body: NSLocalizedString("Added", comment: ""))
-            success.button?.isHidden = true
-            var successConfig = SwiftMessages.defaultConfig
-            successConfig.presentationContext = .window(windowLevel: UIWindow.Level.normal)
-            SwiftMessages.show(config: successConfig, view: success)
         }
+        success.configureDropShadow()
+        success.button?.isHidden = true
+        var successConfig = SwiftMessages.defaultConfig
+        successConfig.presentationContext = .window(windowLevel: UIWindow.Level.normal)
+        SwiftMessages.show(config: successConfig, view: success)
     }
 
     // tableViewの編集モードを切り替える
