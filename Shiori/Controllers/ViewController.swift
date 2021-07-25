@@ -112,19 +112,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     // 一括編集モードで選択した記事を削除する
     @IBAction func deleteSelectedArticles(_ sender: UIBarButtonItem) {
-        // TODO: リファクタリング
-        if tableView.isEditing {
-            if tableView.indexPathsForSelectedRows != nil {
-                if let sortedIndexPaths = tableView.indexPathsForSelectedRows?.sorted(by: {
-                    $0.row > $1.row
-                }) {
-                    for indexPathList in sortedIndexPaths {
-                        deleteCell(at: indexPathList)
-                    }
-                    changeToEditMode(bottomToolbarRightItem)
-                    hiddenToolbarButtonEdit()
-                }
+        if !tableView.isEditing || tableView.indexPathsForSelectedRows == nil { return }
+        if let sortedIndexPaths = tableView.indexPathsForSelectedRows?.sorted(by: {
+            $0.row > $1.row
+        }) {
+            for indexPathList in sortedIndexPaths {
+                deleteCell(at: indexPathList)
             }
+            changeToEditMode(bottomToolbarRightItem)
+            hiddenToolbarButtonEdit()
         }
     }
 
