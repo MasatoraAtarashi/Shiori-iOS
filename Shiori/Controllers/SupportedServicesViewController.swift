@@ -17,6 +17,7 @@ class SupportedServicesViewController: UITableViewController {
     // MARK: Properties
     let services = [
         "Youtube", "nicovideo(ニコニコ動画)", "Ted.com", "Dailymotion", "pornhub", "redtube", "tube8",
+        "spankbang",
     ]
     let sectionTitles = [NSLocalizedString("Supported video sites", comment: "")]
 

@@ -12,7 +12,6 @@ import UIKit
 import WebKit
 
 class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
-
     // MARK: Type Aliases
     // MARK: Classes
     // MARK: Structs
@@ -41,6 +40,9 @@ class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
     override func loadView() {
 
         let webConfiguration = WKWebViewConfiguration()
+
+        // インライン再生を許可
+        webConfiguration.allowsInlineMediaPlayback = true
 
         activityIndicatorView = NVActivityIndicatorView(
             frame: CGRect(x: 0, y: 0, width: 85, height: 85),
@@ -181,20 +183,26 @@ extension WebViewController {
         positionY = 0
         self.refreshControll.endRefreshing()
         activityIndicatorView?.stopAnimating()
+
+        let setVideoPlaybackPositionScript = """
+                var htmlVideoPlayer = document.getElementsByTagName('video')[0];
+                htmlVideoPlayer.currentTime += \(videoPlaybackPosition);
+            """
+        webView.evaluateJavaScript(setVideoPlaybackPositionScript, completionHandler: nil)
     }
 
     func webView(
         _ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction,
         decisionHandler: @escaping (WKNavigationActionPolicy) -> Void
     ) {
-
-        // リンククリックは全部Safariに飛ばしたい
-        if navigationAction.navigationType == WKNavigationType.linkActivated {
-            UIApplication.shared.open(navigationAction.request.url!)
-            decisionHandler(.cancel)
-        } else {
-            decisionHandler(.allow)
-        }
+        decisionHandler(.allow)
+        //        // リンククリックは全部Safariに飛ばしたい
+        //        if navigationAction.navigationType == WKNavigationType.linkActivated {
+        //            UIApplication.shared.open(navigationAction.request.url!)
+        //            decisionHandler(.cancel)
+        //        } else {
+        //            decisionHandler(.allow)
+        //        }
     }
 }
 
