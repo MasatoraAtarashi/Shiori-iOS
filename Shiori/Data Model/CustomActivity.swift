@@ -26,7 +26,7 @@ public class CustomActivity: UIActivity {
     }
 
     override public var activityImage: UIImage? {
-        return UIImage(contentsOfFile: "ks_safari_activity_icon")
+        return UIImage(named: "ks_safari_activity_icon")
     }
 
     override public func canPerform(withActivityItems activityItems: [Any]) -> Bool {

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -45,6 +45,8 @@
 		6280BC09242399FA00EEDB3C /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 6280BC08242399FA00EEDB3C /* settings.png */; };
 		62A1E834242F9A0000113A10 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62A1E833242F9A0000113A10 /* MessageUI.framework */; };
 		62A3AF5F242E350A004BD808 /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A3AF5E242E350A004BD808 /* SettingTableViewController.swift */; };
+		62B08ECD26AB146200CC6B08 /* GoogleDataTransport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62B08ECC26AB146200CC6B08 /* GoogleDataTransport.framework */; };
+		62B08ECF26AB146200CC6B08 /* GoogleUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62B08ECE26AB146200CC6B08 /* GoogleUtilities.framework */; };
 		62B12335232E75D9007E6F61 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6221558B232B79B900DD4AB4 /* AppDelegate.swift */; };
 		62B1234C232E8215007E6F61 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B1234B232E8215007E6F61 /* Entry.swift */; };
 		909E9FA550C96476D4E86C62 /* Pods_Shiori.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98B1316EC4BD7BAAF68C16D6 /* Pods_Shiori.framework */; };
@@ -106,7 +108,7 @@
 		622155B4232B7AD100DD4AB4 /* Shiori.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Shiori.entitlements; sourceTree = "<group>"; };
 		622155B5232B944200DD4AB4 /* GetData.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = GetData.js; sourceTree = "<group>"; };
 		622155B7232CBF8400DD4AB4 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
-		6226B08624610B1200A5E541 /* SubTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SubTableViewController.swift; path = /Users/MasatoraAtarashi/environment/apps/Shiori/Shiori/Controllers/SubTableViewController.swift; sourceTree = "<absolute>"; };
+		6226B08624610B1200A5E541 /* SubTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SubTableViewController.swift; path = "/Users/MasatoraAtarashi/environment/web-shiori/Shiori-iOS/Shiori/Controllers/SubTableViewController.swift"; sourceTree = "<absolute>"; };
 		6226B0882461172100A5E541 /* delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete.png; sourceTree = "<group>"; };
 		6226B08A24611DB400A5E541 /* garbage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = garbage.png; sourceTree = "<group>"; };
 		622DA529245D7ECE001FDFEE /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
@@ -137,6 +139,8 @@
 		6280BC08242399FA00EEDB3C /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
 		62A1E833242F9A0000113A10 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		62A3AF5E242E350A004BD808 /* SettingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
+		62B08ECC26AB146200CC6B08 /* GoogleDataTransport.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GoogleDataTransport.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		62B08ECE26AB146200CC6B08 /* GoogleUtilities.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GoogleUtilities.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		62B1234B232E8215007E6F61 /* Entry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
 		6EC70B92298E46BA5986AED1 /* Pods_Share.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Share.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E5478B8CD8CA0C6ECE6036A /* Pods-Share.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Share.release.xcconfig"; path = "Target Support Files/Pods-Share/Pods-Share.release.xcconfig"; sourceTree = "<group>"; };
@@ -149,6 +153,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62B08ECD26AB146200CC6B08 /* GoogleDataTransport.framework in Frameworks */,
+				62B08ECF26AB146200CC6B08 /* GoogleUtilities.framework in Frameworks */,
 				62A1E834242F9A0000113A10 /* MessageUI.framework in Frameworks */,
 				909E9FA550C96476D4E86C62 /* Pods_Shiori.framework in Frameworks */,
 			);
@@ -256,10 +262,10 @@
 		6268C3E42334EAEF00E86ECC /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				6268C3E52334EC2800E86ECC /* ks_safari_activity_icon.png */,
 				6226B08A24611DB400A5E541 /* garbage.png */,
 				6226B0882461172100A5E541 /* delete.png */,
 				6280BC08242399FA00EEDB3C /* settings.png */,
-				6268C3E52334EC2800E86ECC /* ks_safari_activity_icon.png */,
 				624FE69D233228A2004E271B /* IMG_3203.jpg */,
 				624FE69E233228A2004E271B /* IMG_3205.jpg */,
 			);
@@ -280,6 +286,8 @@
 		B09494A8CAC8586A118C22FA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				62B08ECC26AB146200CC6B08 /* GoogleDataTransport.framework */,
+				62B08ECE26AB146200CC6B08 /* GoogleUtilities.framework */,
 				62A1E833242F9A0000113A10 /* MessageUI.framework */,
 				6EC70B92298E46BA5986AED1 /* Pods_Share.framework */,
 				98B1316EC4BD7BAAF68C16D6 /* Pods_Shiori.framework */,
@@ -366,7 +374,7 @@
 				};
 			};
 			buildConfigurationList = 62215583232B79B900DD4AB4 /* Build configuration list for PBXProject "Shiori" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 12.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -463,7 +471,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n${PODS_ROOT}/FirebaseCrashlytics/run\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n${PODS_ROOT}/FirebaseCrashlytics/run\nswift-format -r . -i\n";
 		};
 		A2D17E4072D655C4FEFA07F7 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -682,7 +690,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -738,7 +746,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -756,14 +764,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Shiori/Shiori.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = PMRC683Z7N;
 				INFOPLIST_FILE = Shiori/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.masatoraatarashi.Shiori;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -779,14 +787,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Shiori/Shiori.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = PMRC683Z7N;
 				INFOPLIST_FILE = Shiori/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.masatoraatarashi.Shiori;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -800,7 +808,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Share/Share.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = PMRC683Z7N;
 				INFOPLIST_FILE = Share/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -808,7 +816,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.masatoraatarashi.Shiori.Share;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -823,7 +831,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Share/Share.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = PMRC683Z7N;
 				INFOPLIST_FILE = Share/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -831,7 +839,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.masatoraatarashi.Shiori.Share;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

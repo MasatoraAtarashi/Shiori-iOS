@@ -8,13 +8,15 @@
 
 import Foundation
 
+// NOTE: 名前をArticleに変えたい
 struct Entry {
+    // NOTE: positionX, positionY, videoPlaybackPositionはIntで保存すべきだった。いつか直したい
     var title: String
     var link: String
     var imageURL: String
     var positionX: String
     var positionY: String
     var date: String
-    var haveRead: Bool
     var folderInd: Array = [] as [String]
+    var videoPlaybackPosition: String
 }

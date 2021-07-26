@@ -6,13 +6,17 @@
 //  Copyright © 2019 Masatora Atarashi. All rights reserved.
 //
 
-import UIKit
-import WebKit
 import Accounts
 import NVActivityIndicatorView
+import UIKit
+import WebKit
 
 class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
-
+    // MARK: Type Aliases
+    // MARK: Classes
+    // MARK: Structs
+    // MARK: Enums
+    // MARK: Properties
     var webView: WKWebView!
     var refreshControll: UIRefreshControl!
     var shareButton: UIBarButtonItem!
@@ -24,13 +28,21 @@ class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
     var targetUrl: String?
     var positionX: Int = 0
     var positionY: Int = 0
+    var videoPlaybackPosition: Int = 0
 
     let preferences = WKPreferences()
     let segment: UISegmentedControl = UISegmentedControl(items: ["web", "smart"])
 
+    // MARK: IBOutlets
+    // MARK: Initializers
+    // MARK: Type Methods
+    // MARK: View Life-Cycle Methods
     override func loadView() {
 
         let webConfiguration = WKWebViewConfiguration()
+
+        // インライン再生を許可
+        webConfiguration.allowsInlineMediaPlayback = true
 
         activityIndicatorView = NVActivityIndicatorView(
             frame: CGRect(x: 0, y: 0, width: 85, height: 85),
@@ -64,23 +76,34 @@ class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
             webView.stopLoading()
         }
 
-        shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(sharePage))
-        shareButton.tintColor = UIColor.init(red: 77/255, green: 77/255, blue: 77/255, alpha: 1)
+        shareButton = UIBarButtonItem(
+            barButtonSystemItem: .action, target: self, action: #selector(sharePage))
+        shareButton.tintColor = UIColor.init(
+            red: 77 / 255, green: 77 / 255, blue: 77 / 255, alpha: 1)
         self.navigationItem.rightBarButtonItem = shareButton
 
         self.navigationController?.setToolbarHidden(false, animated: true)
-        backButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem(rawValue: 101)!, target: self, action: #selector(goBack))
-        backButton.tintColor = UIColor.init(red: 77/255, green: 77/255, blue: 77/255, alpha: 1)
-        let flexibleItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
-        let fixedItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.fixedSpace, target: nil, action: nil)
+        backButton = UIBarButtonItem(
+            barButtonSystemItem: UIBarButtonItem.SystemItem(rawValue: 101)!, target: self,
+            action: #selector(goBack))
+        backButton.tintColor = UIColor.init(
+            red: 77 / 255, green: 77 / 255, blue: 77 / 255, alpha: 1)
+        let flexibleItem = UIBarButtonItem(
+            barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+        let fixedItem = UIBarButtonItem(
+            barButtonSystemItem: UIBarButtonItem.SystemItem.fixedSpace, target: nil, action: nil)
         fixedItem.width = 100
-        forwadButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem(rawValue: 102)!, target: self, action: #selector(goForward))
-        forwadButton.tintColor = UIColor.init(red: 77/255, green: 77/255, blue: 77/255, alpha: 1)
+        forwadButton = UIBarButtonItem(
+            barButtonSystemItem: UIBarButtonItem.SystemItem(rawValue: 102)!, target: self,
+            action: #selector(goForward))
+        forwadButton.tintColor = UIColor.init(
+            red: 77 / 255, green: 77 / 255, blue: 77 / 255, alpha: 1)
         self.toolbarItems = [flexibleItem, backButton, fixedItem, forwadButton, flexibleItem]
 
         refreshControll = UIRefreshControl()
         self.webView.scrollView.refreshControl = refreshControll
-        refreshControll.addTarget(self, action: #selector(WebViewController.refresh(sender:)), for: .valueChanged)
+        refreshControll.addTarget(
+            self, action: #selector(WebViewController.refresh(sender:)), for: .valueChanged)
     }
 
     @objc func refresh(sender: UIRefreshControl) {
@@ -95,6 +118,8 @@ class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
         // Dispose of any resources that can be recreated.
     }
 
+    // MARK: IBActions
+    // MARK: Other Methods
     @objc private func goBack() {
         webView.goBack()
     }
@@ -116,7 +141,11 @@ class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
         let activityItems = [shareText, shareWebsite] as [Any]
 
         // 初期化処理
-        let activityVC = UIActivityViewController(activityItems: activityItems, applicationActivities: [CustomActivity(title: shareText ?? "", url: shareWebsite as URL)])
+        let activityVC = UIActivityViewController(
+            activityItems: activityItems,
+            applicationActivities: [
+                CustomActivity(title: shareText ?? "", url: shareWebsite as URL)
+            ])
 
         // UIActivityViewControllerを表示
         self.present(activityVC, animated: true, completion: nil)
@@ -134,9 +163,11 @@ class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
         }
     }
 
+    // MARK: Subscripts
 }
 
-// MARK: 読み込み
+// MARK: Extensions
+// 読み込み
 extension WebViewController {
 
     func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
@@ -145,31 +176,43 @@ extension WebViewController {
     }
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        webView.evaluateJavaScript("window.scrollTo(\(positionX),\(positionY))", completionHandler: nil)
+        webView.evaluateJavaScript(
+            "window.scrollTo(\(positionX),\(positionY))", completionHandler: nil)
         // ユーザーがリロードしたときスクロールしないようにpositionを初期化
         positionX = 0
         positionY = 0
         self.refreshControll.endRefreshing()
         activityIndicatorView?.stopAnimating()
+
+        let setVideoPlaybackPositionScript = """
+                var htmlVideoPlayer = document.getElementsByTagName('video')[0];
+                htmlVideoPlayer.currentTime += \(videoPlaybackPosition);
+            """
+        webView.evaluateJavaScript(setVideoPlaybackPositionScript, completionHandler: nil)
     }
 
-    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-
-        // リンククリックは全部Safariに飛ばしたい
-        if navigationAction.navigationType == WKNavigationType.linkActivated {
-            UIApplication.shared.open(navigationAction.request.url!)
-            decisionHandler(.cancel)
-        } else {
-            decisionHandler(.allow)
-        }
+    func webView(
+        _ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction,
+        decisionHandler: @escaping (WKNavigationActionPolicy) -> Void
+    ) {
+        decisionHandler(.allow)
+        //        // リンククリックは全部Safariに飛ばしたい
+        //        if navigationAction.navigationType == WKNavigationType.linkActivated {
+        //            UIApplication.shared.open(navigationAction.request.url!)
+        //            decisionHandler(.cancel)
+        //        } else {
+        //            decisionHandler(.allow)
+        //        }
     }
 }
 
 // target=_blank対策
 extension WebViewController {
 
-    func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration,
-                 for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
+    func webView(
+        _ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration,
+        for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures
+    ) -> WKWebView? {
 
         if navigationAction.targetFrame == nil {
             webView.load(navigationAction.request)
