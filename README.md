@@ -1,7 +1,7 @@
 # Web Shiori - webにしおりをはさめるアプリ
 [![](https://img.youtube.com/vi/1DcjMwkmNvA/0.jpg)](https://www.youtube.com/watch?v=1DcjMwkmNvA)
 
-ダウンロードは[こちら](https://apps.apple.com/gb/app/shiori-web-for-safari/id1480539987?l=ja)
+ダウンロードは[こちら](https://apps.apple.com/jp/app/shiori-web-for-safari/id1480539987?l=ja)
 ## 特徴
 Shiori Webは、読んでいる最中の記事や、見ている最中の動画をそのままの状態で記録し、いつでも再開できるアプリです。
 
