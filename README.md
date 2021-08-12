@@ -20,14 +20,9 @@ Shiori Webを利用すれば、まるで動画にしおりをはさむかのよ�
 - podをインストール
 ```sh
 % pod install
-$ pod update
 ```
 
 - xcodeで起動
-- format
-```
-% swift-format -r . -i
-```
 
 ## デプロイ
 [参考](https://qiita.com/Labi/items/3b71b8f5ef065904c1de#-%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E3%82%A2%E3%83%83%E3%83%97%E3%83%AD%E3%83%BC%E3%83%89-1)
