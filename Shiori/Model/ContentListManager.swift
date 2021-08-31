@@ -9,7 +9,7 @@
 import Foundation
 
 let const = Const()
-struct ContentManager {
+struct ContentListManager {
 
     func fetchContentList() {
         let getContentListURL = "\(const.baseURL)/v1/content"
