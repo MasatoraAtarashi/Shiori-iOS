@@ -48,7 +48,7 @@ struct ContentManager {
         }
     }
 
-    func parseJSON(_ contentListData: Foundation.Data) -> ContentListData? {
+    func parseJSON(_ contentListData: Foundation.Data) -> ContentListResponse? {
         print("parseJSON")
         print("parseJSON")
         print("parseJSON")
@@ -58,7 +58,7 @@ struct ContentManager {
         print("parseJSON")
         let decoder = JSONDecoder()
         do {
-            let decodeData = try decoder.decode(ContentListData.self, from: contentListData)
+            let decodeData = try decoder.decode(ContentListResponse.self, from: contentListData)
             return decodeData
         } catch {
             // エラー処理を書く

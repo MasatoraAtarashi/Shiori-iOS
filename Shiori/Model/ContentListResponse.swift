@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct ContentListData: Codable {
+struct ContentListResponse: Codable {
     let meta: Meta
     let data: Data
 }
