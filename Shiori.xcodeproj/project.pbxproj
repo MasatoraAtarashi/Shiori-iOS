@@ -203,7 +203,7 @@
 				6221558B232B79B900DD4AB4 /* AppDelegate.swift */,
 				6268C3E32334EAE000E86ECC /* Controllers */,
 				6268C3E22334EAD400E86ECC /* Views */,
-				624411022334EA7A00C1C411 /* Data Model */,
+				624411022334EA7A00C1C411 /* Model */,
 				62215595232B79BA00DD4AB4 /* Assets.xcassets */,
 				6221559A232B79BA00DD4AB4 /* Info.plist */,
 				624FE69523321297004E271B /* GoogleService-Info.plist */,
@@ -225,13 +225,13 @@
 			path = Share;
 			sourceTree = "<group>";
 		};
-		624411022334EA7A00C1C411 /* Data Model */ = {
+		624411022334EA7A00C1C411 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				624411002334EA6300C1C411 /* CustomActivity.swift */,
 				62B1234B232E8215007E6F61 /* Entry.swift */,
 			);
-			path = "Data Model";
+			path = Model;
 			sourceTree = "<group>";
 		};
 		6268C3E22334EAD400E86ECC /* Views */ = {
