@@ -30,7 +30,7 @@ struct Content: Codable {
     let deletedAt: String?
     let createdAt: String
     let updatedAt: String
-    
+
     enum CodingKeys: String, CodingKey {
         case id
         case contentType
