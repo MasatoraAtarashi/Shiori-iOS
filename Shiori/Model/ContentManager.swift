@@ -8,11 +8,11 @@
 
 import Foundation
 
+let const = Const()
 struct ContentManager {
-    let baseURL = "https://web-shiori.herokuapp.com"
-
+    
     func fetchContentList() {
-        let getContentListURL = "\(baseURL)/heartbeat"
+        let getContentListURL = "\(const.baseURL)/heartbeat"
         performRequest(with: getContentListURL)
     }
 
