@@ -73,8 +73,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.tableView.register(
             UINib(nibName: "FeedTableViewCell", bundle: nil),
             forCellReuseIdentifier: "FeedTableViewCell")
-        // Do any additional setup after loading the view.
+        // ローカルストレージからコンテンツを取得
         getStoredDataFromUserDefault()
+
+        // APIで取得したコンテンツを表示
+
+        // コンテンツ一覧を表示
+        renderContentList()
+
         // 起動時に言語を変更する
         changeViewLanguage()
         // 記事を更新するときにクルクルするやつ
@@ -542,6 +548,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
 
         articles.reverse()
+    }
+
+    // コンテンツ一覧を表示
+    func renderContentList() {
         tableView.reloadData()
         self.tableView.refreshControl?.endRefreshing()
         hiddenToolbarButtonEdit()
@@ -725,8 +735,8 @@ extension ViewController: ContentListManagerDelegate {
     func didUpdateContentList(
         _ contentListManager: ContentListManager, contentListResponse: ContentListResponse
     ) {
-        for content in contentListResponse.data.content {
-            print(content)
+        DispatchQueue.main.async {
+
         }
     }
 
