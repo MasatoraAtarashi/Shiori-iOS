@@ -23,7 +23,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // MARK: Structs
     // MARK: Enums
     // MARK: Properties
-    var contentManager = ContentManager()
+    var contentListManager = ContentListManager()
 
     let suiteName: String = "group.com.masatoraatarashi.Shiori"
     let keyName: String = "shareData"
@@ -82,9 +82,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // 検索
         initSearchController()
         tutorialTextLabel.text = "記事を追加するのは簡単です。\n以下をタップして始めましょう。"
-
-        // 動作確認用
-        contentManager.fetchContentList()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -723,6 +720,22 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 }
 
 // MARK: Extensions
+extension ViewController: ContentListManagerDelegate {
+    func didUpdateContentList(_ contentListManager: ContentListManager, contentListResponse: ContentListResponse) {
+        for content in contentListResponse.data.content {
+            print(content)
+        }
+    }
+    
+    func didFailWithError(error: Error) {
+        print(error)
+    }
+    
+    
+}
+
+
+
 extension ViewController {
     func getDeviceInfo() -> String {
         var size: Int = 0
