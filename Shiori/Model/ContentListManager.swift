@@ -9,7 +9,8 @@
 import Foundation
 
 protocol ContentListManagerDelegate {
-    func didUpdateContentList(_ contentListManager: ContentListManager, contentListResponse: ContentListResponse)
+    func didUpdateContentList(
+        _ contentListManager: ContentListManager, contentListResponse: ContentListResponse)
     func didFailWithError(error: Error)
 }
 

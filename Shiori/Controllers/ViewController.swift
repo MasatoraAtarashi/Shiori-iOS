@@ -720,21 +720,20 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 }
 
 // MARK: Extensions
+// コンテンツ一覧を取得する
 extension ViewController: ContentListManagerDelegate {
-    func didUpdateContentList(_ contentListManager: ContentListManager, contentListResponse: ContentListResponse) {
+    func didUpdateContentList(
+        _ contentListManager: ContentListManager, contentListResponse: ContentListResponse
+    ) {
         for content in contentListResponse.data.content {
             print(content)
         }
     }
-    
+
     func didFailWithError(error: Error) {
         print(error)
     }
-    
-    
 }
-
-
 
 extension ViewController {
     func getDeviceInfo() -> String {
