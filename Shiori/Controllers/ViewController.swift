@@ -74,9 +74,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             UINib(nibName: "FeedTableViewCell", bundle: nil),
             forCellReuseIdentifier: "FeedTableViewCell")
         // ローカルストレージからコンテンツを取得
-        getStoredDataFromUserDefault()
+//        getStoredDataFromUserDefault()
 
-        // APIで取得したコンテンツを表示
+        // コンテンツ一覧を取得
+        contentListManager.fetchContentList()
 
         // コンテンツ一覧を表示
         renderContentList()
@@ -513,7 +514,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
 
-    // TODO: リファクタリング
+    // TODO: 削除
     // ローカルに保存した記事を取得する
     @objc func getStoredDataFromUserDefault() {
         self.articles = []
