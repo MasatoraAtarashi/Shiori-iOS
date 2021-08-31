@@ -21,11 +21,17 @@ struct ContentListManager {
     var delegate: ContentListManagerDelegate?
 
     func fetchContentList() {
+        print("fetchContentList")
+        print("fetchContentList")
+        print("fetchContentList")
         let getContentListURL = "\(const.baseURL)/v1/content"
         performRequest(with: getContentListURL)
     }
 
     func performRequest(with urlString: String) {
+        print("performRequest")
+        print("performRequest")
+        print("performRequest")
         if let url = URL(string: urlString) {
             var request = URLRequest(url: url)
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -39,8 +45,18 @@ struct ContentListManager {
                     return
                 }
                 if let safeData = data {
-                    if let contentList = self.parseJSON(safeData) {
-                        self.delegate?.didUpdateContentList(self, contentListResponse: contentList)
+                    print("safeData")
+                    print("safeData")
+                    print("safeData")
+                    print("safeData")
+                    print("safeData")
+                    if let contentListResponse = self.parseJSON(safeData) {
+                        print("成功")
+                        print("成功")
+                        print("成功")
+                        print("成功")
+                        self.delegate?.didUpdateContentList(
+                            self, contentListResponse: contentListResponse)
                     }
                 }
             }

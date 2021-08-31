@@ -33,7 +33,7 @@ struct Content: Codable {
 
     enum CodingKeys: String, CodingKey {
         case id
-        case contentType
+        case contentType = "content_type"
         case title
         case url
         case sharingUrl = "sharing_url"
