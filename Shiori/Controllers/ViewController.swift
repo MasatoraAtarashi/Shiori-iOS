@@ -23,6 +23,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // MARK: Structs
     // MARK: Enums
     // MARK: Properties
+    var contentManager = ContentManager()
+
     let suiteName: String = "group.com.masatoraatarashi.Shiori"
     let keyName: String = "shareData"
 
@@ -80,6 +82,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // 検索
         initSearchController()
         tutorialTextLabel.text = "記事を追加するのは簡単です。\n以下をタップして始めましょう。"
+
+        // 動作確認用
+        contentManager.fetchContentList()
     }
 
     override func viewWillAppear(_ animated: Bool) {
