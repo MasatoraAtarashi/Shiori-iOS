@@ -159,11 +159,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // MARK: UITableViewDelegate
     // セルの数の設定
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //        let targetArticles = searchController.isActive ? searchResults : articles
-        //        let filteredArticles = targetArticles.filter({
-        //            ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(folderInt)
-        //        })
-        //        return filteredArticles.count
         return contentList.count
     }
 
@@ -431,9 +426,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // 記事を更新するときにクルクルするやつ
     func initRefreshController() {
         tableView.refreshControl = refreshCtl
-        //        tableView.refreshControl?.addTarget(
-        //            self, action: #selector(ViewController.getStoredDataFromUserDefault), for: .valueChanged
-        //        )
         tableView.refreshControl?.addTarget(
             self, action: #selector(ViewController.refresh), for: .valueChanged
         )
