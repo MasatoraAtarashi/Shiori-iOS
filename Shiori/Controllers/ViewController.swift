@@ -398,7 +398,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     //    }
 
     // MARK: UISearchBarDelegate
-    // Asks the object to update the search results for a specified controller.
+    // 検索
     func updateSearchResults(for searchController: UISearchController) {
         //        let filteredArticles = self.articles.filter({
         //            ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(folderInt)
@@ -408,6 +408,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         //            $0.title?.lowercased().contains(searchController.searchBar.text!.lowercased()) ?? true
         //        }
         //        self.tableView.reloadData()
+        contentListManager.fetchContentList(q: searchController.searchBar.text ?? "")
     }
 
     // MARK: Other Methods
