@@ -771,16 +771,8 @@ extension ViewController: ContentListManagerDelegate {
         _ contentListManager: ContentListManager, contentListResponse: ContentListResponse
     ) {
         DispatchQueue.main.async {
-            // TODO: articlesをcontentListに変更
             // TODO: 一番下までスクロールしたら追加でコンテンツを取得できるようにする
             self.contentList = contentListResponse.data.content
-            print("didUpdateContentList")
-            print("didUpdateContentList")
-            print("didUpdateContentList")
-            print("didUpdateContentList")
-            print("didUpdateContentList")
-            print(self.contentList.count)
-            print(self.contentList)
             self.renderContentList()
         }
     }
