@@ -15,10 +15,10 @@ struct ContentListResponse: Codable {
 
 struct Meta: Codable {
     let q: String?
-    let per_page: Int?
-    let page: Int?
-    let nextPage: Int?
-    let liked: Bool?
+    let per_page: String?  // Intに変換可能
+    let page: String?  // Intに変換可能
+    let nextPage: String?  // Intに変換可能
+    let liked: String?  // Boolに変換可能
 }
 
 struct Data: Codable {
