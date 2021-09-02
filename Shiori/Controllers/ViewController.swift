@@ -174,19 +174,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 withIdentifier: "FeedTableViewCell", for: indexPath as IndexPath)
             as! FeedTableViewCell
 
-        //        let targetArticles = searchController.isActive ? searchResults : articles
-        //        let filteredArticles = targetArticles.filter({
-        //            ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(folderInt)
-        //        })
-        //        let entry = filteredArticles[indexPath.row]
-        //        cell.delegate = self
-        //        cell.title.text = entry.title
-        //        cell.subContent.text = entry.link
-        //        cell.date.text = entry.date
-        //        cell.thumbnail.sd_setImage(with: URL(string: entry.imageURL ?? ""))
-
         let content = contentList[indexPath.row]
-        //        cell.delegate = self
         cell.title.text = content.title
         cell.subContent.text = content.url
         cell.date.text = content.createdAt
@@ -213,18 +201,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // セルをタップしたときの処理
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView.isEditing { return }
-        //        let targetArticles = searchController.isActive ? searchResults : articles
-        //        let filteredArticles = targetArticles.filter({
-        //            ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(folderInt)
-        //        })
-        //        let webViewController = WebViewController()
-        //        webViewController.targetUrl = filteredArticles[indexPath.row].link
-        //        webViewController.positionX =
-        //            Int(filteredArticles[indexPath.row].positionX ?? "0") ?? 0
-        //        webViewController.positionY =
-        //            Int(filteredArticles[indexPath.row].positionY ?? "0") ?? 0
-        //        webViewController.videoPlaybackPosition =
-        //            Int(filteredArticles[indexPath.row].videoPlaybackPosition ?? "0") ?? 0
         let webViewController = WebViewController()
         webViewController.targetUrl = contentList[indexPath.row].url
         webViewController.positionX = contentList[indexPath.row].scrollPositionX
@@ -400,14 +376,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // MARK: UISearchBarDelegate
     // 検索
     func updateSearchResults(for searchController: UISearchController) {
-        //        let filteredArticles = self.articles.filter({
-        //            ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(folderInt)
-        //        })
-        //        self.searchResults = filteredArticles.filter {
-        //            // 大文字と小文字を区別せずに検索
-        //            $0.title?.lowercased().contains(searchController.searchBar.text!.lowercased()) ?? true
-        //        }
-        //        self.tableView.reloadData()
         contentListManager.fetchContentList(q: searchController.searchBar.text ?? "")
     }
 
@@ -544,6 +512,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
 
     // TODO: 削除
+    // NOTE: このコードは後で参考にするためとっておく
     // ローカルに保存した記事を取得する
     @objc func getStoredDataFromUserDefault() {
         //        self.articles = []
@@ -585,26 +554,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         tableView.reloadData()
         self.tableView.refreshControl?.endRefreshing()
         hiddenToolbarButtonEdit()
-
-        //        if articles.count == 0 {
-        //            self.view.bringSubviewToFront(text)
-        //            self.view.bringSubviewToFront(text2)
-        //            self.view.bringSubviewToFront(button)
-        //            button.backgroundColor = UIColor.init(
-        //                red: 27 / 255, green: 156 / 255, blue: 252 / 255, alpha: 1)
-        //            text.isHidden = false
-        //            text2.isHidden = false
-        //            button.isHidden = false
-        //            button.isEnabled = true
-        //        } else {
-        //            self.view.bringSubviewToFront(text)
-        //            self.view.bringSubviewToFront(text2)
-        //            self.view.bringSubviewToFront(button)
-        //            text.isHidden = true
-        //            text2.isHidden = true
-        //            button.isHidden = true
-        //            button.isEnabled = false
-        //        }
         if contentList.count == 0 {
             self.view.bringSubviewToFront(text)
             self.view.bringSubviewToFront(text2)
