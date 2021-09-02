@@ -462,11 +462,19 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // 記事を更新するときにクルクルするやつ
     func initRefreshController() {
         tableView.refreshControl = refreshCtl
+        //        tableView.refreshControl?.addTarget(
+        //            self, action: #selector(ViewController.getStoredDataFromUserDefault), for: .valueChanged
+        //        )
         tableView.refreshControl?.addTarget(
-            self, action: #selector(ViewController.getStoredDataFromUserDefault), for: .valueChanged
+            self, action: #selector(ViewController.refresh), for: .valueChanged
         )
         tableView.refreshControl?.attributedTitle = NSAttributedString(
             string: NSLocalizedString("Pull to refresh", comment: ""))
+    }
+
+    // tableView更新
+    @objc func refresh() {
+        contentListManager.fetchContentList()
     }
 
     // 検索
