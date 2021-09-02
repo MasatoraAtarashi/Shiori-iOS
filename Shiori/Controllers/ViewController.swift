@@ -242,7 +242,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // フッターの見た目を設定
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let footerView = UIView(
-            frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 40))  // assuming 40 height for footer.
+            frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 40))
         return footerView
     }
 
