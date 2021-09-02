@@ -212,7 +212,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     // セルをタップしたときの処理
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //        if tableView.isEditing { return }
+        if tableView.isEditing { return }
         //        let targetArticles = searchController.isActive ? searchResults : articles
         //        let filteredArticles = targetArticles.filter({
         //            ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(folderInt)
@@ -225,8 +225,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         //            Int(filteredArticles[indexPath.row].positionY ?? "0") ?? 0
         //        webViewController.videoPlaybackPosition =
         //            Int(filteredArticles[indexPath.row].videoPlaybackPosition ?? "0") ?? 0
-        //        self.navigationController!.pushViewController(webViewController, animated: true)
-        //        tableView.deselectRow(at: indexPath as IndexPath, animated: true)
+        let webViewController = WebViewController()
+        webViewController.targetUrl = contentList[indexPath.row].url
+        webViewController.positionX = contentList[indexPath.row].scrollPositionX
+        webViewController.positionY = contentList[indexPath.row].scrollPositionY
+        webViewController.videoPlaybackPosition = contentList[indexPath.row].videoPlaybackPosition
+        self.navigationController!.pushViewController(webViewController, animated: true)
+        tableView.deselectRow(at: indexPath as IndexPath, animated: true)
     }
 
     // セルの高さを設定
