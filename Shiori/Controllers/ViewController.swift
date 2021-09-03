@@ -14,9 +14,8 @@ import SwiftMessages
 import SwipeCellKit
 import UIKit
 
-//class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate,
-//    SwipeTableViewCellDelegate, UISearchBarDelegate, UISearchResultsUpdating, TutorialDelegate
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate,
+    SwipeTableViewCellDelegate,
     UISearchBarDelegate, UISearchResultsUpdating, TutorialDelegate
 {
 
@@ -26,6 +25,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // MARK: Enums
     // MARK: Properties
     var contentListManager = ContentListManager()
+    var contentManager = ContentManager()
 
     let suiteName: String = "group.com.masatoraatarashi.Shiori"
     let keyName: String = "shareData"
@@ -79,12 +79,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // ローカルストレージからコンテンツを取得
         //        getStoredDataFromUserDefault()
 
-        // コンテンツ一覧を取得
         contentListManager.delegate = self
+        contentManager.delegate = self
+
         print(" contentListManager.fetchContentList()")
         print(" contentListManager.fetchContentList()")
         print(" contentListManager.fetchContentList()")
         print(" contentListManager.fetchContentList()")
+
+        // コンテンツ一覧を取得
         contentListManager.fetchContentList()
 
         // コンテンツ一覧を表示
@@ -170,6 +173,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             as! FeedTableViewCell
 
         let content = contentList[indexPath.row]
+        cell.delegate = self
         cell.title.text = content.title
         cell.subContent.text = content.url
         cell.date.text = content.createdAt
@@ -223,80 +227,142 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
 
     // swipeしたときの処理
-    //    func tableView(
-    //        _ tableView: UITableView, editActionsForRowAt indexPath: IndexPath,
-    //        for orientation: SwipeActionsOrientation
-    //    ) -> [SwipeAction]? {
-    //        if orientation == .right {
-    //            let deleteAction = SwipeAction(
-    //                style: .destructive, title: NSLocalizedString("Delete", comment: "")
-    //            ) { _, indexPath in
-    //                self.deleteCell(at: indexPath)
-    //            }
-    //            deleteAction.image = UIImage(systemName: "trash.fill")
-    //
-    //            // お気に入り
-    //            var favoriteAction: SwipeAction
-    //            //            let favoriteAction = SwipeAction(style: .default, title: NSLocalizedString("Liked", comment: "")) { action, indexPath in
-    //            //                self.favoriteCell(at: indexPath)
-    //            //            }
-    //            let _: NSFetchRequest<Article> = Article.fetchRequest()
-    //
-    //            let targetArticles = searchController.isActive ? searchResults : articles
-    //            let filteredArticles = targetArticles.filter({
-    //                ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(folderInt)
-    //            })
-    //
-    //            if filteredArticles[indexPath.row].folderInt?.contains(
-    //                NSLocalizedString("Liked", comment: "")) ?? false
-    //            {
-    //                favoriteAction = SwipeAction(
-    //                    style: .default, title: NSLocalizedString("Cancel", comment: "")
-    //                ) { _, indexPath in
-    //                    self.favoriteCell(at: indexPath)
-    //                }
-    //                favoriteAction.image = UIImage(systemName: "heart.fill")
-    //            } else {
-    //                favoriteAction = SwipeAction(
-    //                    style: .default, title: NSLocalizedString("Liked", comment: "")
-    //                ) { _, indexPath in
-    //                    self.favoriteCell(at: indexPath)
-    //                }
-    //                favoriteAction.image = UIImage(systemName: "heart")
-    //            }
-    //            favoriteAction.backgroundColor = UIColor.init(
-    //                red: 255 / 255, green: 165 / 255, blue: 0 / 255, alpha: 1)
-    //
-    //            let folderAction = SwipeAction(
-    //                style: .default, title: NSLocalizedString("Add", comment: "")
-    //            ) { _, indexPath in
-    //                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-    //                let vc =
-    //                    storyboard.instantiateViewController(withIdentifier: "myVCID")
-    //                    as! UINavigationController
-    //                let selectFolderTableViewController =
-    //                    vc.viewControllers.first as! SelectFolderTableViewController
-    //                selectFolderTableViewController.selectedIndexPath = indexPath.row
-    //                let _: NSFetchRequest<Article> = Article.fetchRequest()
-    //
-    //                let targetArticles =
-    //                    self.searchController.isActive ? self.searchResults : self.articles
-    //                let filteredArticles = targetArticles.filter({
-    //                    ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(
-    //                        self.folderInt)
-    //                })
-    //                selectFolderTableViewController.articles = filteredArticles
-    //                self.present(vc, animated: true)
-    //            }
-    //            folderAction.image = UIImage(systemName: "folder.fill")
-    //            folderAction.backgroundColor = UIColor.init(
-    //                red: 176 / 255, green: 196 / 255, blue: 222 / 255, alpha: 1)
-    //
-    //            return [deleteAction, favoriteAction, folderAction]
-    //        } else {
-    //            return []
-    //        }
-    //    }
+    func tableView(
+        _ tableView: UITableView, editActionsForRowAt indexPath: IndexPath,
+        for orientation: SwipeActionsOrientation
+    ) -> [SwipeAction]? {
+        print("swipe")
+        print("swipe")
+        print("swipe")
+        print("swipe")
+        print("swipe")
+        if orientation == .right {
+            print("swipe-right")
+            print("swipe-right")
+            print("swipe-right")
+            print("swipe-right")
+            print("swipe-right")
+            //                let deleteAction = SwipeAction(
+            //                    style: .destructive, title: NSLocalizedString("Delete", comment: "")
+            //                ) { _, indexPath in
+            //                    self.deleteCell(at: indexPath)
+            //                }
+            //                deleteAction.image = UIImage(systemName: "trash.fill")
+            //
+            //                // お気に入り
+            //                var favoriteAction: SwipeAction
+            //                let _: NSFetchRequest<Article> = Article.fetchRequest()
+            //
+            //                let targetArticles = searchController.isActive ? searchResults : articles
+            //                let filteredArticles = targetArticles.filter({
+            //                    ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(folderInt)
+            //                })
+            //
+            //                if filteredArticles[indexPath.row].folderInt?.contains(
+            //                    NSLocalizedString("Liked", comment: "")) ?? false
+            //                {
+            //                    favoriteAction = SwipeAction(
+            //                        style: .default, title: NSLocalizedString("Cancel", comment: "")
+            //                    ) { _, indexPath in
+            //                        self.favoriteCell(at: indexPath)
+            //                    }
+            //                    favoriteAction.image = UIImage(systemName: "heart.fill")
+            //                } else {
+            //                    favoriteAction = SwipeAction(
+            //                        style: .default, title: NSLocalizedString("Liked", comment: "")
+            //                    ) { _, indexPath in
+            //                        self.favoriteCell(at: indexPath)
+            //                    }
+            //                    favoriteAction.image = UIImage(systemName: "heart")
+            //                }
+            //                favoriteAction.backgroundColor = UIColor.init(
+            //                    red: 255 / 255, green: 165 / 255, blue: 0 / 255, alpha: 1)
+            //
+            //                let folderAction = SwipeAction(
+            //                    style: .default, title: NSLocalizedString("Add", comment: "")
+            //                ) { _, indexPath in
+            //                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            //                    let vc =
+            //                        storyboard.instantiateViewController(withIdentifier: "myVCID")
+            //                        as! UINavigationController
+            //                    let selectFolderTableViewController =
+            //                        vc.viewControllers.first as! SelectFolderTableViewController
+            //                    selectFolderTableViewController.selectedIndexPath = indexPath.row
+            //                    let _: NSFetchRequest<Article> = Article.fetchRequest()
+            //
+            //                    let targetArticles =
+            //                        self.searchController.isActive ? self.searchResults : self.articles
+            //                    let filteredArticles = targetArticles.filter({
+            //                        ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(
+            //                            self.folderInt)
+            //                    })
+            //                    selectFolderTableViewController.articles = filteredArticles
+            //                    self.present(vc, animated: true)
+            //                }
+            //                folderAction.image = UIImage(systemName: "folder.fill")
+            //                folderAction.backgroundColor = UIColor.init(
+            //                    red: 176 / 255, green: 196 / 255, blue: 222 / 255, alpha: 1)
+
+            let targetContent = contentList[indexPath.row]
+            //
+            let deleteAction = SwipeAction(
+                style: .destructive, title: NSLocalizedString("Delete", comment: "")
+            ) { _, indexPath in
+                self.deleteCell(at: indexPath)
+            }
+            deleteAction.image = UIImage(systemName: "trash.fill")
+
+            // お気に入り
+            var favoriteAction: SwipeAction
+
+            if contentList[indexPath.row].liked ?? false {
+                favoriteAction = SwipeAction(
+                    style: .default, title: NSLocalizedString("Cancel", comment: "")
+                ) { _, indexPath in
+                    self.unFavoriteCell(contentId: targetContent.id)
+                }
+                favoriteAction.image = UIImage(systemName: "heart.fill")
+            } else {
+                favoriteAction = SwipeAction(
+                    style: .default, title: NSLocalizedString("Liked", comment: "")
+                ) { _, indexPath in
+                    self.favoriteCell(at: indexPath)
+                }
+                favoriteAction.image = UIImage(systemName: "heart")
+            }
+            favoriteAction.backgroundColor = UIColor.init(
+                red: 255 / 255, green: 165 / 255, blue: 0 / 255, alpha: 1)
+
+            //                let folderAction = SwipeAction(
+            //                    style: .default, title: NSLocalizedString("Add", comment: "")
+            //                ) { _, indexPath in
+            //                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            //                    let vc =
+            //                        storyboard.instantiateViewController(withIdentifier: "myVCID")
+            //                        as! UINavigationController
+            //                    let selectFolderTableViewController =
+            //                        vc.viewControllers.first as! SelectFolderTableViewController
+            //                    selectFolderTableViewController.selectedIndexPath = indexPath.row
+            //                    let _: NSFetchRequest<Article> = Article.fetchRequest()
+            //
+            //                    let targetArticles =
+            //                        self.searchController.isActive ? self.searchResults : self.articles
+            //                    let filteredArticles = targetArticles.filter({
+            //                        ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(
+            //                            self.folderInt)
+            //                    })
+            //                    selectFolderTableViewController.articles = filteredArticles
+            //                    self.present(vc, animated: true)
+            //                }
+            //                folderAction.image = UIImage(systemName: "folder.fill")
+            //                folderAction.backgroundColor = UIColor.init(
+            //                    red: 176 / 255, green: 196 / 255, blue: 222 / 255, alpha: 1)
+            //                return [deleteAction, favoriteAction, folderAction]
+            return [deleteAction, favoriteAction]
+        } else {
+            return []
+        }
+    }
 
     // 完全にスワイプすると記事を削除する
     func tableView(
@@ -569,6 +635,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     // 記事をお気に入りに登録
     func favoriteCell(at indexPath: IndexPath) {
+        var contentRequest = contentList[indexPath.row]
+        contentRequest.liked = true
+        contentManager.putContent(
+            at: indexPath, contentId: contentList[indexPath.row].id, content: contentRequest)
         //        let _: NSFetchRequest<Article> = Article.fetchRequest()
         //
         //        let targetArticles = searchController.isActive ? searchResults : articles
@@ -593,6 +663,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         //
         //        (UIApplication.shared.delegate as! AppDelegate).saveContext()
         //        getStoredDataFromUserDefault()
+
+    }
+
+    // 記事のお気に入りを解除
+    func unFavoriteCell(contentId: Int) {
+        // TODO: implement
     }
 
     // TODO: リファクタリング
@@ -679,22 +755,22 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     // cellを削除する
     func deleteCell(at indexPath: IndexPath) {
-        //        let readContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
-        //            .viewContext
-        //        let _: NSFetchRequest<Article> = Article.fetchRequest()
-        //        if searchController.isActive {
-        //            let filteredArticles = self.searchResults.filter({
-        //                ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(folderInt)
-        //            })
-        //            readContext.delete(filteredArticles[indexPath.row])
-        //        } else {
-        //            let filteredArticles = self.articles.filter({
-        //                ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(folderInt)
-        //            })
-        //            readContext.delete(filteredArticles[indexPath.row])
-        //        }
-        //        (UIApplication.shared.delegate as! AppDelegate).saveContext()
-        //        getStoredDataFromUserDefault()
+        //                let readContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
+        //                    .viewContext
+        //                let _: NSFetchRequest<Article> = Article.fetchRequest()
+        //                if searchController.isActive {
+        //                    let filteredArticles = self.searchResults.filter({
+        //                        ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(folderInt)
+        //                    })
+        //                    readContext.delete(filteredArticles[indexPath.row])
+        //                } else {
+        //                    let filteredArticles = self.articles.filter({
+        //                        ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(folderInt)
+        //                    })
+        //                    readContext.delete(filteredArticles[indexPath.row])
+        //                }
+        //                (UIApplication.shared.delegate as! AppDelegate).saveContext()
+        //                getStoredDataFromUserDefault()
     }
 
     // 言語変更
@@ -720,8 +796,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 }
 
 // MARK: Extensions
-// コンテンツ一覧を取得する
-extension ViewController: ContentListManagerDelegate {
+extension ViewController: ContentListManagerDelegate, ContentManagerDelegate {
     func didUpdateContentList(
         _ contentListManager: ContentListManager, contentListResponse: ContentListResponse
     ) {
@@ -730,6 +805,26 @@ extension ViewController: ContentListManagerDelegate {
             self.contentList = contentListResponse.data.content
             self.renderContentList()
         }
+    }
+
+    func didCreateContent(_ contentManager: ContentManager, contentResponse: ContentResponse) {
+        // TODO: implement
+        print("didCreateContent")
+        print("didCreateContent")
+        print("didCreateContent")
+    }
+
+    func didUpdateContent(
+        _ contentManager: ContentManager, contentResponse: ContentResponse, at indexPath: IndexPath
+    ) {
+        contentListManager.fetchContentList()
+    }
+
+    func didDeleteContent(_ contentManager: ContentManager) {
+        // TODO: implement
+        print("didDeleteContent")
+        print("didDeleteContent")
+        print("didDeleteContent")
     }
 
     func didFailWithError(error: Error) {

@@ -11,23 +11,23 @@ import Foundation
 struct Content: Codable {
     let id: Int
     let contentType: String
-    let title: String
-    let url: String
-    let sharingUrl: String
-    let fileUrl: String?
-    let thumbnailImgUrl: String
-    let scrollPositionX: Int
-    let scrollPositionY: Int
+    var title: String
+    var url: String
+    var sharingUrl: String
+    var fileUrl: String?
+    var thumbnailImgUrl: String
+    var scrollPositionX: Int
+    var scrollPositionY: Int
     let maxScrollPositionX: Int
     let maxScrollPositionY: Int
-    let videoPlaybackPosition: Int
-    let specifiedText: String?
-    let specifiedDomId: String?
-    let specifiedDomClass: String?
-    let specifiedDomTag: String?
-    let liked: Bool?
-    let deleteFlag: Bool
-    let deletedAt: String?
+    var videoPlaybackPosition: Int
+    var specifiedText: String?
+    var specifiedDomId: String?
+    var specifiedDomClass: String?
+    var specifiedDomTag: String?
+    var liked: Bool?
+    var deleteFlag: Bool
+    var deletedAt: String?
     let createdAt: String
     let updatedAt: String
 

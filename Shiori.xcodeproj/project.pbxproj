@@ -48,6 +48,8 @@
 		6272B36B245E9FEC005727D8 /* SupportedServicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6272B36A245E9FEB005727D8 /* SupportedServicesViewController.swift */; };
 		6280BC09242399FA00EEDB3C /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 6280BC08242399FA00EEDB3C /* settings.png */; };
 		62A1E834242F9A0000113A10 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62A1E833242F9A0000113A10 /* MessageUI.framework */; };
+		62A2E49126E158CC007FD4F8 /* ContentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A2E49026E158CC007FD4F8 /* ContentManager.swift */; };
+		62A2E49326E15B89007FD4F8 /* ContentResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A2E49226E15B89007FD4F8 /* ContentResponse.swift */; };
 		62A3AF5F242E350A004BD808 /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A3AF5E242E350A004BD808 /* SettingTableViewController.swift */; };
 		62B08ECD26AB146200CC6B08 /* GoogleDataTransport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62B08ECC26AB146200CC6B08 /* GoogleDataTransport.framework */; };
 		62B08ECF26AB146200CC6B08 /* GoogleUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62B08ECE26AB146200CC6B08 /* GoogleUtilities.framework */; };
@@ -146,6 +148,8 @@
 		6272B36A245E9FEB005727D8 /* SupportedServicesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportedServicesViewController.swift; sourceTree = "<group>"; };
 		6280BC08242399FA00EEDB3C /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
 		62A1E833242F9A0000113A10 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		62A2E49026E158CC007FD4F8 /* ContentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentManager.swift; sourceTree = "<group>"; };
+		62A2E49226E15B89007FD4F8 /* ContentResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentResponse.swift; sourceTree = "<group>"; };
 		62A3AF5E242E350A004BD808 /* SettingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
 		62B08ECC26AB146200CC6B08 /* GoogleDataTransport.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GoogleDataTransport.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		62B08ECE26AB146200CC6B08 /* GoogleUtilities.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GoogleUtilities.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -242,6 +246,8 @@
 				624D4E5D26DE5AA800921FE3 /* Const.swift */,
 				624D4E5F26DE5D6A00921FE3 /* ContentListResponse.swift */,
 				624D4E6126DE806300921FE3 /* Content.swift */,
+				62A2E49026E158CC007FD4F8 /* ContentManager.swift */,
+				62A2E49226E15B89007FD4F8 /* ContentResponse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -542,6 +548,7 @@
 				624D4E6226DE806300921FE3 /* Content.swift in Sources */,
 				6203169E232E9CF30065ADE9 /* FeedTableViewCell.swift in Sources */,
 				6221558E232B79B900DD4AB4 /* ViewController.swift in Sources */,
+				62A2E49326E15B89007FD4F8 /* ContentResponse.swift in Sources */,
 				6221558C232B79B900DD4AB4 /* AppDelegate.swift in Sources */,
 				6226B08724610B1200A5E541 /* SubTableViewController.swift in Sources */,
 				622155B8232CBF8400DD4AB4 /* WebViewController.swift in Sources */,
@@ -552,6 +559,7 @@
 				624411012334EA6300C1C411 /* CustomActivity.swift in Sources */,
 				624AAFE32461AA3F00265D71 /* SelectFolderTableViewController.swift in Sources */,
 				624D4E5E26DE5AA800921FE3 /* Const.swift in Sources */,
+				62A2E49126E158CC007FD4F8 /* ContentManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
