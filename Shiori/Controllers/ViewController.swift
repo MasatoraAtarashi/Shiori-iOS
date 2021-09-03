@@ -303,8 +303,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             //                folderAction.backgroundColor = UIColor.init(
             //                    red: 176 / 255, green: 196 / 255, blue: 222 / 255, alpha: 1)
 
-            let targetContent = contentList[indexPath.row]
-            //
+            // 削除アクション
             let deleteAction = SwipeAction(
                 style: .destructive, title: NSLocalizedString("Delete", comment: "")
             ) { _, indexPath in
@@ -312,7 +311,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             }
             deleteAction.image = UIImage(systemName: "trash.fill")
 
-            // お気に入り
+            // お気に入りアクション
             var favoriteAction: SwipeAction
 
             if contentList[indexPath.row].liked ?? false {
@@ -731,22 +730,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     // cellを削除する
     func deleteCell(at indexPath: IndexPath) {
-        //                let readContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
-        //                    .viewContext
-        //                let _: NSFetchRequest<Article> = Article.fetchRequest()
-        //                if searchController.isActive {
-        //                    let filteredArticles = self.searchResults.filter({
-        //                        ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(folderInt)
-        //                    })
-        //                    readContext.delete(filteredArticles[indexPath.row])
-        //                } else {
-        //                    let filteredArticles = self.articles.filter({
-        //                        ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(folderInt)
-        //                    })
-        //                    readContext.delete(filteredArticles[indexPath.row])
-        //                }
-        //                (UIApplication.shared.delegate as! AppDelegate).saveContext()
-        //                getStoredDataFromUserDefault()
+        contentManager.deleteContent(contentId: contentList[indexPath.row].id)
     }
 
     // 言語変更
@@ -797,10 +781,7 @@ extension ViewController: ContentListManagerDelegate, ContentManagerDelegate {
     }
 
     func didDeleteContent(_ contentManager: ContentManager) {
-        // TODO: implement
-        print("didDeleteContent")
-        print("didDeleteContent")
-        print("didDeleteContent")
+        contentListManager.fetchContentList()
     }
 
     func didFailWithError(error: Error) {

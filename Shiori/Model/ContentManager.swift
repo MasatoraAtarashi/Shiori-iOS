@@ -23,8 +23,10 @@ struct ContentManager {
         // TODO: implement
     }
 
-    func deleteContent() {
+    func deleteContent(contentId: Int) {
         // TODO: implement
+        let deleteContentURL = "\(const.baseURL)/v1/content/\(contentId)"
+        performRequest(with: deleteContentURL, httpMethod: "DELETE", body: nil)
     }
 
     func putContent(contentId: Int, content: Content) {
@@ -61,6 +63,11 @@ struct ContentManager {
                     return
                 }
                 if httpMethod == "DELETE" {
+                    print("DELETE")
+                    print("DELETE")
+                    print("DELETE")
+                    print("DELETE")
+                    print(response)
                     self.delegate?.didDeleteContent(self)
                     return
                 }
