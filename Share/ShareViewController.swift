@@ -80,9 +80,9 @@ class ShareViewController: SLComposeServiceViewController {
                                             let scrollPositionYString =
                                                 results["positionY"] as! String
                                             let maxScrollPositionXString =
-                                                results["positionX"] as! String
+                                                results["maxScrollPositionX"] as! String
                                             let maxScrollPositionYString =
-                                                results["positionY"] as! String
+                                                results["maxScrollPositionY"] as! String
                                             let videoPlaybackPositionString =
                                                 results["time"] as! String
                                             let scrollPositionX = Int(scrollPositionXString)

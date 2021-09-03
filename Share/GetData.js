@@ -2,6 +2,8 @@ var MyPreprocessor = function() {};
 
 MyPreprocessor.prototype = {
     run: function(arguments) {
+        var height = document.body.height;
+        var width = document.body.width;
         var positionTop = String(Math.max(window.pageYOffset, document.documentElement.scrollTop, document.body.scrollTop));
         var positionLeft = String(Math.max(window.pageXOffset, document.documentElement.scrollLeft, document.body.scrollLeft));
 
@@ -78,6 +80,8 @@ MyPreprocessor.prototype = {
                 "title": title,
                 "positionX": positionLeft,
                 "positionY": positionTop,
+                "maxScrollPositionX": width,
+                "maxScrollPositionY": height,
                 "time": time,
                 "image": image,
                 "date": dateString,
