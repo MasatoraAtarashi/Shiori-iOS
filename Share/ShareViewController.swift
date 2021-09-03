@@ -60,18 +60,6 @@ class ShareViewController: SLComposeServiceViewController {
                                             as? [[String: String]] ?? []
 
                                         if results["url"] != nil {
-                                            //                                            let resultsDic = [
-                                            //                                                "url": results["url"], "title": results["title"],
-                                            //                                                "positionX": results["positionX"],
-                                            //                                                "positionY": results["positionY"],
-                                            //                                                "time": results["time"], "image": results["image"],
-                                            //                                                "date": results["date"],
-                                            //                                                "videoPlaybackPosition": results[
-                                            //                                                    "videoPlaybackPosition"],
-                                            //                                            ]
-                                            //
-                                            //                                            storedArray.append(resultsDic as! [String: String])
-                                            //                                            sharedDefaults.set(storedArray, forKey: self.keyName)
                                             let title = results["title"] as? String
                                             let url = results["url"] as? String
                                             let thumbnailImgUrl = results["image"] as? String
