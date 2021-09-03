@@ -1,9 +1,14 @@
 var MyPreprocessor = function() {};
 
+// TODO: リファクタリング
 MyPreprocessor.prototype = {
     run: function(arguments) {
-        var height = document.body.height;
-        var width = document.body.width;
+        var body = document.body,
+            html = document.documentElement;
+        var height = Math.max( body.scrollHeight, body.offsetHeight,
+                              html.clientHeight, html.scrollHeight, html.offsetHeight );
+        var width = Math.max( body.scrollWidth, body.offsetWidth,
+                             html.clientWidth, html.scrollWidth, html.offsetWidth );
         var positionTop = String(Math.max(window.pageYOffset, document.documentElement.scrollTop, document.body.scrollTop));
         var positionLeft = String(Math.max(window.pageXOffset, document.documentElement.scrollLeft, document.body.scrollLeft));
 
