@@ -638,31 +638,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         var contentRequest = contentList[indexPath.row]
         contentRequest.liked = true
         contentManager.putContent(contentId: contentList[indexPath.row].id, content: contentRequest)
-        //        let _: NSFetchRequest<Article> = Article.fetchRequest()
-        //
-        //        let targetArticles = searchController.isActive ? searchResults : articles
-        //        let filteredArticles = targetArticles.filter({
-        //            ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(folderInt)
-        //        })
-        //
-        //        if filteredArticles[indexPath.row].folderInt == nil {
-        //            filteredArticles[indexPath.row].folderInt = [NSLocalizedString("Home", comment: "")]
-        //        }
-        //
-        //        if filteredArticles[indexPath.row].folderInt!.contains(
-        //            NSLocalizedString("Liked", comment: ""))
-        //        {
-        //            filteredArticles[indexPath.row].folderInt?.remove(
-        //                at: filteredArticles[indexPath.row].folderInt!.firstIndex(
-        //                    of: NSLocalizedString("Liked", comment: ""))!)
-        //        } else {
-        //            filteredArticles[indexPath.row].folderInt?.append(
-        //                NSLocalizedString("Liked", comment: ""))
-        //        }
-        //
-        //        (UIApplication.shared.delegate as! AppDelegate).saveContext()
-        //        getStoredDataFromUserDefault()
-
     }
 
     // 記事のお気に入りを解除
@@ -814,7 +789,8 @@ extension ViewController: ContentListManagerDelegate, ContentManagerDelegate {
     }
 
     func didUpdateContent(
-        _ contentManager: ContentManager, contentResponse: ContentResponse) {
+        _ contentManager: ContentManager, contentResponse: ContentResponse
+    ) {
         contentListManager.fetchContentList()
     }
 
