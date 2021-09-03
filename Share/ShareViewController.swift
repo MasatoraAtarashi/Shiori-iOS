@@ -13,11 +13,15 @@ import UIKit
 
 class ShareViewController: SLComposeServiceViewController {
 
+    var contentManager = ContentManager()
+
     let suiteName: String = "group.com.masatoraatarashi.Shiori"
     let keyName: String = "shareData"
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        contentManager.delegate = self
 
         self.title = "Shiori"
         // postName
@@ -56,18 +60,49 @@ class ShareViewController: SLComposeServiceViewController {
                                             as? [[String: String]] ?? []
 
                                         if results["url"] != nil {
-                                            let resultsDic = [
-                                                "url": results["url"], "title": results["title"],
-                                                "positionX": results["positionX"],
-                                                "positionY": results["positionY"],
-                                                "time": results["time"], "image": results["image"],
-                                                "date": results["date"],
-                                                "videoPlaybackPosition": results[
-                                                    "videoPlaybackPosition"],
-                                            ]
+                                            //                                            let resultsDic = [
+                                            //                                                "url": results["url"], "title": results["title"],
+                                            //                                                "positionX": results["positionX"],
+                                            //                                                "positionY": results["positionY"],
+                                            //                                                "time": results["time"], "image": results["image"],
+                                            //                                                "date": results["date"],
+                                            //                                                "videoPlaybackPosition": results[
+                                            //                                                    "videoPlaybackPosition"],
+                                            //                                            ]
+                                            //
+                                            //                                            storedArray.append(resultsDic as! [String: String])
+                                            //                                            sharedDefaults.set(storedArray, forKey: self.keyName)
+                                            let title = results["title"] as! String
+                                            let url = results["url"] as! String
+                                            let thumbnailImgUrl = results["image"] as! String
+                                            let scrollPositionXString =
+                                                results["positionX"] as! String
+                                            let scrollPositionYString =
+                                                results["positionY"] as! String
+                                            let maxScrollPositionXString =
+                                                results["positionX"] as! String
+                                            let maxScrollPositionYString =
+                                                results["positionY"] as! String
+                                            let videoPlaybackPositionString =
+                                                results["time"] as! String
+                                            let scrollPositionX = Int(scrollPositionXString)
+                                            let scrollPositionY = Int(scrollPositionYString)
+                                            let maxScrollPositionX = Int(maxScrollPositionXString)
+                                            let maxScrollPositionY = Int(maxScrollPositionYString)
+                                            let videoPlaybackPosition = Int(
+                                                videoPlaybackPositionString)
+                                            let contentRequest = ContentRequest(
+                                                title: title, url: url,
+                                                thumbnailImgUrl: thumbnailImgUrl,
+                                                scrollPositionX: scrollPositionX ?? 0,
+                                                scrollPositionY: scrollPositionY ?? 0,
+                                                maxScrollPositionX: maxScrollPositionX ?? 0,
+                                                maxScrollPositionY: maxScrollPositionY ?? 0,
+                                                videoPlaybackPosition: videoPlaybackPosition ?? 0,
+                                                specifiedText: nil, specifiedDomId: nil,
+                                                specifiedDomClass: nil, specifiedDomTag: nil)
 
-                                            storedArray.append(resultsDic as! [String: String])
-                                            sharedDefaults.set(storedArray, forKey: self.keyName)
+                                            self.contentManager.postContent(content: contentRequest)
 
                                             self.extensionContext?.completeRequest(
                                                 returningItems: nil, completionHandler: nil)
@@ -96,6 +131,17 @@ class ShareViewController: SLComposeServiceViewController {
     override func configurationItems() -> [Any]! {
         // To add configuration options via table cells at the bottom of the sheet, return an array of SLComposeSheetConfigurationItem here.
         return []
+    }
+
+}
+
+extension ShareViewController: ContentManagerDelegate {
+    func didCreateContent(_ contentManager: ContentManager) {
+        print("content created")
+    }
+
+    func didFailWithError(error: Error) {
+        print("Error", error)
     }
 
 }

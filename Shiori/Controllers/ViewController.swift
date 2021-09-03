@@ -71,11 +71,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     fileprivate let refreshCtl = UIRefreshControl()
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // delegateを設定
         contentListManager.delegate = self
         contentManager.delegate = self
-        
+
         // 広告
         initAdvertisement()
         self.tableView.register(
