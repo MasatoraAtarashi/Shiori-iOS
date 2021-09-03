@@ -554,18 +554,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     // フッターのボタンの表示切り替え
     func hiddenToolbarButtonEdit() {
-        //        if self.articles.count == 0 {
-        //            bottomToolbarRightItem.isEnabled = false
-        //            bottomToolbarRightItem.title = ""
-        //        } else {
-        //            if tableView.isEditing {
-        //                bottomToolbarLeftItem.isEnabled = false
-        //                bottomToolbarLeftItem.image = nil
-        //            } else {
-        //                bottomToolbarRightItem.isEnabled = true
-        //                bottomToolbarRightItem.title = NSLocalizedString("Edit", comment: "")
-        //            }
-        //        }
+        if contentList.count == 0 {
+            bottomToolbarRightItem.isEnabled = false
+            bottomToolbarRightItem.title = ""
+        } else {
+            if tableView.isEditing {
+                bottomToolbarLeftItem.isEnabled = false
+                bottomToolbarLeftItem.image = nil
+            } else {
+                bottomToolbarRightItem.isEnabled = true
+                bottomToolbarRightItem.title = NSLocalizedString("Edit", comment: "")
+            }
+        }
     }
 
     // TODO: 削除
