@@ -374,64 +374,51 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
 
     //    長押し
-    //    @available(iOS 13.0, *)
-    //    func tableView(
-    //        _ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath,
-    //        point: CGPoint
-    //    ) -> UIContextMenuConfiguration? {
+    @available(iOS 13.0, *)
+    func tableView(
+        _ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath,
+        point: CGPoint
+    ) -> UIContextMenuConfiguration? {
 
-    //        let previewProvider: () -> WebViewController? = { [unowned self] in
-    //            let webViewController = WebViewController()
-    //            let targetArticles = searchController.isActive ? searchResults : articles
-    //            let filteredArticles = targetArticles.filter({
-    //                ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(folderInt)
-    //            })
-    //            webViewController.targetUrl = filteredArticles[indexPath.row].link
-    //            webViewController.positionX =
-    //                Int(filteredArticles[indexPath.row].positionX ?? "0") ?? 0
-    //            webViewController.positionY =
-    //                Int(filteredArticles[indexPath.row].positionY ?? "0") ?? 0
-    //            return webViewController
-    //        }
-    //
-    //        let actionProvider: ([UIMenuElement]) -> UIMenu? = { _ in
-    //            let share = UIAction(title: "共有", image: UIImage(systemName: "square.and.arrow.up")) {
-    //                _ in
-    //                var shareText: String
-    //                var shareWebsite: NSURL
-    //                let targetArticles =
-    //                    self.searchController.isActive ? self.searchResults : self.articles
-    //                let filteredArticles = targetArticles.filter({
-    //                    ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(
-    //                        self.folderInt)
-    //                })
-    //                shareText = filteredArticles[indexPath.row].title!
-    //                if let shareURL = URL(string: filteredArticles[indexPath.row].link!) {
-    //                    shareWebsite = shareURL as NSURL
-    //                } else {
-    //                    return
-    //                }
-    //
-    //                let activityItems = [shareText, shareWebsite] as [Any]
-    //
-    //                // 初期化処理
-    //                let activityVC = UIActivityViewController(
-    //                    activityItems: activityItems,
-    //                    applicationActivities: [
-    //                        CustomActivity(title: shareText, url: shareWebsite as URL)
-    //                    ])
-    //
-    //                // UIActivityViewControllerを表示
-    //                self.present(activityVC, animated: true, completion: nil)
-    //            }
-    //
-    //            return UIMenu(title: "Edit..", image: nil, identifier: nil, children: [share])
-    //        }
-    //
-    //        return UIContextMenuConfiguration(
-    //            identifier: nil,
-    //            previewProvider: previewProvider, actionProvider: actionProvider)
-    //    }
+        let previewProvider: () -> WebViewController? = { [unowned self] in
+            let webViewController = WebViewController()
+            webViewController.targetUrl = contentList[indexPath.row].url
+            webViewController.positionX = contentList[indexPath.row].scrollPositionX
+            webViewController.positionY = contentList[indexPath.row].scrollPositionY
+            return webViewController
+        }
+
+        let actionProvider: ([UIMenuElement]) -> UIMenu? = { _ in
+            let share = UIAction(title: "共有", image: UIImage(systemName: "square.and.arrow.up")) {
+                _ in
+                var shareText: String
+                var shareWebsite: NSURL
+                shareText = self.contentList[indexPath.row].title
+                if let shareURL = URL(string: self.contentList[indexPath.row].url) {
+                    shareWebsite = shareURL as NSURL
+                } else {
+                    return
+                }
+                let activityItems = [shareText, shareWebsite] as [Any]
+
+                // 初期化処理
+                let activityVC = UIActivityViewController(
+                    activityItems: activityItems,
+                    applicationActivities: [
+                        CustomActivity(title: shareText, url: shareWebsite as URL)
+                    ])
+
+                // UIActivityViewControllerを表示
+                self.present(activityVC, animated: true, completion: nil)
+            }
+
+            return UIMenu(title: "Edit..", image: nil, identifier: nil, children: [share])
+        }
+
+        return UIContextMenuConfiguration(
+            identifier: nil,
+            previewProvider: previewProvider, actionProvider: actionProvider)
+    }
 
     // MARK: UISearchBarDelegate
     // 検索
