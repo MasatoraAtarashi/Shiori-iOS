@@ -637,8 +637,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func favoriteCell(at indexPath: IndexPath) {
         var contentRequest = contentList[indexPath.row]
         contentRequest.liked = true
-        contentManager.putContent(
-            at: indexPath, contentId: contentList[indexPath.row].id, content: contentRequest)
+        contentManager.putContent(contentId: contentList[indexPath.row].id, content: contentRequest)
         //        let _: NSFetchRequest<Article> = Article.fetchRequest()
         //
         //        let targetArticles = searchController.isActive ? searchResults : articles
@@ -815,8 +814,7 @@ extension ViewController: ContentListManagerDelegate, ContentManagerDelegate {
     }
 
     func didUpdateContent(
-        _ contentManager: ContentManager, contentResponse: ContentResponse, at indexPath: IndexPath
-    ) {
+        _ contentManager: ContentManager, contentResponse: ContentResponse) {
         contentListManager.fetchContentList()
     }
 

@@ -11,7 +11,7 @@ import Foundation
 protocol ContentManagerDelegate {
     func didCreateContent(_ contentManager: ContentManager, contentResponse: ContentResponse)
     func didUpdateContent(
-        _ contentManager: ContentManager, contentResponse: ContentResponse, at indexPath: IndexPath)
+        _ contentManager: ContentManager, contentResponse: ContentResponse)
     func didDeleteContent(_ contentManager: ContentManager)
     func didFailWithError(error: Error)
 }
@@ -27,12 +27,12 @@ struct ContentManager {
         // TODO: implement
     }
 
-    func putContent(at indexPath: IndexPath, contentId: Int, content: Content) {
+    func putContent(contentId: Int, content: Content) {
         let putContentURL = "\(const.baseURL)/v1/content/\(contentId)"
         let encoder = JSONEncoder()
         do {
             let body = try encoder.encode(content)
-            performRequest(with: putContentURL, httpMethod: "PUT", body: body, at: indexPath)
+            performRequest(with: putContentURL, httpMethod: "PUT", body: body)
         } catch {
             self.delegate?.didFailWithError(error: error)
             return
@@ -40,7 +40,7 @@ struct ContentManager {
     }
 
     func performRequest(
-        with urlString: String, httpMethod: String, body: Foundation.Data?, at indexPath: IndexPath?
+        with urlString: String, httpMethod: String, body: Foundation.Data?
     ) {
         print("performRequest")
         print("performRequest")
@@ -73,7 +73,7 @@ struct ContentManager {
                             self.delegate?.didCreateContent(self, contentResponse: contentResponse)
                         } else if httpMethod == "PUT" {
                             self.delegate?.didUpdateContent(
-                                self, contentResponse: contentResponse, at: indexPath!)
+                                self, contentResponse: contentResponse)
                         }
                     }
                 }
