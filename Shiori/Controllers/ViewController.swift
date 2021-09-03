@@ -319,7 +319,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 favoriteAction = SwipeAction(
                     style: .default, title: NSLocalizedString("Cancel", comment: "")
                 ) { _, indexPath in
-                    self.unFavoriteCell(contentId: targetContent.id)
+                    self.unFavoriteCell(at: indexPath)
                 }
                 favoriteAction.image = UIImage(systemName: "heart.fill")
             } else {
@@ -641,8 +641,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
 
     // 記事のお気に入りを解除
-    func unFavoriteCell(contentId: Int) {
-        // TODO: implement
+    func unFavoriteCell(at indexPath: IndexPath) {
+        var contentRequest = contentList[indexPath.row]
+        contentRequest.liked = false
+        contentManager.putContent(contentId: contentList[indexPath.row].id, content: contentRequest)
     }
 
     // TODO: リファクタリング
