@@ -741,13 +741,6 @@ extension ViewController: ContentListManagerDelegate, ContentManagerDelegate {
         }
     }
 
-    func didCreateContent(_ contentManager: ContentManager, contentResponse: ContentResponse) {
-        // TODO: implement
-        print("didCreateContent")
-        print("didCreateContent")
-        print("didCreateContent")
-    }
-
     func didUpdateContent(
         _ contentManager: ContentManager, contentResponse: ContentResponse
     ) {

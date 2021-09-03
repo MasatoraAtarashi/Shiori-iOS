@@ -9,7 +9,6 @@
 import Foundation
 
 protocol ContentManagerDelegate {
-    func didCreateContent(_ contentManager: ContentManager, contentResponse: ContentResponse)
     func didUpdateContent(
         _ contentManager: ContentManager, contentResponse: ContentResponse)
     func didDeleteContent(_ contentManager: ContentManager)
@@ -19,12 +18,7 @@ protocol ContentManagerDelegate {
 struct ContentManager {
     var delegate: ContentManagerDelegate?
 
-    func postContent() {
-        // TODO: implement
-    }
-
     func deleteContent(contentId: Int) {
-        // TODO: implement
         let deleteContentURL = "\(const.baseURL)/v1/content/\(contentId)"
         performRequest(with: deleteContentURL, httpMethod: "DELETE", body: nil)
     }
@@ -44,10 +38,6 @@ struct ContentManager {
     func performRequest(
         with urlString: String, httpMethod: String, body: Foundation.Data?
     ) {
-        print("performRequest")
-        print("performRequest")
-        print("performRequest")
-        print("performRequest")
         if let url = URL(string: urlString) {
             var request = URLRequest(url: url)
             request.httpMethod = httpMethod
@@ -63,25 +53,13 @@ struct ContentManager {
                     return
                 }
                 if httpMethod == "DELETE" {
-                    print("DELETE")
-                    print("DELETE")
-                    print("DELETE")
-                    print("DELETE")
-                    print(response)
                     self.delegate?.didDeleteContent(self)
                     return
                 }
                 if let safeData = data {
                     if let contentResponse = self.parseJSON(safeData) {
-                        print("contentResponse")
-                        print("contentResponse")
-                        print("contentResponse")
-                        if httpMethod == "POST" {
-                            self.delegate?.didCreateContent(self, contentResponse: contentResponse)
-                        } else if httpMethod == "PUT" {
-                            self.delegate?.didUpdateContent(
-                                self, contentResponse: contentResponse)
-                        }
+                        self.delegate?.didUpdateContent(
+                            self, contentResponse: contentResponse)
                     }
                 }
             }
@@ -90,9 +68,6 @@ struct ContentManager {
     }
 
     func parseJSON(_ contentData: Foundation.Data) -> ContentResponse? {
-        print("parseJSON")
-        print("parseJSON")
-        print("parseJSON")
         print(String(bytes: contentData, encoding: .utf8))
         let decoder = JSONDecoder()
         do {
