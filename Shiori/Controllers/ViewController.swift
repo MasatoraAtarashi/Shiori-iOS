@@ -71,27 +71,24 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     fileprivate let refreshCtl = UIRefreshControl()
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // delegateを設定
+        contentListManager.delegate = self
+        contentManager.delegate = self
+        
         // 広告
         initAdvertisement()
         self.tableView.register(
             UINib(nibName: "FeedTableViewCell", bundle: nil),
             forCellReuseIdentifier: "FeedTableViewCell")
         // ローカルストレージからコンテンツを取得
-        //        getStoredDataFromUserDefault()
-
-        contentListManager.delegate = self
-        contentManager.delegate = self
-
-        print(" contentListManager.fetchContentList()")
-        print(" contentListManager.fetchContentList()")
-        print(" contentListManager.fetchContentList()")
-        print(" contentListManager.fetchContentList()")
+        // getStoredDataFromUserDefault()
 
         // コンテンツ一覧を取得
         contentListManager.fetchContentList()
 
         // コンテンツ一覧を表示
-        //        renderContentList()
+        // renderContentList()
 
         // 起動時に言語を変更する
         changeViewLanguage()
