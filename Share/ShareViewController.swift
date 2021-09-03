@@ -72,28 +72,32 @@ class ShareViewController: SLComposeServiceViewController {
                                             //
                                             //                                            storedArray.append(resultsDic as! [String: String])
                                             //                                            sharedDefaults.set(storedArray, forKey: self.keyName)
-                                            let title = results["title"] as! String
-                                            let url = results["url"] as! String
-                                            let thumbnailImgUrl = results["image"] as! String
+                                            let title = results["title"] as? String
+                                            let url = results["url"] as? String
+                                            let thumbnailImgUrl = results["image"] as? String
                                             let scrollPositionXString =
-                                                results["positionX"] as! String
+                                                results["positionX"] as? String
                                             let scrollPositionYString =
-                                                results["positionY"] as! String
+                                                results["positionY"] as? String
+                                            print(results["maxScrollPositionX"])
+                                            print(results["maxScrollPositionY"])
                                             let maxScrollPositionXString =
-                                                results["maxScrollPositionX"] as! String
+                                                results["maxScrollPositionX"] as? String
                                             let maxScrollPositionYString =
-                                                results["maxScrollPositionY"] as! String
+                                                results["maxScrollPositionY"] as? String
                                             let videoPlaybackPositionString =
                                                 results["time"] as! String
-                                            let scrollPositionX = Int(scrollPositionXString)
-                                            let scrollPositionY = Int(scrollPositionYString)
-                                            let maxScrollPositionX = Int(maxScrollPositionXString)
-                                            let maxScrollPositionY = Int(maxScrollPositionYString)
+                                            let scrollPositionX = Int(scrollPositionXString ?? "0")
+                                            let scrollPositionY = Int(scrollPositionYString ?? "0")
+                                            let maxScrollPositionX = Int(
+                                                maxScrollPositionXString ?? "0")
+                                            let maxScrollPositionY = Int(
+                                                maxScrollPositionYString ?? "0")
                                             let videoPlaybackPosition = Int(
                                                 videoPlaybackPositionString)
                                             let contentRequest = ContentRequest(
-                                                title: title, url: url,
-                                                thumbnailImgUrl: thumbnailImgUrl,
+                                                title: title ?? "", url: url ?? "",
+                                                thumbnailImgUrl: thumbnailImgUrl ?? "",
                                                 scrollPositionX: scrollPositionX ?? 0,
                                                 scrollPositionY: scrollPositionY ?? 0,
                                                 maxScrollPositionX: maxScrollPositionX ?? 0,
