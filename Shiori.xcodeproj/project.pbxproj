@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		6203169C232E9C740065ADE9 /* FeedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6203169B232E9C740065ADE9 /* FeedTableViewCell.xib */; };
 		6203169E232E9CF30065ADE9 /* FeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6203169D232E9CF30065ADE9 /* FeedTableViewCell.swift */; };
+		6204CC5526E298F5000611E1 /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624D4E5D26DE5AA800921FE3 /* Const.swift */; };
+		6204CC5626E29900000611E1 /* ContentListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624D4E5B26DE55C100921FE3 /* ContentListManager.swift */; };
+		6204CC5726E29904000611E1 /* Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624D4E6126DE806300921FE3 /* Content.swift */; };
 		6221558C232B79B900DD4AB4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6221558B232B79B900DD4AB4 /* AppDelegate.swift */; };
 		6221558E232B79B900DD4AB4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6221558D232B79B900DD4AB4 /* ViewController.swift */; };
 		62215591232B79B900DD4AB4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6221558F232B79B900DD4AB4 /* Main.storyboard */; };
@@ -568,7 +571,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				62B12335232E75D9007E6F61 /* AppDelegate.swift in Sources */,
+				6204CC5626E29900000611E1 /* ContentListManager.swift in Sources */,
 				622155A7232B7A2F00DD4AB4 /* ShareViewController.swift in Sources */,
+				6204CC5726E29904000611E1 /* Content.swift in Sources */,
+				6204CC5526E298F5000611E1 /* Const.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
