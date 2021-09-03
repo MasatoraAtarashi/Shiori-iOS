@@ -231,17 +231,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         _ tableView: UITableView, editActionsForRowAt indexPath: IndexPath,
         for orientation: SwipeActionsOrientation
     ) -> [SwipeAction]? {
-        print("swipe")
-        print("swipe")
-        print("swipe")
-        print("swipe")
-        print("swipe")
         if orientation == .right {
-            print("swipe-right")
-            print("swipe-right")
-            print("swipe-right")
-            print("swipe-right")
-            print("swipe-right")
             //                let deleteAction = SwipeAction(
             //                    style: .destructive, title: NSLocalizedString("Delete", comment: "")
             //                ) { _, indexPath in
