@@ -23,6 +23,7 @@ class SelectFolderTableViewController: UITableViewController {
     var folderList: [Folder] = []
 
     var folderListManager = FolderListManager()
+    var folderManager = FolderManager()
 
     // MARK: IBOutlets
     @IBOutlet weak var navTitle: UINavigationItem!
@@ -34,6 +35,7 @@ class SelectFolderTableViewController: UITableViewController {
         super.viewDidLoad()
 
         folderListManager.delegate = self
+        folderManager.delegate = self
 
         folderListManager.fetchFolderList()
     }
@@ -70,10 +72,12 @@ class SelectFolderTableViewController: UITableViewController {
                 style: UIAlertAction.Style.default
             ) { _ in
                 if let text = alertTextField?.text {
-                    var categories = UserDefaults.standard.array(forKey: "categories")
-                    categories?.append(text)
-                    UserDefaults.standard.set(categories, forKey: "categories")
-                    self.tableView.reloadData()
+                    //                    var categories = UserDefaults.standard.array(forKey: "categories")
+                    //                    categories?.append(text)
+                    //                    UserDefaults.standard.set(categories, forKey: "categories")
+                    //                    self.tableView.reloadData()
+                    let folderRequest = FolderRequest(name: text)
+                    self.folderManager.postFolder(folder: folderRequest)
                 }
             }
         )
@@ -87,7 +91,6 @@ class SelectFolderTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("folderList.count", folderList.count)
         return folderList.count
     }
 
@@ -131,7 +134,21 @@ class SelectFolderTableViewController: UITableViewController {
 }
 
 // MARK: Extensions
-extension SelectFolderTableViewController: FolderListManagerDelegate {
+extension SelectFolderTableViewController: FolderListManagerDelegate, FolderManagerDelegate {
+    func didCreateFolder(_ folderManager: FolderManager, folderResponse: FolderResponse) {
+        DispatchQueue.main.async {
+            self.folderListManager.fetchFolderList()
+        }
+    }
+
+    func didUpdateFolder(_ folderManager: FolderManager, folderResponse: FolderResponse) {
+        return
+    }
+
+    func didDeleteFolder(_ folderManager: FolderManager) {
+        return
+    }
+
     func didUpdateFolderList(
         _ folderListManager: FolderListManager, folderListResponse: FolderListResponse
     ) {
