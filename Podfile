@@ -4,10 +4,10 @@ platform :ios, '9.0'
 target 'Share' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
+  # Pods for Share
   pod 'Firebase/Analytics'
   pod 'Google-Mobile-Ads-SDK'
-  # Pods for Share
-
+  pod 'NVActivityIndicatorView'
 end
 
 target 'Shiori' do

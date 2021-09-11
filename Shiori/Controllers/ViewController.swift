@@ -38,7 +38,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     //    var articles: [Article] = []
     var contentList: [Content] = []
-    var searchResults: [Article] = []
+    //    var searchResults: [Article] = []
 
     var searchController = UISearchController()
 
@@ -65,8 +65,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     @IBOutlet weak var bottomToolbarLeftItem: UIBarButtonItem!
     @IBOutlet weak var bottomToolbarRightItem: UIBarButtonItem!
-
-    var activityIndicatorView: NVActivityIndicatorView?
 
     // MARK: Initializers
     // MARK: Type Methods
@@ -496,25 +494,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     // インジケータ
     func initIndicator() {
-        activityIndicatorView = NVActivityIndicatorView(
-            frame: CGRect(x: 0, y: 0, width: 85, height: 85),
-            type: NVActivityIndicatorType.ballSpinFadeLoader,
-            color: UIColor.darkGray,
-            padding: 0
-        )
-        if let activityView = activityIndicatorView {
-            tableView.addSubview(activityView)
-            tableView.bringSubviewToFront(activityView)
-            activityView.center = tableView.center
-        }
+        tableView.addSubview(const.activityIndicatorView)
+        tableView.bringSubviewToFront(const.activityIndicatorView)
+        const.activityIndicatorView.center = tableView.center
     }
 
     func startIndicator() {
-        activityIndicatorView?.startAnimating()
+        const.activityIndicatorView.startAnimating()
     }
 
     func stopIndicator() {
-        activityIndicatorView?.stopAnimating()
+        const.activityIndicatorView.stopAnimating()
     }
 
     // 背景色を設定

@@ -22,9 +22,6 @@ class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
     var shareButton: UIBarButtonItem!
     var backButton: UIBarButtonItem!
     var forwadButton: UIBarButtonItem!
-
-    var activityIndicatorView: NVActivityIndicatorView?
-
     var targetUrl: String?
     var positionX: Int = 0
     var positionY: Int = 0
@@ -43,24 +40,14 @@ class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
 
         // インライン再生を許可
         webConfiguration.allowsInlineMediaPlayback = true
-
-        activityIndicatorView = NVActivityIndicatorView(
-            frame: CGRect(x: 0, y: 0, width: 85, height: 85),
-            type: NVActivityIndicatorType.ballSpinFadeLoader,
-            color: UIColor.darkGray,
-            padding: 0
-        )
-
         webConfiguration.preferences = preferences
         webView = WKWebView(frame: .zero, configuration: webConfiguration)
         webView.uiDelegate = self
         webView.navigationDelegate = self
         view = webView
 
-        if let activityView = activityIndicatorView {
-            webView.addSubview(activityView)
-            webView.bringSubviewToFront(activityView)
-        }
+        webView.addSubview(const.activityIndicatorView)
+        webView.bringSubviewToFront(const.activityIndicatorView)
 
         webView.allowsBackForwardNavigationGestures = true
     }
@@ -171,8 +158,8 @@ class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
 extension WebViewController {
 
     func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
-        activityIndicatorView?.center = webView.center
-        activityIndicatorView?.startAnimating()
+        const.activityIndicatorView.center = webView.center
+        const.activityIndicatorView.startAnimating()
     }
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
@@ -182,7 +169,7 @@ extension WebViewController {
         positionX = 0
         positionY = 0
         self.refreshControll.endRefreshing()
-        activityIndicatorView?.stopAnimating()
+        const.activityIndicatorView.stopAnimating()
 
         let setVideoPlaybackPositionScript = """
                 var htmlVideoPlayer = document.getElementsByTagName('video')[0];
