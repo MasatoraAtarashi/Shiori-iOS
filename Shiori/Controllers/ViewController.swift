@@ -9,6 +9,7 @@
 import CoreData
 import Firebase
 import GoogleMobileAds
+import NVActivityIndicatorView
 import SDWebImage
 import SwiftMessages
 import SwipeCellKit
@@ -65,6 +66,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var bottomToolbarLeftItem: UIBarButtonItem!
     @IBOutlet weak var bottomToolbarRightItem: UIBarButtonItem!
 
+    var activityIndicatorView: NVActivityIndicatorView?
+
     // MARK: Initializers
     // MARK: Type Methods
     // MARK: View Life-Cycle Methods
@@ -97,9 +100,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // 検索
         initSearchController()
         tutorialTextLabel.text = "記事を追加するのは簡単です。\n以下をタップして始めましょう。"
+
+        // インジケータを作成
+        initIndicator()
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        // インジケータを表示
+        startIndicator()
         // 背景色を設定
         changeBackgroundColor()
         // 広告表示
@@ -486,6 +494,29 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.navigationItem.searchController = searchController
     }
 
+    // インジケータ
+    func initIndicator() {
+        activityIndicatorView = NVActivityIndicatorView(
+            frame: CGRect(x: 0, y: 0, width: 85, height: 85),
+            type: NVActivityIndicatorType.ballSpinFadeLoader,
+            color: UIColor.darkGray,
+            padding: 0
+        )
+        if let activityView = activityIndicatorView {
+            tableView.addSubview(activityView)
+            tableView.bringSubviewToFront(activityView)
+            activityView.center = tableView.center
+        }
+    }
+
+    func startIndicator() {
+        activityIndicatorView?.startAnimating()
+    }
+
+    func stopIndicator() {
+        activityIndicatorView?.stopAnimating()
+    }
+
     // 背景色を設定
     func changeBackgroundColor() {
         r = UserDefaults.standard.integer(forKey: "r")
@@ -738,6 +769,7 @@ extension ViewController: ContentListManagerDelegate, ContentManagerDelegate {
             // TODO: 一番下までスクロールしたら追加でコンテンツを取得できるようにする
             self.contentList = contentListResponse.data.content
             self.renderContentList()
+            self.stopIndicator()
         }
     }
 
