@@ -11,11 +11,16 @@ import NVActivityIndicatorView
 
 // 定数クラス
 struct Const {
+    // APIのURL
     let baseURL: String = "https://web-shiori.herokuapp.com"
+    // インジケータ
     let activityIndicatorView = NVActivityIndicatorView(
         frame: CGRect(x: 0, y: 0, width: 85, height: 85),
         type: NVActivityIndicatorType.ballSpinFadeLoader,
         color: UIColor.darkGray,
         padding: 0
     )
+    // ホームとお気に入りフォルダを識別するためのid
+    let HomeFolderId = -1
+    let LikedFolderId = -2
 }

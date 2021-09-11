@@ -85,7 +85,6 @@ class SubTableViewController: UITableViewController, SwipeTableViewCellDelegate 
         //
         //                    return cell
         //                }
-
         let cell =
             tableView.dequeueReusableCell(withIdentifier: "cellForSub", for: indexPath)
             as! SwipeTableViewCell
@@ -102,10 +101,14 @@ class SubTableViewController: UITableViewController, SwipeTableViewCellDelegate 
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //        let preNC = self.navigationController?.presentingViewController as! UINavigationController
+        //        let preVC = preNC.viewControllers[preNC.viewControllers.count - 1] as! ViewController
+        //        preVC.folderInt =
+        //            UserDefaults.standard.array(forKey: "categories")?[indexPath.row] as! String
+        //        self.dismiss(animated: true, completion: nil)
         let preNC = self.navigationController?.presentingViewController as! UINavigationController
         let preVC = preNC.viewControllers[preNC.viewControllers.count - 1] as! ViewController
-        preVC.folderInt =
-            UserDefaults.standard.array(forKey: "categories")?[indexPath.row] as! String
+        preVC.folderId = folderList[indexPath.row].folderId
         self.dismiss(animated: true, completion: nil)
     }
 

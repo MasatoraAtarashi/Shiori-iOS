@@ -21,10 +21,17 @@ let const = Const()
 struct ContentListManager {
     var delegate: ContentListManagerDelegate?
 
+    // コンテンツ一覧を取得
     func fetchContentList(q: String = "", per_page: Int = 50, page: Int = 1, liked: Bool = false) {
         let getContentListURL =
             "\(const.baseURL)/v1/content?q=\(q)&per_page=\(per_page)&page=\(page)&liked=\(liked)"
         performRequest(with: getContentListURL)
+    }
+
+    // フォルダ内コンテンツ一覧を取得
+    func fetchFolderContentList(folderId: Int, q: String = "", per_page: Int = 50, page: Int = 1) {
+        let getFolderContentListURL = "\(const.baseURL)/v1/folder/\(folderId)/content"
+        performRequest(with: getFolderContentListURL)
     }
 
     func performRequest(with urlString: String) {

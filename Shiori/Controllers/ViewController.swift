@@ -44,6 +44,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     // フォルダ
     var folderInt: String = NSLocalizedString("Home", comment: "")
+    var folderId: Int = const.HomeFolderId
 
     var r: Int = UserDefaults.standard.integer(forKey: "r")
     var g: Int = UserDefaults.standard.integer(forKey: "g")
@@ -85,6 +86,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // ローカルストレージからコンテンツを取得
         // getStoredDataFromUserDefault()
 
+        // インジケータを表示
+        startIndicator()
         // コンテンツ一覧を取得
         contentListManager.fetchContentList()
 
@@ -104,20 +107,22 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        // インジケータを表示
-        startIndicator()
         // 背景色を設定
         changeBackgroundColor()
         // 広告表示
         changeDisplayAdvertisement()
         // フッターのボタンの表示切り替え
         hiddenToolbarButtonEdit()
+
+        // NOTE: SubTableViewControllerから戻ってきたときの処理。!= nilという条件はあんまりよくない。本当は == SubTableViewControllerとかでやりたいけど、どうやるかわからない
+        if navigationController?.presentedViewController != nil {
+            loadFolderContentList()
+        }
     }
 
-    // Called to notify the view controller that its view has just laid out its subviews.
+    // レイアウト処理終了時の処理
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-
         let screenRect = UIScreen.main.bounds
         tableView.frame = CGRect(x: 0, y: 0, width: screenRect.width, height: screenRect.height)
     }
@@ -560,6 +565,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 bottomToolbarRightItem.isEnabled = true
                 bottomToolbarRightItem.title = NSLocalizedString("Edit", comment: "")
             }
+        }
+    }
+
+    // フォルダ内コンテンツを取得して表示する
+    func loadFolderContentList() {
+        startIndicator()
+        if folderId == const.HomeFolderId {
+            contentListManager.fetchContentList()
+        } else if folderId == const.LikedFolderId {
+            contentListManager.fetchContentList(liked: true)
+        } else {
+            contentListManager.fetchFolderContentList(folderId: folderId)
         }
     }
 
