@@ -420,7 +420,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // MARK: UISearchBarDelegate
     // 検索
     func updateSearchResults(for searchController: UISearchController) {
-        contentListManager.fetchContentList(q: searchController.searchBar.text ?? "")
+        self.loadFolderContentList(q: searchController.searchBar.text ?? "")
     }
 
     // MARK: Other Methods
@@ -484,7 +484,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     // tableView更新
     @objc func refresh() {
-        contentListManager.fetchContentList()
+        loadFolderContentList()
     }
 
     // 検索
@@ -568,14 +568,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
 
     // フォルダ内コンテンツを取得して表示する
-    func loadFolderContentList() {
+    func loadFolderContentList(q: String = "") {
         startIndicator()
         if folderId == const.HomeFolderId {
-            contentListManager.fetchContentList()
+            contentListManager.fetchContentList(q: q)
         } else if folderId == const.LikedFolderId {
-            contentListManager.fetchContentList(liked: true)
+            contentListManager.fetchContentList(q: q, liked: true)
         } else {
-            contentListManager.fetchFolderContentList(folderId: folderId)
+            contentListManager.fetchFolderContentList(folderId: folderId, q: q)
         }
     }
 
@@ -782,11 +782,11 @@ extension ViewController: ContentListManagerDelegate, ContentManagerDelegate {
     func didUpdateContent(
         _ contentManager: ContentManager, contentResponse: ContentResponse
     ) {
-        contentListManager.fetchContentList()
+        self.loadFolderContentList()
     }
 
     func didDeleteContent(_ contentManager: ContentManager) {
-        contentListManager.fetchContentList()
+        self.loadFolderContentList()
     }
 
     func didFailWithError(error: Error) {

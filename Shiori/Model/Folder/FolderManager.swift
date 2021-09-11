@@ -29,7 +29,7 @@ struct FolderManager {
             return
         }
     }
-    
+
     // フォルダ削除
     func deleteFolder(folderId: Int) {
         let deleteFolderURL = "\(const.baseURL)/v1/folder/\(folderId)"
