@@ -329,32 +329,32 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             favoriteAction.backgroundColor = UIColor.init(
                 red: 255 / 255, green: 165 / 255, blue: 0 / 255, alpha: 1)
 
-            //                let folderAction = SwipeAction(
-            //                    style: .default, title: NSLocalizedString("Add", comment: "")
-            //                ) { _, indexPath in
-            //                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            //                    let vc =
-            //                        storyboard.instantiateViewController(withIdentifier: "myVCID")
-            //                        as! UINavigationController
-            //                    let selectFolderTableViewController =
-            //                        vc.viewControllers.first as! SelectFolderTableViewController
-            //                    selectFolderTableViewController.selectedIndexPath = indexPath.row
-            //                    let _: NSFetchRequest<Article> = Article.fetchRequest()
-            //
-            //                    let targetArticles =
-            //                        self.searchController.isActive ? self.searchResults : self.articles
-            //                    let filteredArticles = targetArticles.filter({
-            //                        ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(
-            //                            self.folderInt)
-            //                    })
-            //                    selectFolderTableViewController.articles = filteredArticles
-            //                    self.present(vc, animated: true)
-            //                }
-            //                folderAction.image = UIImage(systemName: "folder.fill")
-            //                folderAction.backgroundColor = UIColor.init(
-            //                    red: 176 / 255, green: 196 / 255, blue: 222 / 255, alpha: 1)
-            //                return [deleteAction, favoriteAction, folderAction]
-            return [deleteAction, favoriteAction]
+            let folderAction = SwipeAction(
+                style: .default, title: NSLocalizedString("Add", comment: "")
+            ) { _, indexPath in
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let vc =
+                    storyboard.instantiateViewController(withIdentifier: "myVCID")
+                    as! UINavigationController
+                let selectFolderTableViewController =
+                    vc.viewControllers.first as! SelectFolderTableViewController
+                selectFolderTableViewController.selectedIndexPath = indexPath.row
+                let _: NSFetchRequest<Article> = Article.fetchRequest()
+
+                //                                let targetArticles =
+                //                                    self.searchController.isActive ? self.searchResults : self.articles
+                //                                let filteredArticles = targetArticles.filter({
+                //                                    ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(
+                //                                        self.folderInt)
+                //                                })
+                //                                selectFolderTableViewController.articles = filteredArticles
+                selectFolderTableViewController.content = self.contentList[indexPath.row]
+                self.present(vc, animated: true)
+            }
+            folderAction.image = UIImage(systemName: "folder.fill")
+            folderAction.backgroundColor = UIColor.init(
+                red: 176 / 255, green: 196 / 255, blue: 222 / 255, alpha: 1)
+            return [deleteAction, favoriteAction, folderAction]
         } else {
             return []
         }

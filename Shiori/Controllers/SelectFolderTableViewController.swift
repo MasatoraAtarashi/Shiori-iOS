@@ -15,8 +15,14 @@ class SelectFolderTableViewController: UITableViewController {
     // MARK: Structs
     // MARK: Enums
     // MARK: Properties
+    // TODO: 削除
     var selectedIndexPath: Int = 0
     var articles: [Article] = []
+
+    var content: Content?
+    var folderList: [Folder] = []
+
+    var folderListManager = FolderListManager()
 
     // MARK: IBOutlets
     @IBOutlet weak var navTitle: UINavigationItem!
@@ -26,6 +32,10 @@ class SelectFolderTableViewController: UITableViewController {
     // MARK: View Life-Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        folderListManager.delegate = self
+
+        folderListManager.fetchFolderList()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -79,30 +89,37 @@ class SelectFolderTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        var count: Int
-        if UserDefaults.standard.array(forKey: "categories")?.count ?? 0 > 2 {
-            count = UserDefaults.standard.array(forKey: "categories")!.count - 2
-        } else {
-            count = 0
-        }
-        return count
+        //        var count: Int
+        //        if UserDefaults.standard.array(forKey: "categories")?.count ?? 0 > 2 {
+        //            count = UserDefaults.standard.array(forKey: "categories")!.count - 2
+        //        } else {
+        //            count = 0
+        //        }
+        //        return count
+        print("folderList.count", folderList.count)
+        return folderList.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath)
         -> UITableViewCell
     {
+        //        let cell = tableView.dequeueReusableCell(
+        //            withIdentifier: "cellForFolderSelection", for: indexPath)
+        //
+        //        // Configure the cell...
+        //        let categories = UserDefaults.standard.array(forKey: "categories")?.dropFirst(2)
+        //        cell.textLabel!.text = categories![indexPath.row + 2] as? String
+        //
+        //        if let folderName = categories?[indexPath.row + 2] {
+        //            if articles[selectedIndexPath].folderInt?.contains(folderName as! String) ?? false {
+        //                cell.textLabel!.text! += NSLocalizedString("(Added)", comment: "")
+        //            }
+        //        }
+        //        return cell
+
         let cell = tableView.dequeueReusableCell(
             withIdentifier: "cellForFolderSelection", for: indexPath)
-
-        // Configure the cell...
-        let categories = UserDefaults.standard.array(forKey: "categories")?.dropFirst(2)
-        cell.textLabel!.text = categories![indexPath.row + 2] as? String
-
-        if let folderName = categories?[indexPath.row + 2] {
-            if articles[selectedIndexPath].folderInt?.contains(folderName as! String) ?? false {
-                cell.textLabel!.text! += NSLocalizedString("(Added)", comment: "")
-            }
-        }
+        cell.textLabel?.text = folderList[indexPath.row].name
         return cell
     }
 
@@ -115,7 +132,25 @@ class SelectFolderTableViewController: UITableViewController {
     }
 
     // MARK: Other Methods
+    func renderFolderList() {
+        tableView.reloadData()
+    }
     // MARK: Subscripts
 }
 
 // MARK: Extensions
+extension SelectFolderTableViewController: FolderListManagerDelegate {
+    func didUpdateFolderList(
+        _ folderListManager: FolderListManager, folderListResponse: FolderListResponse
+    ) {
+        DispatchQueue.main.async {
+            self.folderList = Array(folderListResponse.data.folder[2...])
+            self.renderFolderList()
+        }
+    }
+
+    func didFailWithError(error: Error) {
+        print("Error", error)
+    }
+
+}
