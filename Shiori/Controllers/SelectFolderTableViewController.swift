@@ -83,19 +83,10 @@ class SelectFolderTableViewController: UITableViewController {
 
     // MARK: Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        //        var count: Int
-        //        if UserDefaults.standard.array(forKey: "categories")?.count ?? 0 > 2 {
-        //            count = UserDefaults.standard.array(forKey: "categories")!.count - 2
-        //        } else {
-        //            count = 0
-        //        }
-        //        return count
         print("folderList.count", folderList.count)
         return folderList.count
     }
@@ -117,6 +108,7 @@ class SelectFolderTableViewController: UITableViewController {
         //        }
         //        return cell
 
+        // TODO: すでにフォルダに追加されていたらその旨を表示する
         let cell = tableView.dequeueReusableCell(
             withIdentifier: "cellForFolderSelection", for: indexPath)
         cell.textLabel?.text = folderList[indexPath.row].name
