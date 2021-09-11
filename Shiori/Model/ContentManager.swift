@@ -68,13 +68,11 @@ struct ContentManager {
     }
 
     func parseJSON(_ contentData: Foundation.Data) -> ContentResponse? {
-        print(String(bytes: contentData, encoding: .utf8))
         let decoder = JSONDecoder()
         do {
             let decodeData = try decoder.decode(ContentResponse.self, from: contentData)
             return decodeData
         } catch {
-            print("Error", error)
             delegate?.didFailWithError(error: error)
             return nil
         }
