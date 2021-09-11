@@ -53,12 +53,6 @@ class ShareViewController: SLComposeServiceViewController {
                                             dictionary[NSExtensionJavaScriptPreprocessingResultsKey]
                                             as! NSDictionary
 
-                                        let sharedDefaults: UserDefaults = UserDefaults(
-                                            suiteName: self.suiteName)!
-                                        var storedArray: [[String: String]] =
-                                            sharedDefaults.array(forKey: self.keyName)
-                                            as? [[String: String]] ?? []
-
                                         if results["url"] != nil {
                                             let title = results["title"] as? String
                                             let url = results["url"] as? String
@@ -67,8 +61,6 @@ class ShareViewController: SLComposeServiceViewController {
                                                 results["positionX"] as? String
                                             let scrollPositionYString =
                                                 results["positionY"] as? String
-                                            print(results["maxScrollPositionX"])
-                                            print(results["maxScrollPositionY"])
                                             let maxScrollPositionXString =
                                                 results["maxScrollPositionX"] as? String
                                             let maxScrollPositionYString =

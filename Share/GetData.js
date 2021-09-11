@@ -79,6 +79,7 @@ MyPreprocessor.prototype = {
         if(document.title) {
          title = document.title;
         }
+        // TODO: 変数名を合わせる
         arguments.completionFunction(
             {
                 "url": url,
