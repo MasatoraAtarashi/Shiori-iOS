@@ -214,10 +214,6 @@ class SubTableViewController: UITableViewController, SwipeTableViewCellDelegate 
                 style: UIAlertAction.Style.default
             ) { _ in
                 if let text = alertTextField?.text {
-                    //                    var categories = UserDefaults.standard.array(forKey: "categories")
-                    //                    categories?.append(text)
-                    //                    UserDefaults.standard.set(categories, forKey: "categories")
-                    //                    self.tableView.reloadData()
                     let folderRequest = FolderRequest(name: text)
                     self.folderManager.postFolder(folder: folderRequest)
                 }
