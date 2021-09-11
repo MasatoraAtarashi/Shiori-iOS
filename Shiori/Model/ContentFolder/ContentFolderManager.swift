@@ -23,8 +23,9 @@ struct ContentFolderManager {
     }
 
     // フォルダからコンテンツを取り除く
-    func deleteContentToFolder() {
-
+    func deleteContentToFolder(contentId: Int, folderId: Int) {
+        let deleteContentToFolderURL = "\(const.baseURL)/v1/folder/\(folderId)/content/\(contentId)"
+        performRequest(with: deleteContentToFolderURL, httpMethod: "DELETE")
     }
 
     func performRequest(with urlString: String, httpMethod: String) {
@@ -41,7 +42,6 @@ struct ContentFolderManager {
                     self.delegate?.didFailWithError(error: error!)
                     return
                 }
-                print(response)
                 self.delegate?.didUpdateContentFolder(self)
             }
             task.resume()

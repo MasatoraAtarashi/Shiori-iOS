@@ -133,8 +133,14 @@ class SelectFolderTableViewController: UITableViewController {
         //        preVC.addArticleToFolder(self.selectedIndexPath, categories[indexPath.row + 2])
         //        self.dismiss(animated: true, completion: nil)
         guard let contentId = content?.id else { return }
-        let folderId = folderList[indexPath.row].folderId
-        contentFolderManager.postContentToFolder(contentId: contentId, folderId: folderId)
+        let folder = folderList[indexPath.row]
+        let folderId = folder.folderId
+        let folderContentList = folder.contentList
+        if Bool(folder.contentList?.contains(content?.id ?? 0) ?? false) {
+            contentFolderManager.deleteContentToFolder(contentId: contentId, folderId: folderId)
+        } else {
+            contentFolderManager.postContentToFolder(contentId: contentId, folderId: folderId)
+        }
         self.dismiss(animated: true, completion: nil)
     }
 
