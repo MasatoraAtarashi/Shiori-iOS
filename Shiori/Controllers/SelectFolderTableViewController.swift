@@ -37,6 +37,8 @@ class SelectFolderTableViewController: UITableViewController {
         folderListManager.delegate = self
         folderManager.delegate = self
 
+        initIndicator()
+        const.activityIndicatorView.startAnimating()
         folderListManager.fetchFolderList()
     }
 
@@ -130,6 +132,13 @@ class SelectFolderTableViewController: UITableViewController {
     func renderFolderList() {
         tableView.reloadData()
     }
+
+    // インジケータ
+    func initIndicator() {
+        tableView.addSubview(const.activityIndicatorView)
+        tableView.bringSubviewToFront(const.activityIndicatorView)
+        const.activityIndicatorView.center = CGPoint(x: tableView.center.x, y: 50)
+    }
     // MARK: Subscripts
 }
 
@@ -155,6 +164,7 @@ extension SelectFolderTableViewController: FolderListManagerDelegate, FolderMana
         DispatchQueue.main.async {
             self.folderList = Array(folderListResponse.data.folder[2...])
             self.renderFolderList()
+            const.activityIndicatorView.stopAnimating()
         }
     }
 
