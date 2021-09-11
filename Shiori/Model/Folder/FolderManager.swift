@@ -10,8 +10,6 @@ import Foundation
 
 protocol FolderManagerDelegate {
     func didCreateFolder(_ folderManager: FolderManager, folderResponse: FolderResponse)
-    func didUpdateFolder(
-        _ folderManager: FolderManager, folderResponse: FolderResponse)
     func didDeleteFolder(_ folderManager: FolderManager)
     func didFailWithError(error: Error)
 }
@@ -31,12 +29,7 @@ struct FolderManager {
             return
         }
     }
-
-    // フォルダ修正
-    func putFolder() {
-
-    }
-
+    
     // フォルダ削除
     func deleteFolder(folderId: Int) {
         let deleteFolderURL = "\(const.baseURL)/v1/folder/\(folderId)"
@@ -72,13 +65,11 @@ struct FolderManager {
     }
 
     func parseJSON(_ folderData: Foundation.Data) -> FolderResponse? {
-        print(String(bytes: folderData, encoding: .utf8))
         let decoder = JSONDecoder()
         do {
             let decodeData = try decoder.decode(FolderResponse.self, from: folderData)
             return decodeData
         } catch {
-            print("Error", error)
             delegate?.didFailWithError(error: error)
             return nil
         }

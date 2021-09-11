@@ -45,7 +45,6 @@ struct ContentManager {
                     self.delegate?.didFailWithError(error: error!)
                     return
                 }
-                print(response)
                 self.delegate?.didCreateContent(self)
             }
             task.resume()

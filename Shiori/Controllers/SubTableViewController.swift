@@ -238,14 +238,7 @@ extension SubTableViewController: FolderListManagerDelegate, FolderManagerDelega
         }
     }
 
-    func didUpdateFolder(_ folderManager: FolderManager, folderResponse: FolderResponse) {
-        // TODO: 実装
-        print("didUpdateFolder")
-    }
-
     func didDeleteFolder(_ folderManager: FolderManager) {
-        // TODO: 実装
-        print("didDeleteFolder")
         DispatchQueue.main.async {
             self.folderViewActivityIndicatorView.startAnimating()
             self.folderListManager.fetchFolderList()
