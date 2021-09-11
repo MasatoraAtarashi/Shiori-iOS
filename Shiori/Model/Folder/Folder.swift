@@ -13,11 +13,12 @@ struct Folder: Codable {
     let userId: Int
     let name: String
     let contentCount: Int
-
+    let contentList: [Int]?
     enum CodingKeys: String, CodingKey {
         case folderId = "folder_id"
         case userId = "user_id"
         case name
         case contentCount = "content_count"
+        case contentList = "content_list"
     }
 }

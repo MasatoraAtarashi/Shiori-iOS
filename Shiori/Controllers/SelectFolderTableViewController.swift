@@ -118,7 +118,11 @@ class SelectFolderTableViewController: UITableViewController {
         // TODO: すでにフォルダに追加されていたらその旨を表示する
         let cell = tableView.dequeueReusableCell(
             withIdentifier: "cellForFolderSelection", for: indexPath)
-        cell.textLabel?.text = folderList[indexPath.row].name
+        let folder = folderList[indexPath.row]
+        cell.textLabel?.text = folder.name
+        if Bool(folder.contentList?.contains(content?.id ?? 0) ?? false) {
+            cell.textLabel?.text! += NSLocalizedString("(Added)", comment: "")
+        }
         return cell
     }
 
