@@ -140,6 +140,7 @@ class SubTableViewController: UITableViewController, SwipeTableViewCellDelegate 
         for orientation: SwipeActionsOrientation
     ) -> [SwipeAction]? {
 
+        if [0, 1].contains(indexPath.row) { return nil }
         guard orientation == .right else { return nil }
 
         let deleteAction = SwipeAction(
