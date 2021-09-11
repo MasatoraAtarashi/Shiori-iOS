@@ -233,8 +233,10 @@ class SubTableViewController: UITableViewController, SwipeTableViewCellDelegate 
 // MARK: Extensions
 extension SubTableViewController: FolderListManagerDelegate, FolderManagerDelegate {
     func didCreateFolder(_ folderManager: FolderManager, folderResponse: FolderResponse) {
-        folderViewActivityIndicatorView.startAnimating()
-        folderListManager.fetchFolderList()
+        DispatchQueue.main.async {
+            self.folderViewActivityIndicatorView.startAnimating()
+            self.folderListManager.fetchFolderList()
+        }
     }
 
     func didUpdateFolder(_ folderManager: FolderManager, folderResponse: FolderResponse) {
