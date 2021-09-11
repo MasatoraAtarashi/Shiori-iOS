@@ -790,6 +790,7 @@ extension ViewController: ContentListManagerDelegate, ContentManagerDelegate {
     }
 
     func didFailWithError(error: Error) {
+        const.activityIndicatorView.stopAnimating()
         print("Error", error)
     }
 }
