@@ -24,6 +24,7 @@ class SelectFolderTableViewController: UITableViewController {
 
     var folderListManager = FolderListManager()
     var folderManager = FolderManager()
+    var contentFolderManager = ContentFolderManager()
 
     // MARK: IBOutlets
     @IBOutlet weak var navTitle: UINavigationItem!
@@ -36,6 +37,7 @@ class SelectFolderTableViewController: UITableViewController {
 
         folderListManager.delegate = self
         folderManager.delegate = self
+        contentFolderManager.delegate = self
 
         initIndicator()
         const.activityIndicatorView.startAnimating()
@@ -121,10 +123,14 @@ class SelectFolderTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let preNC = self.navigationController?.presentingViewController as! UINavigationController
-        let preVC = preNC.viewControllers[preNC.viewControllers.count - 1] as! ViewController
-        let categories = UserDefaults.standard.array(forKey: "categories") as! [String]
-        preVC.addArticleToFolder(self.selectedIndexPath, categories[indexPath.row + 2])
+        //        let preNC = self.navigationController?.presentingViewController as! UINavigationController
+        //        let preVC = preNC.viewControllers[preNC.viewControllers.count - 1] as! ViewController
+        //        let categories = UserDefaults.standard.array(forKey: "categories") as! [String]
+        //        preVC.addArticleToFolder(self.selectedIndexPath, categories[indexPath.row + 2])
+        //        self.dismiss(animated: true, completion: nil)
+        guard let contentId = content?.id else { return }
+        let folderId = folderList[indexPath.row].folderId
+        contentFolderManager.postContentToFolder(contentId: contentId, folderId: folderId)
         self.dismiss(animated: true, completion: nil)
     }
 
@@ -143,7 +149,13 @@ class SelectFolderTableViewController: UITableViewController {
 }
 
 // MARK: Extensions
-extension SelectFolderTableViewController: FolderListManagerDelegate, FolderManagerDelegate {
+extension SelectFolderTableViewController: FolderListManagerDelegate, FolderManagerDelegate,
+    ContentFolderManagerDelegate
+{
+    func didUpdateContentFolder(_ contentFolderManager: ContentFolderManager) {
+        return
+    }
+
     func didCreateFolder(_ folderManager: FolderManager, folderResponse: FolderResponse) {
         DispatchQueue.main.async {
             self.folderListManager.fetchFolderList()

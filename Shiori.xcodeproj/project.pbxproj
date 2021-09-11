@@ -61,6 +61,7 @@
 		62A2E49126E158CC007FD4F8 /* ContentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A2E49026E158CC007FD4F8 /* ContentManager.swift */; };
 		62A2E49326E15B89007FD4F8 /* ContentResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A2E49226E15B89007FD4F8 /* ContentResponse.swift */; };
 		62A3AF5F242E350A004BD808 /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A3AF5E242E350A004BD808 /* SettingTableViewController.swift */; };
+		62A7BA8B26ED0CF000D3CD8E /* ContentFolderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A7BA8A26ED0CF000D3CD8E /* ContentFolderManager.swift */; };
 		62B08ECD26AB146200CC6B08 /* GoogleDataTransport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62B08ECC26AB146200CC6B08 /* GoogleDataTransport.framework */; };
 		62B08ECF26AB146200CC6B08 /* GoogleUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62B08ECE26AB146200CC6B08 /* GoogleUtilities.framework */; };
 		62B12335232E75D9007E6F61 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6221558B232B79B900DD4AB4 /* AppDelegate.swift */; };
@@ -169,6 +170,7 @@
 		62A2E49026E158CC007FD4F8 /* ContentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentManager.swift; sourceTree = "<group>"; };
 		62A2E49226E15B89007FD4F8 /* ContentResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentResponse.swift; sourceTree = "<group>"; };
 		62A3AF5E242E350A004BD808 /* SettingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
+		62A7BA8A26ED0CF000D3CD8E /* ContentFolderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentFolderManager.swift; sourceTree = "<group>"; };
 		62B08ECC26AB146200CC6B08 /* GoogleDataTransport.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GoogleDataTransport.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		62B08ECE26AB146200CC6B08 /* GoogleUtilities.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GoogleUtilities.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		62B1234B232E8215007E6F61 /* Entry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
@@ -259,6 +261,7 @@
 		624411022334EA7A00C1C411 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				62A7BA8926ED0CC500D3CD8E /* ContentFolder */,
 				6256E89326ECEE70007B4FCC /* Folder */,
 				6256E89226ECEE6A007B4FCC /* Content */,
 				624411002334EA6300C1C411 /* CustomActivity.swift */,
@@ -330,6 +333,14 @@
 				624FE69E233228A2004E271B /* IMG_3205.jpg */,
 			);
 			path = Images;
+			sourceTree = "<group>";
+		};
+		62A7BA8926ED0CC500D3CD8E /* ContentFolder */ = {
+			isa = PBXGroup;
+			children = (
+				62A7BA8A26ED0CF000D3CD8E /* ContentFolderManager.swift */,
+			);
+			path = ContentFolder;
 			sourceTree = "<group>";
 		};
 		A7F17AA72CB685FA65F6E95E /* Pods */ = {
@@ -609,6 +620,7 @@
 				624AAFE32461AA3F00265D71 /* SelectFolderTableViewController.swift in Sources */,
 				624D4E5E26DE5AA800921FE3 /* Const.swift in Sources */,
 				62A2E49126E158CC007FD4F8 /* ContentManager.swift in Sources */,
+				62A7BA8B26ED0CF000D3CD8E /* ContentFolderManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
