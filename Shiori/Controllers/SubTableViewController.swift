@@ -15,6 +15,10 @@ class SubTableViewController: UITableViewController, SwipeTableViewCellDelegate 
     // MARK: Structs
     // MARK: Enums
     // MARK: Properties
+    var folderListManager = FolderListManager()
+
+    var folderList: [Folder] = []
+
     var r: Int = UserDefaults.standard.integer(forKey: "r")
     var b: Int = UserDefaults.standard.integer(forKey: "r")
     var g: Int = UserDefaults.standard.integer(forKey: "r")
@@ -25,20 +29,13 @@ class SubTableViewController: UITableViewController, SwipeTableViewCellDelegate 
     // MARK: View Life-Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        folderListManager.delegate = self
+
+        folderListManager.fetchFolderList()
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        r = UserDefaults.standard.integer(forKey: "r")
-        b = UserDefaults.standard.integer(forKey: "b")
-        g = UserDefaults.standard.integer(forKey: "g")
-        let bgColor: UIColor = UIColor(
-            red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: 1)
-        self.view.backgroundColor = bgColor
-        self.tableView.backgroundColor = bgColor
-        //        footer color
-        self.navigationController?.toolbar.barTintColor = bgColor
-        //        header color
-        self.navigationController?.navigationBar.barTintColor = bgColor
+        changeBackgroundColor()
     }
 
     // MARK: IBActions
@@ -49,8 +46,8 @@ class SubTableViewController: UITableViewController, SwipeTableViewCellDelegate 
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return UserDefaults.standard.array(forKey: "categories")?.count ?? 2
+        //        return UserDefaults.standard.array(forKey: "categories")?.count ?? 2
+        return folderList.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath)
@@ -58,38 +55,51 @@ class SubTableViewController: UITableViewController, SwipeTableViewCellDelegate 
     {
         let bgColor: UIColor = UIColor(
             red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: 1)
-        if indexPath.row == 0 || indexPath.row == 1 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cellForSub", for: indexPath)
-            // Configure the cell...
-            cell.textLabel!.text =
-                UserDefaults.standard.array(forKey: "categories")![indexPath.row] as? String
+        //                if indexPath.row == 0 || indexPath.row == 1 {
+        //                    let cell = tableView.dequeueReusableCell(withIdentifier: "cellForSub", for: indexPath)
+        //                    // Configure the cell...
+        //                    cell.textLabel!.text =
+        //                        UserDefaults.standard.array(forKey: "categories")![indexPath.row] as? String
+        //
+        //                    cell.backgroundColor = bgColor
+        //                    if r == 0 || r == 60 {
+        //                        cell.textLabel?.textColor = UIColor.white
+        //                    } else {
+        //                        cell.textLabel?.textColor = UIColor.black
+        //                    }
+        //
+        //                    return cell
+        //                } else {
+        //                    let cell =
+        //                        tableView.dequeueReusableCell(withIdentifier: "cellForSub", for: indexPath)
+        //                        as! SwipeTableViewCell
+        //                    cell.delegate = self
+        //                    cell.textLabel!.text =
+        //                        UserDefaults.standard.array(forKey: "categories")![indexPath.row] as? String
+        //
+        //                    cell.backgroundColor = bgColor
+        //                    if r == 0 || r == 60 {
+        //                        cell.textLabel?.textColor = UIColor.white
+        //                    } else {
+        //                        cell.textLabel?.textColor = UIColor.black
+        //                    }
+        //
+        //                    return cell
+        //                }
 
-            cell.backgroundColor = bgColor
-            if r == 0 || r == 60 {
-                cell.textLabel?.textColor = UIColor.white
-            } else {
-                cell.textLabel?.textColor = UIColor.black
-            }
-
-            return cell
+        let cell =
+            tableView.dequeueReusableCell(withIdentifier: "cellForSub", for: indexPath)
+            as! SwipeTableViewCell
+        cell.delegate = self
+        cell.textLabel?.text = String(folderList[indexPath.row].name)
+        cell.backgroundColor = bgColor
+        if r == 0 || r == 60 {
+            cell.textLabel?.textColor = UIColor.white
         } else {
-            let cell =
-                tableView.dequeueReusableCell(withIdentifier: "cellForSub", for: indexPath)
-                as! SwipeTableViewCell
-            cell.delegate = self
-            // Configure the cell...
-            cell.textLabel!.text =
-                UserDefaults.standard.array(forKey: "categories")![indexPath.row] as? String
-
-            cell.backgroundColor = bgColor
-            if r == 0 || r == 60 {
-                cell.textLabel?.textColor = UIColor.white
-            } else {
-                cell.textLabel?.textColor = UIColor.black
-            }
-
-            return cell
+            cell.textLabel?.textColor = UIColor.black
         }
+
+        return cell
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -127,6 +137,26 @@ class SubTableViewController: UITableViewController, SwipeTableViewCellDelegate 
     }
 
     // MARK: Other Methods
+    // フォルダ一覧を表示
+    func renderFolderList() {
+        tableView.reloadData()
+    }
+
+    // 背景色を設定
+    func changeBackgroundColor() {
+        r = UserDefaults.standard.integer(forKey: "r")
+        b = UserDefaults.standard.integer(forKey: "b")
+        g = UserDefaults.standard.integer(forKey: "g")
+        let bgColor: UIColor = UIColor(
+            red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: 1)
+        self.view.backgroundColor = bgColor
+        self.tableView.backgroundColor = bgColor
+        //        footer color
+        self.navigationController?.toolbar.barTintColor = bgColor
+        //        header color
+        self.navigationController?.navigationBar.barTintColor = bgColor
+    }
+
     // フォルダ(カテゴリー)を削除する
     func deleteFolder(at indexPath: IndexPath) {
         var categories = UserDefaults.standard.array(forKey: "categories") as! [String]
@@ -176,3 +206,17 @@ class SubTableViewController: UITableViewController, SwipeTableViewCellDelegate 
 }
 
 // MARK: Extensions
+extension SubTableViewController: FolderListManagerDelegate {
+    func didUpdateFolderList(
+        _ folderListManager: FolderListManager, folderListResponse: FolderListResponse
+    ) {
+        DispatchQueue.main.async {
+            self.folderList = folderListResponse.data.folder
+            self.renderFolderList()
+        }
+    }
+
+    func didFailWithError(error: Error) {
+        print("Error", error)
+    }
+}

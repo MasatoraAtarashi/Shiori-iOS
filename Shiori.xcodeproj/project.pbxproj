@@ -44,6 +44,7 @@
 		624FE6A323323C56004E271B /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624FE6A223323C56004E271B /* TutorialViewController.swift */; };
 		6256E88726ECBB09007B4FCC /* FolderListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6256E88626ECBB09007B4FCC /* FolderListManager.swift */; };
 		6256E88926ECBB23007B4FCC /* FolderListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6256E88826ECBB23007B4FCC /* FolderListResponse.swift */; };
+		6256E88B26ECC575007B4FCC /* Folder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6256E88A26ECC575007B4FCC /* Folder.swift */; };
 		6268C3E62334EC2800E86ECC /* ks_safari_activity_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6268C3E52334EC2800E86ECC /* ks_safari_activity_icon.png */; };
 		6272B350245DC06F005727D8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6272B353245DC06F005727D8 /* Localizable.strings */; };
 		6272B351245DC06F005727D8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6272B353245DC06F005727D8 /* Localizable.strings */; };
@@ -142,6 +143,7 @@
 		624FE6A223323C56004E271B /* TutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		6256E88626ECBB09007B4FCC /* FolderListManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderListManager.swift; sourceTree = "<group>"; };
 		6256E88826ECBB23007B4FCC /* FolderListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderListResponse.swift; sourceTree = "<group>"; };
+		6256E88A26ECC575007B4FCC /* Folder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Folder.swift; sourceTree = "<group>"; };
 		6268C3E52334EC2800E86ECC /* ks_safari_activity_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ks_safari_activity_icon.png; sourceTree = "<group>"; };
 		6272B34D245DC04F005727D8 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Main.strings; sourceTree = "<group>"; };
 		6272B34E245DC04F005727D8 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -262,6 +264,7 @@
 				6204CC5B26E29B28000611E1 /* ContentRequest.swift */,
 				6256E88626ECBB09007B4FCC /* FolderListManager.swift */,
 				6256E88826ECBB23007B4FCC /* FolderListResponse.swift */,
+				6256E88A26ECC575007B4FCC /* Folder.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -571,6 +574,7 @@
 				624D4E6026DE5D6A00921FE3 /* ContentListResponse.swift in Sources */,
 				6272B36B245E9FEC005727D8 /* SupportedServicesViewController.swift in Sources */,
 				6256E88726ECBB09007B4FCC /* FolderListManager.swift in Sources */,
+				6256E88B26ECC575007B4FCC /* Folder.swift in Sources */,
 				62B1234C232E8215007E6F61 /* Entry.swift in Sources */,
 				624411012334EA6300C1C411 /* CustomActivity.swift in Sources */,
 				6204CC5C26E29B28000611E1 /* ContentRequest.swift in Sources */,
