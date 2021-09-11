@@ -15,6 +15,7 @@ protocol ContentListManagerDelegate {
 }
 
 // 定数用
+// TODO: どこかに移す
 let const = Const()
 
 struct ContentListManager {
