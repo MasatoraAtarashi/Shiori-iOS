@@ -17,6 +17,8 @@ class SubTableViewController: UITableViewController, SwipeTableViewCellDelegate 
     // MARK: Enums
     // MARK: Properties
     var folderListManager = FolderListManager()
+    var folderManager = FolderManager()
+
     var folderList: [Folder] = []
     let folderViewActivityIndicatorView = NVActivityIndicatorView(
         frame: CGRect(x: 0, y: 0, width: 20, height: 20),
@@ -36,6 +38,8 @@ class SubTableViewController: UITableViewController, SwipeTableViewCellDelegate 
     override func viewDidLoad() {
         super.viewDidLoad()
         folderListManager.delegate = self
+        folderManager.delegate = self
+
         initIndicator()
 
         folderViewActivityIndicatorView.startAnimating()
@@ -210,10 +214,12 @@ class SubTableViewController: UITableViewController, SwipeTableViewCellDelegate 
                 style: UIAlertAction.Style.default
             ) { _ in
                 if let text = alertTextField?.text {
-                    var categories = UserDefaults.standard.array(forKey: "categories")
-                    categories?.append(text)
-                    UserDefaults.standard.set(categories, forKey: "categories")
-                    self.tableView.reloadData()
+                    //                    var categories = UserDefaults.standard.array(forKey: "categories")
+                    //                    categories?.append(text)
+                    //                    UserDefaults.standard.set(categories, forKey: "categories")
+                    //                    self.tableView.reloadData()
+                    let folderRequest = FolderRequest(name: text)
+                    self.folderManager.postFolder(folder: folderRequest)
                 }
             }
         )
@@ -225,14 +231,29 @@ class SubTableViewController: UITableViewController, SwipeTableViewCellDelegate 
 }
 
 // MARK: Extensions
-extension SubTableViewController: FolderListManagerDelegate {
+extension SubTableViewController: FolderListManagerDelegate, FolderManagerDelegate {
+    func didCreateFolder(_ folderManager: FolderManager, folderResponse: FolderResponse) {
+        folderViewActivityIndicatorView.startAnimating()
+        folderListManager.fetchFolderList()
+    }
+
+    func didUpdateFolder(_ folderManager: FolderManager, folderResponse: FolderResponse) {
+        // TODO: 実装
+        print("didUpdateFolder")
+    }
+
+    func didDeleteFolder(_ folderManager: FolderManager) {
+        // TODO: 実装
+        print("didDeleteFolder")
+    }
+
     func didUpdateFolderList(
         _ folderListManager: FolderListManager, folderListResponse: FolderListResponse
     ) {
         DispatchQueue.main.async {
             self.folderList = folderListResponse.data.folder
             self.renderFolderList()
-                        self.folderViewActivityIndicatorView.stopAnimating()
+            self.folderViewActivityIndicatorView.stopAnimating()
         }
     }
 
