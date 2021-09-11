@@ -41,7 +41,6 @@ class SubTableViewController: UITableViewController, SwipeTableViewCellDelegate 
     // MARK: IBActions
     // MARK: SwipeTableViewCellDelegate
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
