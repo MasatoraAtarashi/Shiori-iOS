@@ -31,10 +31,6 @@ struct ContentManager {
     func performRequest(
         with urlString: String, body: Foundation.Data?
     ) {
-        print("performRequest")
-        print("performRequest")
-        print("performRequest")
-        print("performRequest")
         if let url = URL(string: urlString) {
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
