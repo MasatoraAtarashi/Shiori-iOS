@@ -182,12 +182,14 @@ class SubTableViewController: UITableViewController, SwipeTableViewCellDelegate 
 
     // フォルダ(カテゴリー)を削除する
     func deleteFolder(at indexPath: IndexPath) {
-        var categories = UserDefaults.standard.array(forKey: "categories") as! [String]
-        if let i = categories.firstIndex(of: categories[indexPath.row]) {
-            categories.remove(at: i)
-        }
-        UserDefaults.standard.set(categories, forKey: "categories")
-        self.tableView.reloadData()
+        //        var categories = UserDefaults.standard.array(forKey: "categories") as! [String]
+        //        if let i = categories.firstIndex(of: categories[indexPath.row]) {
+        //            categories.remove(at: i)
+        //        }
+        //        UserDefaults.standard.set(categories, forKey: "categories")
+        //        self.tableView.reloadData()
+        let folderId = folderList[indexPath.row].folderId
+        folderManager.deleteFolder(folderId: folderId)
     }
     // フォルダを追加する
     @IBAction func addCategory(_ sender: Any) {
@@ -243,6 +245,10 @@ extension SubTableViewController: FolderListManagerDelegate, FolderManagerDelega
     func didDeleteFolder(_ folderManager: FolderManager) {
         // TODO: 実装
         print("didDeleteFolder")
+        DispatchQueue.main.async {
+            self.folderViewActivityIndicatorView.startAnimating()
+            self.folderListManager.fetchFolderList()
+        }
     }
 
     func didUpdateFolderList(
@@ -256,6 +262,7 @@ extension SubTableViewController: FolderListManagerDelegate, FolderManagerDelega
     }
 
     func didFailWithError(error: Error) {
+        self.folderViewActivityIndicatorView.stopAnimating()
         print("Error", error)
     }
 }

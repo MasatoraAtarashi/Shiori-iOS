@@ -38,8 +38,9 @@ struct FolderManager {
     }
 
     // フォルダ削除
-    func deleteFolder() {
-
+    func deleteFolder(folderId: Int) {
+        let deleteFolderURL = "\(const.baseURL)/v1/folder/\(folderId)"
+        performRequest(with: deleteFolderURL, httpMethod: "DELETE", body: nil)
     }
 
     func performRequest(with urlString: String, httpMethod: String, body: Foundation.Data?) {
@@ -56,6 +57,9 @@ struct FolderManager {
                 if error != nil {
                     self.delegate?.didFailWithError(error: error!)
                     return
+                }
+                if httpMethod == "DELETE" {
+                    self.delegate?.didDeleteFolder(self)
                 }
                 if let safeData = data {
                     if let folderResponse = self.parseJSON(safeData) {
