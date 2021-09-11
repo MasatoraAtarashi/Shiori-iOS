@@ -86,6 +86,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // ローカルストレージからコンテンツを取得
         // getStoredDataFromUserDefault()
 
+        // インジケータを作成
+        initIndicator()
         // インジケータを表示
         startIndicator()
         // コンテンツ一覧を取得
@@ -101,9 +103,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // 検索
         initSearchController()
         tutorialTextLabel.text = "記事を追加するのは簡単です。\n以下をタップして始めましょう。"
-
-        // インジケータを作成
-        initIndicator()
     }
 
     override func viewWillAppear(_ animated: Bool) {

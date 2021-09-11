@@ -5,6 +5,7 @@
 //  Created by あたらしまさとら on 2020/05/05.
 //
 
+import NVActivityIndicatorView
 import SwipeCellKit
 import UIKit
 
@@ -16,8 +17,13 @@ class SubTableViewController: UITableViewController, SwipeTableViewCellDelegate 
     // MARK: Enums
     // MARK: Properties
     var folderListManager = FolderListManager()
-
     var folderList: [Folder] = []
+    let folderViewActivityIndicatorView = NVActivityIndicatorView(
+        frame: CGRect(x: 0, y: 0, width: 20, height: 20),
+        type: NVActivityIndicatorType.ballSpinFadeLoader,
+        color: UIColor.lightGray,
+        padding: 0
+    )
 
     var r: Int = UserDefaults.standard.integer(forKey: "r")
     var b: Int = UserDefaults.standard.integer(forKey: "r")
@@ -30,12 +36,15 @@ class SubTableViewController: UITableViewController, SwipeTableViewCellDelegate 
     override func viewDidLoad() {
         super.viewDidLoad()
         folderListManager.delegate = self
+        initIndicator()
 
+        folderViewActivityIndicatorView.startAnimating()
         folderListManager.fetchFolderList()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         changeBackgroundColor()
+
     }
 
     // MARK: IBActions
@@ -159,6 +168,14 @@ class SubTableViewController: UITableViewController, SwipeTableViewCellDelegate 
         self.navigationController?.navigationBar.barTintColor = bgColor
     }
 
+    // インジケータ初期化
+    func initIndicator() {
+        tableView.addSubview(folderViewActivityIndicatorView)
+        tableView.bringSubviewToFront(folderViewActivityIndicatorView)
+        folderViewActivityIndicatorView.center = CGPoint(
+            x: self.view.frame.maxX * 0.7 / 2, y: 20)
+    }
+
     // フォルダ(カテゴリー)を削除する
     func deleteFolder(at indexPath: IndexPath) {
         var categories = UserDefaults.standard.array(forKey: "categories") as! [String]
@@ -215,6 +232,7 @@ extension SubTableViewController: FolderListManagerDelegate {
         DispatchQueue.main.async {
             self.folderList = folderListResponse.data.folder
             self.renderFolderList()
+                        self.folderViewActivityIndicatorView.stopAnimating()
         }
     }
 

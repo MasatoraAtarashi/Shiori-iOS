@@ -37,7 +37,6 @@ struct FolderListManager {
                 }
                 if let safeData = data {
                     if let folderListResponse = self.parseJSON(safeData) {
-                        print(folderListResponse)
                         self.delegate?.didUpdateFolderList(
                             self, folderListResponse: folderListResponse)
                     }
