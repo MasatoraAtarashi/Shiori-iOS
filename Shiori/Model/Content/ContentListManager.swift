@@ -22,7 +22,7 @@ struct ContentListManager {
     var delegate: ContentListManagerDelegate?
 
     // コンテンツ一覧を取得
-    func fetchContentList(q: String = "", per_page: Int = 50, page: Int = 1, liked: Bool = false) {
+    func fetchContentList(q: String = "", per_page: Int = 1000, page: Int = 1, liked: Bool = false) {
         let getContentListURL =
             "\(const.baseURL)/v1/content?q=\(q)&per_page=\(per_page)&page=\(page)&liked=\(liked)"
         performRequest(with: getContentListURL)
