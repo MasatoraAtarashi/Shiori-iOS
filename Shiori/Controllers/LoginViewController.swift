@@ -50,8 +50,10 @@ extension LoginViewController: SignInManagerDelegate, KeyChainDelegate {
     }
 
     func didFailWithError(error: Error?) {
-        print("Error", error)
-        ConstShiori().showPopUp(
-            is_success: false, title: "error", body: "メールアドレスまたはパスワードが正しくありません。")
+        DispatchQueue.main.async {
+            print("Error", error)
+            ConstShiori().showPopUp(
+                is_success: false, title: "error", body: "メールアドレスまたはパスワードが正しくありません。")
+        }
     }
 }
