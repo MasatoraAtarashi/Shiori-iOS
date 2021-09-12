@@ -40,6 +40,8 @@ extension LoginViewController: SignInManagerDelegate, KeyChainDelegate {
         self.dismiss(animated: true, completion: nil)
     }
 
+    func didDeleteKeyChain() {}
+
     func didSignIn(_ signInManager: SignInManager, authResponse: AuthResponse) {
         DispatchQueue.main.async {
             self.keyChain.saveKeyChain(authResponse: authResponse)

@@ -436,7 +436,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     // 認証
     func authorize() {
-        // TODO: 認証機能を実装
+        let isAuthorized = KeyChain().getKeyChain()
+        if isAuthorized != nil { return }
+
         // 未ログインの場合チュートリアル画面を表示
         let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let initialVC =
