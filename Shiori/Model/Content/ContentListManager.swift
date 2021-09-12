@@ -29,7 +29,9 @@ struct ContentListManager {
     }
 
     // フォルダ内コンテンツ一覧を取得
-    func fetchFolderContentList(folderId: Int, q: String = "", per_page: Int = 50, page: Int = 1) {
+    // TODO: スクロール一番下まで行ったら追加で取得するようにする
+    func fetchFolderContentList(folderId: Int, q: String = "", per_page: Int = 1000, page: Int = 1)
+    {
         let getFolderContentListURL =
             "\(const.baseURL)/v1/folder/\(folderId)/content?q=\(q)&per_page=\(per_page)&page=\(page)"
         performRequest(with: getFolderContentListURL)
