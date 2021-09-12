@@ -20,7 +20,7 @@ struct Content: Codable {
     var scrollPositionY: Int
     let maxScrollPositionX: Int
     let maxScrollPositionY: Int
-    var videoPlaybackPosition: Int
+    var videoPlaybackPosition: Int?
     var specifiedText: String?
     var specifiedDomId: String?
     var specifiedDomClass: String?
