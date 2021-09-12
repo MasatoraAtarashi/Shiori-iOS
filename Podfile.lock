@@ -88,6 +88,7 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (7.5.0):
     - GoogleUtilities/Logger
+  - KeychainAccess (4.2.2)
   - nanopb (2.30908.0):
     - nanopb/decode (= 2.30908.0)
     - nanopb/encode (= 2.30908.0)
@@ -111,6 +112,7 @@ DEPENDENCIES:
   - Firebase/Analytics
   - Firebase/Crashlytics
   - Google-Mobile-Ads-SDK
+  - KeychainAccess
   - NVActivityIndicatorView
   - OpenGraph
   - SDWebImage
@@ -131,6 +133,7 @@ SPEC REPOS:
     - GoogleDataTransport
     - GoogleUserMessagingPlatform
     - GoogleUtilities
+    - KeychainAccess
     - nanopb
     - NVActivityIndicatorView
     - OpenGraph
@@ -152,6 +155,7 @@ SPEC CHECKSUMS:
   GoogleDataTransport: 85fd18ff3019bb85d3f2c551d04c481dedf71fc9
   GoogleUserMessagingPlatform: ab890ce5f6620f293a21b6bdd82e416a2c73aeca
   GoogleUtilities: eea970f4a389963963bffe8d8fabe43540678b9c
+  KeychainAccess: c0c4f7f38f6fc7bbe58f5702e25f7bd2f65abf51
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   NVActivityIndicatorView: 1f6c5687f1171810aa27a3296814dc2d7dec3667
   OpenGraph: 50242907f6fd3f8a9916f33c8cbb7b488d915814
@@ -161,6 +165,6 @@ SPEC CHECKSUMS:
   SwiftMessages: 077f19126c24033fe24042237ecc20261adb46e4
   SwipeCellKit: 935ca28c187ec6e1ffb2b578cf8ddca842bfdcbb
 
-PODFILE CHECKSUM: d4dc60809400fd0e63d6950fc3bc8b074f25b17f
+PODFILE CHECKSUM: 230f79674e2d65a02bdeb1c6d3c86bbfa4f28c2e
 
 COCOAPODS: 1.10.1

@@ -24,4 +24,5 @@ target 'Shiori' do
   pod 'SideMenu'
   pod 'SwiftMessages'
   pod 'NVActivityIndicatorView'
+  pod 'KeychainAccess'
 end
