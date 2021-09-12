@@ -23,12 +23,25 @@ class LoginViewController: UIViewController {
         keyChain.delegate = self
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "signInWithTwitter" {
+            let nextVC = segue.destination as? UINavigationController
+            let omniAuthWebVC = nextVC?.children.first as? OmniAuthWebViewController
+            omniAuthWebVC?.targetService = "Twitter"
+        }
+    }
+
     @IBAction func signIn(_ sender: UIButton) {
         let email = self.emailInputField.text ?? ""
         let password = self.passwordInputField.text ?? ""
         let signInRequest = SignInRequest(email: email, password: password)
         signInManager.signIn(signInRequest: signInRequest)
     }
+
+    @IBAction func signInWithTwitter(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "signInWithTwitter", sender: nil)
+    }
+
 }
 
 extension LoginViewController: SignInManagerDelegate, KeyChainDelegate {
@@ -45,7 +58,6 @@ extension LoginViewController: SignInManagerDelegate, KeyChainDelegate {
     func didSignIn(_ signInManager: SignInManager, authResponse: AuthResponse) {
         DispatchQueue.main.async {
             self.keyChain.saveKeyChain(authResponse: authResponse)
-
         }
     }
 

@@ -628,7 +628,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Twitterでログイン"/>
                                 <connections>
-                                    <segue destination="Tng-dn-v6R" kind="show" id="1M3-bi-NRJ"/>
+                                    <action selector="signInWithTwitter:" destination="S0z-Ug-Gje" eventType="touchUpInside" id="5aB-G0-Vn3"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SKZ-HZ-KJb">
@@ -669,6 +669,7 @@
                     <connections>
                         <outlet property="emailInputField" destination="bw0-tq-Vci" id="RQF-YD-Xzk"/>
                         <outlet property="passwordInputField" destination="OHJ-Xt-2Oy" id="hJz-8p-EW1"/>
+                        <segue destination="Tng-dn-v6R" kind="show" identifier="signInWithTwitter" id="xvU-j9-IId"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Fd-eC-xM3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -702,7 +703,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pSo-dU-LFI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-424.80000000000001" y="492.50374812593708"/>
+            <point key="canvasLocation" x="-580" y="493"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="hVl-Cj-6Ux">
