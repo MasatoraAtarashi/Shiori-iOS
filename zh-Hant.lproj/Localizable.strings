@@ -32,9 +32,6 @@
 "Version" = "版";
 "Copyright" = "版權";
 
-//サポート動画サイト
-"Supported video sites" = "支持的視頻網站";
-
 //スワイプ
 "Cancel" = "取消";
 "Add" = "加";

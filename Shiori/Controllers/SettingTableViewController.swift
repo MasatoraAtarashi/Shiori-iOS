@@ -31,7 +31,6 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
     @IBOutlet weak var text4: UILabel!
     @IBOutlet weak var text5: UILabel!
     @IBOutlet weak var text6: UILabel!
-    @IBOutlet weak var text7: UILabel!
 
     // MARK: Initializers
     // MARK: Type Methods
@@ -80,7 +79,7 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
         case 0:  // 「設定」のセクション
             return 2
         case 1:  // 「その他」のセクション
-            return 6
+            return 5  
         default:  // ここが実行されることはないはず
             return 0
         }
@@ -204,7 +203,6 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
         text4.text = NSLocalizedString("Rate Shiori web", comment: "")
         text5.text = NSLocalizedString("Version", comment: "")
         text6.text = NSLocalizedString("Copyright", comment: "")
-        text7.text = NSLocalizedString("Supported video sites", comment: "")
     }
 
     // MARK: Subscripts
