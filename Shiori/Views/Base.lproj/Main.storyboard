@@ -687,11 +687,13 @@
                     </view>
                     <navigationItem key="navigationItem" title="ログイン" id="1Lk-7Y-hSk">
                         <barButtonItem key="leftBarButtonItem" title="完了" id="AlR-xg-dnR">
+                            <color key="tintColor" systemColor="linkColor"/>
                             <connections>
                                 <action selector="doneButtonTapped:" destination="eii-v5-hpG" id="b93-5D-Alj"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="C9q-K4-g02">
+                            <color key="tintColor" systemColor="linkColor"/>
                             <connections>
                                 <action selector="refreshButtonTapped:" destination="eii-v5-hpG" id="ax0-vf-5Rg"/>
                             </connections>
@@ -768,6 +770,9 @@
         <image name="IMG_3205.jpg" width="750" height="666"/>
         <image name="line.horizontal.3" catalog="system" width="128" height="64"/>
         <image name="settings.png" width="18" height="18"/>
+        <systemColor name="linkColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="scrollViewTexturedBackgroundColor">
             <color red="0.43529411764705878" green="0.44313725490196082" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
