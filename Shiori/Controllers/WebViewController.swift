@@ -37,6 +37,8 @@ class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
     // MARK: Initializers
     // MARK: Type Methods
     // MARK: View Life-Cycle Methods
+    
+    // TODO: リファクタリング
     override func loadView() {
 
         let webConfiguration = WKWebViewConfiguration()
@@ -55,6 +57,7 @@ class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
         webView.allowsBackForwardNavigationGestures = true
     }
 
+    // TODO: リファクタリング
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -180,9 +183,7 @@ extension WebViewController {
                             self.positionX = 0
                             self.positionY = 0
                         })
-
                 }
-
             })
 
         self.refreshControll.endRefreshing()
