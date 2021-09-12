@@ -100,7 +100,7 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
         } else if indexPath == [1, 1] {
             sendMail()
         } else if indexPath == [1, 5] {
-            signOut()
+            showSignOutConfirmAlert()
         }
 
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
@@ -202,9 +202,28 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
         }
     }
 
+    // ログアウトするか確認するアラート
+    func showSignOutConfirmAlert() {
+        let alert: UIAlertController = UIAlertController(
+            title: "", message: "ログアウトしますか？", preferredStyle: UIAlertController.Style.actionSheet)
+        let defaultAction: UIAlertAction = UIAlertAction(
+            title: "ログアウト", style: UIAlertAction.Style.destructive,
+            handler: {
+                (action: UIAlertAction!) -> Void in
+                self.signOut()
+            })
+        let cancelAction: UIAlertAction = UIAlertAction(
+            title: "キャンセル", style: UIAlertAction.Style.cancel,
+            handler: {
+                (action: UIAlertAction!) -> Void in
+            })
+        alert.addAction(cancelAction)
+        alert.addAction(defaultAction)
+        present(alert, animated: true, completion: nil)
+    }
+
     // ログアウト
     func signOut() {
-        print("sign out")
         keyChain.deleteKeyChain()
     }
 
