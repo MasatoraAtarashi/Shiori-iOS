@@ -22,7 +22,8 @@ struct ContentListManager {
     var delegate: ContentListManagerDelegate?
 
     // コンテンツ一覧を取得
-    func fetchContentList(q: String = "", per_page: Int = 1000, page: Int = 1, liked: Bool = false) {
+    func fetchContentList(q: String = "", per_page: Int = 1000, page: Int = 1, liked: Bool = false)
+    {
         let getContentListURL =
             "\(const.baseURL)/v1/content?q=\(q)&per_page=\(per_page)&page=\(page)&liked=\(liked)"
         performRequest(with: getContentListURL)
@@ -38,26 +39,30 @@ struct ContentListManager {
     }
 
     func performRequest(with urlString: String) {
-        if let url = URL(string: urlString) {
-            var request = URLRequest(url: url)
-            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-            // TODO: ちゃんとした値を入れる
-            request.setValue("unko@gmail.com", forHTTPHeaderField: "uid")
-            request.setValue("BTDPytpbkqjPSzlHWmj0fg", forHTTPHeaderField: "client")
-            request.setValue("8sT9I1VQ5qAx_MkqUBLb2Q", forHTTPHeaderField: "access-token")
-            let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-                if error != nil {
-                    self.delegate?.didFailWithError(error: error!)
-                    return
-                }
-                if let safeData = data {
-                    if let contentListResponse = self.parseJSON(safeData) {
-                        self.delegate?.didUpdateContentList(
-                            self, contentListResponse: contentListResponse)
+        if let encodedURLString = urlString.addingPercentEncoding(
+            withAllowedCharacters: .urlQueryAllowed)
+        {
+            if let url = URL(string: encodedURLString) {
+                var request = URLRequest(url: url)
+                request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                // TODO: ちゃんとした値を入れる
+                request.setValue("unko@gmail.com", forHTTPHeaderField: "uid")
+                request.setValue("BTDPytpbkqjPSzlHWmj0fg", forHTTPHeaderField: "client")
+                request.setValue("8sT9I1VQ5qAx_MkqUBLb2Q", forHTTPHeaderField: "access-token")
+                let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+                    if error != nil {
+                        self.delegate?.didFailWithError(error: error!)
+                        return
+                    }
+                    if let safeData = data {
+                        if let contentListResponse = self.parseJSON(safeData) {
+                            self.delegate?.didUpdateContentList(
+                                self, contentListResponse: contentListResponse)
+                        }
                     }
                 }
+                task.resume()
             }
-            task.resume()
         }
     }
 
