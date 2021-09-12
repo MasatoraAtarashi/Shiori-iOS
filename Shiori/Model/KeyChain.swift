@@ -49,6 +49,7 @@ struct KeyChain {
     func deleteKeyChain() {
         do {
             try keychain.removeAll()
+            self.delegate?.didDeleteKeyChain()
         } catch {
             self.delegate?.didFailWithError(error: error)
         }

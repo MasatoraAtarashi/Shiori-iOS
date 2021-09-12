@@ -17,6 +17,8 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
     // MARK: Structs
     // MARK: Enums
     // MARK: Properties
+    var keyChain = KeyChain()
+
     // MARK: IBOutlets
     @IBOutlet weak var switchAdvertisementDisplay: UISwitch!
 
@@ -38,6 +40,9 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        keyChain.delegate = self
+
+        // TODO: リファクタリング
         switchAdvertisementDisplay.isOn = !UserDefaults.standard.bool(forKey: "isAdvertisementOn")
         switchAdvertisementDisplay.addTarget(
             self, action: #selector(self.onClickMySwicth(sender:)),
@@ -79,7 +84,7 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
         case 0:  // 「設定」のセクション
             return 2
         case 1:  // 「その他」のセクション
-            return 5  
+            return 6
         default:  // ここが実行されることはないはず
             return 0
         }
@@ -94,6 +99,8 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
             UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)
         } else if indexPath == [1, 1] {
             sendMail()
+        } else if indexPath == [1, 5] {
+            signOut()
         }
 
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
@@ -195,6 +202,12 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
         }
     }
 
+    // ログアウト
+    func signOut() {
+        print("sign out")
+        keyChain.deleteKeyChain()
+    }
+
     // 言語を変更
     func changeLanguage() {
         text1.text = NSLocalizedString("Hide ads", comment: "")
@@ -209,3 +222,22 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
 }
 
 // MARK: Extensions
+extension SettingTableViewController: KeyChainDelegate {
+    func didSaveToKeyChain() {
+    }
+
+    func didDeleteKeyChain() {
+        // チュートリアル画面を表示
+        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let initialVC =
+            storyboard.instantiateViewController(withIdentifier: "InitialViewController")
+            as! InitialViewController
+        initialVC.modalPresentationStyle = .fullScreen
+        self.present(initialVC, animated: true, completion: nil)
+    }
+
+    func didFailWithError(error: Error?) {
+        print("Error", error)
+    }
+
+}
