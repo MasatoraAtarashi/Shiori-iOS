@@ -51,6 +51,6 @@ extension LoginViewController: SignInManagerDelegate, KeyChainDelegate {
 
     func didFailWithError(error: Error?) {
         print("Error", error)
-        // TODO: エラーをポップアップでユーザーに伝える
+        const.showPopUp(is_success: false, title: "error", body: "メールアドレスまたはパスワードが正しくありません。")
     }
 }
