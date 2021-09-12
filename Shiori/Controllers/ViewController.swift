@@ -83,7 +83,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.tableView.register(
             UINib(nibName: "FeedTableViewCell", bundle: nil),
             forCellReuseIdentifier: "FeedTableViewCell")
-        
+
+        // 認証
+        authorize()
 
         // インジケータを作成
         initIndicator()
@@ -429,6 +431,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.hidesNavigationBarDuringPresentation = false
         self.navigationItem.searchController = searchController
+    }
+
+    // 認証
+    func authorize() {
+        // TODO: 認証機能を実装
+        // 未ログインの場合チュートリアル画面を表示
+        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let initialVC =
+            storyboard.instantiateViewController(withIdentifier: "InitialViewController")
+            as! InitialViewController
+        initialVC.modalPresentationStyle = .fullScreen
+        self.present(initialVC, animated: false, completion: nil)
     }
 
     // インジケータ
