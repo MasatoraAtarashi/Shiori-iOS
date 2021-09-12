@@ -157,6 +157,7 @@ extension WebViewController {
     }
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        // TODO: メソッドに切り出す
         webView.evaluateJavaScript(
             "document.documentElement.scrollHeight",
             completionHandler: { (value, error) in
@@ -177,11 +178,15 @@ extension WebViewController {
         self.refreshControll.endRefreshing()
         const.activityIndicatorView.stopAnimating()
 
-        let setVideoPlaybackPositionScript = """
-                var htmlVideoPlayer = document.getElementsByTagName('video')[0];
-                htmlVideoPlayer.currentTime += \(videoPlaybackPosition);
-            """
-        webView.evaluateJavaScript(setVideoPlaybackPositionScript, completionHandler: nil)
+        if let url = targetUrl {
+            if url.hasPrefix("https://youtu.be/") || url.contains("pornhub")
+                || url.contains("nicovideo") || url.contains("dailymotion") || url.contains("tube8")
+                || url.contains("redtube")
+            {
+                return
+            }
+            setVideoPlayBackPosition(videoPlayBackPosition: videoPlaybackPosition)
+        }
     }
 
     func webView(
@@ -196,6 +201,17 @@ extension WebViewController {
         //        } else {
         //            decisionHandler(.allow)
         //        }
+    }
+
+    // スクロール位置を復元する
+
+    // 動画再生位置を復元する
+    func setVideoPlayBackPosition(videoPlayBackPosition: Int) {
+        let setVideoPlaybackPositionScript = """
+                var htmlVideoPlayer = document.getElementsByTagName('video')[0];
+                htmlVideoPlayer.currentTime += \(videoPlaybackPosition);
+            """
+        webView.evaluateJavaScript(setVideoPlaybackPositionScript, completionHandler: nil)
     }
 }
 
