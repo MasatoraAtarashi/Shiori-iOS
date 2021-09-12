@@ -58,21 +58,21 @@ class ShareViewController: SLComposeServiceViewController {
                                             let url = results["url"] as? String
                                             let thumbnailImgUrl = results["image"] as? String
                                             let scrollPositionXString =
-                                                results["positionX"] as? String
+                                                results["scrollPositionX"] as? Int
                                             let scrollPositionYString =
-                                                results["positionY"] as? String
+                                                results["scrollPositionY"] as? Int
                                             let maxScrollPositionXString =
-                                                results["maxScrollPositionX"] as? String
+                                                results["maxScrollPositionX"] as? Int
                                             let maxScrollPositionYString =
-                                                results["maxScrollPositionY"] as? String
+                                                results["maxScrollPositionY"] as? Int
                                             let videoPlaybackPositionString =
                                                 results["time"] as! String
-                                            let scrollPositionX = Int(scrollPositionXString ?? "0")
-                                            let scrollPositionY = Int(scrollPositionYString ?? "0")
+                                            let scrollPositionX = Int(scrollPositionXString ?? 0)
+                                            let scrollPositionY = Int(scrollPositionYString ?? 0)
                                             let maxScrollPositionX = Int(
-                                                maxScrollPositionXString ?? "0")
+                                                maxScrollPositionXString ?? 0)
                                             let maxScrollPositionY = Int(
-                                                maxScrollPositionYString ?? "0")
+                                                maxScrollPositionYString ?? 0)
                                             let videoPlaybackPosition = Int(
                                                 videoPlaybackPositionString)
                                             let contentRequest = ContentRequest(

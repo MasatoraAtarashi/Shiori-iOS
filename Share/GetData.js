@@ -5,13 +5,10 @@ MyPreprocessor.prototype = {
     run: function(arguments) {
         var body = document.body,
             html = document.documentElement;
-        var height = Math.max( body.scrollHeight, body.offsetHeight,
-                              html.clientHeight, html.scrollHeight, html.offsetHeight );
-        var width = Math.max( body.scrollWidth, body.offsetWidth,
-                             html.clientWidth, html.scrollWidth, html.offsetWidth );
-        var positionTop = String(Math.max(window.pageYOffset, document.documentElement.scrollTop, document.body.scrollTop));
-        var positionLeft = String(Math.max(window.pageXOffset, document.documentElement.scrollLeft, document.body.scrollLeft));
-
+        var scrollPositionX = document.documentElement.scrollLeft
+        var scrollPositionY = document.documentElement.scrollTop
+        var maxScrollPositionX = document.documentElement.scrollWidth
+        var maxScrollPositionY = document.documentElement.scrollHeight
 
         var htmlVideoPlayer = document.getElementsByTagName('video')[0];
         var time = "0";
@@ -84,10 +81,10 @@ MyPreprocessor.prototype = {
             {
                 "url": url,
                 "title": title,
-                "positionX": positionLeft,
-                "positionY": positionTop,
-                "maxScrollPositionX": width,
-                "maxScrollPositionY": height,
+                "scrollPositionX": scrollPositionX,
+                "scrollPositionY": scrollPositionY,
+                "maxScrollPositionX": maxScrollPositionX,
+                "maxScrollPositionY": maxScrollPositionY,
                 "time": time,
                 "image": image,
                 "date": dateString,
