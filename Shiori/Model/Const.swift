@@ -8,6 +8,7 @@
 
 import Foundation
 import NVActivityIndicatorView
+import SwiftMessages
 
 // 定数クラス
 struct Const {
@@ -23,4 +24,20 @@ struct Const {
     // ホームとお気に入りフォルダを識別するためのid
     let HomeFolderId = -1
     let LikedFolderId = -2
+    
+    // ポップアップを表示する
+    func showPopUp(is_success: Bool, title: String, body: String, iconText: String = "") {
+            let popup = MessageView.viewFromNib(layout: .cardView)
+            if is_success {
+                popup.configureTheme(.success)
+            } else {
+                popup.configureTheme(.error)
+            }
+            popup.configureDropShadow()
+            popup.configureContent(title: title, body: body, iconText: iconText)
+            popup.button?.isHidden = true
+            var popupConfig = SwiftMessages.defaultConfig
+            popupConfig.presentationContext = .window(windowLevel: UIWindow.Level.normal)
+            SwiftMessages.show(config: popupConfig, view: popup)
+        }
 }
