@@ -40,7 +40,6 @@ struct SignInManager {
                     return
                 }
                 if let httpResponse = response as? HTTPURLResponse {
-                    print(httpResponse.allHeaderFields)
                     // TODO: オリジナルのエラーを作って渡す
                     guard let uid = httpResponse.allHeaderFields["Uid"] as? String else {
                         self.delegate?.didFailWithError(error: nil)

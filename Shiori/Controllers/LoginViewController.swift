@@ -15,10 +15,12 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordInputField: UITextField!
 
     var signInManager = SignInManager()
+    var keyChain = KeyChain()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         signInManager.delegate = self
+        keyChain.delegate = self
     }
 
     @IBAction func signIn(_ sender: UIButton) {
@@ -29,11 +31,24 @@ class LoginViewController: UIViewController {
     }
 }
 
-extension LoginViewController: SignInManagerDelegate {
-    func didSignIn(_ signInManager: SignInManager, authResponse: AuthResponse) {
-        print("didSignIn")
-        print(authResponse)
+extension LoginViewController: SignInManagerDelegate, KeyChainDelegate {
+    func didSaveToKeyChain() {
+        print("didSaveToKeyChain")
+        let a = self.keyChain.getKeyChain()
+        print(a)
         // TODO: 画面を閉じる
+        //            self.presentingViewController?.dismiss(animated: true, completion: nil)
+        //            self.dismiss(animated: true, completion: nil)
+    }
+
+    func didSignIn(_ signInManager: SignInManager, authResponse: AuthResponse) {
+        DispatchQueue.main.async {
+            print("didSignIn")
+            print(authResponse)
+            // TODO: key chainに認証情報を保存する
+            self.keyChain.saveKeyChain(authResponse: authResponse)
+
+        }
     }
 
     func didFailWithError(error: Error?) {

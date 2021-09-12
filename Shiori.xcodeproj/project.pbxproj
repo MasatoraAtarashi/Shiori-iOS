@@ -71,6 +71,7 @@
 		62B8CF7526EE16C6009FB5AC /* SignInManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B8CF7426EE16C6009FB5AC /* SignInManager.swift */; };
 		62B8CF7726EE1C0E009FB5AC /* SignInRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B8CF7626EE1C0E009FB5AC /* SignInRequest.swift */; };
 		62B8CF7926EE1C1D009FB5AC /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B8CF7826EE1C1D009FB5AC /* AuthResponse.swift */; };
+		62B8CF7B26EE291B009FB5AC /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B8CF7A26EE291B009FB5AC /* KeyChain.swift */; };
 		909E9FA550C96476D4E86C62 /* Pods_Shiori.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98B1316EC4BD7BAAF68C16D6 /* Pods_Shiori.framework */; };
 		B417587B67390A83D3E0AB99 /* Pods_Share.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EC70B92298E46BA5986AED1 /* Pods_Share.framework */; };
 /* End PBXBuildFile section */
@@ -184,6 +185,7 @@
 		62B8CF7426EE16C6009FB5AC /* SignInManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInManager.swift; sourceTree = "<group>"; };
 		62B8CF7626EE1C0E009FB5AC /* SignInRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInRequest.swift; sourceTree = "<group>"; };
 		62B8CF7826EE1C1D009FB5AC /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
+		62B8CF7A26EE291B009FB5AC /* KeyChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChain.swift; sourceTree = "<group>"; };
 		6EC70B92298E46BA5986AED1 /* Pods_Share.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Share.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E5478B8CD8CA0C6ECE6036A /* Pods-Share.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Share.release.xcconfig"; path = "Target Support Files/Pods-Share/Pods-Share.release.xcconfig"; sourceTree = "<group>"; };
 		98B1316EC4BD7BAAF68C16D6 /* Pods_Shiori.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shiori.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -278,6 +280,7 @@
 				624411002334EA6300C1C411 /* CustomActivity.swift */,
 				62B1234B232E8215007E6F61 /* Entry.swift */,
 				624D4E5D26DE5AA800921FE3 /* Const.swift */,
+				62B8CF7A26EE291B009FB5AC /* KeyChain.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -639,6 +642,7 @@
 				624D4E6026DE5D6A00921FE3 /* ContentListResponse.swift in Sources */,
 				6272B36B245E9FEC005727D8 /* SupportedServicesViewController.swift in Sources */,
 				6256E88D26ECE2E1007B4FCC /* FolderManager.swift in Sources */,
+				62B8CF7B26EE291B009FB5AC /* KeyChain.swift in Sources */,
 				6256E88726ECBB09007B4FCC /* FolderListManager.swift in Sources */,
 				6256E88B26ECC575007B4FCC /* Folder.swift in Sources */,
 				62B1234C232E8215007E6F61 /* Entry.swift in Sources */,
