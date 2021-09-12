@@ -408,27 +408,27 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mobile Safariの「共有」ボタンをタップ" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="72j-7g-tkS">
-                                <rect key="frame" x="20" y="84" width="374" height="14"/>
+                                <rect key="frame" x="20" y="84" width="335" height="14"/>
                                 <fontDescription key="fontDescription" name="HiraMinProN-W3" family="Hiragino Mincho ProN" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IMG_3203.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="4XN-5A-yQ7">
-                                <rect key="frame" x="20" y="114" width="374" height="50"/>
+                                <rect key="frame" x="20" y="114" width="335" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="374" id="cbo-cD-H2O"/>
                                     <constraint firstAttribute="height" constant="50" id="svq-VH-W7D"/>
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IMG_3205.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="XQ0-I5-BY9">
-                                <rect key="frame" x="20" y="184" width="374" height="260"/>
+                                <rect key="frame" x="20" y="184" width="335" height="260"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="260" id="OZa-9g-6Ae"/>
                                     <constraint firstAttribute="width" constant="374" id="au2-oX-zPh"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="※「Shiori」が表示されない場合は「その他(More)」から「Shiori」をオンにしてください" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cka-hI-r5n">
-                                <rect key="frame" x="20" y="452" width="374" height="59"/>
+                                <rect key="frame" x="20" y="452" width="335" height="59"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="59" id="qEY-ed-zc1"/>
                                 </constraints>
@@ -597,47 +597,54 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MVN-AE-tTe">
-                                <rect key="frame" x="126" y="169" width="123" height="30"/>
+                                <rect key="frame" x="120" y="316" width="123" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Githubでログイン"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J7G-8Q-AwP">
-                                <rect key="frame" x="125" y="119" width="124" height="30"/>
+                                <rect key="frame" x="120" y="278" width="124" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Twitterでログイン"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YoM-t7-Poq">
-                                <rect key="frame" x="129" y="214" width="117" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Appleでログイン"/>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SKZ-HZ-KJb">
-                                <rect key="frame" x="124" y="66" width="126" height="30"/>
+                                <rect key="frame" x="124" y="240" width="126" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Googleでログイン"/>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="メールアドレス" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bw0-tq-Vci">
-                                <rect key="frame" x="100" y="332" width="179" height="34"/>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="password" borderStyle="roundedRect" placeholder="パスワード" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OHJ-Xt-2Oy">
+                                <rect key="frame" x="96" y="93" width="179" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" textContentType="password"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="unko@gmail.com" borderStyle="roundedRect" placeholder="メールアドレス" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bw0-tq-Vci">
+                                <rect key="frame" x="98" y="51" width="179" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" textContentType="email"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Laf-Ky-9Mu">
-                                <rect key="frame" x="154" y="416" width="62" height="30"/>
+                                <rect key="frame" x="154" y="135" width="62" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="ログイン"/>
+                                <connections>
+                                    <action selector="signIn:" destination="S0z-Ug-Gje" eventType="touchUpInside" id="Zdq-L8-tQj"/>
+                                </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="パスワード" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OHJ-Xt-2Oy">
-                                <rect key="frame" x="100" y="374" width="179" height="34"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YoM-t7-Poq">
+                                <rect key="frame" x="124" y="354" width="117" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" textContentType="password"/>
-                            </textField>
+                                <state key="normal" title="Appleでログイン"/>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="RcR-Ci-D6B"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="iEK-KF-afx"/>
+                    <connections>
+                        <outlet property="emailInputField" destination="bw0-tq-Vci" id="RQF-YD-Xzk"/>
+                        <outlet property="passwordInputField" destination="OHJ-Xt-2Oy" id="hJz-8p-EW1"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Fd-eC-xM3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

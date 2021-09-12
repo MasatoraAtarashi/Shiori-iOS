@@ -71,6 +71,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // MARK: Type Methods
     // MARK: View Life-Cycle Methods
     fileprivate let refreshCtl = UIRefreshControl()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -78,14 +79,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         contentListManager.delegate = self
         contentManager.delegate = self
 
+        // 認証
+        authorize()
+
         // 広告
         initAdvertisement()
         self.tableView.register(
             UINib(nibName: "FeedTableViewCell", bundle: nil),
             forCellReuseIdentifier: "FeedTableViewCell")
-
-        // 認証
-        authorize()
 
         // インジケータを作成
         initIndicator()
