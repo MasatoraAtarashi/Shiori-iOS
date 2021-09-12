@@ -29,15 +29,15 @@ struct KeyChain {
     }
 
     func getKeyChain() -> AuthResponse? {
-        guard let uid = keychain["uid"] as? String else {
+        guard let uid = keychain["uid"] else {
             self.delegate?.didFailWithError(error: nil)
             return nil
         }
-        guard let accessToken = keychain["accessToken"] as? String else {
+        guard let accessToken = keychain["accessToken"] else {
             self.delegate?.didFailWithError(error: nil)
             return nil
         }
-        guard let client = keychain["client"] as? String else {
+        guard let client = keychain["client"] else {
             self.delegate?.didFailWithError(error: nil)
             return nil
         }
