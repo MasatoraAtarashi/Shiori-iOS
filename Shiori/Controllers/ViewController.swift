@@ -519,12 +519,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let bgColor: UIColor = UIColor(
             red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: 1)
         self.navigationController?.setToolbarHidden(false, animated: true)
-        //        footer color
+        // footer color
         self.navigationController?.toolbar.barTintColor = bgColor
-        //        header color
+        // header color
         self.navigationController?.navigationBar.barTintColor = bgColor
 
-        //        背景
+        // 背景
         tableView.backgroundColor = bgColor
         tableView.reloadData()
 
