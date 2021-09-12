@@ -11,6 +11,7 @@ import KeychainAccess
 
 protocol KeyChainDelegate {
     func didSaveToKeyChain()
+    func didDeleteKeyChain()
     func didFailWithError(error: Error?)
 }
 
@@ -46,6 +47,10 @@ struct KeyChain {
     }
 
     func deleteKeyChain() {
-
+        do {
+            try keychain.removeAll()
+        } catch {
+            self.delegate?.didFailWithError(error: error)
+        }
     }
 }
