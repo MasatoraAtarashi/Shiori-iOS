@@ -18,9 +18,6 @@ struct KeyChain {
     var delegate: KeyChainDelegate?
     let keychain = Keychain(service: "com.masatoraatarashi.Shiori")
     func saveKeyChain(authResponse: AuthResponse) {
-        print("saveKeyCHain")
-        print("saveKeyCHain")
-        print("saveKeyCHain")
         do {
             try keychain.set(authResponse.uid, key: "uid")
             try keychain.set(authResponse.client, key: "client")
@@ -40,7 +37,7 @@ struct KeyChain {
             self.delegate?.didFailWithError(error: nil)
             return nil
         }
-        guard let client = keychain["uid"] as? String else {
+        guard let client = keychain["client"] as? String else {
             self.delegate?.didFailWithError(error: nil)
             return nil
         }

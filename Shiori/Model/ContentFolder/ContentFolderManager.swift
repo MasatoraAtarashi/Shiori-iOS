@@ -32,11 +32,12 @@ struct ContentFolderManager {
         if let url = URL(string: urlString) {
             var request = URLRequest(url: url)
             request.httpMethod = httpMethod
+            let authData = KeyChain().getKeyChain()
+
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-            // TODO: ちゃんとした値を入れる
-            request.setValue("unko@gmail.com", forHTTPHeaderField: "uid")
-            request.setValue("BTDPytpbkqjPSzlHWmj0fg", forHTTPHeaderField: "client")
-            request.setValue("8sT9I1VQ5qAx_MkqUBLb2Q", forHTTPHeaderField: "access-token")
+            request.setValue(authData?.uid, forHTTPHeaderField: "uid")
+            request.setValue(authData?.client, forHTTPHeaderField: "client")
+            request.setValue(authData?.accessToken, forHTTPHeaderField: "access-token")
             let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
                 if error != nil {
                     self.delegate?.didFailWithError(error: error!)
