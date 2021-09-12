@@ -89,7 +89,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // インジケータを作成
         initIndicator()
         // インジケータを表示
-        startIndicator()
+        const.activityIndicatorView.startAnimating()
         // コンテンツ一覧を取得
         contentListManager.fetchContentList()
 
@@ -242,67 +242,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         for orientation: SwipeActionsOrientation
     ) -> [SwipeAction]? {
         if orientation == .right {
-            //                let deleteAction = SwipeAction(
-            //                    style: .destructive, title: NSLocalizedString("Delete", comment: "")
-            //                ) { _, indexPath in
-            //                    self.deleteCell(at: indexPath)
-            //                }
-            //                deleteAction.image = UIImage(systemName: "trash.fill")
-            //
-            //                // お気に入り
-            //                var favoriteAction: SwipeAction
-            //                let _: NSFetchRequest<Article> = Article.fetchRequest()
-            //
-            //                let targetArticles = searchController.isActive ? searchResults : articles
-            //                let filteredArticles = targetArticles.filter({
-            //                    ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(folderInt)
-            //                })
-            //
-            //                if filteredArticles[indexPath.row].folderInt?.contains(
-            //                    NSLocalizedString("Liked", comment: "")) ?? false
-            //                {
-            //                    favoriteAction = SwipeAction(
-            //                        style: .default, title: NSLocalizedString("Cancel", comment: "")
-            //                    ) { _, indexPath in
-            //                        self.favoriteCell(at: indexPath)
-            //                    }
-            //                    favoriteAction.image = UIImage(systemName: "heart.fill")
-            //                } else {
-            //                    favoriteAction = SwipeAction(
-            //                        style: .default, title: NSLocalizedString("Liked", comment: "")
-            //                    ) { _, indexPath in
-            //                        self.favoriteCell(at: indexPath)
-            //                    }
-            //                    favoriteAction.image = UIImage(systemName: "heart")
-            //                }
-            //                favoriteAction.backgroundColor = UIColor.init(
-            //                    red: 255 / 255, green: 165 / 255, blue: 0 / 255, alpha: 1)
-            //
-            //                let folderAction = SwipeAction(
-            //                    style: .default, title: NSLocalizedString("Add", comment: "")
-            //                ) { _, indexPath in
-            //                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            //                    let vc =
-            //                        storyboard.instantiateViewController(withIdentifier: "myVCID")
-            //                        as! UINavigationController
-            //                    let selectFolderTableViewController =
-            //                        vc.viewControllers.first as! SelectFolderTableViewController
-            //                    selectFolderTableViewController.selectedIndexPath = indexPath.row
-            //                    let _: NSFetchRequest<Article> = Article.fetchRequest()
-            //
-            //                    let targetArticles =
-            //                        self.searchController.isActive ? self.searchResults : self.articles
-            //                    let filteredArticles = targetArticles.filter({
-            //                        ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(
-            //                            self.folderInt)
-            //                    })
-            //                    selectFolderTableViewController.articles = filteredArticles
-            //                    self.present(vc, animated: true)
-            //                }
-            //                folderAction.image = UIImage(systemName: "folder.fill")
-            //                folderAction.backgroundColor = UIColor.init(
-            //                    red: 176 / 255, green: 196 / 255, blue: 222 / 255, alpha: 1)
-
             // 削除アクション
             let deleteAction = SwipeAction(
                 style: .destructive, title: NSLocalizedString("Delete", comment: "")
@@ -332,6 +271,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             favoriteAction.backgroundColor = UIColor.init(
                 red: 255 / 255, green: 165 / 255, blue: 0 / 255, alpha: 1)
 
+            // フォルダアクション
             let folderAction = SwipeAction(
                 style: .default, title: NSLocalizedString("Add", comment: "")
             ) { _, indexPath in
@@ -343,20 +283,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                     vc.viewControllers.first as! SelectFolderTableViewController
                 selectFolderTableViewController.selectedIndexPath = indexPath.row
                 let _: NSFetchRequest<Article> = Article.fetchRequest()
-
-                //                                let targetArticles =
-                //                                    self.searchController.isActive ? self.searchResults : self.articles
-                //                                let filteredArticles = targetArticles.filter({
-                //                                    ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(
-                //                                        self.folderInt)
-                //                                })
-                //                                selectFolderTableViewController.articles = filteredArticles
                 selectFolderTableViewController.content = self.contentList[indexPath.row]
                 self.present(vc, animated: true)
             }
             folderAction.image = UIImage(systemName: "folder.fill")
             folderAction.backgroundColor = UIColor.init(
                 red: 176 / 255, green: 196 / 255, blue: 222 / 255, alpha: 1)
+
             return [deleteAction, favoriteAction, folderAction]
         } else {
             return []
@@ -506,14 +439,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         const.activityIndicatorView.center = tableView.center
     }
 
-    func startIndicator() {
-        const.activityIndicatorView.startAnimating()
-    }
-
-    func stopIndicator() {
-        const.activityIndicatorView.stopAnimating()
-    }
-
     // 背景色を設定
     func changeBackgroundColor() {
         r = UserDefaults.standard.integer(forKey: "r")
@@ -572,7 +497,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     // フォルダ内コンテンツを取得して表示する
     func loadFolderContentList(q: String = "") {
-        startIndicator()
+        const.activityIndicatorView.startAnimating()
         if folderId == const.HomeFolderId {
             contentListManager.fetchContentList(q: q)
         } else if folderId == const.LikedFolderId {
@@ -658,38 +583,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         var contentRequest = contentList[indexPath.row]
         contentRequest.liked = false
         contentManager.putContent(contentId: contentList[indexPath.row].id, content: contentRequest)
-    }
-
-    // TODO: リファクタリング
-    // 記事をフォルダに追加
-    func addArticleToFolder(_ ArticleindexPathRow: Int, _ folderName: String) {
-        //        var alreadyAdded: Bool
-        //        let _: NSFetchRequest<Article> = Article.fetchRequest()
-        //
-        //        let targetArticles = searchController.isActive ? searchResults : articles
-        //        let filteredArticles = targetArticles.filter({
-        //            ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(folderInt)
-        //        })
-        //
-        //        if filteredArticles[ArticleindexPathRow].folderInt == nil {
-        //            filteredArticles[ArticleindexPathRow].folderInt = [
-        //                NSLocalizedString("Home", comment: "")
-        //            ]
-        //        }
-        //
-        //        if filteredArticles[ArticleindexPathRow].folderInt!.contains(folderName) {
-        //            filteredArticles[ArticleindexPathRow].folderInt?.remove(
-        //                at: filteredArticles[ArticleindexPathRow].folderInt!.firstIndex(of: folderName)!
-        //            )
-        //            alreadyAdded = true
-        //        } else {
-        //            filteredArticles[ArticleindexPathRow].folderInt?.append(folderName)
-        //            alreadyAdded = false
-        //        }
-        //
-        //        (UIApplication.shared.delegate as! AppDelegate).saveContext()
-        //        getStoredDataFromUserDefault()
-        //        showPopUp(alreadyAdded)
     }
 
     // ポップアップを表示
@@ -778,7 +671,7 @@ extension ViewController: ContentListManagerDelegate, ContentManagerDelegate {
             // TODO: 一番下までスクロールしたら追加でコンテンツを取得できるようにする
             self.contentList = contentListResponse.data.content
             self.renderContentList()
-            self.stopIndicator()
+            const.activityIndicatorView.stopAnimating()
         }
     }
 

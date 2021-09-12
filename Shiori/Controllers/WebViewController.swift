@@ -37,7 +37,7 @@ class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
     // MARK: Initializers
     // MARK: Type Methods
     // MARK: View Life-Cycle Methods
-    
+
     // TODO: リファクタリング
     override func loadView() {
 

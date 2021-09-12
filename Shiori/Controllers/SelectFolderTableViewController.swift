@@ -76,10 +76,6 @@ class SelectFolderTableViewController: UITableViewController {
                 style: UIAlertAction.Style.default
             ) { _ in
                 if let text = alertTextField?.text {
-                    //                    var categories = UserDefaults.standard.array(forKey: "categories")
-                    //                    categories?.append(text)
-                    //                    UserDefaults.standard.set(categories, forKey: "categories")
-                    //                    self.tableView.reloadData()
                     let folderRequest = FolderRequest(name: text)
                     self.folderManager.postFolder(folder: folderRequest)
                 }
@@ -101,20 +97,6 @@ class SelectFolderTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath)
         -> UITableViewCell
     {
-        //        let cell = tableView.dequeueReusableCell(
-        //            withIdentifier: "cellForFolderSelection", for: indexPath)
-        //
-        //        // Configure the cell...
-        //        let categories = UserDefaults.standard.array(forKey: "categories")?.dropFirst(2)
-        //        cell.textLabel!.text = categories![indexPath.row + 2] as? String
-        //
-        //        if let folderName = categories?[indexPath.row + 2] {
-        //            if articles[selectedIndexPath].folderInt?.contains(folderName as! String) ?? false {
-        //                cell.textLabel!.text! += NSLocalizedString("(Added)", comment: "")
-        //            }
-        //        }
-        //        return cell
-
         // TODO: すでにフォルダに追加されていたらその旨を表示する
         let cell = tableView.dequeueReusableCell(
             withIdentifier: "cellForFolderSelection", for: indexPath)
@@ -135,7 +117,6 @@ class SelectFolderTableViewController: UITableViewController {
         guard let contentId = content?.id else { return }
         let folder = folderList[indexPath.row]
         let folderId = folder.folderId
-        let folderContentList = folder.contentList
         if Bool(folder.contentList?.contains(content?.id ?? 0) ?? false) {
             contentFolderManager.deleteContentToFolder(contentId: contentId, folderId: folderId)
         } else {

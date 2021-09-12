@@ -114,11 +114,6 @@ class SubTableViewController: UITableViewController, SwipeTableViewCellDelegate 
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //        let preNC = self.navigationController?.presentingViewController as! UINavigationController
-        //        let preVC = preNC.viewControllers[preNC.viewControllers.count - 1] as! ViewController
-        //        preVC.folderInt =
-        //            UserDefaults.standard.array(forKey: "categories")?[indexPath.row] as! String
-        //        self.dismiss(animated: true, completion: nil)
         let preNC = self.navigationController?.presentingViewController as! UINavigationController
         let preVC = preNC.viewControllers[preNC.viewControllers.count - 1] as! ViewController
         preVC.folderId = folderList[indexPath.row].folderId
@@ -167,9 +162,9 @@ class SubTableViewController: UITableViewController, SwipeTableViewCellDelegate 
             red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: 1)
         self.view.backgroundColor = bgColor
         self.tableView.backgroundColor = bgColor
-        //        footer color
+        // footer color
         self.navigationController?.toolbar.barTintColor = bgColor
-        //        header color
+        // header color
         self.navigationController?.navigationBar.barTintColor = bgColor
     }
 
@@ -183,12 +178,6 @@ class SubTableViewController: UITableViewController, SwipeTableViewCellDelegate 
 
     // フォルダ(カテゴリー)を削除する
     func deleteFolder(at indexPath: IndexPath) {
-        //        var categories = UserDefaults.standard.array(forKey: "categories") as! [String]
-        //        if let i = categories.firstIndex(of: categories[indexPath.row]) {
-        //            categories.remove(at: i)
-        //        }
-        //        UserDefaults.standard.set(categories, forKey: "categories")
-        //        self.tableView.reloadData()
         let folderId = folderList[indexPath.row].folderId
         folderManager.deleteFolder(folderId: folderId)
     }
