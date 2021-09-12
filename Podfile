@@ -8,7 +8,6 @@ target 'Share' do
   pod 'Firebase/Analytics'
   pod 'Google-Mobile-Ads-SDK'
   pod 'NVActivityIndicatorView'
-  pod 'SwiftMessages'
 end
 
 target 'Shiori' do
