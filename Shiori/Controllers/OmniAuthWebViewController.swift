@@ -68,11 +68,11 @@ class OmniAuthWebViewController: UIViewController, WKNavigationDelegate, WKUIDel
     func setTargetURL(targetService: String) -> URL? {
         switch targetService {
         case "Google":
-            return URL(string: "\(const.baseURL)/v1/auth/twitter")
+            return URL(string: "\(const.baseURL)/v1/auth/google")
         case "Twitter":
             return URL(string: "\(const.baseURL)/v1/auth/twitter")
         case "Github":
-            return URL(string: "\(const.baseURL)/v1/auth/twitter")
+            return URL(string: "\(const.baseURL)/v1/auth/github")
         default:
             // TODO: エラー処理
             return nil

@@ -622,6 +622,9 @@
                                 <rect key="frame" x="120" y="316" width="123" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Githubでログイン"/>
+                                <connections>
+                                    <action selector="signInWithGithub:" destination="S0z-Ug-Gje" eventType="touchUpInside" id="ZFd-1G-ivz"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J7G-8Q-AwP">
                                 <rect key="frame" x="120" y="278" width="124" height="30"/>
@@ -670,6 +673,7 @@
                         <outlet property="emailInputField" destination="bw0-tq-Vci" id="RQF-YD-Xzk"/>
                         <outlet property="passwordInputField" destination="OHJ-Xt-2Oy" id="hJz-8p-EW1"/>
                         <segue destination="Tng-dn-v6R" kind="show" identifier="signInWithTwitter" id="xvU-j9-IId"/>
+                        <segue destination="Tng-dn-v6R" kind="show" identifier="signInWithGithub" id="mAF-q8-dsp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Fd-eC-xM3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -763,6 +767,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="mAF-q8-dsp"/>
         <segue reference="9Vi-OO-DHj"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" systemColor="scrollViewTexturedBackgroundColor"/>

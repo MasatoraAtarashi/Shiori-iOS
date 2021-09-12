@@ -24,11 +24,16 @@ class LoginViewController: UIViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        var targetService = ""
         if segue.identifier == "signInWithTwitter" {
-            let nextVC = segue.destination as? UINavigationController
-            let omniAuthWebVC = nextVC?.children.first as? OmniAuthWebViewController
-            omniAuthWebVC?.targetService = "Twitter"
+            targetService = "Twitter"
+        } else if segue.identifier == "signInWithGithub" {
+            targetService = "Github"
         }
+
+        let nextVC = segue.destination as? UINavigationController
+        let omniAuthWebVC = nextVC?.children.first as? OmniAuthWebViewController
+        omniAuthWebVC?.targetService = targetService
     }
 
     @IBAction func signIn(_ sender: UIButton) {
@@ -42,6 +47,9 @@ class LoginViewController: UIViewController {
         self.performSegue(withIdentifier: "signInWithTwitter", sender: nil)
     }
 
+    @IBAction func signInWithGithub(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "signInWithGithub", sender: nil)
+    }
 }
 
 extension LoginViewController: SignInManagerDelegate, KeyChainDelegate {
