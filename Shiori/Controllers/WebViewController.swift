@@ -23,8 +23,11 @@ class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
     var backButton: UIBarButtonItem!
     var forwadButton: UIBarButtonItem!
     var targetUrl: String?
+    // TODO: 変数名変える
     var positionX: Int = 0
     var positionY: Int = 0
+    var maxScroolPositionX: Int = 0
+    var maxScroolPositionY: Int = 0
     var videoPlaybackPosition: Int = 0
 
     let preferences = WKPreferences()
@@ -164,10 +167,24 @@ extension WebViewController {
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         webView.evaluateJavaScript(
-            "window.scrollTo(\(positionX),\(positionY))", completionHandler: nil)
-        // ユーザーがリロードしたときスクロールしないようにpositionを初期化
-        positionX = 0
-        positionY = 0
+            "document.documentElement.scrollHeight",
+            completionHandler: { (value, error) in
+                if let maxScrollPositionYThisWindow: Int = value as? Int {
+                    let scrollRateY = Float(self.positionY) / Float(self.maxScroolPositionY)
+                    let scrollPositionYThisWindow =
+                        CGFloat(Float(maxScrollPositionYThisWindow) * scrollRateY)
+                    self.webView.evaluateJavaScript(
+                        "window.scrollTo(\(0),\(scrollPositionYThisWindow))",
+                        completionHandler: { _, _ in
+                            // ユーザーがリロードしたときスクロールしないようにpositionを初期化
+                            self.positionX = 0
+                            self.positionY = 0
+                        })
+
+                }
+
+            })
+
         self.refreshControll.endRefreshing()
         const.activityIndicatorView.stopAnimating()
 

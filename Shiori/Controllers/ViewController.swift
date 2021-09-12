@@ -208,9 +208,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView.isEditing { return }
         let webViewController = WebViewController()
-        webViewController.targetUrl = contentList[indexPath.row].url
-        webViewController.positionX = contentList[indexPath.row].scrollPositionX
-        webViewController.positionY = contentList[indexPath.row].scrollPositionY
+        let selectedContent = contentList[indexPath.row]
+        webViewController.targetUrl = selectedContent.url
+        webViewController.positionX = selectedContent.scrollPositionX
+        webViewController.positionY = selectedContent.scrollPositionY
+        webViewController.maxScroolPositionX = selectedContent.maxScrollPositionX
+        webViewController.maxScroolPositionY = selectedContent.maxScrollPositionY
         webViewController.videoPlaybackPosition = contentList[indexPath.row].videoPlaybackPosition
         self.navigationController!.pushViewController(webViewController, animated: true)
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
