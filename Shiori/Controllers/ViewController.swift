@@ -83,8 +83,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.tableView.register(
             UINib(nibName: "FeedTableViewCell", bundle: nil),
             forCellReuseIdentifier: "FeedTableViewCell")
-        // ローカルストレージからコンテンツを取得
-        // getStoredDataFromUserDefault()
+        
 
         // インジケータを作成
         initIndicator()
