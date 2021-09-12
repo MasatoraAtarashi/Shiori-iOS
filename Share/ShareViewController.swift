@@ -78,10 +78,10 @@ class ShareViewController: SLComposeServiceViewController {
                                             let contentRequest = ContentRequest(
                                                 title: title ?? "", url: url ?? "",
                                                 thumbnailImgUrl: thumbnailImgUrl ?? "",
-                                                scrollPositionX: scrollPositionX ?? 0,
-                                                scrollPositionY: scrollPositionY ?? 0,
-                                                maxScrollPositionX: maxScrollPositionX ?? 0,
-                                                maxScrollPositionY: maxScrollPositionY ?? 0,
+                                                scrollPositionX: scrollPositionX,
+                                                scrollPositionY: scrollPositionY,
+                                                maxScrollPositionX: maxScrollPositionX,
+                                                maxScrollPositionY: maxScrollPositionY,
                                                 videoPlaybackPosition: videoPlaybackPosition ?? 0,
                                                 specifiedText: nil, specifiedDomId: nil,
                                                 specifiedDomClass: nil, specifiedDomTag: nil)

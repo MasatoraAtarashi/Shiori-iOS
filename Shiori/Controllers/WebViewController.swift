@@ -144,18 +144,6 @@ class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
         self.present(activityVC, animated: true, completion: nil)
     }
 
-    @objc func segmentChanged() {
-        // セグメントが変更されたときの処理
-        // 選択されているセグメントのインデックス
-        if self.segment.selectedSegmentIndex == 0 {
-            self.preferences.javaScriptEnabled = true
-            webView.reload()
-        } else {
-            self.preferences.javaScriptEnabled = false
-            webView.reload()
-        }
-    }
-
     // MARK: Subscripts
 }
 
