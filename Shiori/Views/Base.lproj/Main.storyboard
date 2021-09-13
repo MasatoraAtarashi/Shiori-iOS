@@ -588,19 +588,10 @@
         <!--会員登録画面-->
         <scene sceneID="NvB-Ig-tQZ">
             <objects>
-                <viewController title="会員登録画面" id="NED-fG-Q9L" sceneMemberID="viewController">
+                <viewController title="会員登録画面" id="NED-fG-Q9L" customClass="SignUpViewController" customModule="Shiori" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="m9C-5R-Gnh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="会員登録" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5nJ-za-WKJ">
-                                <rect key="frame" x="2" y="198" width="402" height="120"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="100"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="hkR-Iu-i1P"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
