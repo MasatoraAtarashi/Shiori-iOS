@@ -79,6 +79,12 @@ class LoginViewController: UIViewController {
 
     // UIを初期化
     func initViewUI() {
+        emailInputField.layer.borderWidth = 1
+        emailInputField.layer.borderColor = UIColor.opaqueSeparator.cgColor
+
+        passwordInputField.layer.borderWidth = 1
+        passwordInputField.layer.borderColor = UIColor.opaqueSeparator.cgColor
+
         signInWithTwitterButton.layer.borderWidth = 1
         signInWithTwitterButton.layer.borderColor = UIColor.opaqueSeparator.cgColor
         signInWithTwitterButton.layer.cornerRadius = 5
