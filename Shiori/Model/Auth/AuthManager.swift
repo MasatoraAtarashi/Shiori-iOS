@@ -10,7 +10,7 @@ import Foundation
 
 protocol AuthManagerDelegate {
     func didSignIn(_ signInManager: AuthManager, authResponse: AuthResponse)
-    func didAuthWithApple()
+    func didAuthWithApple(authResponse: AuthResponse)
     func didFailWithError(error: Error?)
 }
 
@@ -58,12 +58,13 @@ struct AuthManager {
                         self.delegate?.didFailWithError(error: nil)
                         return
                     }
+
                     let authResponse = AuthResponse(
                         uid: uid,
                         accessToken: accessToken,
                         client: client)
                     if isAppleAuth {
-                        self.delegate?.didAuthWithApple()
+                        self.delegate?.didAuthWithApple(authResponse: authResponse)
                     } else {
                         self.delegate?.didSignIn(self, authResponse: authResponse)
                     }

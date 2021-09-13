@@ -71,10 +71,10 @@ class LoginViewController: UIViewController {
 }
 
 extension LoginViewController: AuthManagerDelegate, KeyChainDelegate {
-    func didAuthWithApple() {
+    func didAuthWithApple(authResponse: AuthResponse) {
         DispatchQueue.main.async {
             UserDefaults.standard.set(true, forKey: "already_sign_in_with_apple?")
-            self.closeAuthView()
+            self.keyChain.saveKeyChain(authResponse: authResponse)
         }
     }
 
