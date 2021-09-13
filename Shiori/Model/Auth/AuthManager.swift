@@ -8,13 +8,13 @@
 
 import Foundation
 
-protocol SignInManagerDelegate {
-    func didSignIn(_ signInManager: SignInManager, authResponse: AuthResponse)
+protocol AuthManagerDelegate {
+    func didSignIn(_ signInManager: AuthManager, authResponse: AuthResponse)
     func didFailWithError(error: Error?)
 }
 
-struct SignInManager {
-    var delegate: SignInManagerDelegate?
+struct AuthManager {
+    var delegate: AuthManagerDelegate?
 
     func signIn(signInRequest: SignInRequest) {
         let signInURL = "\(const.baseURL)/v1/auth/sign_in"

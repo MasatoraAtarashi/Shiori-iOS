@@ -15,12 +15,12 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate {
     @IBOutlet weak var emailInputField: UITextField!
     @IBOutlet weak var passwordInputField: UITextField!
 
-    var signInManager = SignInManager()
+    var authManager = AuthManager()
     var keyChain = KeyChain()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        signInManager.delegate = self
+        authManager.delegate = self
         keyChain.delegate = self
     }
 
@@ -43,7 +43,7 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate {
         let email = self.emailInputField.text ?? ""
         let password = self.passwordInputField.text ?? ""
         let signInRequest = SignInRequest(email: email, password: password)
-        signInManager.signIn(signInRequest: signInRequest)
+        authManager.signIn(signInRequest: signInRequest)
     }
 
     // NOTE: Googleにアプリを承認されるまで使わない
@@ -81,7 +81,7 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate {
             let email = randomString + fullName + "." + userIdentifier + "@apple.com"
             // TODO: UserDefaults.standard.set(true, forKey:"already_sign_in_with_apple?")
             let signInRequest = SignInRequest(email: email, password: userIdentifier)
-            signInManager.signIn(signInRequest: signInRequest)
+            authManager.signIn(signInRequest: signInRequest)
             //            if UserDefaults.standard.bool(forKey: "already_sign_in_with_apple?") {
             //                let signInRequest = SignInRequest(email: email, password: userIdentifier)
             //                signInManager.signIn(signInRequest: signInRequest)
@@ -92,7 +92,7 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate {
     }
 }
 
-extension LoginViewController: SignInManagerDelegate, KeyChainDelegate {
+extension LoginViewController: AuthManagerDelegate, KeyChainDelegate {
     func didSaveToKeyChain() {
         // 認証画面・初期画面を閉じる
         self.presentingViewController?.presentingViewController?.dismiss(
@@ -103,7 +103,7 @@ extension LoginViewController: SignInManagerDelegate, KeyChainDelegate {
 
     func didDeleteKeyChain() {}
 
-    func didSignIn(_ signInManager: SignInManager, authResponse: AuthResponse) {
+    func didSignIn(_ signInManager: AuthManager, authResponse: AuthResponse) {
         DispatchQueue.main.async {
             self.keyChain.saveKeyChain(authResponse: authResponse)
         }
