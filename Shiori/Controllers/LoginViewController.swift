@@ -42,8 +42,8 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate {
     @IBAction func signIn(_ sender: UIButton) {
         let email = self.emailInputField.text ?? ""
         let password = self.passwordInputField.text ?? ""
-        let signInRequest = AuthRequest(email: email, password: password)
-        authManager.signIn(signInRequest: signInRequest)
+        let authRequest = AuthRequest(email: email, password: password, passwordConfirmation: nil)
+        authManager.authenticate(authRequest: authRequest, isSignIn: true, isAppleAuth: false)
     }
 
     // NOTE: Googleにアプリを承認されるまで使わない
@@ -76,29 +76,46 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate {
         if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
             let userIdentifier = appleIDCredential.user
             let randomString = ConstShiori().randomString(length: 10)
-            let fullName = appleIDCredential.fullName as? String ?? ""
+            let email = randomString + "." + userIdentifier + "@apple.com"
 
-            let email = randomString + fullName + "." + userIdentifier + "@apple.com"
-            // TODO: UserDefaults.standard.set(true, forKey:"already_sign_in_with_apple?")
-            let signInRequest = AuthRequest(email: email, password: userIdentifier)
-            authManager.signIn(signInRequest: signInRequest)
-            //            if UserDefaults.standard.bool(forKey: "already_sign_in_with_apple?") {
-            //                let signInRequest = SignInRequest(email: email, password: userIdentifier)
-            //                signInManager.signIn(signInRequest: signInRequest)
-            //            } else {
-            //                // TODO: 会員登録
-            //            }
+            if UserDefaults.standard.bool(forKey: "already_sign_in_with_apple?") {
+                let authRequest = AuthRequest(
+                    email: email, password: userIdentifier, passwordConfirmation: nil)
+                authManager.authenticate(
+                    authRequest: authRequest, isSignIn: true, isAppleAuth: true)
+            } else {
+                // TODO: 会員登録
+                let authRequest = AuthRequest(
+                    email: email, password: userIdentifier, passwordConfirmation: userIdentifier)
+                authManager.authenticate(
+                    authRequest: authRequest, isSignIn: false, isAppleAuth: true)
+            }
         }
     }
 }
 
 extension LoginViewController: AuthManagerDelegate, KeyChainDelegate {
+    func didAuthWithApple() {
+        DispatchQueue.main.async {
+            UserDefaults.standard.set(true, forKey: "already_sign_in_with_apple?")
+            self.closeAuthView()
+        }
+    }
+
     func didSaveToKeyChain() {
-        // 認証画面・初期画面を閉じる
-        self.presentingViewController?.presentingViewController?.dismiss(
-            animated: true, completion: nil)
-        self.presentingViewController?.dismiss(animated: true, completion: nil)
-        self.dismiss(animated: true, completion: nil)
+        DispatchQueue.main.async {
+            self.closeAuthView()
+        }
+    }
+
+    // 認証画面・初期画面を閉じる
+    func closeAuthView() {
+        DispatchQueue.main.async {
+            self.presentingViewController?.presentingViewController?.dismiss(
+                animated: true, completion: nil)
+            self.presentingViewController?.dismiss(animated: true, completion: nil)
+            self.dismiss(animated: true, completion: nil)
+        }
     }
 
     func didDeleteKeyChain() {}

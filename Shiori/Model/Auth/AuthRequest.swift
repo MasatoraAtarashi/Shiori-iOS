@@ -11,4 +11,11 @@ import Foundation
 struct AuthRequest: Codable {
     let email: String
     let password: String
+    let passwordConfirmation: String?
+
+    enum CodingKeys: String, CodingKey {
+        case email
+        case password
+        case passwordConfirmation = "password_confirmation"
+    }
 }

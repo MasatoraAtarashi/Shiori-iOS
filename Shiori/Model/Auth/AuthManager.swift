@@ -10,25 +10,29 @@ import Foundation
 
 protocol AuthManagerDelegate {
     func didSignIn(_ signInManager: AuthManager, authResponse: AuthResponse)
+    func didAuthWithApple()
     func didFailWithError(error: Error?)
 }
 
 struct AuthManager {
     var delegate: AuthManagerDelegate?
 
-    func signIn(authRequest: AuthRequest) {
-        let signInURL = "\(const.baseURL)/v1/auth/sign_in"
+    func authenticate(authRequest: AuthRequest, isSignIn: Bool, isAppleAuth: Bool) {
+        var authURL = "\(const.baseURL)/v1/auth/"
+        if isSignIn {
+            authURL = "\(const.baseURL)/v1/auth/sign_in"
+        }
         let encoder = JSONEncoder()
         do {
             let body = try encoder.encode(authRequest)
-            performRequest(with: signInURL, body: body)
+            performRequest(with: authURL, body: body, isAppleAuth: isAppleAuth)
         } catch {
             self.delegate?.didFailWithError(error: error)
             return
         }
     }
 
-    func performRequest(with urlString: String, body: Foundation.Data) {
+    func performRequest(with urlString: String, body: Foundation.Data, isAppleAuth: Bool) {
         if let url = URL(string: urlString) {
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
@@ -58,7 +62,11 @@ struct AuthManager {
                         uid: uid,
                         accessToken: accessToken,
                         client: client)
-                    self.delegate?.didSignIn(self, authResponse: authResponse)
+                    if isAppleAuth {
+                        self.delegate?.didAuthWithApple()
+                    } else {
+                        self.delegate?.didSignIn(self, authResponse: authResponse)
+                    }
                 }
             }
             task.resume()
