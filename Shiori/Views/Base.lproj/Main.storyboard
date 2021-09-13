@@ -648,7 +648,7 @@
                                     <action selector="signIn:" destination="S0z-Ug-Gje" eventType="touchUpInside" id="Zdq-L8-tQj"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YoM-t7-Poq">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YoM-t7-Poq" customClass="SignInWithAppleIDButton" customModule="Shiori" customModuleProvider="target">
                                 <rect key="frame" x="16" y="354" width="343" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Appleでログイン"/>
@@ -778,6 +778,11 @@
             <point key="canvasLocation" x="-1364" y="492.50374812593708"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="YoM-t7-Poq">
+            <size key="intrinsicContentSize" width="117" height="30"/>
+        </designable>
+    </designables>
     <inferredMetricsTieBreakers>
         <segue reference="xvU-j9-IId"/>
         <segue reference="9Vi-OO-DHj"/>

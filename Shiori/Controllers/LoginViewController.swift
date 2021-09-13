@@ -87,9 +87,9 @@ class LoginViewController: UIViewController {
         signInWithGithubButton.layer.borderColor = UIColor.opaqueSeparator.cgColor
         signInWithGithubButton.layer.cornerRadius = 5
 
-        signInWithAppleButton.layer.borderWidth = 1
-        signInWithAppleButton.layer.borderColor = UIColor.opaqueSeparator.cgColor
-        signInWithAppleButton.layer.cornerRadius = 5
+        //        signInWithAppleButton.layer.borderWidth = 1
+        //        signInWithAppleButton.layer.borderColor = UIColor.opaqueSeparator.cgColor
+        //        signInWithAppleButton.layer.cornerRadius = 5
     }
 }
 
