@@ -10,7 +10,7 @@ import AuthenticationServices
 import Foundation
 import UIKit
 
-class LoginViewController: UIViewController, ASAuthorizationControllerDelegate {
+class LoginViewController: UIViewController {
 
     @IBOutlet weak var emailInputField: UITextField!
     @IBOutlet weak var passwordInputField: UITextField!
@@ -58,6 +58,7 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate {
     @IBAction func signInWithGithub(_ sender: UIButton) {
         self.performSegue(withIdentifier: "signInWithGithub", sender: nil)
     }
+    
     @IBAction func signInWithApple(_ sender: UIButton) {
         let appleIDProvider = ASAuthorizationAppleIDProvider()
         let request = appleIDProvider.createRequest()
@@ -66,31 +67,6 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate {
         let authorizationController = ASAuthorizationController(authorizationRequests: [request])
         authorizationController.delegate = self
         authorizationController.performRequests()
-    }
-
-    // TODO: リファクタリング: extensionに切り出す
-    func authorizationController(
-        controller: ASAuthorizationController,
-        didCompleteWithAuthorization authorization: ASAuthorization
-    ) {
-        if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
-            let userIdentifier = appleIDCredential.user
-            let randomString = ConstShiori().randomString(length: 10)
-            let email = randomString + "." + userIdentifier + "@apple.com"
-
-            if UserDefaults.standard.bool(forKey: "already_sign_in_with_apple?") {
-                let authRequest = AuthRequest(
-                    email: email, password: userIdentifier, passwordConfirmation: nil)
-                authManager.authenticate(
-                    authRequest: authRequest, isSignIn: true, isAppleAuth: true)
-            } else {
-                // TODO: 会員登録
-                let authRequest = AuthRequest(
-                    email: email, password: userIdentifier, passwordConfirmation: userIdentifier)
-                authManager.authenticate(
-                    authRequest: authRequest, isSignIn: false, isAppleAuth: true)
-            }
-        }
     }
 }
 
@@ -131,6 +107,34 @@ extension LoginViewController: AuthManagerDelegate, KeyChainDelegate {
             print("Error", error)
             ConstShiori().showPopUp(
                 is_success: false, title: "error", body: "メールアドレスまたはパスワードが正しくありません。")
+        }
+    }
+}
+
+// authentication with apple
+extension LoginViewController: ASAuthorizationControllerDelegate {
+    // TODO: リファクタリング: extensionに切り出す
+    func authorizationController(
+        controller: ASAuthorizationController,
+        didCompleteWithAuthorization authorization: ASAuthorization
+    ) {
+        if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
+            let userIdentifier = appleIDCredential.user
+            let randomString = ConstShiori().randomString(length: 10)
+            let email = randomString + "." + userIdentifier + "@apple.com"
+
+            if UserDefaults.standard.bool(forKey: "already_sign_in_with_apple?") {
+                let authRequest = AuthRequest(
+                    email: email, password: userIdentifier, passwordConfirmation: nil)
+                authManager.authenticate(
+                    authRequest: authRequest, isSignIn: true, isAppleAuth: true)
+            } else {
+                // TODO: 会員登録
+                let authRequest = AuthRequest(
+                    email: email, password: userIdentifier, passwordConfirmation: userIdentifier)
+                authManager.authenticate(
+                    authRequest: authRequest, isSignIn: false, isAppleAuth: true)
+            }
         }
     }
 }
