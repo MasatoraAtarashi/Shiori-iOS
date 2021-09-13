@@ -75,6 +75,7 @@
 		62B8CF7D26EE4D7C009FB5AC /* ConstShiori.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B8CF7C26EE4D7C009FB5AC /* ConstShiori.swift */; };
 		62B8CF7F26EE5003009FB5AC /* OmniAuthWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B8CF7E26EE5003009FB5AC /* OmniAuthWebViewController.swift */; };
 		62B8CF8026EFB38E009FB5AC /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B8CF7A26EE291B009FB5AC /* KeyChain.swift */; };
+		62B8CF8126EFB43C009FB5AC /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B8CF7826EE1C1D009FB5AC /* AuthResponse.swift */; };
 		909E9FA550C96476D4E86C62 /* Pods_Shiori.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98B1316EC4BD7BAAF68C16D6 /* Pods_Shiori.framework */; };
 		B417587B67390A83D3E0AB99 /* Pods_Share.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EC70B92298E46BA5986AED1 /* Pods_Share.framework */; };
 /* End PBXBuildFile section */
@@ -673,6 +674,7 @@
 				62B8CF8026EFB38E009FB5AC /* KeyChain.swift in Sources */,
 				6204CC5A26E299C2000611E1 /* ContentManager.swift in Sources */,
 				622155A7232B7A2F00DD4AB4 /* ShareViewController.swift in Sources */,
+				62B8CF8126EFB43C009FB5AC /* AuthResponse.swift in Sources */,
 				6256E89426ECEF3D007B4FCC /* ContentRequest.swift in Sources */,
 				6204CC5526E298F5000611E1 /* Const.swift in Sources */,
 			);
