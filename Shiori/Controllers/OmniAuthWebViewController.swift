@@ -40,7 +40,7 @@ class OmniAuthWebViewController: UIViewController, WKNavigationDelegate, WKUIDel
             return
         }
         let headers = httpURLResponse.allHeaderFields
-        guard let uid = headers["Uid"] as? String else {
+        guard let uid = headers["Uid "] as? String else {
             return
         }
         guard let accessToken = headers["Access-Token"] as? String
@@ -68,7 +68,7 @@ class OmniAuthWebViewController: UIViewController, WKNavigationDelegate, WKUIDel
     func setTargetURL(targetService: String) -> URL? {
         switch targetService {
         case "Google":
-            return URL(string: "\(const.baseURL)/v1/auth/google")
+            return URL(string: "\(const.baseURL)/v1/auth/google_oauth2")
         case "Twitter":
             return URL(string: "\(const.baseURL)/v1/auth/twitter")
         case "Github":

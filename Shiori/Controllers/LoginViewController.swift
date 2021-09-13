@@ -25,7 +25,9 @@ class LoginViewController: UIViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         var targetService = ""
-        if segue.identifier == "signInWithTwitter" {
+        if segue.identifier == "signInWithGoogle" {
+            targetService = "Google"
+        } else if segue.identifier == "signInWithTwitter" {
             targetService = "Twitter"
         } else if segue.identifier == "signInWithGithub" {
             targetService = "Github"
@@ -41,6 +43,11 @@ class LoginViewController: UIViewController {
         let password = self.passwordInputField.text ?? ""
         let signInRequest = SignInRequest(email: email, password: password)
         signInManager.signIn(signInRequest: signInRequest)
+    }
+
+    // NOTE: Googleにアプリを承認されるまで使わない
+    @IBAction func signInWithGoogle(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "signInWithGoogle", sender: nil)
     }
 
     @IBAction func signInWithTwitter(_ sender: UIButton) {
