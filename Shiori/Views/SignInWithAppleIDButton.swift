@@ -13,15 +13,15 @@ import UIKit
 class SignInWithAppleIDButton: UIButton {
 
     private var appleIDButton: ASAuthorizationAppleIDButton!
-    
+
     @IBInspectable
-        var cornerRadius: CGFloat = 6.0
+    var cornerRadius: CGFloat = 6.0
 
-        @IBInspectable
-        var type: Int = ASAuthorizationAppleIDButton.ButtonType.default.rawValue
+    @IBInspectable
+    var type: Int = ASAuthorizationAppleIDButton.ButtonType.default.rawValue
 
-        @IBInspectable
-        var style: Int = ASAuthorizationAppleIDButton.Style.black.rawValue
+    @IBInspectable
+    var style: Int = ASAuthorizationAppleIDButton.Style.black.rawValue
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -35,9 +35,10 @@ class SignInWithAppleIDButton: UIButton {
         super.draw(rect)
 
         let type = ASAuthorizationAppleIDButton.ButtonType.init(rawValue: self.type) ?? .default
-                let style = ASAuthorizationAppleIDButton.Style.init(rawValue: self.style) ?? .black
-                appleIDButton = ASAuthorizationAppleIDButton(authorizationButtonType: type, authorizationButtonStyle: style)
-                appleIDButton.cornerRadius = cornerRadius
+        let style = ASAuthorizationAppleIDButton.Style.init(rawValue: self.style) ?? .black
+        appleIDButton = ASAuthorizationAppleIDButton(
+            authorizationButtonType: type, authorizationButtonStyle: style)
+        appleIDButton.cornerRadius = cornerRadius
 
         addSubview(appleIDButton)
 
