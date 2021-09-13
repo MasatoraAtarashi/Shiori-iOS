@@ -14,6 +14,9 @@ class LoginViewController: UIViewController {
 
     @IBOutlet weak var emailInputField: UITextField!
     @IBOutlet weak var passwordInputField: UITextField!
+    @IBOutlet weak var signInWithTwitterButton: UIButton!
+    @IBOutlet weak var signInWithGithubButton: UIButton!
+    @IBOutlet weak var signInWithAppleButton: UIButton!
 
     var authManager = AuthManager()
     var keyChain = KeyChain()
@@ -22,6 +25,11 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         authManager.delegate = self
         keyChain.delegate = self
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(false)
+        initViewUI()
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -67,6 +75,21 @@ class LoginViewController: UIViewController {
         let authorizationController = ASAuthorizationController(authorizationRequests: [request])
         authorizationController.delegate = self
         authorizationController.performRequests()
+    }
+
+    // UIを初期化
+    func initViewUI() {
+        signInWithTwitterButton.layer.borderWidth = 1
+        signInWithTwitterButton.layer.borderColor = UIColor.opaqueSeparator.cgColor
+        signInWithTwitterButton.layer.cornerRadius = 5
+
+        signInWithGithubButton.layer.borderWidth = 1
+        signInWithGithubButton.layer.borderColor = UIColor.opaqueSeparator.cgColor
+        signInWithGithubButton.layer.cornerRadius = 5
+
+        signInWithAppleButton.layer.borderWidth = 1
+        signInWithAppleButton.layer.borderColor = UIColor.opaqueSeparator.cgColor
+        signInWithAppleButton.layer.cornerRadius = 5
     }
 }
 

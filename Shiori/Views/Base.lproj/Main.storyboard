@@ -610,7 +610,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MVN-AE-tTe">
-                                <rect key="frame" x="120" y="316" width="123" height="30"/>
+                                <rect key="frame" x="16" y="316" width="343" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Githubでログイン"/>
                                 <connections>
@@ -618,7 +618,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J7G-8Q-AwP">
-                                <rect key="frame" x="120" y="278" width="124" height="30"/>
+                                <rect key="frame" x="16" y="278" width="343" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Twitterでログイン"/>
                                 <connections>
@@ -626,48 +626,71 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="password" borderStyle="roundedRect" placeholder="パスワード" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OHJ-Xt-2Oy">
-                                <rect key="frame" x="96" y="93" width="179" height="34"/>
+                                <rect key="frame" x="16" y="93" width="343" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" textContentType="password"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="unko@gmail.com" borderStyle="roundedRect" placeholder="メールアドレス" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bw0-tq-Vci">
-                                <rect key="frame" x="98" y="51" width="179" height="34"/>
+                                <rect key="frame" x="16" y="51" width="343" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" textContentType="email"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Laf-Ky-9Mu">
-                                <rect key="frame" x="154" y="135" width="62" height="30"/>
+                                <rect key="frame" x="16" y="135" width="343" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="ログイン"/>
+                                <color key="backgroundColor" red="0.11372549019607843" green="0.85882352941176465" blue="0.70980392156862748" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="ログイン">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
                                     <action selector="signIn:" destination="S0z-Ug-Gje" eventType="touchUpInside" id="Zdq-L8-tQj"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YoM-t7-Poq">
-                                <rect key="frame" x="124" y="354" width="117" height="30"/>
+                                <rect key="frame" x="16" y="354" width="343" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Appleでログイン"/>
                                 <connections>
                                     <action selector="signInWithApple:" destination="S0z-Ug-Gje" eventType="touchUpInside" id="0US-s4-OT5"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="または" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ImT-xk-W9z">
+                                <rect key="frame" x="166" y="207" width="52" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" systemColor="opaqueSeparatorColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QXp-rt-OKl">
+                                <rect key="frame" x="226" y="217" width="133" height="1"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ck2-K8-uPF">
+                                <rect key="frame" x="16" y="217" width="133" height="1"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="RcR-Ci-D6B"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="iEK-KF-afx"/>
                     <connections>
                         <outlet property="emailInputField" destination="bw0-tq-Vci" id="RQF-YD-Xzk"/>
                         <outlet property="passwordInputField" destination="OHJ-Xt-2Oy" id="hJz-8p-EW1"/>
+                        <outlet property="signInWithAppleButton" destination="YoM-t7-Poq" id="lds-SO-4pF"/>
+                        <outlet property="signInWithGithubButton" destination="MVN-AE-tTe" id="75K-Wi-Jhs"/>
+                        <outlet property="signInWithTwitterButton" destination="J7G-8Q-AwP" id="VtE-cm-mGV"/>
                         <segue destination="Tng-dn-v6R" kind="show" identifier="signInWithTwitter" id="xvU-j9-IId"/>
                         <segue destination="Tng-dn-v6R" kind="show" identifier="signInWithGithub" id="mAF-q8-dsp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Fd-eC-xM3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2212" y="480"/>
+            <point key="canvasLocation" x="-2212" y="479.91004497751129"/>
         </scene>
         <!--外部サービスログイン画面-->
         <scene sceneID="2ML-jB-pWt">
@@ -767,6 +790,9 @@
         <image name="settings.png" width="18" height="18"/>
         <systemColor name="linkColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="opaqueSeparatorColor">
+            <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="scrollViewTexturedBackgroundColor">
             <color red="0.43529411764705878" green="0.44313725490196082" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
