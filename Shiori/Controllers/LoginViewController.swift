@@ -58,7 +58,7 @@ class LoginViewController: UIViewController {
     @IBAction func signInWithGithub(_ sender: UIButton) {
         self.performSegue(withIdentifier: "signInWithGithub", sender: nil)
     }
-    
+
     @IBAction func signInWithApple(_ sender: UIButton) {
         let appleIDProvider = ASAuthorizationAppleIDProvider()
         let request = appleIDProvider.createRequest()
@@ -120,8 +120,7 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
     ) {
         if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
             let userIdentifier = appleIDCredential.user
-            let randomString = ConstShiori().randomString(length: 10)
-            let email = randomString + "." + userIdentifier + "@apple.com"
+            let email = userIdentifier + "@apple.com"
 
             if UserDefaults.standard.bool(forKey: "already_sign_in_with_apple?") {
                 let authRequest = AuthRequest(
