@@ -49,5 +49,12 @@ class SignInWithAppleIDButton: UIButton {
             appleIDButton.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             appleIDButton.trailingAnchor.constraint(equalTo: self.trailingAnchor),
         ])
+
+        appleIDButton.addTarget(self, action: #selector(appleIDButtonTapped), for: .touchUpInside)
+    }
+
+    @objc
+    func appleIDButtonTapped(_ sender: Any) {
+        sendActions(for: .touchUpInside)
     }
 }
