@@ -69,7 +69,7 @@
 		62B8CF7026EE10FE009FB5AC /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B8CF6F26EE10FE009FB5AC /* InitialViewController.swift */; };
 		62B8CF7226EE141F009FB5AC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B8CF7126EE141F009FB5AC /* LoginViewController.swift */; };
 		62B8CF7526EE16C6009FB5AC /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B8CF7426EE16C6009FB5AC /* AuthManager.swift */; };
-		62B8CF7726EE1C0E009FB5AC /* SignInRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B8CF7626EE1C0E009FB5AC /* SignInRequest.swift */; };
+		62B8CF7726EE1C0E009FB5AC /* AuthRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B8CF7626EE1C0E009FB5AC /* AuthRequest.swift */; };
 		62B8CF7926EE1C1D009FB5AC /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B8CF7826EE1C1D009FB5AC /* AuthResponse.swift */; };
 		62B8CF7B26EE291B009FB5AC /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B8CF7A26EE291B009FB5AC /* KeyChain.swift */; };
 		62B8CF7D26EE4D7C009FB5AC /* ConstShiori.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B8CF7C26EE4D7C009FB5AC /* ConstShiori.swift */; };
@@ -185,7 +185,7 @@
 		62B8CF6F26EE10FE009FB5AC /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		62B8CF7126EE141F009FB5AC /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		62B8CF7426EE16C6009FB5AC /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
-		62B8CF7626EE1C0E009FB5AC /* SignInRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInRequest.swift; sourceTree = "<group>"; };
+		62B8CF7626EE1C0E009FB5AC /* AuthRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRequest.swift; sourceTree = "<group>"; };
 		62B8CF7826EE1C1D009FB5AC /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
 		62B8CF7A26EE291B009FB5AC /* KeyChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChain.swift; sourceTree = "<group>"; };
 		62B8CF7C26EE4D7C009FB5AC /* ConstShiori.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstShiori.swift; sourceTree = "<group>"; };
@@ -369,7 +369,7 @@
 			isa = PBXGroup;
 			children = (
 				62B8CF7426EE16C6009FB5AC /* AuthManager.swift */,
-				62B8CF7626EE1C0E009FB5AC /* SignInRequest.swift */,
+				62B8CF7626EE1C0E009FB5AC /* AuthRequest.swift */,
 				62B8CF7826EE1C1D009FB5AC /* AuthResponse.swift */,
 			);
 			path = Auth;
@@ -628,7 +628,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				62B8CF7226EE141F009FB5AC /* LoginViewController.swift in Sources */,
-				62B8CF7726EE1C0E009FB5AC /* SignInRequest.swift in Sources */,
+				62B8CF7726EE1C0E009FB5AC /* AuthRequest.swift in Sources */,
 				62215594232B79B900DD4AB4 /* Shiori.xcdatamodeld in Sources */,
 				62B8CF7D26EE4D7C009FB5AC /* ConstShiori.swift in Sources */,
 				62B8CF7926EE1C1D009FB5AC /* AuthResponse.swift in Sources */,

@@ -16,11 +16,11 @@ protocol AuthManagerDelegate {
 struct AuthManager {
     var delegate: AuthManagerDelegate?
 
-    func signIn(signInRequest: SignInRequest) {
+    func signIn(authRequest: AuthRequest) {
         let signInURL = "\(const.baseURL)/v1/auth/sign_in"
         let encoder = JSONEncoder()
         do {
-            let body = try encoder.encode(signInRequest)
+            let body = try encoder.encode(authRequest)
             performRequest(with: signInURL, body: body)
         } catch {
             self.delegate?.didFailWithError(error: error)

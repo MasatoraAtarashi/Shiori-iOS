@@ -42,7 +42,7 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate {
     @IBAction func signIn(_ sender: UIButton) {
         let email = self.emailInputField.text ?? ""
         let password = self.passwordInputField.text ?? ""
-        let signInRequest = SignInRequest(email: email, password: password)
+        let signInRequest = AuthRequest(email: email, password: password)
         authManager.signIn(signInRequest: signInRequest)
     }
 
@@ -80,7 +80,7 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate {
 
             let email = randomString + fullName + "." + userIdentifier + "@apple.com"
             // TODO: UserDefaults.standard.set(true, forKey:"already_sign_in_with_apple?")
-            let signInRequest = SignInRequest(email: email, password: userIdentifier)
+            let signInRequest = AuthRequest(email: email, password: userIdentifier)
             authManager.signIn(signInRequest: signInRequest)
             //            if UserDefaults.standard.bool(forKey: "already_sign_in_with_apple?") {
             //                let signInRequest = SignInRequest(email: email, password: userIdentifier)
