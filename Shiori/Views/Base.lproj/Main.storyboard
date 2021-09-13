@@ -658,6 +658,9 @@
                                 <rect key="frame" x="124" y="354" width="117" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Appleでログイン"/>
+                                <connections>
+                                    <action selector="signInWithApple:" destination="S0z-Ug-Gje" eventType="touchUpInside" id="0US-s4-OT5"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="RcR-Ci-D6B"/>

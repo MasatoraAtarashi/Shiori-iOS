@@ -6,10 +6,11 @@
 //  Copyright © 2021 Masatora Atarashi. All rights reserved.
 //
 
+import AuthenticationServices
 import Foundation
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, ASAuthorizationControllerDelegate {
 
     @IBOutlet weak var emailInputField: UITextField!
     @IBOutlet weak var passwordInputField: UITextField!
@@ -56,6 +57,38 @@ class LoginViewController: UIViewController {
 
     @IBAction func signInWithGithub(_ sender: UIButton) {
         self.performSegue(withIdentifier: "signInWithGithub", sender: nil)
+    }
+    @IBAction func signInWithApple(_ sender: UIButton) {
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+        let request = appleIDProvider.createRequest()
+        request.requestedScopes = [.fullName, .email]
+
+        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+        authorizationController.delegate = self
+        authorizationController.performRequests()
+    }
+
+    // TODO: リファクタリング: extensionに切り出す
+    func authorizationController(
+        controller: ASAuthorizationController,
+        didCompleteWithAuthorization authorization: ASAuthorization
+    ) {
+        if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
+            let userIdentifier = appleIDCredential.user
+            let randomString = ConstShiori().randomString(length: 10)
+            let fullName = appleIDCredential.fullName as? String ?? ""
+
+            let email = randomString + fullName + "." + userIdentifier + "@apple.com"
+            // TODO: UserDefaults.standard.set(true, forKey:"already_sign_in_with_apple?")
+            let signInRequest = SignInRequest(email: email, password: userIdentifier)
+            signInManager.signIn(signInRequest: signInRequest)
+            //            if UserDefaults.standard.bool(forKey: "already_sign_in_with_apple?") {
+            //                let signInRequest = SignInRequest(email: email, password: userIdentifier)
+            //                signInManager.signIn(signInRequest: signInRequest)
+            //            } else {
+            //                // TODO: 会員登録
+            //            }
+        }
     }
 }
 
