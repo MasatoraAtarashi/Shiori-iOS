@@ -40,7 +40,7 @@ class OmniAuthWebViewController: UIViewController, WKNavigationDelegate, WKUIDel
             return
         }
         let headers = httpURLResponse.allHeaderFields
-        guard let uid = headers["Uid "] as? String else {
+        guard let uid = headers["Uid"] as? String else {
             return
         }
         guard let accessToken = headers["Access-Token"] as? String
