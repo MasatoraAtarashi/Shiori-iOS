@@ -609,29 +609,39 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MVN-AE-tTe">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MVN-AE-tTe">
                                 <rect key="frame" x="16" y="313" width="343" height="45"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="pPI-Cl-s9o"/>
+                                </constraints>
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
                                         <fragment content="github">
                                             <attributes>
                                                 <color key="NSColor" systemColor="labelColor"/>
                                                 <font key="NSFont" size="15" name="FontAwesome5Brands-Regular"/>
+                                                <font key="NSOriginalFont" size="15" name="FontAwesome5Brands-Regular"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                             </attributes>
                                         </fragment>
-                                        <fragment content=" Github">
+                                        <fragment content=" ">
                                             <attributes>
                                                 <color key="NSColor" systemColor="labelColor"/>
-                                                <font key="NSFont" metaFont="system" size="15"/>
+                                                <font key="NSFont" size="15" name=".HiraKakuInterface-W3"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content="Github">
+                                            <attributes>
+                                                <color key="NSColor" systemColor="labelColor"/>
+                                                <font key="NSFont" metaFont="system" size="18"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                             </attributes>
                                         </fragment>
                                         <fragment content="で続ける">
                                             <attributes>
                                                 <color key="NSColor" systemColor="labelColor"/>
-                                                <font key="NSFont" size="15" name=".HiraKakuInterface-W3"/>
+                                                <font key="NSFont" size="18" name=".HiraKakuInterface-W3"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                             </attributes>
                                         </fragment>
@@ -641,30 +651,29 @@
                                     <action selector="signInWithGithub:" destination="S0z-Ug-Gje" eventType="touchUpInside" id="ZFd-1G-ivz"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J7G-8Q-AwP">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J7G-8Q-AwP">
                                 <rect key="frame" x="16" y="260" width="343" height="45"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="Ark-Iy-KM1"/>
+                                </constraints>
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
                                         <fragment content="twitter ">
                                             <attributes>
-                                                <color key="NSColor" red="0.39736682176589966" green="0.70471864938735962" blue="0.95367652177810669" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <font key="NSFont" size="15" name="FontAwesome5Brands-Regular"/>
-                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                <color key="NSColor" red="0.33333333333333331" green="0.67450980392156867" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="16" name="FontAwesome5Brands-Regular"/>
                                             </attributes>
                                         </fragment>
                                         <fragment content="Twitter">
                                             <attributes>
-                                                <color key="NSColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <font key="NSFont" metaFont="system" size="15"/>
-                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" metaFont="system" size="16"/>
                                             </attributes>
                                         </fragment>
                                         <fragment content="で続ける">
                                             <attributes>
-                                                <color key="NSColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <font key="NSFont" size="15" name=".HiraKakuInterface-W3"/>
-                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="16" name=".HiraKakuInterface-W3"/>
                                             </attributes>
                                         </fragment>
                                     </attributedString>
@@ -673,16 +682,20 @@
                                     <action selector="signInWithTwitter:" destination="S0z-Ug-Gje" eventType="touchUpInside" id="5aB-G0-Vn3"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="unko@gmail.com" placeholder="メールアドレス" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="bw0-tq-Vci">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="メールアドレス" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="bw0-tq-Vci">
                                 <rect key="frame" x="16" y="51" width="343" height="45"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="7oY-Ku-iRi"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress" textContentType="email"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Laf-Ky-9Mu">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Laf-Ky-9Mu">
                                 <rect key="frame" x="16" y="157" width="343" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.11372549019607843" green="0.85882352941176465" blue="0.70980392156862748" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="hz7-J0-Ez3"/>
+                                </constraints>
                                 <state key="normal" title="ログイン">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -690,32 +703,33 @@
                                     <action selector="signIn:" destination="S0z-Ug-Gje" eventType="touchUpInside" id="Zdq-L8-tQj"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="または" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ImT-xk-W9z">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="または" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ImT-xk-W9z">
                                 <rect key="frame" x="166" y="220" width="52" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" systemColor="opaqueSeparatorColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QXp-rt-OKl">
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QXp-rt-OKl">
                                 <rect key="frame" x="226" y="230" width="133" height="1"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ck2-K8-uPF">
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ck2-K8-uPF">
                                 <rect key="frame" x="16" y="230" width="133" height="1"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
                             </view>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="password" placeholder="パスワード" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OHJ-Xt-2Oy">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="パスワード" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OHJ-Xt-2Oy">
                                 <rect key="frame" x="16" y="104" width="343" height="45"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="mKN-nd-XCi"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="alphabet" textContentType="password"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YoM-t7-Poq" customClass="SignInWithAppleIDButton" customModule="Shiori" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YoM-t7-Poq" customClass="SignInWithAppleIDButton" customModule="Shiori" customModuleProvider="target">
                                 <rect key="frame" x="16" y="366" width="343" height="45"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="joD-r0-Bxq"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <state key="normal" title="Appleでログイン">
                                     <color key="titleColor" systemColor="labelColor"/>
@@ -738,6 +752,31 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="RcR-Ci-D6B"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="OHJ-Xt-2Oy" firstAttribute="leading" secondItem="RcR-Ci-D6B" secondAttribute="leading" constant="16" id="4dN-NU-lOr"/>
+                            <constraint firstItem="bw0-tq-Vci" firstAttribute="top" secondItem="RcR-Ci-D6B" secondAttribute="top" constant="51" id="9cC-nu-TQY"/>
+                            <constraint firstItem="ImT-xk-W9z" firstAttribute="top" secondItem="Laf-Ky-9Mu" secondAttribute="bottom" constant="23" id="B4W-sb-9Hf"/>
+                            <constraint firstItem="RcR-Ci-D6B" firstAttribute="trailing" secondItem="Laf-Ky-9Mu" secondAttribute="trailing" constant="16" id="I7B-PZ-CAS"/>
+                            <constraint firstItem="J7G-8Q-AwP" firstAttribute="top" secondItem="ImT-xk-W9z" secondAttribute="bottom" constant="19" id="KbH-ZI-j6W"/>
+                            <constraint firstItem="Laf-Ky-9Mu" firstAttribute="leading" secondItem="RcR-Ci-D6B" secondAttribute="leading" constant="16" id="Mf0-tQ-Xe3"/>
+                            <constraint firstItem="ck2-K8-uPF" firstAttribute="top" secondItem="Laf-Ky-9Mu" secondAttribute="bottom" constant="33" id="N3r-k2-ohW"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ck2-K8-uPF" secondAttribute="trailing" constant="210" id="RB8-YW-Z5l"/>
+                            <constraint firstItem="MVN-AE-tTe" firstAttribute="top" secondItem="J7G-8Q-AwP" secondAttribute="bottom" constant="8" symbolic="YES" id="Scv-Ju-Esv"/>
+                            <constraint firstItem="OHJ-Xt-2Oy" firstAttribute="top" secondItem="bw0-tq-Vci" secondAttribute="bottom" constant="8" symbolic="YES" id="U7f-XE-UCm"/>
+                            <constraint firstItem="YoM-t7-Poq" firstAttribute="top" secondItem="MVN-AE-tTe" secondAttribute="bottom" constant="8" symbolic="YES" id="Wnh-e4-UId"/>
+                            <constraint firstItem="MVN-AE-tTe" firstAttribute="leading" secondItem="RcR-Ci-D6B" secondAttribute="leading" constant="16" id="YbG-Rs-Eal"/>
+                            <constraint firstItem="RcR-Ci-D6B" firstAttribute="trailing" secondItem="bw0-tq-Vci" secondAttribute="trailing" constant="16" id="azY-dn-Yub"/>
+                            <constraint firstItem="ck2-K8-uPF" firstAttribute="leading" secondItem="Lb3-8k-99G" secondAttribute="leadingMargin" id="co6-F7-azj"/>
+                            <constraint firstItem="QXp-rt-OKl" firstAttribute="top" secondItem="Laf-Ky-9Mu" secondAttribute="bottom" constant="33" id="d4m-jc-PX5"/>
+                            <constraint firstItem="YoM-t7-Poq" firstAttribute="leading" secondItem="RcR-Ci-D6B" secondAttribute="leading" constant="16" id="d6F-cT-I3a"/>
+                            <constraint firstItem="QXp-rt-OKl" firstAttribute="trailing" secondItem="Lb3-8k-99G" secondAttribute="trailingMargin" id="nR4-R2-BJx"/>
+                            <constraint firstItem="bw0-tq-Vci" firstAttribute="leading" secondItem="RcR-Ci-D6B" secondAttribute="leading" constant="16" id="ruy-P8-m9g"/>
+                            <constraint firstItem="RcR-Ci-D6B" firstAttribute="trailing" secondItem="MVN-AE-tTe" secondAttribute="trailing" constant="16" id="srO-I3-8zB"/>
+                            <constraint firstItem="QXp-rt-OKl" firstAttribute="leading" secondItem="Lb3-8k-99G" secondAttribute="leadingMargin" constant="210" id="ueF-Tc-7vP"/>
+                            <constraint firstItem="RcR-Ci-D6B" firstAttribute="trailing" secondItem="OHJ-Xt-2Oy" secondAttribute="trailing" constant="16" id="uy2-QJ-neh"/>
+                            <constraint firstItem="Laf-Ky-9Mu" firstAttribute="top" secondItem="OHJ-Xt-2Oy" secondAttribute="bottom" constant="8" symbolic="YES" id="vb4-zL-P8P"/>
+                            <constraint firstItem="RcR-Ci-D6B" firstAttribute="trailing" secondItem="YoM-t7-Poq" secondAttribute="trailing" constant="16" id="ydo-bb-ocM"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="iEK-KF-afx"/>
                     <connections>
