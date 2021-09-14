@@ -573,22 +573,22 @@
                                     <segue destination="NED-fG-Q9L" kind="show" id="qtP-2a-cak"/>
                                 </connections>
                             </button>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Ab-2q-xXv">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="549"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Ab-2q-xXv">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="489"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ghh-bZ-105">
-                                        <rect key="frame" x="0.0" y="0.0" width="1125" height="549"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="1125" height="489"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AEy-o7-dMc">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="549"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="489"/>
                                                 <color key="backgroundColor" systemColor="systemIndigoColor"/>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UXB-Rb-knb">
-                                                <rect key="frame" x="375" y="0.0" width="375" height="549"/>
+                                                <rect key="frame" x="375" y="0.0" width="375" height="489"/>
                                                 <color key="backgroundColor" systemColor="systemGreenColor"/>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EfN-4t-pmQ">
-                                                <rect key="frame" x="750" y="0.0" width="375" height="549"/>
+                                                <rect key="frame" x="750" y="0.0" width="375" height="489"/>
                                                 <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                             </view>
                                         </subviews>
@@ -607,12 +607,19 @@
                                 <viewLayoutGuide key="contentLayoutGuide" id="Mm0-1m-LhU"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="BT5-U0-JxO"/>
                             </scrollView>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="4TM-yw-Zhn">
+                                <rect key="frame" x="126" y="497" width="122" height="27.5"/>
+                                <color key="pageIndicatorTintColor" systemColor="opaqueSeparatorColor"/>
+                                <color key="currentPageIndicatorTintColor" red="0.031372549019607843" green="0.67843137254901964" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </pageControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="bBB-Mu-v8g"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="bBB-Mu-v8g" firstAttribute="trailing" secondItem="4TM-yw-Zhn" secondAttribute="trailing" constant="127" id="1rq-gf-sfT"/>
                             <constraint firstItem="hft-Db-vEY" firstAttribute="leading" secondItem="bBB-Mu-v8g" secondAttribute="leading" constant="16" id="40M-k9-XVK"/>
                             <constraint firstItem="gcs-d2-WGu" firstAttribute="top" secondItem="hft-Db-vEY" secondAttribute="bottom" constant="8" id="Des-pd-Iuw"/>
+                            <constraint firstItem="4TM-yw-Zhn" firstAttribute="leading" secondItem="bBB-Mu-v8g" secondAttribute="leading" constant="126" id="HCy-Wt-amj"/>
                             <constraint firstItem="bBB-Mu-v8g" firstAttribute="trailing" secondItem="gcs-d2-WGu" secondAttribute="trailing" constant="16" id="JSe-L8-8Hj"/>
                             <constraint firstItem="0Ab-2q-xXv" firstAttribute="leading" secondItem="bBB-Mu-v8g" secondAttribute="leading" id="MZh-gV-b6D"/>
                             <constraint firstItem="bBB-Mu-v8g" firstAttribute="trailing" secondItem="hft-Db-vEY" secondAttribute="trailing" constant="16" id="NXN-Oa-GKM"/>
@@ -620,9 +627,14 @@
                             <constraint firstItem="bBB-Mu-v8g" firstAttribute="bottom" secondItem="gcs-d2-WGu" secondAttribute="bottom" constant="20" id="SrP-lK-gtm"/>
                             <constraint firstItem="bBB-Mu-v8g" firstAttribute="trailing" secondItem="0Ab-2q-xXv" secondAttribute="trailing" id="Ux7-RX-3Ta"/>
                             <constraint firstItem="gcs-d2-WGu" firstAttribute="leading" secondItem="bBB-Mu-v8g" secondAttribute="leading" constant="16" id="hgE-6u-hGk"/>
-                            <constraint firstItem="hft-Db-vEY" firstAttribute="top" secondItem="0Ab-2q-xXv" secondAttribute="bottom" id="j5r-id-bnt"/>
+                            <constraint firstItem="hft-Db-vEY" firstAttribute="top" secondItem="0Ab-2q-xXv" secondAttribute="bottom" constant="60" id="j5r-id-bnt"/>
+                            <constraint firstItem="4TM-yw-Zhn" firstAttribute="top" secondItem="0Ab-2q-xXv" secondAttribute="bottom" constant="8" symbolic="YES" id="p0A-zy-fET"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="pageControll" destination="4TM-yw-Zhn" id="fGj-tn-sjh"/>
+                        <outlet property="scrollView" destination="0Ab-2q-xXv" id="8e4-2Q-jbx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="95e-Ur-KSD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

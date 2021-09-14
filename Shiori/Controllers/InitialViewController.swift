@@ -11,4 +11,20 @@ import UIKit
 
 class InitialViewController: UIViewController {
 
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var pageControll: UIPageControl!
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        scrollView.delegate = self
+    }
+
+}
+
+extension InitialViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let index = Int(round(scrollView.contentOffset.x / scrollView.frame.width))
+        self.pageControll.currentPage = index
+    }
 }
