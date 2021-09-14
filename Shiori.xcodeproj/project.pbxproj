@@ -76,7 +76,6 @@
 		62B8CF7F26EE5003009FB5AC /* OmniAuthWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B8CF7E26EE5003009FB5AC /* OmniAuthWebViewController.swift */; };
 		62B8CF8026EFB38E009FB5AC /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B8CF7A26EE291B009FB5AC /* KeyChain.swift */; };
 		62B8CF8126EFB43C009FB5AC /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B8CF7826EE1C1D009FB5AC /* AuthResponse.swift */; };
-		62B8CF8326EFB74D009FB5AC /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B8CF8226EFB74D009FB5AC /* SignUpViewController.swift */; };
 		62B8CF8526EFBD3E009FB5AC /* SignInWithAppleIDButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B8CF8426EFBD3E009FB5AC /* SignInWithAppleIDButton.swift */; };
 		62D5918026F0A821000D4552 /* Font Awesome 5 Free-Solid-900.otf in Resources */ = {isa = PBXBuildFile; fileRef = 62D5917D26F0A820000D4552 /* Font Awesome 5 Free-Solid-900.otf */; };
 		62D5918126F0A821000D4552 /* Font Awesome 5 Free-Regular-400.otf in Resources */ = {isa = PBXBuildFile; fileRef = 62D5917E26F0A820000D4552 /* Font Awesome 5 Free-Regular-400.otf */; };
@@ -198,7 +197,6 @@
 		62B8CF7A26EE291B009FB5AC /* KeyChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChain.swift; sourceTree = "<group>"; };
 		62B8CF7C26EE4D7C009FB5AC /* ConstShiori.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstShiori.swift; sourceTree = "<group>"; };
 		62B8CF7E26EE5003009FB5AC /* OmniAuthWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmniAuthWebViewController.swift; sourceTree = "<group>"; };
-		62B8CF8226EFB74D009FB5AC /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		62B8CF8426EFBD3E009FB5AC /* SignInWithAppleIDButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithAppleIDButton.swift; sourceTree = "<group>"; };
 		62D5917D26F0A820000D4552 /* Font Awesome 5 Free-Solid-900.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Font Awesome 5 Free-Solid-900.otf"; sourceTree = "<group>"; };
 		62D5917E26F0A820000D4552 /* Font Awesome 5 Free-Regular-400.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Font Awesome 5 Free-Regular-400.otf"; sourceTree = "<group>"; };
@@ -357,7 +355,6 @@
 				62B8CF6F26EE10FE009FB5AC /* InitialViewController.swift */,
 				62B8CF7126EE141F009FB5AC /* LoginViewController.swift */,
 				62B8CF7E26EE5003009FB5AC /* OmniAuthWebViewController.swift */,
-				62B8CF8226EFB74D009FB5AC /* SignUpViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -679,7 +676,6 @@
 				62B8CF8526EFBD3E009FB5AC /* SignInWithAppleIDButton.swift in Sources */,
 				624411012334EA6300C1C411 /* CustomActivity.swift in Sources */,
 				6204CC5C26E29B28000611E1 /* ContentRequest.swift in Sources */,
-				62B8CF8326EFB74D009FB5AC /* SignUpViewController.swift in Sources */,
 				6256E89126ECEB70007B4FCC /* FolderRequest.swift in Sources */,
 				624AAFE32461AA3F00265D71 /* SelectFolderTableViewController.swift in Sources */,
 				624D4E5E26DE5AA800921FE3 /* Const.swift in Sources */,

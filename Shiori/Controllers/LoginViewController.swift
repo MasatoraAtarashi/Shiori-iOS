@@ -11,6 +11,7 @@ import FontAwesome_swift
 import Foundation
 import UIKit
 
+// NOTE: 会員登録画面・ログイン画面共有
 class LoginViewController: UIViewController {
 
     @IBOutlet weak var emailInputField: UITextField!
@@ -63,6 +64,12 @@ class LoginViewController: UIViewController {
         let password = self.passwordInputField.text ?? ""
         let authRequest = AuthRequest(email: email, password: password, passwordConfirmation: nil)
         authManager.authenticate(authRequest: authRequest, isSignIn: true, isAppleAuth: false)
+    }
+
+    @IBAction func signUp(_ sender: UIButton) {
+        print("signUp")
+        print("signUp")
+        print("signUp")
     }
 
     // NOTE: Googleにアプリを承認されるまで使わない

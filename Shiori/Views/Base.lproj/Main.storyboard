@@ -588,7 +588,7 @@
         <!--会員登録画面-->
         <scene sceneID="NvB-Ig-tQZ">
             <objects>
-                <viewController title="会員登録画面" id="NED-fG-Q9L" customClass="SignUpViewController" customModule="Shiori" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="会員登録画面" id="NED-fG-Q9L" customClass="LoginViewController" customModule="Shiori" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="m9C-5R-Gnh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -625,6 +625,9 @@
                                         </fragment>
                                     </attributedString>
                                 </state>
+                                <connections>
+                                    <action selector="signInWithGithub:" destination="NED-fG-Q9L" eventType="touchUpInside" id="fKE-dE-t2i"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HsL-qy-a48">
                                 <rect key="frame" x="16" y="260" width="343" height="45"/>
@@ -648,6 +651,9 @@
                                         </fragment>
                                     </attributedString>
                                 </state>
+                                <connections>
+                                    <action selector="signInWithTwitter:" destination="NED-fG-Q9L" eventType="touchUpInside" id="ISU-1S-FVv"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" メールアドレス" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="7bg-CC-l3N">
                                 <rect key="frame" x="16" y="51" width="343" height="45"/>
@@ -667,6 +673,9 @@
                                 <state key="normal" title="登録">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="signUp:" destination="NED-fG-Q9L" eventType="touchUpInside" id="15Y-eH-t9n"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="または" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0rd-Xi-LAM">
                                 <rect key="frame" x="166" y="220" width="52" height="21"/>
@@ -703,6 +712,9 @@
                                         <integer key="value" value="1"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="signInWithApple:" destination="NED-fG-Q9L" eventType="touchUpInside" id="OzG-et-amH"/>
+                                </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2iT-RD-flQ">
                                 <rect key="frame" x="226" y="231" width="133" height="1"/>
@@ -759,11 +771,12 @@
                     </view>
                     <navigationItem key="navigationItem" id="dXW-sd-ctU"/>
                     <connections>
-                        <outlet property="emailInputField" destination="7bg-CC-l3N" id="4C5-iU-juE"/>
-                        <outlet property="passwordInputField" destination="JyR-0K-0W4" id="9yI-L2-DkQ"/>
-                        <outlet property="signUpButton" destination="KqG-Bw-9xx" id="c7O-Hq-RsU"/>
-                        <outlet property="signUpWithGithubButton" destination="Tmd-t2-NhF" id="xfz-RW-yXS"/>
-                        <outlet property="signUpWithTwitterButton" destination="HsL-qy-a48" id="qMK-Ef-h01"/>
+                        <outlet property="emailInputField" destination="7bg-CC-l3N" id="62O-vh-CTO"/>
+                        <outlet property="passwordInputField" destination="JyR-0K-0W4" id="0Sc-M8-9Kp"/>
+                        <outlet property="signInButton" destination="KqG-Bw-9xx" id="Z6h-xd-1U9"/>
+                        <outlet property="signInWithAppleButton" destination="oIe-XU-Lpe" id="PXN-TI-p9z"/>
+                        <outlet property="signInWithGithubButton" destination="Tmd-t2-NhF" id="meh-Po-KWM"/>
+                        <outlet property="signInWithTwitterButton" destination="HsL-qy-a48" id="nQ9-xK-ze0"/>
                         <segue destination="Tng-dn-v6R" kind="show" identifier="signUpWithTwitter" id="wTK-By-fmr"/>
                         <segue destination="Tng-dn-v6R" kind="show" identifier="signUpWithGithub" id="W9m-zS-IFT"/>
                     </connections>
@@ -1074,7 +1087,7 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="W9m-zS-IFT"/>
+        <segue reference="xvU-j9-IId"/>
         <segue reference="9Vi-OO-DHj"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" systemColor="scrollViewTexturedBackgroundColor"/>
