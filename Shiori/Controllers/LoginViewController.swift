@@ -97,16 +97,20 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var textlabel: UILabel!
     // UIを初期化
     func initViewUI() {
+        // メールアドレス入力欄のUI
         emailInputField.layer.borderWidth = 1
         emailInputField.layer.borderColor = UIColor.opaqueSeparator.cgColor
         emailInputField.layer.cornerRadius = 5
 
+        // パスワード入力欄のUI
         passwordInputField.layer.borderWidth = 1
         passwordInputField.layer.borderColor = UIColor.opaqueSeparator.cgColor
         passwordInputField.layer.cornerRadius = 5
 
+        // ログインボタンのUI
         signInButton.layer.cornerRadius = 5
 
+        // TwitterログインのUI
         signInWithTwitterButton.layer.borderWidth = 1
         signInWithTwitterButton.layer.borderColor = UIColor.opaqueSeparator.cgColor
         signInWithTwitterButton.layer.cornerRadius = 5
@@ -115,6 +119,7 @@ class LoginViewController: UIViewController {
         signInWithTwitterButton.titleLabel?.tintColor = .cyan
         signInWithTwitterButton.titleLabel?.text = "twitter Twitterで続ける"
 
+        // GithubログインのUI
         signInWithGithubButton.layer.borderWidth = 1
         signInWithGithubButton.layer.borderColor = UIColor.opaqueSeparator.cgColor
         signInWithGithubButton.layer.cornerRadius = 5
