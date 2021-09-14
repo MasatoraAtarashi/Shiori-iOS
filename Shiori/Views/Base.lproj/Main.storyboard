@@ -588,7 +588,7 @@
         <!--会員登録画面-->
         <scene sceneID="NvB-Ig-tQZ">
             <objects>
-                <viewController title="会員登録画面" id="NED-fG-Q9L" customClass="LoginViewController" customModule="Shiori" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="会員登録画面" id="NED-fG-Q9L" customClass="AuthenticationViewController" customModule="Shiori" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="m9C-5R-Gnh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -788,7 +788,7 @@
         <!--ログイン画面-->
         <scene sceneID="VcA-Fh-jXt">
             <objects>
-                <viewController title="ログイン画面" id="S0z-Ug-Gje" customClass="LoginViewController" customModule="Shiori" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="ログイン画面" id="S0z-Ug-Gje" customClass="AuthenticationViewController" customModule="Shiori" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Lb3-8k-99G">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1087,7 +1087,7 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="W9m-zS-IFT"/>
+        <segue reference="xvU-j9-IId"/>
         <segue reference="9Vi-OO-DHj"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" systemColor="scrollViewTexturedBackgroundColor"/>

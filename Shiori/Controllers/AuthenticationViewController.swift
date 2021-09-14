@@ -7,12 +7,11 @@
 //
 
 import AuthenticationServices
-import FontAwesome_swift
 import Foundation
 import UIKit
 
 // NOTE: 会員登録画面・ログイン画面共有
-class LoginViewController: UIViewController, UITextFieldDelegate {
+class AuthenticationViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var emailInputField: UITextField!
     @IBOutlet weak var passwordInputField: UITextField!
@@ -89,7 +88,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         authorizationController.delegate = self
         authorizationController.performRequests()
     }
-    
+
     //改行ボタンが押された際に呼ばれる.
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
@@ -123,7 +122,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
 }
 
-extension LoginViewController: AuthManagerDelegate, KeyChainDelegate {
+extension AuthenticationViewController: AuthManagerDelegate, KeyChainDelegate {
     func didAuthWithApple(authResponse: AuthResponse) {
         DispatchQueue.main.async {
             UserDefaults.standard.set(true, forKey: "already_sign_in_with_apple?")
@@ -165,7 +164,7 @@ extension LoginViewController: AuthManagerDelegate, KeyChainDelegate {
 }
 
 // authentication with apple
-extension LoginViewController: ASAuthorizationControllerDelegate {
+extension AuthenticationViewController: ASAuthorizationControllerDelegate {
     func authorizationController(
         controller: ASAuthorizationController,
         didCompleteWithAuthorization authorization: ASAuthorization
