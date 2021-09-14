@@ -634,14 +634,16 @@
                                         <fragment content="Github">
                                             <attributes>
                                                 <color key="NSColor" systemColor="labelColor"/>
-                                                <font key="NSFont" metaFont="system" size="18"/>
+                                                <font key="NSFont" metaFont="system" size="15"/>
+                                                <font key="NSOriginalFont" metaFont="system" size="15"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                             </attributes>
                                         </fragment>
                                         <fragment content="で続ける">
                                             <attributes>
                                                 <color key="NSColor" systemColor="labelColor"/>
-                                                <font key="NSFont" size="18" name=".HiraKakuInterface-W3"/>
+                                                <font key="NSFont" size="15" name=".HiraKakuInterface-W3"/>
+                                                <font key="NSOriginalFont" size="15" name=".HiraKakuInterface-W3"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                             </attributes>
                                         </fragment>
@@ -651,7 +653,7 @@
                                     <action selector="signInWithGithub:" destination="S0z-Ug-Gje" eventType="touchUpInside" id="ZFd-1G-ivz"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J7G-8Q-AwP">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J7G-8Q-AwP">
                                 <rect key="frame" x="16" y="260" width="343" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="Ark-Iy-KM1"/>
@@ -667,13 +669,13 @@
                                         <fragment content="Twitter">
                                             <attributes>
                                                 <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <font key="NSFont" metaFont="system" size="16"/>
+                                                <font key="NSFont" metaFont="system" size="15"/>
                                             </attributes>
                                         </fragment>
                                         <fragment content="で続ける">
                                             <attributes>
                                                 <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <font key="NSFont" size="16" name=".HiraKakuInterface-W3"/>
+                                                <font key="NSFont" size="15" name=".HiraKakuInterface-W3"/>
                                             </attributes>
                                         </fragment>
                                     </attributedString>
@@ -758,6 +760,7 @@
                             <constraint firstItem="ImT-xk-W9z" firstAttribute="top" secondItem="Laf-Ky-9Mu" secondAttribute="bottom" constant="23" id="B4W-sb-9Hf"/>
                             <constraint firstItem="RcR-Ci-D6B" firstAttribute="trailing" secondItem="Laf-Ky-9Mu" secondAttribute="trailing" constant="16" id="I7B-PZ-CAS"/>
                             <constraint firstItem="J7G-8Q-AwP" firstAttribute="top" secondItem="ImT-xk-W9z" secondAttribute="bottom" constant="19" id="KbH-ZI-j6W"/>
+                            <constraint firstItem="J7G-8Q-AwP" firstAttribute="leading" secondItem="RcR-Ci-D6B" secondAttribute="leading" constant="16" id="MVy-62-gS5"/>
                             <constraint firstItem="Laf-Ky-9Mu" firstAttribute="leading" secondItem="RcR-Ci-D6B" secondAttribute="leading" constant="16" id="Mf0-tQ-Xe3"/>
                             <constraint firstItem="ck2-K8-uPF" firstAttribute="top" secondItem="Laf-Ky-9Mu" secondAttribute="bottom" constant="33" id="N3r-k2-ohW"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ck2-K8-uPF" secondAttribute="trailing" constant="210" id="RB8-YW-Z5l"/>
@@ -775,6 +778,7 @@
                             <constraint firstItem="QXp-rt-OKl" firstAttribute="leading" secondItem="Lb3-8k-99G" secondAttribute="leadingMargin" constant="210" id="ueF-Tc-7vP"/>
                             <constraint firstItem="RcR-Ci-D6B" firstAttribute="trailing" secondItem="OHJ-Xt-2Oy" secondAttribute="trailing" constant="16" id="uy2-QJ-neh"/>
                             <constraint firstItem="Laf-Ky-9Mu" firstAttribute="top" secondItem="OHJ-Xt-2Oy" secondAttribute="bottom" constant="8" symbolic="YES" id="vb4-zL-P8P"/>
+                            <constraint firstItem="RcR-Ci-D6B" firstAttribute="trailing" secondItem="J7G-8Q-AwP" secondAttribute="trailing" constant="16" id="x9L-mz-qca"/>
                             <constraint firstItem="RcR-Ci-D6B" firstAttribute="trailing" secondItem="YoM-t7-Poq" secondAttribute="trailing" constant="16" id="ydo-bb-ocM"/>
                         </constraints>
                     </view>
@@ -821,7 +825,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pSo-dU-LFI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-580" y="493"/>
+            <point key="canvasLocation" x="-350" y="36"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="hVl-Cj-6Ux">
@@ -877,7 +881,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dCd-2q-vVv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1364" y="492.50374812593708"/>
+            <point key="canvasLocation" x="-1116" y="36"/>
         </scene>
     </scenes>
     <designables>
