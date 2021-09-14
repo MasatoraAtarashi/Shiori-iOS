@@ -81,6 +81,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
         // 認証
         authorize()
+        
+        // TODO: ローカルにコンテンツがある場合すべてアップロードする
+        if checkExistsContentInLocal() {
+            
+        }
 
         // 広告
         initAdvertisement()
@@ -446,6 +451,21 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             as! InitialViewController
         initialVC.modalPresentationStyle = .fullScreen
         self.present(initialVC, animated: false, completion: nil)
+    }
+    
+    // ローカルにコンテンツが存在するかどうかをチェックする
+    func checkExistsContentInLocal() -> Bool {
+        // TODO: implements
+        return false
+    }
+    
+    // ローカルに存在するコンテンツをすべてアップロードする
+    func uploadAllLocalContent() {
+        // TODO: implements
+        // 作業中であることを表示する(インジケータ&メッセージ)
+        // コンテンツをすべてアップロード
+        // アップロードに成功したらそのコンテンツをローカルから削除
+        // 全部終わったらその旨を伝える
     }
 
     // インジケータ
