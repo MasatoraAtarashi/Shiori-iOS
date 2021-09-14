@@ -22,8 +22,7 @@ class InitialViewController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        signUpButton.layer.borderWidth = 1
-        signUpButton.layer.borderColor = UIColor.opaqueSeparator.cgColor
+        signUpButton.layer.borderWidth = 0
         signUpButton.layer.cornerRadius = 5
     }
 }
