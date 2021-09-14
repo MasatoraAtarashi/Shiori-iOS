@@ -114,18 +114,38 @@ class LoginViewController: UIViewController {
         signInWithTwitterButton.layer.borderWidth = 1
         signInWithTwitterButton.layer.borderColor = UIColor.opaqueSeparator.cgColor
         signInWithTwitterButton.layer.cornerRadius = 5
-        signInWithTwitterButton.titleLabel?.font = UIFont(
-            name: "FontAwesome5Brands-Regular", size: 15)
-        signInWithTwitterButton.titleLabel?.tintColor = .cyan
-        signInWithTwitterButton.titleLabel?.text = "twitter Twitterで続ける"
+        //        signInWithTwitterButton.titleLabel?.font =
+
+        //        let FontAwesomeFont = UIFont(name: "FontAwesome5Brands-Regular", size: 15)
+        //
+        //        let signInWithTwitterButtonLabelString = "twitter Twitterで続ける"
+        //        let signInWithTwitterButtonLabelMutableString = NSMutableAttributedString(
+        //            string: signInWithTwitterButtonLabelString,
+        //            attributes: [NSAttributedString.Key.font: FontAwesomeFont])
+        //        signInWithTwitterButtonLabelMutableString.addAttribute(
+        //            NSAttributedString.Key.foregroundColor,
+        //            value: UIColor.init(
+        //                red: CGFloat(85) / 255.0, green: CGFloat(172) / 255.0, blue: CGFloat(238) / 255.0,
+        //                alpha: 1),
+        //            range: NSRange(location: 0, length: 7))
+        //        signInWithTwitterButtonLabelMutableString.addAttributes(<#T##attrs: [NSAttributedString.Key : Any]##[NSAttributedString.Key : Any]#>, range: <#T##NSRange#>)
+        //        signInWithTwitterButton.setAttributedTitle(
+        //            signInWithTwitterButtonLabelMutableString, for: .normal)
+        //        signInWithTwitterButton.setTitle("twitter Twittarで続ける", for: .normal)
 
         // GithubログインのUI
         signInWithGithubButton.layer.borderWidth = 1
         signInWithGithubButton.layer.borderColor = UIColor.opaqueSeparator.cgColor
         signInWithGithubButton.layer.cornerRadius = 5
-        signInWithGithubButton.titleLabel?.font = UIFont(
-            name: "FontAwesome5Brands-Regular", size: 15)
-        signInWithGithubButton.titleLabel?.text = "github Gihtubで続ける"
+        //        signInWithGithubButton.titleLabel?.font = UIFont(
+        //            name: "FontAwesome5Brands-Regular", size: 15)
+        //        let signInWithGithubButtonLabelString = "github Githubで続ける"
+        //        let signInWithGithubButtonLabelMutableString = NSMutableAttributedString(
+        //            string: signInWithGithubButtonLabelString,
+        //            attributes: [NSAttributedString.Key.font: FontAwesomeFont])
+        //        signInWithGithubButton.setAttributedTitle(
+        //            signInWithGithubButtonLabelMutableString, for: .normal)
+
     }
 }
 
