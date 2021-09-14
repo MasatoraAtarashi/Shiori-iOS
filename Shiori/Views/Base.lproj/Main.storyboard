@@ -553,37 +553,80 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="初期画面" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="td9-bH-tbT">
-                                <rect key="frame" x="-14" y="273" width="402" height="120"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="100"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hft-Db-vEY">
-                                <rect key="frame" x="181" y="482" width="31" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="登録"/>
-                                <connections>
-                                    <segue destination="NED-fG-Q9L" kind="show" id="qtP-2a-cak"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gcs-d2-WGu">
-                                <rect key="frame" x="166" y="520" width="62" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gcs-d2-WGu">
+                                <rect key="frame" x="16" y="602" width="343" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="76I-ad-o13"/>
+                                </constraints>
                                 <state key="normal" title="ログイン"/>
                                 <connections>
                                     <segue destination="S0z-Ug-Gje" kind="show" id="Yhf-zl-lJn"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hft-Db-vEY">
+                                <rect key="frame" x="16" y="549" width="343" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="wNa-Dw-DGc"/>
+                                </constraints>
+                                <state key="normal" title="登録"/>
+                                <connections>
+                                    <segue destination="NED-fG-Q9L" kind="show" id="qtP-2a-cak"/>
+                                </connections>
+                            </button>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Ab-2q-xXv">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="549"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ghh-bZ-105">
+                                        <rect key="frame" x="0.0" y="0.0" width="1125" height="549"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AEy-o7-dMc">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="549"/>
+                                                <color key="backgroundColor" systemColor="systemIndigoColor"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UXB-Rb-knb">
+                                                <rect key="frame" x="375" y="0.0" width="375" height="549"/>
+                                                <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EfN-4t-pmQ">
+                                                <rect key="frame" x="750" y="0.0" width="375" height="549"/>
+                                                <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                                            </view>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="UXB-Rb-knb" firstAttribute="width" secondItem="0Ab-2q-xXv" secondAttribute="width" id="1Xa-pD-Hiu"/>
+                                    <constraint firstItem="ghh-bZ-105" firstAttribute="top" secondItem="0Ab-2q-xXv" secondAttribute="top" id="6OI-6p-w99"/>
+                                    <constraint firstItem="EfN-4t-pmQ" firstAttribute="width" secondItem="0Ab-2q-xXv" secondAttribute="width" id="A9x-yT-hgc"/>
+                                    <constraint firstItem="AEy-o7-dMc" firstAttribute="width" secondItem="0Ab-2q-xXv" secondAttribute="width" id="IcE-0P-nk1"/>
+                                    <constraint firstAttribute="bottom" secondItem="ghh-bZ-105" secondAttribute="bottom" id="Qip-hV-vXh"/>
+                                    <constraint firstAttribute="trailing" secondItem="ghh-bZ-105" secondAttribute="trailing" id="QlF-Ka-APz"/>
+                                    <constraint firstItem="ghh-bZ-105" firstAttribute="leading" secondItem="0Ab-2q-xXv" secondAttribute="leading" id="n3p-Mp-TSi"/>
+                                    <constraint firstItem="ghh-bZ-105" firstAttribute="height" secondItem="0Ab-2q-xXv" secondAttribute="height" id="wMQ-N0-hVK"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="Mm0-1m-LhU"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="BT5-U0-JxO"/>
+                            </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="bBB-Mu-v8g"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="hft-Db-vEY" firstAttribute="leading" secondItem="bBB-Mu-v8g" secondAttribute="leading" constant="16" id="40M-k9-XVK"/>
+                            <constraint firstItem="gcs-d2-WGu" firstAttribute="top" secondItem="hft-Db-vEY" secondAttribute="bottom" constant="8" id="Des-pd-Iuw"/>
+                            <constraint firstItem="bBB-Mu-v8g" firstAttribute="trailing" secondItem="gcs-d2-WGu" secondAttribute="trailing" constant="16" id="JSe-L8-8Hj"/>
+                            <constraint firstItem="0Ab-2q-xXv" firstAttribute="leading" secondItem="bBB-Mu-v8g" secondAttribute="leading" id="MZh-gV-b6D"/>
+                            <constraint firstItem="bBB-Mu-v8g" firstAttribute="trailing" secondItem="hft-Db-vEY" secondAttribute="trailing" constant="16" id="NXN-Oa-GKM"/>
+                            <constraint firstItem="0Ab-2q-xXv" firstAttribute="top" secondItem="bBB-Mu-v8g" secondAttribute="top" id="PmC-el-kXv"/>
+                            <constraint firstItem="bBB-Mu-v8g" firstAttribute="bottom" secondItem="gcs-d2-WGu" secondAttribute="bottom" constant="20" id="SrP-lK-gtm"/>
+                            <constraint firstItem="bBB-Mu-v8g" firstAttribute="trailing" secondItem="0Ab-2q-xXv" secondAttribute="trailing" id="Ux7-RX-3Ta"/>
+                            <constraint firstItem="gcs-d2-WGu" firstAttribute="leading" secondItem="bBB-Mu-v8g" secondAttribute="leading" constant="16" id="hgE-6u-hGk"/>
+                            <constraint firstItem="hft-Db-vEY" firstAttribute="top" secondItem="0Ab-2q-xXv" secondAttribute="bottom" id="j5r-id-bnt"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="95e-Ur-KSD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2982" y="49"/>
+            <point key="canvasLocation" x="-2983.1999999999998" y="48.125937031484263"/>
         </scene>
         <!--会員登録画面-->
         <scene sceneID="NvB-Ig-tQZ">
@@ -1087,7 +1130,7 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="mAF-q8-dsp"/>
+        <segue reference="W9m-zS-IFT"/>
         <segue reference="RrE-4R-PV5"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" systemColor="scrollViewTexturedBackgroundColor"/>
@@ -1110,6 +1153,15 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemIndigoColor">
+            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
