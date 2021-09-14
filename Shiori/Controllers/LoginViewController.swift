@@ -181,7 +181,6 @@ extension LoginViewController: AuthManagerDelegate, KeyChainDelegate {
 
 // authentication with apple
 extension LoginViewController: ASAuthorizationControllerDelegate {
-    // TODO: リファクタリング: extensionに切り出す
     func authorizationController(
         controller: ASAuthorizationController,
         didCompleteWithAuthorization authorization: ASAuthorization
