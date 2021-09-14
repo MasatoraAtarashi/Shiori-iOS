@@ -82,7 +82,7 @@
 		62D5918226F0A821000D4552 /* Font Awesome 5 Brands-Regular-400.otf in Resources */ = {isa = PBXBuildFile; fileRef = 62D5917F26F0A820000D4552 /* Font Awesome 5 Brands-Regular-400.otf */; };
 		62D5918926F10415000D4552 /* tutorial2.png in Resources */ = {isa = PBXBuildFile; fileRef = 62D5918626F10413000D4552 /* tutorial2.png */; };
 		62D5918A26F10415000D4552 /* tutorial3.png in Resources */ = {isa = PBXBuildFile; fileRef = 62D5918726F10414000D4552 /* tutorial3.png */; };
-		62D5918B26F10415000D4552 /* tutorial1.png in Resources */ = {isa = PBXBuildFile; fileRef = 62D5918826F10414000D4552 /* tutorial1.png */; };
+		62D5918D26F104CF000D4552 /* tutorial1.png in Resources */ = {isa = PBXBuildFile; fileRef = 62D5918C26F104CE000D4552 /* tutorial1.png */; };
 		909E9FA550C96476D4E86C62 /* Pods_Shiori.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98B1316EC4BD7BAAF68C16D6 /* Pods_Shiori.framework */; };
 		B417587B67390A83D3E0AB99 /* Pods_Share.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EC70B92298E46BA5986AED1 /* Pods_Share.framework */; };
 /* End PBXBuildFile section */
@@ -206,7 +206,7 @@
 		62D5917F26F0A820000D4552 /* Font Awesome 5 Brands-Regular-400.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Font Awesome 5 Brands-Regular-400.otf"; sourceTree = "<group>"; };
 		62D5918626F10413000D4552 /* tutorial2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tutorial2.png; sourceTree = "<group>"; };
 		62D5918726F10414000D4552 /* tutorial3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tutorial3.png; sourceTree = "<group>"; };
-		62D5918826F10414000D4552 /* tutorial1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tutorial1.png; sourceTree = "<group>"; };
+		62D5918C26F104CE000D4552 /* tutorial1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tutorial1.png; sourceTree = "<group>"; };
 		6EC70B92298E46BA5986AED1 /* Pods_Share.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Share.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E5478B8CD8CA0C6ECE6036A /* Pods-Share.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Share.release.xcconfig"; path = "Target Support Files/Pods-Share/Pods-Share.release.xcconfig"; sourceTree = "<group>"; };
 		98B1316EC4BD7BAAF68C16D6 /* Pods_Shiori.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shiori.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -366,7 +366,7 @@
 		6268C3E42334EAEF00E86ECC /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				62D5918826F10414000D4552 /* tutorial1.png */,
+				62D5918C26F104CE000D4552 /* tutorial1.png */,
 				62D5918626F10413000D4552 /* tutorial2.png */,
 				62D5918726F10414000D4552 /* tutorial3.png */,
 				6261F3A926F087E10088AE75 /* twitter.png */,
@@ -554,7 +554,7 @@
 				624FE69F233228A3004E271B /* IMG_3203.jpg in Resources */,
 				62D5918926F10415000D4552 /* tutorial2.png in Resources */,
 				6272B35B245DC32D005727D8 /* Localizable.strings in Resources */,
-				62D5918B26F10415000D4552 /* tutorial1.png in Resources */,
+				62D5918D26F104CF000D4552 /* tutorial1.png in Resources */,
 				6268C3E62334EC2800E86ECC /* ks_safari_activity_icon.png in Resources */,
 				62215596232B79BA00DD4AB4 /* Assets.xcassets in Resources */,
 				62D5918226F0A821000D4552 /* Font Awesome 5 Brands-Regular-400.otf in Resources */,
