@@ -626,7 +626,7 @@
                                     </attributedString>
                                 </state>
                                 <connections>
-                                    <action selector="signInWithGithub:" destination="NED-fG-Q9L" eventType="touchUpInside" id="fKE-dE-t2i"/>
+                                    <action selector="signUpWithGithub:" destination="NED-fG-Q9L" eventType="touchUpInside" id="Feb-qr-B5n"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HsL-qy-a48">
@@ -652,7 +652,7 @@
                                     </attributedString>
                                 </state>
                                 <connections>
-                                    <action selector="signInWithTwitter:" destination="NED-fG-Q9L" eventType="touchUpInside" id="ISU-1S-FVv"/>
+                                    <action selector="signUpWithTwitter:" destination="NED-fG-Q9L" eventType="touchUpInside" id="kKu-up-sUJ"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" メールアドレス" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="7bg-CC-l3N">
@@ -1087,7 +1087,7 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="W9m-zS-IFT"/>
+        <segue reference="mAF-q8-dsp"/>
         <segue reference="9Vi-OO-DHj"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" systemColor="scrollViewTexturedBackgroundColor"/>

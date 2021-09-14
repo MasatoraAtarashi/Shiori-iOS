@@ -40,9 +40,9 @@ class AuthenticationViewController: UIViewController, UITextFieldDelegate {
         var targetService = ""
         if segue.identifier == "signInWithGoogle" {
             targetService = "Google"
-        } else if segue.identifier == "signInWithTwitter" {
+        } else if ["signInWithTwitter", "signUpWithTwitter"].contains(segue.identifier) {
             targetService = "Twitter"
-        } else if segue.identifier == "signInWithGithub" {
+        } else if ["signInWithGithub", "signUpWithGithub"].contains(segue.identifier) {
             targetService = "Github"
         }
 
@@ -75,8 +75,16 @@ class AuthenticationViewController: UIViewController, UITextFieldDelegate {
         self.performSegue(withIdentifier: "signInWithTwitter", sender: nil)
     }
 
+    @IBAction func signUpWithTwitter(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "signUpWithTwitter", sender: nil)
+    }
+
     @IBAction func signInWithGithub(_ sender: UIButton) {
         self.performSegue(withIdentifier: "signInWithGithub", sender: nil)
+    }
+
+    @IBAction func signUpWithGithub(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "signUpWithGithub", sender: nil)
     }
 
     @IBAction func signInWithApple(_ sender: UIButton) {
