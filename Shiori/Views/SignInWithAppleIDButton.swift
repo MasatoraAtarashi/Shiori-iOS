@@ -14,15 +14,6 @@ class SignInWithAppleIDButton: UIButton {
 
     private var appleIDButton: ASAuthorizationAppleIDButton!
 
-    @IBInspectable
-    var cornerRadius: CGFloat = 6.0
-
-    @IBInspectable
-    var type: Int = ASAuthorizationAppleIDButton.ButtonType.default.rawValue
-
-    @IBInspectable
-    var style: Int = ASAuthorizationAppleIDButton.Style.black.rawValue
-
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -34,15 +25,16 @@ class SignInWithAppleIDButton: UIButton {
     override func draw(_ rect: CGRect) {
         super.draw(rect)
 
-        let type = ASAuthorizationAppleIDButton.ButtonType.init(rawValue: self.type) ?? .default
-        let style = ASAuthorizationAppleIDButton.Style.init(rawValue: self.style) ?? .black
         appleIDButton = ASAuthorizationAppleIDButton(
-            authorizationButtonType: type, authorizationButtonStyle: style)
-        appleIDButton.cornerRadius = cornerRadius
+            authorizationButtonType: .continue, authorizationButtonStyle: .white)
 
         addSubview(appleIDButton)
 
         appleIDButton.translatesAutoresizingMaskIntoConstraints = false
+        appleIDButton.layer.borderWidth = 1
+        appleIDButton.layer.borderColor = UIColor.opaqueSeparator.cgColor
+        appleIDButton.layer.cornerRadius = 5
+
         NSLayoutConstraint.activate([
             appleIDButton.topAnchor.constraint(equalTo: self.topAnchor),
             appleIDButton.leadingAnchor.constraint(equalTo: self.leadingAnchor),

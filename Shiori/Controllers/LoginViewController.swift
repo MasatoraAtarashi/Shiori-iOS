@@ -14,6 +14,7 @@ class LoginViewController: UIViewController {
 
     @IBOutlet weak var emailInputField: UITextField!
     @IBOutlet weak var passwordInputField: UITextField!
+    @IBOutlet weak var signInButton: UIButton!
     @IBOutlet weak var signInWithTwitterButton: UIButton!
     @IBOutlet weak var signInWithGithubButton: UIButton!
     @IBOutlet weak var signInWithAppleButton: UIButton!
@@ -30,6 +31,15 @@ class LoginViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(false)
         initViewUI()
+
+        //        NSNotificationCenter.defaultCenter().addObserver(self,
+        //                    selector: "keyboardWillBeShown:",
+        //                    name: UIKeyboardWillShowNotification,
+        //                    object: nil)
+        //                NSNotificationCenter.defaultCenter().addObserver(self,
+        //                    selector: "keyboardWillBeHidden:",
+        //                    name: UIKeyboardWillHideNotification,
+        //                    object: nil)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -77,6 +87,12 @@ class LoginViewController: UIViewController {
         authorizationController.performRequests()
     }
 
+    func keyboardWillBeShown(notification: NSNotification) {
+    }
+
+    func keyboardWillBeHidden(notification: NSNotification) {
+    }
+
     // UIを初期化
     func initViewUI() {
         emailInputField.layer.borderWidth = 1
@@ -87,9 +103,17 @@ class LoginViewController: UIViewController {
         passwordInputField.layer.borderColor = UIColor.opaqueSeparator.cgColor
         passwordInputField.layer.cornerRadius = 5
 
+        signInButton.layer.cornerRadius = 5
+
         signInWithTwitterButton.layer.borderWidth = 1
         signInWithTwitterButton.layer.borderColor = UIColor.opaqueSeparator.cgColor
         signInWithTwitterButton.layer.cornerRadius = 5
+        let twitterIcon = UIImage(named: "twitter")
+        signInWithTwitterButton.setImage(twitterIcon, for: .normal)
+        signInWithTwitterButton.imageView?.contentMode = .scaleAspectFit
+        signInWithTwitterButton.imageEdgeInsets = UIEdgeInsets(
+            top: 0, left: -20, bottom: 0, right: 0)
+        signInWithTwitterButton.imageView?.tintColor = UIColor.cyan
 
         signInWithGithubButton.layer.borderWidth = 1
         signInWithGithubButton.layer.borderColor = UIColor.opaqueSeparator.cgColor

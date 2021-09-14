@@ -48,6 +48,7 @@
 		6256E88F26ECE2EC007B4FCC /* FolderResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6256E88E26ECE2EC007B4FCC /* FolderResponse.swift */; };
 		6256E89126ECEB70007B4FCC /* FolderRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6256E89026ECEB70007B4FCC /* FolderRequest.swift */; };
 		6256E89426ECEF3D007B4FCC /* ContentRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6204CC5B26E29B28000611E1 /* ContentRequest.swift */; };
+		6261F3AA26F087E10088AE75 /* twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = 6261F3A926F087E10088AE75 /* twitter.png */; };
 		6268C3E62334EC2800E86ECC /* ks_safari_activity_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6268C3E52334EC2800E86ECC /* ks_safari_activity_icon.png */; };
 		6272B350245DC06F005727D8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6272B353245DC06F005727D8 /* Localizable.strings */; };
 		6272B351245DC06F005727D8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6272B353245DC06F005727D8 /* Localizable.strings */; };
@@ -163,6 +164,7 @@
 		6256E88C26ECE2E1007B4FCC /* FolderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderManager.swift; sourceTree = "<group>"; };
 		6256E88E26ECE2EC007B4FCC /* FolderResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderResponse.swift; sourceTree = "<group>"; };
 		6256E89026ECEB70007B4FCC /* FolderRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderRequest.swift; sourceTree = "<group>"; };
+		6261F3A926F087E10088AE75 /* twitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twitter.png; sourceTree = "<group>"; };
 		6268C3E52334EC2800E86ECC /* ks_safari_activity_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ks_safari_activity_icon.png; sourceTree = "<group>"; };
 		6272B34D245DC04F005727D8 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Main.strings; sourceTree = "<group>"; };
 		6272B34E245DC04F005727D8 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -325,10 +327,10 @@
 		6268C3E22334EAD400E86ECC /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				62B8CF8426EFBD3E009FB5AC /* SignInWithAppleIDButton.swift */,
 				6203169B232E9C740065ADE9 /* FeedTableViewCell.xib */,
 				6221558F232B79B900DD4AB4 /* Main.storyboard */,
 				62215597232B79BA00DD4AB4 /* LaunchScreen.storyboard */,
-				62B8CF8426EFBD3E009FB5AC /* SignInWithAppleIDButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -355,6 +357,7 @@
 		6268C3E42334EAEF00E86ECC /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				6261F3A926F087E10088AE75 /* twitter.png */,
 				6268C3E52334EC2800E86ECC /* ks_safari_activity_icon.png */,
 				6226B08A24611DB400A5E541 /* garbage.png */,
 				6226B0882461172100A5E541 /* delete.png */,
@@ -526,6 +529,7 @@
 				624FE69F233228A3004E271B /* IMG_3203.jpg in Resources */,
 				6272B35B245DC32D005727D8 /* Localizable.strings in Resources */,
 				6268C3E62334EC2800E86ECC /* ks_safari_activity_icon.png in Resources */,
+				6261F3AA26F087E10088AE75 /* twitter.png in Resources */,
 				62215596232B79BA00DD4AB4 /* Assets.xcassets in Resources */,
 				62215591232B79B900DD4AB4 /* Main.storyboard in Resources */,
 			);
