@@ -264,9 +264,7 @@
 				6268C3E22334EAD400E86ECC /* Views */,
 				624411022334EA7A00C1C411 /* Model */,
 				62215595232B79BA00DD4AB4 /* Assets.xcassets */,
-				62D5917F26F0A820000D4552 /* Font Awesome 5 Brands-Regular-400.otf */,
-				62D5917E26F0A820000D4552 /* Font Awesome 5 Free-Regular-400.otf */,
-				62D5917D26F0A820000D4552 /* Font Awesome 5 Free-Solid-900.otf */,
+				62D5918326F0EE77000D4552 /* font */,
 				6221559A232B79BA00DD4AB4 /* Info.plist */,
 				624FE69523321297004E271B /* GoogleService-Info.plist */,
 				62215592232B79B900DD4AB4 /* Shiori.xcdatamodeld */,
@@ -389,6 +387,16 @@
 				62B8CF7826EE1C1D009FB5AC /* AuthResponse.swift */,
 			);
 			path = Auth;
+			sourceTree = "<group>";
+		};
+		62D5918326F0EE77000D4552 /* font */ = {
+			isa = PBXGroup;
+			children = (
+				62D5917F26F0A820000D4552 /* Font Awesome 5 Brands-Regular-400.otf */,
+				62D5917E26F0A820000D4552 /* Font Awesome 5 Free-Regular-400.otf */,
+				62D5917D26F0A820000D4552 /* Font Awesome 5 Free-Solid-900.otf */,
+			);
+			path = font;
 			sourceTree = "<group>";
 		};
 		A7F17AA72CB685FA65F6E95E /* Pods */ = {
