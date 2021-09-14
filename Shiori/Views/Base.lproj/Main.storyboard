@@ -596,6 +596,10 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="dXW-sd-ctU"/>
+                    <connections>
+                        <segue destination="Tng-dn-v6R" kind="show" identifier="signUpWithTwitter" id="wTK-By-fmr"/>
+                        <segue destination="Tng-dn-v6R" kind="show" identifier="signUpWithGithub" id="W9m-zS-IFT"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IQ4-d6-wd8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -890,7 +894,7 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="xvU-j9-IId"/>
+        <segue reference="W9m-zS-IFT"/>
         <segue reference="9Vi-OO-DHj"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" systemColor="scrollViewTexturedBackgroundColor"/>
