@@ -54,7 +54,6 @@ class OmniAuthWebViewController: UIViewController, WKNavigationDelegate, WKUIDel
             uid: uid,
             accessToken: accessToken,
             client: client)
-        print(authResponse)
         keyChain.saveKeyChain(authResponse: authResponse)
     }
 
