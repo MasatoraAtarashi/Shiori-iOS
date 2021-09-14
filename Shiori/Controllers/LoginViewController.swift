@@ -67,9 +67,11 @@ class LoginViewController: UIViewController {
     }
 
     @IBAction func signUp(_ sender: UIButton) {
-        print("signUp")
-        print("signUp")
-        print("signUp")
+        let email = self.emailInputField.text ?? ""
+        let password = self.passwordInputField.text ?? ""
+        let authRequest = AuthRequest(
+            email: email, password: password, passwordConfirmation: password)
+        authManager.authenticate(authRequest: authRequest, isSignIn: false, isAppleAuth: false)
     }
 
     // NOTE: Googleにアプリを承認されるまで使わない
