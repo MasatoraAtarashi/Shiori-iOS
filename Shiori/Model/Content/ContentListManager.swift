@@ -15,7 +15,7 @@ protocol ContentListManagerDelegate {
 }
 
 // 定数用
-// TODO: どこかに移す
+// TODO: constの初期化をviewControllerに移す
 let const = Const()
 
 struct ContentListManager {

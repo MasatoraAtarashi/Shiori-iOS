@@ -10,6 +10,7 @@ import Foundation
 import NVActivityIndicatorView
 
 // 定数クラス
+// TODO: shioriでしか使わないものはConstShioriに移す
 struct Const {
     // APIのURL
     let baseURL: String = "https://web-shiori.herokuapp.com"
