@@ -693,10 +693,6 @@
                                     <action selector="signInWithApple:" destination="S0z-Ug-Gje" eventType="touchUpInside" id="0US-s4-OT5"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d64-OK-q0A">
-                                <rect key="frame" x="67" y="427" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="RcR-Ci-D6B"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -704,7 +700,6 @@
                     <navigationItem key="navigationItem" id="iEK-KF-afx"/>
                     <connections>
                         <outlet property="emailInputField" destination="bw0-tq-Vci" id="RQF-YD-Xzk"/>
-                        <outlet property="image" destination="d64-OK-q0A" id="ayc-br-0Q0"/>
                         <outlet property="passwordInputField" destination="OHJ-Xt-2Oy" id="hJz-8p-EW1"/>
                         <outlet property="signInButton" destination="Laf-Ky-9Mu" id="KCd-4W-4G7"/>
                         <outlet property="signInWithAppleButton" destination="YoM-t7-Poq" id="lds-SO-4pF"/>

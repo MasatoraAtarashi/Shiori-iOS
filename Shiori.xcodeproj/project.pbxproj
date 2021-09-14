@@ -48,7 +48,6 @@
 		6256E88F26ECE2EC007B4FCC /* FolderResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6256E88E26ECE2EC007B4FCC /* FolderResponse.swift */; };
 		6256E89126ECEB70007B4FCC /* FolderRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6256E89026ECEB70007B4FCC /* FolderRequest.swift */; };
 		6256E89426ECEF3D007B4FCC /* ContentRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6204CC5B26E29B28000611E1 /* ContentRequest.swift */; };
-		6261F3AA26F087E10088AE75 /* twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = 6261F3A926F087E10088AE75 /* twitter.png */; };
 		6268C3E62334EC2800E86ECC /* ks_safari_activity_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6268C3E52334EC2800E86ECC /* ks_safari_activity_icon.png */; };
 		6272B350245DC06F005727D8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6272B353245DC06F005727D8 /* Localizable.strings */; };
 		6272B351245DC06F005727D8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6272B353245DC06F005727D8 /* Localizable.strings */; };
@@ -79,6 +78,9 @@
 		62B8CF8126EFB43C009FB5AC /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B8CF7826EE1C1D009FB5AC /* AuthResponse.swift */; };
 		62B8CF8326EFB74D009FB5AC /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B8CF8226EFB74D009FB5AC /* SignUpViewController.swift */; };
 		62B8CF8526EFBD3E009FB5AC /* SignInWithAppleIDButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B8CF8426EFBD3E009FB5AC /* SignInWithAppleIDButton.swift */; };
+		62D5918026F0A821000D4552 /* Font Awesome 5 Free-Solid-900.otf in Resources */ = {isa = PBXBuildFile; fileRef = 62D5917D26F0A820000D4552 /* Font Awesome 5 Free-Solid-900.otf */; };
+		62D5918126F0A821000D4552 /* Font Awesome 5 Free-Regular-400.otf in Resources */ = {isa = PBXBuildFile; fileRef = 62D5917E26F0A820000D4552 /* Font Awesome 5 Free-Regular-400.otf */; };
+		62D5918226F0A821000D4552 /* Font Awesome 5 Brands-Regular-400.otf in Resources */ = {isa = PBXBuildFile; fileRef = 62D5917F26F0A820000D4552 /* Font Awesome 5 Brands-Regular-400.otf */; };
 		909E9FA550C96476D4E86C62 /* Pods_Shiori.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98B1316EC4BD7BAAF68C16D6 /* Pods_Shiori.framework */; };
 		B417587B67390A83D3E0AB99 /* Pods_Share.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EC70B92298E46BA5986AED1 /* Pods_Share.framework */; };
 /* End PBXBuildFile section */
@@ -198,6 +200,9 @@
 		62B8CF7E26EE5003009FB5AC /* OmniAuthWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmniAuthWebViewController.swift; sourceTree = "<group>"; };
 		62B8CF8226EFB74D009FB5AC /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		62B8CF8426EFBD3E009FB5AC /* SignInWithAppleIDButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithAppleIDButton.swift; sourceTree = "<group>"; };
+		62D5917D26F0A820000D4552 /* Font Awesome 5 Free-Solid-900.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Font Awesome 5 Free-Solid-900.otf"; sourceTree = "<group>"; };
+		62D5917E26F0A820000D4552 /* Font Awesome 5 Free-Regular-400.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Font Awesome 5 Free-Regular-400.otf"; sourceTree = "<group>"; };
+		62D5917F26F0A820000D4552 /* Font Awesome 5 Brands-Regular-400.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Font Awesome 5 Brands-Regular-400.otf"; sourceTree = "<group>"; };
 		6EC70B92298E46BA5986AED1 /* Pods_Share.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Share.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E5478B8CD8CA0C6ECE6036A /* Pods-Share.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Share.release.xcconfig"; path = "Target Support Files/Pods-Share/Pods-Share.release.xcconfig"; sourceTree = "<group>"; };
 		98B1316EC4BD7BAAF68C16D6 /* Pods_Shiori.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shiori.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -261,6 +266,9 @@
 				6268C3E22334EAD400E86ECC /* Views */,
 				624411022334EA7A00C1C411 /* Model */,
 				62215595232B79BA00DD4AB4 /* Assets.xcassets */,
+				62D5917F26F0A820000D4552 /* Font Awesome 5 Brands-Regular-400.otf */,
+				62D5917E26F0A820000D4552 /* Font Awesome 5 Free-Regular-400.otf */,
+				62D5917D26F0A820000D4552 /* Font Awesome 5 Free-Solid-900.otf */,
 				6221559A232B79BA00DD4AB4 /* Info.plist */,
 				624FE69523321297004E271B /* GoogleService-Info.plist */,
 				62215592232B79B900DD4AB4 /* Shiori.xcdatamodeld */,
@@ -517,11 +525,13 @@
 			files = (
 				624FE6A0233228A3004E271B /* IMG_3205.jpg in Resources */,
 				6272B350245DC06F005727D8 /* Localizable.strings in Resources */,
+				62D5918026F0A821000D4552 /* Font Awesome 5 Free-Solid-900.otf in Resources */,
 				62215599232B79BA00DD4AB4 /* LaunchScreen.storyboard in Resources */,
 				6226B0892461172100A5E541 /* delete.png in Resources */,
 				6272B366245DC4EA005727D8 /* Localizable.strings in Resources */,
 				622DA536245D7F0A001FDFEE /* Localizable.strings in Resources */,
 				6280BC09242399FA00EEDB3C /* settings.png in Resources */,
+				62D5918126F0A821000D4552 /* Font Awesome 5 Free-Regular-400.otf in Resources */,
 				6226B08B24611DB500A5E541 /* garbage.png in Resources */,
 				6203169C232E9C740065ADE9 /* FeedTableViewCell.xib in Resources */,
 				624FE69623321297004E271B /* GoogleService-Info.plist in Resources */,
@@ -529,8 +539,8 @@
 				624FE69F233228A3004E271B /* IMG_3203.jpg in Resources */,
 				6272B35B245DC32D005727D8 /* Localizable.strings in Resources */,
 				6268C3E62334EC2800E86ECC /* ks_safari_activity_icon.png in Resources */,
-				6261F3AA26F087E10088AE75 /* twitter.png in Resources */,
 				62215596232B79BA00DD4AB4 /* Assets.xcassets in Resources */,
+				62D5918226F0A821000D4552 /* Font Awesome 5 Brands-Regular-400.otf in Resources */,
 				62215591232B79B900DD4AB4 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
