@@ -48,7 +48,6 @@ PODS:
     - GoogleUtilities/Environment (~> 7.4)
     - GoogleUtilities/UserDefaults (~> 7.4)
     - PromisesObjC (< 3.0, >= 1.2)
-  - FontAwesome.swift (1.9.1)
   - Google-Mobile-Ads-SDK (8.10.0):
     - GoogleAppMeasurement (< 9.0, >= 7.0)
     - GoogleUserMessagingPlatform (>= 1.1)
@@ -112,7 +111,6 @@ PODS:
 DEPENDENCIES:
   - Firebase/Analytics
   - Firebase/Crashlytics
-  - FontAwesome.swift
   - Google-Mobile-Ads-SDK
   - KeychainAccess
   - NVActivityIndicatorView
@@ -130,7 +128,6 @@ SPEC REPOS:
     - FirebaseCoreDiagnostics
     - FirebaseCrashlytics
     - FirebaseInstallations
-    - FontAwesome.swift
     - Google-Mobile-Ads-SDK
     - GoogleAppMeasurement
     - GoogleDataTransport
@@ -153,7 +150,6 @@ SPEC CHECKSUMS:
   FirebaseCoreDiagnostics: b63732f581a1c6a453ec7241f9ab60b3a5bd3450
   FirebaseCrashlytics: 6fac03d1eef054833b71c929c93ab95c12989728
   FirebaseInstallations: ede6fb72bb6337914e5888b399271259d0c4910c
-  FontAwesome.swift: 6b52cb7be66eacd28cbfaa0ca7ffd0de4a186a1d
   Google-Mobile-Ads-SDK: 9c78323a7069cd42ddf1ad2fddbaec889b085091
   GoogleAppMeasurement: 2be61ce546ad074dbe4dd545f222ac6033bb1d9e
   GoogleDataTransport: 85fd18ff3019bb85d3f2c551d04c481dedf71fc9
@@ -169,6 +165,6 @@ SPEC CHECKSUMS:
   SwiftMessages: 077f19126c24033fe24042237ecc20261adb46e4
   SwipeCellKit: 935ca28c187ec6e1ffb2b578cf8ddca842bfdcbb
 
-PODFILE CHECKSUM: 512d2cbed1790cafd40b7b8f0993b438b88a7f7b
+PODFILE CHECKSUM: 0fbdf31ba7d1b78db0f43cb466e9924850b0b37a
 
 COCOAPODS: 1.10.1

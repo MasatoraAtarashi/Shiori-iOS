@@ -26,5 +26,4 @@ target 'Shiori' do
   pod 'SwiftMessages'
   pod 'NVActivityIndicatorView'
   pod 'KeychainAccess'
-  pod 'FontAwesome.swift'
 end
