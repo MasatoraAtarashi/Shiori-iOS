@@ -662,7 +662,7 @@
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="45" id="Tc3-uL-ITJ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" textContentType="email"/>
+                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="done" textContentType="email"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KqG-Bw-9xx">
                                 <rect key="frame" x="16" y="157" width="343" height="40"/>
@@ -690,7 +690,7 @@
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="45" id="V2M-qh-u0x"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardType="alphabet" textContentType="password"/>
+                                <textInputTraits key="textInputTraits" keyboardType="alphabet" returnKeyType="done" textContentType="password"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oIe-XU-Lpe" customClass="SignInWithAppleIDButton" customModule="Shiori" customModuleProvider="target">
                                 <rect key="frame" x="16" y="366" width="343" height="45"/>
@@ -874,7 +874,7 @@
                                     <constraint firstAttribute="height" constant="45" id="7oY-Ku-iRi"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" textContentType="email"/>
+                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="done" textContentType="email"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Laf-Ky-9Mu">
                                 <rect key="frame" x="16" y="157" width="343" height="40"/>
@@ -901,7 +901,7 @@
                                     <constraint firstAttribute="height" constant="45" id="mKN-nd-XCi"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardType="alphabet" textContentType="password"/>
+                                <textInputTraits key="textInputTraits" keyboardType="alphabet" returnKeyType="done" textContentType="password"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YoM-t7-Poq" customClass="SignInWithAppleIDButton" customModule="Shiori" customModuleProvider="target">
                                 <rect key="frame" x="16" y="366" width="343" height="45"/>
@@ -1087,7 +1087,7 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="xvU-j9-IId"/>
+        <segue reference="W9m-zS-IFT"/>
         <segue reference="9Vi-OO-DHj"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" systemColor="scrollViewTexturedBackgroundColor"/>
