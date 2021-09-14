@@ -558,17 +558,22 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="76I-ad-o13"/>
                                 </constraints>
-                                <state key="normal" title="ログイン"/>
+                                <state key="normal" title="ログイン">
+                                    <color key="titleColor" red="0.031372549020000001" green="0.67843137249999996" blue="0.92549019610000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
                                 <connections>
                                     <segue destination="S0z-Ug-Gje" kind="show" id="Yhf-zl-lJn"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hft-Db-vEY">
                                 <rect key="frame" x="16" y="549" width="343" height="45"/>
+                                <color key="backgroundColor" red="0.031372549020000001" green="0.67843137249999996" blue="0.92549019610000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="wNa-Dw-DGc"/>
                                 </constraints>
-                                <state key="normal" title="登録"/>
+                                <state key="normal" title="登録">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
                                     <segue destination="NED-fG-Q9L" kind="show" id="qtP-2a-cak"/>
                                 </connections>
@@ -670,6 +675,7 @@
                     <connections>
                         <outlet property="pageControll" destination="4TM-yw-Zhn" id="fGj-tn-sjh"/>
                         <outlet property="scrollView" destination="0Ab-2q-xXv" id="8e4-2Q-jbx"/>
+                        <outlet property="signUpButton" destination="hft-Db-vEY" id="Dbf-4l-Xn9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="95e-Ur-KSD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

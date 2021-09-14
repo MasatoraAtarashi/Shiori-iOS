@@ -13,6 +13,7 @@ class InitialViewController: UIViewController {
 
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var pageControll: UIPageControl!
+    @IBOutlet weak var signUpButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +21,11 @@ class InitialViewController: UIViewController {
         scrollView.delegate = self
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        signUpButton.layer.borderWidth = 1
+        signUpButton.layer.borderColor = UIColor.opaqueSeparator.cgColor
+        signUpButton.layer.cornerRadius = 5
+    }
 }
 
 extension InitialViewController: UIScrollViewDelegate {
