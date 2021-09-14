@@ -35,15 +35,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(false)
         initViewUI()
-
-        //        NSNotificationCenter.defaultCenter().addObserver(self,
-        //                    selector: "keyboardWillBeShown:",
-        //                    name: UIKeyboardWillShowNotification,
-        //                    object: nil)
-        //                NSNotificationCenter.defaultCenter().addObserver(self,
-        //                    selector: "keyboardWillBeHidden:",
-        //                    name: UIKeyboardWillHideNotification,
-        //                    object: nil)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -98,13 +89,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         authorizationController.delegate = self
         authorizationController.performRequests()
     }
-
-    func keyboardWillBeShown(notification: NSNotification) {
-    }
-
-    func keyboardWillBeHidden(notification: NSNotification) {
-    }
-
+    
     //改行ボタンが押された際に呼ばれる.
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
