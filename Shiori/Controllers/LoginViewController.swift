@@ -7,6 +7,7 @@
 //
 
 import AuthenticationServices
+import FontAwesome_swift
 import Foundation
 import UIKit
 
@@ -18,6 +19,8 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var signInWithTwitterButton: UIButton!
     @IBOutlet weak var signInWithGithubButton: UIButton!
     @IBOutlet weak var signInWithAppleButton: UIButton!
+
+    @IBOutlet weak var image: UIImageView!
 
     var authManager = AuthManager()
     var keyChain = KeyChain()
@@ -95,6 +98,9 @@ class LoginViewController: UIViewController {
 
     // UIを初期化
     func initViewUI() {
+        image.image = UIImage.fontAwesomeIcon(
+            name: .github, style: .solid, textColor: .black, size: CGSize(width: 10, height: 10))
+
         emailInputField.layer.borderWidth = 1
         emailInputField.layer.borderColor = UIColor.opaqueSeparator.cgColor
         emailInputField.layer.cornerRadius = 5
@@ -108,11 +114,15 @@ class LoginViewController: UIViewController {
         signInWithTwitterButton.layer.borderWidth = 1
         signInWithTwitterButton.layer.borderColor = UIColor.opaqueSeparator.cgColor
         signInWithTwitterButton.layer.cornerRadius = 5
-        let twitterIcon = UIImage(named: "twitter")
+        //        let twitterIcon = UIImage.fontAwesomeIcon(
+        //            name: .twitter, style: .regular, textColor: .cyan, size: CGSize(width: 10, height: 10))
+        let twitterIcon = UIImage.fontAwesomeIcon(
+            name: .coffee, style: .regular, textColor: UIColor.black,
+            size: CGSize(width: 40, height: 40))
         signInWithTwitterButton.setImage(twitterIcon, for: .normal)
-        signInWithTwitterButton.imageView?.contentMode = .scaleAspectFit
-        signInWithTwitterButton.imageEdgeInsets = UIEdgeInsets(
-            top: 0, left: -20, bottom: 0, right: 0)
+        //        signInWithTwitterButton.imageView?.contentMode = .scaleAspectFit
+        //        signInWithTwitterButton.imageEdgeInsets = UIEdgeInsets(
+        //            top: 0, left: -20, bottom: 0, right: 0)
         signInWithTwitterButton.imageView?.tintColor = UIColor.cyan
 
         signInWithGithubButton.layer.borderWidth = 1
