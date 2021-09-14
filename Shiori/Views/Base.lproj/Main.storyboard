@@ -12,7 +12,7 @@
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Shiori" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -28,7 +28,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gpS-rY-FFh" customClass="GADBannerView">
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gpS-rY-FFh" customClass="GADBannerView">
                                 <rect key="frame" x="27.5" y="568" width="320" height="50"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -430,27 +430,27 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mobile Safariの「共有」ボタンをタップ" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="72j-7g-tkS">
-                                <rect key="frame" x="20" y="84" width="335" height="14"/>
+                                <rect key="frame" x="20" y="84" width="374" height="14"/>
                                 <fontDescription key="fontDescription" name="HiraMinProN-W3" family="Hiragino Mincho ProN" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IMG_3203.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="4XN-5A-yQ7">
-                                <rect key="frame" x="20" y="114" width="335" height="50"/>
+                                <rect key="frame" x="20" y="114" width="374" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="374" id="cbo-cD-H2O"/>
                                     <constraint firstAttribute="height" constant="50" id="svq-VH-W7D"/>
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IMG_3205.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="XQ0-I5-BY9">
-                                <rect key="frame" x="20" y="184" width="335" height="260"/>
+                                <rect key="frame" x="20" y="184" width="374" height="260"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="260" id="OZa-9g-6Ae"/>
                                     <constraint firstAttribute="width" constant="374" id="au2-oX-zPh"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="※「Shiori」が表示されない場合は「その他(More)」から「Shiori」をオンにしてください" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cka-hI-r5n">
-                                <rect key="frame" x="20" y="452" width="335" height="59"/>
+                                <rect key="frame" x="20" y="452" width="374" height="59"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="59" id="qEY-ed-zc1"/>
                                 </constraints>
@@ -581,15 +581,53 @@
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AEy-o7-dMc">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="489"/>
-                                                <color key="backgroundColor" systemColor="systemIndigoColor"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tutorial1.png" translatesAutoresizingMaskIntoConstraints="NO" id="qGS-MK-uzj">
+                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="489"/>
+                                                    </imageView>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="qGS-MK-uzj" firstAttribute="height" secondItem="AEy-o7-dMc" secondAttribute="height" id="0lh-sT-XuZ"/>
+                                                    <constraint firstItem="qGS-MK-uzj" firstAttribute="top" secondItem="AEy-o7-dMc" secondAttribute="top" id="7PC-Zz-7Cs"/>
+                                                    <constraint firstItem="qGS-MK-uzj" firstAttribute="leading" secondItem="AEy-o7-dMc" secondAttribute="leading" id="Jqj-jT-VxR"/>
+                                                    <constraint firstAttribute="bottom" secondItem="qGS-MK-uzj" secondAttribute="bottom" id="N5b-xP-zRt"/>
+                                                    <constraint firstItem="qGS-MK-uzj" firstAttribute="width" secondItem="AEy-o7-dMc" secondAttribute="width" id="ZGG-uv-gVB"/>
+                                                    <constraint firstAttribute="trailing" secondItem="qGS-MK-uzj" secondAttribute="trailing" id="rPD-Ng-yXa"/>
+                                                </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UXB-Rb-knb">
                                                 <rect key="frame" x="375" y="0.0" width="375" height="489"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tutorial2.png" translatesAutoresizingMaskIntoConstraints="NO" id="po2-2U-nuA">
+                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="489"/>
+                                                    </imageView>
+                                                </subviews>
                                                 <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                                <constraints>
+                                                    <constraint firstItem="po2-2U-nuA" firstAttribute="height" secondItem="UXB-Rb-knb" secondAttribute="height" id="Fgr-If-7Gt"/>
+                                                    <constraint firstAttribute="trailing" secondItem="po2-2U-nuA" secondAttribute="trailing" id="PgI-8U-aBh"/>
+                                                    <constraint firstAttribute="bottom" secondItem="po2-2U-nuA" secondAttribute="bottom" id="blL-IU-mQa"/>
+                                                    <constraint firstItem="po2-2U-nuA" firstAttribute="top" secondItem="UXB-Rb-knb" secondAttribute="top" id="kLe-eL-eTz"/>
+                                                    <constraint firstItem="po2-2U-nuA" firstAttribute="width" secondItem="UXB-Rb-knb" secondAttribute="width" id="wQF-eO-gdN"/>
+                                                    <constraint firstItem="po2-2U-nuA" firstAttribute="leading" secondItem="UXB-Rb-knb" secondAttribute="leading" id="xtj-sW-vAX"/>
+                                                </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EfN-4t-pmQ">
                                                 <rect key="frame" x="750" y="0.0" width="375" height="489"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tutorial3.png" translatesAutoresizingMaskIntoConstraints="NO" id="jHm-U2-fw4">
+                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="489"/>
+                                                    </imageView>
+                                                </subviews>
                                                 <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                                                <constraints>
+                                                    <constraint firstItem="jHm-U2-fw4" firstAttribute="height" secondItem="EfN-4t-pmQ" secondAttribute="height" id="1Bu-Ff-ucf"/>
+                                                    <constraint firstItem="jHm-U2-fw4" firstAttribute="top" secondItem="EfN-4t-pmQ" secondAttribute="top" id="5uv-HE-czZ"/>
+                                                    <constraint firstItem="jHm-U2-fw4" firstAttribute="leading" secondItem="EfN-4t-pmQ" secondAttribute="leading" id="ZMi-77-QzO"/>
+                                                    <constraint firstAttribute="trailing" secondItem="jHm-U2-fw4" secondAttribute="trailing" id="vXC-o7-Dih"/>
+                                                    <constraint firstAttribute="bottom" secondItem="jHm-U2-fw4" secondAttribute="bottom" id="wdw-cH-lOO"/>
+                                                    <constraint firstItem="jHm-U2-fw4" firstAttribute="width" secondItem="EfN-4t-pmQ" secondAttribute="width" id="zmQ-rL-rlD"/>
+                                                </constraints>
                                             </view>
                                         </subviews>
                                     </stackView>
@@ -1151,6 +1189,9 @@
         <image name="IMG_3205.jpg" width="750" height="666"/>
         <image name="line.horizontal.3" catalog="system" width="128" height="64"/>
         <image name="settings.png" width="18" height="18"/>
+        <image name="tutorial1.png" width="406" height="540"/>
+        <image name="tutorial2.png" width="397" height="541"/>
+        <image name="tutorial3.png" width="397" height="538"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
@@ -1168,9 +1209,6 @@
         </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemIndigoColor">
-            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemOrangeColor">
             <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
