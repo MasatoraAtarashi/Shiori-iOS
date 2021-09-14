@@ -12,7 +12,7 @@ import Foundation
 import UIKit
 
 // NOTE: 会員登録画面・ログイン画面共有
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var emailInputField: UITextField!
     @IBOutlet weak var passwordInputField: UITextField!
@@ -28,6 +28,8 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         authManager.delegate = self
         keyChain.delegate = self
+        emailInputField.delegate = self
+        passwordInputField.delegate = self
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -101,6 +103,12 @@ class LoginViewController: UIViewController {
     }
 
     func keyboardWillBeHidden(notification: NSNotification) {
+    }
+
+    //改行ボタンが押された際に呼ばれる.
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 
     // UIを初期化
