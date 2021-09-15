@@ -9,6 +9,8 @@
 import Foundation
 
 protocol ContentManagerDelegate {
+    func didCreateContent(
+        _ contentManager: ContentManager, contentResponse: ContentResponse)
     func didUpdateContent(
         _ contentManager: ContentManager, contentResponse: ContentResponse)
     func didDeleteContent(_ contentManager: ContentManager)
@@ -17,6 +19,18 @@ protocol ContentManagerDelegate {
 
 struct ContentManager {
     var delegate: ContentManagerDelegate?
+
+    func postContent(content: ContentRequest) {
+        let postContentURL = "\(const.baseURL)/v1/content"
+        let encoder = JSONEncoder()
+        do {
+            let body = try encoder.encode(content)
+            performRequest(with: postContentURL, httpMethod: "POST", body: body)
+        } catch {
+            self.delegate?.didFailWithError(error: error)
+            return
+        }
+    }
 
     func deleteContent(contentId: Int) {
         let deleteContentURL = "\(const.baseURL)/v1/content/\(contentId)"
@@ -60,8 +74,12 @@ struct ContentManager {
                 }
                 if let safeData = data {
                     if let contentResponse = self.parseJSON(safeData) {
-                        self.delegate?.didUpdateContent(
-                            self, contentResponse: contentResponse)
+                        if httpMethod == "POST" {
+                            self.delegate?.didCreateContent(self, contentResponse: contentResponse)
+                        } else if httpMethod == "PUT" {
+                            self.delegate?.didUpdateContent(
+                                self, contentResponse: contentResponse)
+                        }
                     }
                 }
             }
