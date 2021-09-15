@@ -32,9 +32,6 @@
 "Version" = "버전";
 "Copyright" = "저작권";
 
-//サポート動画サイト
-"Supported video sites" = "지원되는 비디오 사이트";
-
 //スワイプ
 "Cancel" = "취소";
 "Add" = "더하다";

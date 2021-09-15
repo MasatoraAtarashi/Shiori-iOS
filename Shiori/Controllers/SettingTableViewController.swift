@@ -17,6 +17,8 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
     // MARK: Structs
     // MARK: Enums
     // MARK: Properties
+    var keyChain = KeyChain()
+
     // MARK: IBOutlets
     @IBOutlet weak var switchAdvertisementDisplay: UISwitch!
 
@@ -31,7 +33,6 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
     @IBOutlet weak var text4: UILabel!
     @IBOutlet weak var text5: UILabel!
     @IBOutlet weak var text6: UILabel!
-    @IBOutlet weak var text7: UILabel!
 
     // MARK: Initializers
     // MARK: Type Methods
@@ -39,6 +40,9 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        keyChain.delegate = self
+
+        // TODO: リファクタリング
         switchAdvertisementDisplay.isOn = !UserDefaults.standard.bool(forKey: "isAdvertisementOn")
         switchAdvertisementDisplay.addTarget(
             self, action: #selector(self.onClickMySwicth(sender:)),
@@ -95,6 +99,8 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
             UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)
         } else if indexPath == [1, 1] {
             sendMail()
+        } else if indexPath == [1, 5] {
+            showSignOutConfirmAlert()
         }
 
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
@@ -196,6 +202,31 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
         }
     }
 
+    // ログアウトするか確認するアラート
+    func showSignOutConfirmAlert() {
+        let alert: UIAlertController = UIAlertController(
+            title: "", message: "ログアウトしますか？", preferredStyle: UIAlertController.Style.actionSheet)
+        let defaultAction: UIAlertAction = UIAlertAction(
+            title: "ログアウト", style: UIAlertAction.Style.destructive,
+            handler: {
+                (action: UIAlertAction!) -> Void in
+                self.signOut()
+            })
+        let cancelAction: UIAlertAction = UIAlertAction(
+            title: "キャンセル", style: UIAlertAction.Style.cancel,
+            handler: {
+                (action: UIAlertAction!) -> Void in
+            })
+        alert.addAction(cancelAction)
+        alert.addAction(defaultAction)
+        present(alert, animated: true, completion: nil)
+    }
+
+    // ログアウト
+    func signOut() {
+        keyChain.deleteKeyChain()
+    }
+
     // 言語を変更
     func changeLanguage() {
         text1.text = NSLocalizedString("Hide ads", comment: "")
@@ -204,10 +235,28 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
         text4.text = NSLocalizedString("Rate Shiori web", comment: "")
         text5.text = NSLocalizedString("Version", comment: "")
         text6.text = NSLocalizedString("Copyright", comment: "")
-        text7.text = NSLocalizedString("Supported video sites", comment: "")
     }
 
     // MARK: Subscripts
 }
 
 // MARK: Extensions
+extension SettingTableViewController: KeyChainDelegate {
+    func didSaveToKeyChain() {
+    }
+
+    func didDeleteKeyChain() {
+        // チュートリアル画面を表示
+        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let initialVC =
+            storyboard.instantiateViewController(withIdentifier: "InitialViewController")
+            as! InitialViewController
+        initialVC.modalPresentationStyle = .fullScreen
+        self.present(initialVC, animated: true, completion: nil)
+    }
+
+    func didFailWithError(error: Error?) {
+        print("Error", error)
+    }
+
+}

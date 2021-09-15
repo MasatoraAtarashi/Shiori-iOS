@@ -1,10 +1,14 @@
 var MyPreprocessor = function() {};
 
+// TODO: リファクタリング
 MyPreprocessor.prototype = {
     run: function(arguments) {
-        var positionTop = String(Math.max(window.pageYOffset, document.documentElement.scrollTop, document.body.scrollTop));
-        var positionLeft = String(Math.max(window.pageXOffset, document.documentElement.scrollLeft, document.body.scrollLeft));
-
+        var body = document.body,
+            html = document.documentElement;
+        var scrollPositionX = document.documentElement.scrollLeft
+        var scrollPositionY = document.documentElement.scrollTop
+        var maxScrollPositionX = document.documentElement.scrollWidth
+        var maxScrollPositionY = document.documentElement.scrollHeight
 
         var htmlVideoPlayer = document.getElementsByTagName('video')[0];
         var time = "0";
@@ -72,12 +76,15 @@ MyPreprocessor.prototype = {
         if(document.title) {
          title = document.title;
         }
+        // TODO: 変数名を合わせる
         arguments.completionFunction(
             {
                 "url": url,
                 "title": title,
-                "positionX": positionLeft,
-                "positionY": positionTop,
+                "scrollPositionX": scrollPositionX,
+                "scrollPositionY": scrollPositionY,
+                "maxScrollPositionX": maxScrollPositionX,
+                "maxScrollPositionY": maxScrollPositionY,
                 "time": time,
                 "image": image,
                 "date": dateString,

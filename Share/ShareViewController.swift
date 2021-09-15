@@ -13,11 +13,15 @@ import UIKit
 
 class ShareViewController: SLComposeServiceViewController {
 
+    var contentManager = ContentManager()
+
     let suiteName: String = "group.com.masatoraatarashi.Shiori"
     let keyName: String = "shareData"
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        contentManager.delegate = self
 
         self.title = "Shiori"
         // postName
@@ -49,25 +53,40 @@ class ShareViewController: SLComposeServiceViewController {
                                             dictionary[NSExtensionJavaScriptPreprocessingResultsKey]
                                             as! NSDictionary
 
-                                        let sharedDefaults: UserDefaults = UserDefaults(
-                                            suiteName: self.suiteName)!
-                                        var storedArray: [[String: String]] =
-                                            sharedDefaults.array(forKey: self.keyName)
-                                            as? [[String: String]] ?? []
-
                                         if results["url"] != nil {
-                                            let resultsDic = [
-                                                "url": results["url"], "title": results["title"],
-                                                "positionX": results["positionX"],
-                                                "positionY": results["positionY"],
-                                                "time": results["time"], "image": results["image"],
-                                                "date": results["date"],
-                                                "videoPlaybackPosition": results[
-                                                    "videoPlaybackPosition"],
-                                            ]
+                                            let title = results["title"] as? String
+                                            let url = results["url"] as? String
+                                            let thumbnailImgUrl = results["image"] as? String
+                                            let scrollPositionXString =
+                                                results["scrollPositionX"] as? Int
+                                            let scrollPositionYString =
+                                                results["scrollPositionY"] as? Int
+                                            let maxScrollPositionXString =
+                                                results["maxScrollPositionX"] as? Int
+                                            let maxScrollPositionYString =
+                                                results["maxScrollPositionY"] as? Int
+                                            let videoPlaybackPositionString =
+                                                results["time"] as! String
+                                            let scrollPositionX = Int(scrollPositionXString ?? 0)
+                                            let scrollPositionY = Int(scrollPositionYString ?? 0)
+                                            let maxScrollPositionX = Int(
+                                                maxScrollPositionXString ?? 0)
+                                            let maxScrollPositionY = Int(
+                                                maxScrollPositionYString ?? 0)
+                                            let videoPlaybackPosition = Int(
+                                                videoPlaybackPositionString)
+                                            let contentRequest = ContentRequest(
+                                                title: title ?? "", url: url ?? "",
+                                                thumbnailImgUrl: thumbnailImgUrl ?? "",
+                                                scrollPositionX: scrollPositionX,
+                                                scrollPositionY: scrollPositionY,
+                                                maxScrollPositionX: maxScrollPositionX,
+                                                maxScrollPositionY: maxScrollPositionY,
+                                                videoPlaybackPosition: videoPlaybackPosition ?? 0,
+                                                specifiedText: nil, specifiedDomId: nil,
+                                                specifiedDomClass: nil, specifiedDomTag: nil)
 
-                                            storedArray.append(resultsDic as! [String: String])
-                                            sharedDefaults.set(storedArray, forKey: self.keyName)
+                                            self.contentManager.postContent(content: contentRequest)
 
                                             self.extensionContext?.completeRequest(
                                                 returningItems: nil, completionHandler: nil)
@@ -96,6 +115,17 @@ class ShareViewController: SLComposeServiceViewController {
     override func configurationItems() -> [Any]! {
         // To add configuration options via table cells at the bottom of the sheet, return an array of SLComposeSheetConfigurationItem here.
         return []
+    }
+
+}
+
+extension ShareViewController: ContentManagerDelegate {
+    func didCreateContent(_ contentManager: ContentManager) {
+        print("content created")
+    }
+
+    func didFailWithError(error: Error) {
+        print("Error", error)
     }
 
 }

@@ -9,13 +9,15 @@
 import CoreData
 import Firebase
 import GoogleMobileAds
+import NVActivityIndicatorView
 import SDWebImage
 import SwiftMessages
 import SwipeCellKit
 import UIKit
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate,
-    SwipeTableViewCellDelegate, UISearchBarDelegate, UISearchResultsUpdating, TutorialDelegate
+    SwipeTableViewCellDelegate,
+    UISearchBarDelegate, UISearchResultsUpdating, TutorialDelegate
 {
 
     // MARK: Type Aliases
@@ -23,22 +25,20 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // MARK: Structs
     // MARK: Enums
     // MARK: Properties
-    let suiteName: String = "group.com.masatoraatarashi.Shiori"
-    let keyName: String = "shareData"
+    var contentListManager = ContentListManager()
+    var contentManager = ContentManager()
+    var searchController = UISearchController()
 
     var pageTitle: String = ""
     var link: String = ""
     var positionX: Int = 0
     var positionY: Int = 0
-
-    var articles: [Article] = []
-    var searchResults: [Article] = []
-
-    var searchController = UISearchController()
-
+    // コンテンツ
+    var contentList: [Content] = []
     // フォルダ
     var folderInt: String = NSLocalizedString("Home", comment: "")
-
+    var folderId: Int = const.HomeFolderId
+    // UI
     var r: Int = UserDefaults.standard.integer(forKey: "r")
     var g: Int = UserDefaults.standard.integer(forKey: "g")
     var b: Int = UserDefaults.standard.integer(forKey: "b")
@@ -64,15 +64,29 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // MARK: Type Methods
     // MARK: View Life-Cycle Methods
     fileprivate let refreshCtl = UIRefreshControl()
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        // delegateを設定
+        contentListManager.delegate = self
+        contentManager.delegate = self
+        // 認証
+        authorize()
+        // ローカルにコンテンツがある場合すべてアップロードする
+        if checkExistsContentInLocal() {
+            uploadAllLocalContent()
+        }
         // 広告
         initAdvertisement()
         self.tableView.register(
             UINib(nibName: "FeedTableViewCell", bundle: nil),
             forCellReuseIdentifier: "FeedTableViewCell")
-        // Do any additional setup after loading the view.
-        getStoredDataFromUserDefault()
+        // インジケータを作成
+        initIndicator()
+        // インジケータを表示
+        const.activityIndicatorView.startAnimating()
+        // コンテンツ一覧を取得
+        contentListManager.fetchContentList()
         // 起動時に言語を変更する
         changeViewLanguage()
         // 記事を更新するときにクルクルするやつ
@@ -89,12 +103,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         changeDisplayAdvertisement()
         // フッターのボタンの表示切り替え
         hiddenToolbarButtonEdit()
+        // NOTE: SubTableViewControllerから戻ってきたときの処理。!= nilという条件はあんまりよくない。本当は == SubTableViewControllerとかでやりたいけど、どうやるかわからない
+        if navigationController?.presentedViewController != nil {
+            loadFolderContentList()
+        }
     }
 
-    // Called to notify the view controller that its view has just laid out its subviews.
+    // レイアウト処理終了時の処理
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-
         let screenRect = UIScreen.main.bounds
         tableView.frame = CGRect(x: 0, y: 0, width: screenRect.width, height: screenRect.height)
     }
@@ -142,11 +159,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // MARK: UITableViewDelegate
     // セルの数の設定
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let targetArticles = searchController.isActive ? searchResults : articles
-        let filteredArticles = targetArticles.filter({
-            ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(folderInt)
-        })
-        return filteredArticles.count
+        return contentList.count
     }
 
     // セルの設定
@@ -156,17 +169,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 withIdentifier: "FeedTableViewCell", for: indexPath as IndexPath)
             as! FeedTableViewCell
 
-        let targetArticles = searchController.isActive ? searchResults : articles
-        let filteredArticles = targetArticles.filter({
-            ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(folderInt)
-        })
-
-        let entry = filteredArticles[indexPath.row]
+        let content = contentList[indexPath.row]
         cell.delegate = self
-        cell.title.text = entry.title
-        cell.subContent.text = entry.link
-        cell.date.text = entry.date
-        cell.thumbnail.sd_setImage(with: URL(string: entry.imageURL ?? ""))
+        cell.title.text = content.title
+        cell.subContent.text = content.url
+        cell.date.text = content.createdAt
+        cell.thumbnail.sd_setImage(with: URL(string: content.thumbnailImgUrl))
 
         r = UserDefaults.standard.integer(forKey: "r")
         b = UserDefaults.standard.integer(forKey: "b")
@@ -189,18 +197,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // セルをタップしたときの処理
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView.isEditing { return }
-        let targetArticles = searchController.isActive ? searchResults : articles
-        let filteredArticles = targetArticles.filter({
-            ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(folderInt)
-        })
         let webViewController = WebViewController()
-        webViewController.targetUrl = filteredArticles[indexPath.row].link
-        webViewController.positionX =
-            Int(filteredArticles[indexPath.row].positionX ?? "0") ?? 0
-        webViewController.positionY =
-            Int(filteredArticles[indexPath.row].positionY ?? "0") ?? 0
-        webViewController.videoPlaybackPosition =
-            Int(filteredArticles[indexPath.row].videoPlaybackPosition ?? "0") ?? 0
+        let selectedContent = contentList[indexPath.row]
+        webViewController.targetUrl = selectedContent.url
+        webViewController.positionX = selectedContent.scrollPositionX
+        webViewController.positionY = selectedContent.scrollPositionY
+        webViewController.maxScroolPositionX = selectedContent.maxScrollPositionX
+        webViewController.maxScroolPositionY = selectedContent.maxScrollPositionY
+        webViewController.videoPlaybackPosition = selectedContent.videoPlaybackPosition ?? 0
         self.navigationController!.pushViewController(webViewController, animated: true)
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
     }
@@ -213,7 +217,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // フッターの見た目を設定
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let footerView = UIView(
-            frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 40))  // assuming 40 height for footer.
+            frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 40))
         return footerView
     }
 
@@ -228,6 +232,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         for orientation: SwipeActionsOrientation
     ) -> [SwipeAction]? {
         if orientation == .right {
+            // 削除アクション
             let deleteAction = SwipeAction(
                 style: .destructive, title: NSLocalizedString("Delete", comment: "")
             ) { _, indexPath in
@@ -235,25 +240,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             }
             deleteAction.image = UIImage(systemName: "trash.fill")
 
-            // お気に入り
+            // お気に入りアクション
             var favoriteAction: SwipeAction
-            //            let favoriteAction = SwipeAction(style: .default, title: NSLocalizedString("Liked", comment: "")) { action, indexPath in
-            //                self.favoriteCell(at: indexPath)
-            //            }
-            let _: NSFetchRequest<Article> = Article.fetchRequest()
 
-            let targetArticles = searchController.isActive ? searchResults : articles
-            let filteredArticles = targetArticles.filter({
-                ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(folderInt)
-            })
-
-            if filteredArticles[indexPath.row].folderInt?.contains(
-                NSLocalizedString("Liked", comment: "")) ?? false
-            {
+            if contentList[indexPath.row].liked ?? false {
                 favoriteAction = SwipeAction(
                     style: .default, title: NSLocalizedString("Cancel", comment: "")
                 ) { _, indexPath in
-                    self.favoriteCell(at: indexPath)
+                    self.unFavoriteCell(at: indexPath)
                 }
                 favoriteAction.image = UIImage(systemName: "heart.fill")
             } else {
@@ -267,6 +261,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             favoriteAction.backgroundColor = UIColor.init(
                 red: 255 / 255, green: 165 / 255, blue: 0 / 255, alpha: 1)
 
+            // フォルダアクション
             let folderAction = SwipeAction(
                 style: .default, title: NSLocalizedString("Add", comment: "")
             ) { _, indexPath in
@@ -278,14 +273,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                     vc.viewControllers.first as! SelectFolderTableViewController
                 selectFolderTableViewController.selectedIndexPath = indexPath.row
                 let _: NSFetchRequest<Article> = Article.fetchRequest()
-
-                let targetArticles =
-                    self.searchController.isActive ? self.searchResults : self.articles
-                let filteredArticles = targetArticles.filter({
-                    ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(
-                        self.folderInt)
-                })
-                selectFolderTableViewController.articles = filteredArticles
+                selectFolderTableViewController.content = self.contentList[indexPath.row]
                 self.present(vc, animated: true)
             }
             folderAction.image = UIImage(systemName: "folder.fill")
@@ -308,7 +296,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return options
     }
 
-    //    長押し
+    // 長押し
     @available(iOS 13.0, *)
     func tableView(
         _ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath,
@@ -317,15 +305,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
         let previewProvider: () -> WebViewController? = { [unowned self] in
             let webViewController = WebViewController()
-            let targetArticles = searchController.isActive ? searchResults : articles
-            let filteredArticles = targetArticles.filter({
-                ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(folderInt)
-            })
-            webViewController.targetUrl = filteredArticles[indexPath.row].link
-            webViewController.positionX =
-                Int(filteredArticles[indexPath.row].positionX ?? "0") ?? 0
-            webViewController.positionY =
-                Int(filteredArticles[indexPath.row].positionY ?? "0") ?? 0
+            webViewController.targetUrl = contentList[indexPath.row].url
+            webViewController.positionX = contentList[indexPath.row].scrollPositionX
+            webViewController.positionY = contentList[indexPath.row].scrollPositionY
             return webViewController
         }
 
@@ -334,19 +316,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 _ in
                 var shareText: String
                 var shareWebsite: NSURL
-                let targetArticles =
-                    self.searchController.isActive ? self.searchResults : self.articles
-                let filteredArticles = targetArticles.filter({
-                    ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(
-                        self.folderInt)
-                })
-                shareText = filteredArticles[indexPath.row].title!
-                if let shareURL = URL(string: filteredArticles[indexPath.row].link!) {
+                shareText = self.contentList[indexPath.row].title
+                if let shareURL = URL(string: self.contentList[indexPath.row].url) {
                     shareWebsite = shareURL as NSURL
                 } else {
                     return
                 }
-
                 let activityItems = [shareText, shareWebsite] as [Any]
 
                 // 初期化処理
@@ -369,16 +344,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
 
     // MARK: UISearchBarDelegate
-    // Asks the object to update the search results for a specified controller.
+    // 検索
     func updateSearchResults(for searchController: UISearchController) {
-        let filteredArticles = self.articles.filter({
-            ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(folderInt)
-        })
-        self.searchResults = filteredArticles.filter {
-            // 大文字と小文字を区別せずに検索
-            $0.title?.lowercased().contains(searchController.searchBar.text!.lowercased()) ?? true
-        }
-        self.tableView.reloadData()
+        self.loadFolderContentList(q: searchController.searchBar.text ?? "")
     }
 
     // MARK: Other Methods
@@ -434,10 +402,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func initRefreshController() {
         tableView.refreshControl = refreshCtl
         tableView.refreshControl?.addTarget(
-            self, action: #selector(ViewController.getStoredDataFromUserDefault), for: .valueChanged
+            self, action: #selector(ViewController.refresh), for: .valueChanged
         )
         tableView.refreshControl?.attributedTitle = NSAttributedString(
             string: NSLocalizedString("Pull to refresh", comment: ""))
+    }
+
+    // tableView更新
+    @objc func refresh() {
+        loadFolderContentList()
     }
 
     // 検索
@@ -449,6 +422,27 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.navigationItem.searchController = searchController
     }
 
+    // 認証
+    func authorize() {
+        let isAuthorized = KeyChain().getKeyChain()
+        if isAuthorized != nil { return }
+
+        // 未ログインの場合チュートリアル画面を表示
+        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let initialVC =
+            storyboard.instantiateViewController(withIdentifier: "InitialViewController")
+            as! InitialViewController
+        initialVC.modalPresentationStyle = .fullScreen
+        self.present(initialVC, animated: false, completion: nil)
+    }
+
+    // インジケータ
+    func initIndicator() {
+        tableView.addSubview(const.activityIndicatorView)
+        tableView.bringSubviewToFront(const.activityIndicatorView)
+        const.activityIndicatorView.center = tableView.center
+    }
+
     // 背景色を設定
     func changeBackgroundColor() {
         r = UserDefaults.standard.integer(forKey: "r")
@@ -457,12 +451,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let bgColor: UIColor = UIColor(
             red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: 1)
         self.navigationController?.setToolbarHidden(false, animated: true)
-        //        footer color
+        // footer color
         self.navigationController?.toolbar.barTintColor = bgColor
-        //        header color
+        // header color
         self.navigationController?.navigationBar.barTintColor = bgColor
 
-        //        背景
+        // 背景
         tableView.backgroundColor = bgColor
         tableView.reloadData()
 
@@ -491,7 +485,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     // フッターのボタンの表示切り替え
     func hiddenToolbarButtonEdit() {
-        if self.articles.count == 0 {
+        if contentList.count == 0 {
             bottomToolbarRightItem.isEnabled = false
             bottomToolbarRightItem.title = ""
         } else {
@@ -505,46 +499,24 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
 
-    // TODO: リファクタリング
-    // ローカルに保存した記事を取得する
-    @objc func getStoredDataFromUserDefault() {
-        self.articles = []
-        let sharedDefaults: UserDefaults = UserDefaults(suiteName: self.suiteName)!
-        let storedArray: [[String: String]] =
-            sharedDefaults.array(forKey: self.keyName) as? [[String: String]] ?? []
-
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
-            .viewContext
-
-        for result in storedArray {
-            let article = Article(context: context)
-            article.title = result["title"]!
-            article.link = result["url"]!
-            article.imageURL = result["image"]!
-            article.positionX = result["positionX"]!
-            article.positionY = result["positionY"]!
-            article.date = result["date"]!
-            article.videoPlaybackPosition = result["videoPlaybackPosition"]
-            (UIApplication.shared.delegate as! AppDelegate).saveContext()
+    // フォルダ内コンテンツを取得して表示する
+    func loadFolderContentList(q: String = "") {
+        const.activityIndicatorView.startAnimating()
+        if folderId == const.HomeFolderId {
+            contentListManager.fetchContentList(q: q)
+        } else if folderId == const.LikedFolderId {
+            contentListManager.fetchContentList(q: q, liked: true)
+        } else {
+            contentListManager.fetchFolderContentList(folderId: folderId, q: q)
         }
+    }
 
-        sharedDefaults.set([], forKey: self.keyName)
-
-        let readContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
-            .viewContext
-        do {
-            let fetchRequest: NSFetchRequest<Article> = Article.fetchRequest()
-            self.articles = try readContext.fetch(fetchRequest)
-        } catch {
-            print("Error")
-        }
-
-        articles.reverse()
+    // コンテンツ一覧を表示
+    func renderContentList() {
         tableView.reloadData()
         self.tableView.refreshControl?.endRefreshing()
         hiddenToolbarButtonEdit()
-
-        if articles.count == 0 {
+        if contentList.count == 0 {
             self.view.bringSubviewToFront(text)
             self.view.bringSubviewToFront(text2)
             self.view.bringSubviewToFront(button)
@@ -567,62 +539,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     // 記事をお気に入りに登録
     func favoriteCell(at indexPath: IndexPath) {
-        let _: NSFetchRequest<Article> = Article.fetchRequest()
-
-        let targetArticles = searchController.isActive ? searchResults : articles
-        let filteredArticles = targetArticles.filter({
-            ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(folderInt)
-        })
-
-        if filteredArticles[indexPath.row].folderInt == nil {
-            filteredArticles[indexPath.row].folderInt = [NSLocalizedString("Home", comment: "")]
-        }
-
-        if filteredArticles[indexPath.row].folderInt!.contains(
-            NSLocalizedString("Liked", comment: ""))
-        {
-            filteredArticles[indexPath.row].folderInt?.remove(
-                at: filteredArticles[indexPath.row].folderInt!.firstIndex(
-                    of: NSLocalizedString("Liked", comment: ""))!)
-        } else {
-            filteredArticles[indexPath.row].folderInt?.append(
-                NSLocalizedString("Liked", comment: ""))
-        }
-
-        (UIApplication.shared.delegate as! AppDelegate).saveContext()
-        getStoredDataFromUserDefault()
+        var contentRequest = contentList[indexPath.row]
+        contentRequest.liked = true
+        contentManager.putContent(contentId: contentList[indexPath.row].id, content: contentRequest)
     }
 
-    // TODO: リファクタリング
-    // 記事をフォルダに追加
-    func addArticleToFolder(_ ArticleindexPathRow: Int, _ folderName: String) {
-        var alreadyAdded: Bool
-        let _: NSFetchRequest<Article> = Article.fetchRequest()
-
-        let targetArticles = searchController.isActive ? searchResults : articles
-        let filteredArticles = targetArticles.filter({
-            ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(folderInt)
-        })
-
-        if filteredArticles[ArticleindexPathRow].folderInt == nil {
-            filteredArticles[ArticleindexPathRow].folderInt = [
-                NSLocalizedString("Home", comment: "")
-            ]
-        }
-
-        if filteredArticles[ArticleindexPathRow].folderInt!.contains(folderName) {
-            filteredArticles[ArticleindexPathRow].folderInt?.remove(
-                at: filteredArticles[ArticleindexPathRow].folderInt!.firstIndex(of: folderName)!
-            )
-            alreadyAdded = true
-        } else {
-            filteredArticles[ArticleindexPathRow].folderInt?.append(folderName)
-            alreadyAdded = false
-        }
-
-        (UIApplication.shared.delegate as! AppDelegate).saveContext()
-        getStoredDataFromUserDefault()
-        showPopUp(alreadyAdded)
+    // 記事のお気に入りを解除
+    func unFavoriteCell(at indexPath: IndexPath) {
+        var contentRequest = contentList[indexPath.row]
+        contentRequest.liked = false
+        contentManager.putContent(contentId: contentList[indexPath.row].id, content: contentRequest)
     }
 
     // ポップアップを表示
@@ -658,41 +584,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         viewControllerNameFrom = viewController
     }
 
-    // 使われてなさそう。デバッグ用？
-    // すべての記事を削除
-    func deleteAllRecords() {
-        let delegate = UIApplication.shared.delegate as! AppDelegate
-        let context = delegate.persistentContainer.viewContext
-
-        let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Article")
-        let deleteRequest = NSBatchDeleteRequest(fetchRequest: deleteFetch)
-
-        do {
-            try context.execute(deleteRequest)
-            try context.save()
-        } catch {
-            print("There was an error")
-        }
-    }
-
     // cellを削除する
     func deleteCell(at indexPath: IndexPath) {
-        let readContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
-            .viewContext
-        let _: NSFetchRequest<Article> = Article.fetchRequest()
-        if searchController.isActive {
-            let filteredArticles = self.searchResults.filter({
-                ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(folderInt)
-            })
-            readContext.delete(filteredArticles[indexPath.row])
-        } else {
-            let filteredArticles = self.articles.filter({
-                ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(folderInt)
-            })
-            readContext.delete(filteredArticles[indexPath.row])
-        }
-        (UIApplication.shared.delegate as! AppDelegate).saveContext()
-        getStoredDataFromUserDefault()
+        contentManager.deleteContent(contentId: contentList[indexPath.row].id)
     }
 
     // 言語変更
@@ -714,10 +608,145 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
 
+    ///
+    /// LEGACY: v2.0までの後方互換を保つためのコード
+    /// 後方互換を保つため、ローカルストレージにコンテンツが存在する場合はすべてアップロードし、その後削除する
+    ///
+    var articles: [Article] = []
+    let suiteName: String = "group.com.masatoraatarashi.Shiori"
+    let keyName: String = "shareData"
+
+    // ローカルストレージ内にコンテンツが存在するか確認
+    func checkExistsContentInLocal() -> Bool {
+        getStoredDataFromUserDefault()
+        if articles.count != 0 {
+            return true
+        }
+        return false
+    }
+
+    // ローカルに存在するコンテンツをすべてアップロードする
+    func uploadAllLocalContent() {
+        // TODO: implements
+        // 作業中であることを表示する(インジケータ&メッセージ)
+        const.activityIndicatorView.startAnimating()
+
+        // コンテンツをすべてアップロード
+        for (i, article) in articles.enumerated().reversed() {
+            let contentRequest = ContentRequest(
+                title: article.title ?? "",
+                url: article.link ?? "",
+                thumbnailImgUrl: article.imageURL ?? "",
+                scrollPositionX: 0,
+                scrollPositionY: Int(article.positionY ?? "0") ?? 0,
+                maxScrollPositionX: 0,
+                maxScrollPositionY: 1000,
+                videoPlaybackPosition: Int(article.videoPlaybackPosition ?? "0") ?? 0,
+                specifiedText: nil,
+                specifiedDomId: nil,
+                specifiedDomClass: nil,
+                specifiedDomTag: nil
+            )
+            contentManager.postContent(content: contentRequest)
+            articles.remove(at: i)
+        }
+
+        const.activityIndicatorView.stopAnimating()
+    }
+
+    // ローカルストレージ内の記事を取得する
+    @objc func getStoredDataFromUserDefault() {
+        self.articles = []
+        let sharedDefaults: UserDefaults = UserDefaults(suiteName: self.suiteName)!
+        let storedArray: [[String: String]] =
+            sharedDefaults.array(forKey: self.keyName) as? [[String: String]] ?? []
+
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
+            .viewContext
+
+        for result in storedArray {
+            let article = Article(context: context)
+            article.title = result["title"]!
+            article.link = result["url"]!
+            article.imageURL = result["image"]!
+            article.positionX = result["positionX"]!
+            article.positionY = result["positionY"]!
+            article.date = result["date"]!
+            article.videoPlaybackPosition = result["videoPlaybackPosition"]
+            (UIApplication.shared.delegate as! AppDelegate).saveContext()
+        }
+
+        sharedDefaults.set([], forKey: self.keyName)
+
+        let readContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
+            .viewContext
+        do {
+            let fetchRequest: NSFetchRequest<Article> = Article.fetchRequest()
+            self.articles = try readContext.fetch(fetchRequest)
+        } catch {
+            print("Error")
+        }
+
+        articles.reverse()
+    }
+
+    // ローカルストレージ内のすべてのコンテンツを削除
+    func deleteAllRecords() {
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        let context = delegate.persistentContainer.viewContext
+
+        let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Article")
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: deleteFetch)
+
+        do {
+            try context.execute(deleteRequest)
+            try context.save()
+        } catch {
+            print("There was an error")
+        }
+    }
+
     // MARK: Subscripts
 }
 
 // MARK: Extensions
+extension ViewController: ContentListManagerDelegate, ContentManagerDelegate {
+    func didCreateContent(_ contentManager: ContentManager, contentResponse: ContentResponse) {
+        DispatchQueue.main.async {
+            // すべてのローカルコンテンツをアップロードできたら、ローカルストレージ内のコンテンツを全て削除
+            if self.articles.count == 0 {
+                self.deleteAllRecords()
+            }
+        }
+    }
+
+    func didUpdateContentList(
+        _ contentListManager: ContentListManager, contentListResponse: ContentListResponse
+    ) {
+        DispatchQueue.main.async {
+            // TODO: 一番下までスクロールしたら追加でコンテンツを取得できるようにする
+            self.contentList = contentListResponse.data.content
+            self.renderContentList()
+            const.activityIndicatorView.stopAnimating()
+        }
+    }
+
+    func didUpdateContent(
+        _ contentManager: ContentManager, contentResponse: ContentResponse
+    ) {
+        self.loadFolderContentList()
+    }
+
+    func didDeleteContent(_ contentManager: ContentManager) {
+        self.loadFolderContentList()
+    }
+
+    func didFailWithError(error: Error) {
+        const.activityIndicatorView.stopAnimating()
+        print("Error", error)
+    }
+}
+
 extension ViewController {
     func getDeviceInfo() -> String {
         var size: Int = 0

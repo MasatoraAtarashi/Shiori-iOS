@@ -8,7 +8,7 @@
 	</array>
 	<key>keychain-access-groups</key>
 	<array>
-		<string>$(AppIdentifierPrefix)com.masatoraatarashi.Shiori.Share</string>
+		<string>$(AppIdentifierPrefix)com.masatoraatarashi.Shiori</string>
 	</array>
 </dict>
 </plist>

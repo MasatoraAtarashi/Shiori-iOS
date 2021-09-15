@@ -33,9 +33,6 @@
 "Version" = "バージョン";
 "Copyright" = "コピーライト";
 
-//サポート動画サイト
-"Supported video sites" = "対応済動画サイト";
-
 //スワイプ
 "Cancel" = "解除";
 "Add" = "追加";

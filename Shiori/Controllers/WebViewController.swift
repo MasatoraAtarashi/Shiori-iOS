@@ -22,12 +22,12 @@ class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
     var shareButton: UIBarButtonItem!
     var backButton: UIBarButtonItem!
     var forwadButton: UIBarButtonItem!
-
-    var activityIndicatorView: NVActivityIndicatorView?
-
     var targetUrl: String?
+    // TODO: 変数名変える
     var positionX: Int = 0
     var positionY: Int = 0
+    var maxScroolPositionX: Int = 0
+    var maxScroolPositionY: Int = 0
     var videoPlaybackPosition: Int = 0
 
     let preferences = WKPreferences()
@@ -37,34 +37,27 @@ class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
     // MARK: Initializers
     // MARK: Type Methods
     // MARK: View Life-Cycle Methods
+
+    // TODO: リファクタリング
     override func loadView() {
 
         let webConfiguration = WKWebViewConfiguration()
 
         // インライン再生を許可
         webConfiguration.allowsInlineMediaPlayback = true
-
-        activityIndicatorView = NVActivityIndicatorView(
-            frame: CGRect(x: 0, y: 0, width: 85, height: 85),
-            type: NVActivityIndicatorType.ballSpinFadeLoader,
-            color: UIColor.darkGray,
-            padding: 0
-        )
-
         webConfiguration.preferences = preferences
         webView = WKWebView(frame: .zero, configuration: webConfiguration)
         webView.uiDelegate = self
         webView.navigationDelegate = self
         view = webView
 
-        if let activityView = activityIndicatorView {
-            webView.addSubview(activityView)
-            webView.bringSubviewToFront(activityView)
-        }
+        webView.addSubview(const.activityIndicatorView)
+        webView.bringSubviewToFront(const.activityIndicatorView)
 
         webView.allowsBackForwardNavigationGestures = true
     }
 
+    // TODO: リファクタリング
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -151,18 +144,6 @@ class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
         self.present(activityVC, animated: true, completion: nil)
     }
 
-    @objc func segmentChanged() {
-        // セグメントが変更されたときの処理
-        // 選択されているセグメントのインデックス
-        if self.segment.selectedSegmentIndex == 0 {
-            self.preferences.javaScriptEnabled = true
-            webView.reload()
-        } else {
-            self.preferences.javaScriptEnabled = false
-            webView.reload()
-        }
-    }
-
     // MARK: Subscripts
 }
 
@@ -171,24 +152,41 @@ class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
 extension WebViewController {
 
     func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
-        activityIndicatorView?.center = webView.center
-        activityIndicatorView?.startAnimating()
+        const.activityIndicatorView.center = webView.center
+        const.activityIndicatorView.startAnimating()
     }
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        // TODO: メソッドに切り出す
         webView.evaluateJavaScript(
-            "window.scrollTo(\(positionX),\(positionY))", completionHandler: nil)
-        // ユーザーがリロードしたときスクロールしないようにpositionを初期化
-        positionX = 0
-        positionY = 0
-        self.refreshControll.endRefreshing()
-        activityIndicatorView?.stopAnimating()
+            "document.documentElement.scrollHeight",
+            completionHandler: { (value, error) in
+                if let maxScrollPositionYThisWindow: Int = value as? Int {
+                    let scrollRateY = Float(self.positionY) / Float(self.maxScroolPositionY)
+                    let scrollPositionYThisWindow =
+                        CGFloat(Float(maxScrollPositionYThisWindow) * scrollRateY)
+                    self.webView.evaluateJavaScript(
+                        "window.scrollTo(\(0),\(scrollPositionYThisWindow))",
+                        completionHandler: { _, _ in
+                            // ユーザーがリロードしたときスクロールしないようにpositionを初期化
+                            self.positionX = 0
+                            self.positionY = 0
+                        })
+                }
+            })
 
-        let setVideoPlaybackPositionScript = """
-                var htmlVideoPlayer = document.getElementsByTagName('video')[0];
-                htmlVideoPlayer.currentTime += \(videoPlaybackPosition);
-            """
-        webView.evaluateJavaScript(setVideoPlaybackPositionScript, completionHandler: nil)
+        self.refreshControll.endRefreshing()
+        const.activityIndicatorView.stopAnimating()
+
+        if let url = targetUrl {
+            if url.hasPrefix("https://youtu.be/") || url.contains("pornhub")
+                || url.contains("nicovideo") || url.contains("dailymotion") || url.contains("tube8")
+                || url.contains("redtube")
+            {
+                return
+            }
+            setVideoPlayBackPosition(videoPlayBackPosition: videoPlaybackPosition)
+        }
     }
 
     func webView(
@@ -203,6 +201,17 @@ extension WebViewController {
         //        } else {
         //            decisionHandler(.allow)
         //        }
+    }
+
+    // スクロール位置を復元する
+
+    // 動画再生位置を復元する
+    func setVideoPlayBackPosition(videoPlayBackPosition: Int) {
+        let setVideoPlaybackPositionScript = """
+                var htmlVideoPlayer = document.getElementsByTagName('video')[0];
+                htmlVideoPlayer.currentTime += \(videoPlaybackPosition);
+            """
+        webView.evaluateJavaScript(setVideoPlaybackPositionScript, completionHandler: nil)
     }
 }
 
