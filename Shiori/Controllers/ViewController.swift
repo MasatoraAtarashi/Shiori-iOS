@@ -449,50 +449,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.present(initialVC, animated: false, completion: nil)
     }
 
-    // NOTE: 後方互換を保つため、ローカルストレージにコンテンツが存在する場合はすべてアップロードする
-    // ALERT: 古いコードをそのまま使っている
-    var articles: [Article] = []
-    let suiteName: String = "group.com.masatoraatarashi.Shiori"
-    let keyName: String = "shareData"
-    func checkExistsContentInLocal() -> Bool {
-        getStoredDataFromUserDefault()
-        if articles.count != 0 {
-            return true
-        }
-        return false
-    }
-
-    // ローカルに存在するコンテンツをすべてアップロードする
-    func uploadAllLocalContent() {
-        // TODO: implements
-        // 作業中であることを表示する(インジケータ&メッセージ)
-        const.activityIndicatorView.startAnimating()
-
-        // コンテンツをすべてアップロード
-        for (i, article) in articles.enumerated().reversed() {
-            let contentRequest = ContentRequest(
-                title: article.title ?? "",
-                url: article.link ?? "",
-                thumbnailImgUrl: article.imageURL ?? "",
-                scrollPositionX: 0,
-                scrollPositionY: Int(article.positionY ?? "0") ?? 0,
-                maxScrollPositionX: 0,
-                maxScrollPositionY: 1000,
-                videoPlaybackPosition: Int(article.videoPlaybackPosition ?? "0") ?? 0,
-                specifiedText: nil,
-                specifiedDomId: nil,
-                specifiedDomClass: nil,
-                specifiedDomTag: nil
-            )
-            contentManager.postContent(content: contentRequest)
-            articles.remove(at: i)
-        }
-
-        // 全部終わったらその旨を伝える
-        const.activityIndicatorView.stopAnimating()
-
-    }
-
     // インジケータ
     func initIndicator() {
         tableView.addSubview(const.activityIndicatorView)
@@ -568,45 +524,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
 
-    // TODO: 削除
-    // NOTE: このコードは後で参考にするためとっておく
-    // ローカルに保存した記事を取得する
-    // TODO: !を消す
-    @objc func getStoredDataFromUserDefault() {
-        self.articles = []
-        let sharedDefaults: UserDefaults = UserDefaults(suiteName: self.suiteName)!
-        let storedArray: [[String: String]] =
-            sharedDefaults.array(forKey: self.keyName) as? [[String: String]] ?? []
-
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
-            .viewContext
-
-        for result in storedArray {
-            let article = Article(context: context)
-            article.title = result["title"]!
-            article.link = result["url"]!
-            article.imageURL = result["image"]!
-            article.positionX = result["positionX"]!
-            article.positionY = result["positionY"]!
-            article.date = result["date"]!
-            article.videoPlaybackPosition = result["videoPlaybackPosition"]
-            (UIApplication.shared.delegate as! AppDelegate).saveContext()
-        }
-
-        sharedDefaults.set([], forKey: self.keyName)
-
-        let readContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
-            .viewContext
-        do {
-            let fetchRequest: NSFetchRequest<Article> = Article.fetchRequest()
-            self.articles = try readContext.fetch(fetchRequest)
-        } catch {
-            print("Error")
-        }
-
-        articles.reverse()
-    }
-
     // コンテンツ一覧を表示
     func renderContentList() {
         tableView.reloadData()
@@ -680,23 +597,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         viewControllerNameFrom = viewController
     }
 
-    // 使われてなさそう。デバッグ用？
-    // すべての記事を削除
-    func deleteAllRecords() {
-        let delegate = UIApplication.shared.delegate as! AppDelegate
-        let context = delegate.persistentContainer.viewContext
-
-        let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Article")
-        let deleteRequest = NSBatchDeleteRequest(fetchRequest: deleteFetch)
-
-        do {
-            try context.execute(deleteRequest)
-            try context.save()
-        } catch {
-            print("There was an error")
-        }
-    }
-
     // cellを削除する
     func deleteCell(at indexPath: IndexPath) {
         contentManager.deleteContent(contentId: contentList[indexPath.row].id)
@@ -720,6 +620,104 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             bottomToolbarRightItem.title = NSLocalizedString("Edit", comment: "")
         }
     }
+    
+    ///
+    /// LEGACY: v2.0までの後方互換を保つためのコード
+    /// 後方互換を保つため、ローカルストレージにコンテンツが存在する場合はすべてアップロードし、その後削除する
+    ///
+    var articles: [Article] = []
+    let suiteName: String = "group.com.masatoraatarashi.Shiori"
+    let keyName: String = "shareData"
+    
+    // ローカルストレージ内にコンテンツが存在するか確認
+    func checkExistsContentInLocal() -> Bool {
+        getStoredDataFromUserDefault()
+        if articles.count != 0 {
+            return true
+        }
+        return false
+    }
+
+    // ローカルに存在するコンテンツをすべてアップロードする
+    func uploadAllLocalContent() {
+        // TODO: implements
+        // 作業中であることを表示する(インジケータ&メッセージ)
+        const.activityIndicatorView.startAnimating()
+
+        // コンテンツをすべてアップロード
+        for (i, article) in articles.enumerated().reversed() {
+            let contentRequest = ContentRequest(
+                title: article.title ?? "",
+                url: article.link ?? "",
+                thumbnailImgUrl: article.imageURL ?? "",
+                scrollPositionX: 0,
+                scrollPositionY: Int(article.positionY ?? "0") ?? 0,
+                maxScrollPositionX: 0,
+                maxScrollPositionY: 1000,
+                videoPlaybackPosition: Int(article.videoPlaybackPosition ?? "0") ?? 0,
+                specifiedText: nil,
+                specifiedDomId: nil,
+                specifiedDomClass: nil,
+                specifiedDomTag: nil
+            )
+            contentManager.postContent(content: contentRequest)
+            articles.remove(at: i)
+        }
+        
+        const.activityIndicatorView.stopAnimating()
+    }
+    
+    // ローカルストレージ内の記事を取得する
+    @objc func getStoredDataFromUserDefault() {
+        self.articles = []
+        let sharedDefaults: UserDefaults = UserDefaults(suiteName: self.suiteName)!
+        let storedArray: [[String: String]] =
+            sharedDefaults.array(forKey: self.keyName) as? [[String: String]] ?? []
+
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
+            .viewContext
+
+        for result in storedArray {
+            let article = Article(context: context)
+            article.title = result["title"]!
+            article.link = result["url"]!
+            article.imageURL = result["image"]!
+            article.positionX = result["positionX"]!
+            article.positionY = result["positionY"]!
+            article.date = result["date"]!
+            article.videoPlaybackPosition = result["videoPlaybackPosition"]
+            (UIApplication.shared.delegate as! AppDelegate).saveContext()
+        }
+
+        sharedDefaults.set([], forKey: self.keyName)
+
+        let readContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
+            .viewContext
+        do {
+            let fetchRequest: NSFetchRequest<Article> = Article.fetchRequest()
+            self.articles = try readContext.fetch(fetchRequest)
+        } catch {
+            print("Error")
+        }
+
+        articles.reverse()
+    }
+
+    // ローカルストレージ内のすべてのコンテンツを削除
+    func deleteAllRecords() {
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        let context = delegate.persistentContainer.viewContext
+
+        let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Article")
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: deleteFetch)
+
+        do {
+            try context.execute(deleteRequest)
+            try context.save()
+        } catch {
+            print("There was an error")
+        }
+    }
 
     // MARK: Subscripts
 }
@@ -728,7 +726,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 extension ViewController: ContentListManagerDelegate, ContentManagerDelegate {
     func didCreateContent(_ contentManager: ContentManager, contentResponse: ContentResponse) {
         DispatchQueue.main.async {
-            // すべてのコンテンツを削除
+            // すべてのローカルコンテンツをアップロードできたら、ローカルストレージ内のコンテンツを全て削除
             if self.articles.count == 0 {
                 self.deleteAllRecords()
             }
