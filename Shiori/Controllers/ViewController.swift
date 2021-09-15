@@ -469,7 +469,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         const.activityIndicatorView.startAnimating()
 
         // コンテンツをすべてアップロード
-        for (i, article) in articles.enumerated() {
+        for (i, article) in articles.enumerated().reversed() {
             let contentRequest = ContentRequest(
                 title: article.title ?? "",
                 url: article.link ?? "",
@@ -730,7 +730,7 @@ extension ViewController: ContentListManagerDelegate, ContentManagerDelegate {
         DispatchQueue.main.async {
             // すべてのコンテンツを削除
             if self.articles.count == 0 {
-                //                self.deleteAllRecords()
+                self.deleteAllRecords()
             }
         }
     }
