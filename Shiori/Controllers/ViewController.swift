@@ -27,19 +27,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // MARK: Properties
     var contentListManager = ContentListManager()
     var contentManager = ContentManager()
+    var searchController = UISearchController()
 
     var pageTitle: String = ""
     var link: String = ""
     var positionX: Int = 0
     var positionY: Int = 0
+    // コンテンツ
     var contentList: [Content] = []
-
-    var searchController = UISearchController()
-
     // フォルダ
     var folderInt: String = NSLocalizedString("Home", comment: "")
     var folderId: Int = const.HomeFolderId
-
+    // UI
     var r: Int = UserDefaults.standard.integer(forKey: "r")
     var g: Int = UserDefaults.standard.integer(forKey: "g")
     var b: Int = UserDefaults.standard.integer(forKey: "b")
@@ -68,14 +67,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // delegateを設定
         contentListManager.delegate = self
         contentManager.delegate = self
-
         // 認証
         authorize()
-
         // ローカルにコンテンツがある場合すべてアップロードする
         if checkExistsContentInLocal() {
             uploadAllLocalContent()
@@ -107,7 +103,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         changeDisplayAdvertisement()
         // フッターのボタンの表示切り替え
         hiddenToolbarButtonEdit()
-
         // NOTE: SubTableViewControllerから戻ってきたときの処理。!= nilという条件はあんまりよくない。本当は == SubTableViewControllerとかでやりたいけど、どうやるかわからない
         if navigationController?.presentedViewController != nil {
             loadFolderContentList()
