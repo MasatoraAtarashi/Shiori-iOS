@@ -296,7 +296,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return options
     }
 
-    //    長押し
+    // 長押し
     @available(iOS 13.0, *)
     func tableView(
         _ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath,
@@ -607,7 +607,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             bottomToolbarRightItem.title = NSLocalizedString("Edit", comment: "")
         }
     }
-    
+
     ///
     /// LEGACY: v2.0までの後方互換を保つためのコード
     /// 後方互換を保つため、ローカルストレージにコンテンツが存在する場合はすべてアップロードし、その後削除する
@@ -615,7 +615,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var articles: [Article] = []
     let suiteName: String = "group.com.masatoraatarashi.Shiori"
     let keyName: String = "shareData"
-    
+
     // ローカルストレージ内にコンテンツが存在するか確認
     func checkExistsContentInLocal() -> Bool {
         getStoredDataFromUserDefault()
@@ -650,10 +650,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             contentManager.postContent(content: contentRequest)
             articles.remove(at: i)
         }
-        
+
         const.activityIndicatorView.stopAnimating()
     }
-    
+
     // ローカルストレージ内の記事を取得する
     @objc func getStoredDataFromUserDefault() {
         self.articles = []
