@@ -67,37 +67,6 @@ class SubTableViewController: UITableViewController, SwipeTableViewCellDelegate 
     {
         let bgColor: UIColor = UIColor(
             red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: 1)
-        //                if indexPath.row == 0 || indexPath.row == 1 {
-        //                    let cell = tableView.dequeueReusableCell(withIdentifier: "cellForSub", for: indexPath)
-        //                    // Configure the cell...
-        //                    cell.textLabel!.text =
-        //                        UserDefaults.standard.array(forKey: "categories")![indexPath.row] as? String
-        //
-        //                    cell.backgroundColor = bgColor
-        //                    if r == 0 || r == 60 {
-        //                        cell.textLabel?.textColor = UIColor.white
-        //                    } else {
-        //                        cell.textLabel?.textColor = UIColor.black
-        //                    }
-        //
-        //                    return cell
-        //                } else {
-        //                    let cell =
-        //                        tableView.dequeueReusableCell(withIdentifier: "cellForSub", for: indexPath)
-        //                        as! SwipeTableViewCell
-        //                    cell.delegate = self
-        //                    cell.textLabel!.text =
-        //                        UserDefaults.standard.array(forKey: "categories")![indexPath.row] as? String
-        //
-        //                    cell.backgroundColor = bgColor
-        //                    if r == 0 || r == 60 {
-        //                        cell.textLabel?.textColor = UIColor.white
-        //                    } else {
-        //                        cell.textLabel?.textColor = UIColor.black
-        //                    }
-        //
-        //                    return cell
-        //                }
         let cell =
             tableView.dequeueReusableCell(withIdentifier: "cellForSub", for: indexPath)
             as! SwipeTableViewCell

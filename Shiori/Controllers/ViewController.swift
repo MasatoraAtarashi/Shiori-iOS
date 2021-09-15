@@ -32,9 +32,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var link: String = ""
     var positionX: Int = 0
     var positionY: Int = 0
-
     var contentList: [Content] = []
-    //    var searchResults: [Article] = []
 
     var searchController = UISearchController()
 
@@ -82,23 +80,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if checkExistsContentInLocal() {
             uploadAllLocalContent()
         }
-
         // 広告
         initAdvertisement()
         self.tableView.register(
             UINib(nibName: "FeedTableViewCell", bundle: nil),
             forCellReuseIdentifier: "FeedTableViewCell")
-
         // インジケータを作成
         initIndicator()
         // インジケータを表示
         const.activityIndicatorView.startAnimating()
         // コンテンツ一覧を取得
         contentListManager.fetchContentList()
-
-        // コンテンツ一覧を表示
-        // renderContentList()
-
         // 起動時に言語を変更する
         changeViewLanguage()
         // 記事を更新するときにクルクルするやつ

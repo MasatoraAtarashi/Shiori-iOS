@@ -109,11 +109,6 @@ class SelectFolderTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //        let preNC = self.navigationController?.presentingViewController as! UINavigationController
-        //        let preVC = preNC.viewControllers[preNC.viewControllers.count - 1] as! ViewController
-        //        let categories = UserDefaults.standard.array(forKey: "categories") as! [String]
-        //        preVC.addArticleToFolder(self.selectedIndexPath, categories[indexPath.row + 2])
-        //        self.dismiss(animated: true, completion: nil)
         guard let contentId = content?.id else { return }
         let folder = folderList[indexPath.row]
         let folderId = folder.folderId
