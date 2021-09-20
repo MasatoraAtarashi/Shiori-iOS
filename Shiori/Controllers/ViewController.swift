@@ -531,13 +531,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     // フォルダ内コンテンツを取得して表示する
     func loadFolderContentList(q: String = "") {
-        const.activityIndicatorView.startAnimating()
-        if folderId == const.HomeFolderId {
-            contentListManager.fetchContentList(q: q)
-        } else if folderId == const.LikedFolderId {
-            contentListManager.fetchContentList(q: q, liked: true)
+        if Const().isLoggedInUser() {
+            const.activityIndicatorView.startAnimating()
+            if folderId == const.HomeFolderId {
+                contentListManager.fetchContentList(q: q)
+            } else if folderId == const.LikedFolderId {
+                contentListManager.fetchContentList(q: q, liked: true)
+            } else {
+                contentListManager.fetchFolderContentList(folderId: folderId, q: q)
+            }
         } else {
-            contentListManager.fetchFolderContentList(folderId: folderId, q: q)
+            getStoredDataFromUserDefault()
+            renderContentList()
         }
     }
 
