@@ -241,7 +241,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     ) -> [SwipeAction]? {
         if orientation == .right {
             // 削除アクション
-            let deleteAction = SwipeAction(
+            var deleteAction = SwipeAction(
                 style: .destructive, title: NSLocalizedString("Delete", comment: "")
             ) { _, indexPath in
                 self.deleteCell(at: indexPath)
@@ -288,7 +288,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             folderAction.backgroundColor = UIColor.init(
                 red: 176 / 255, green: 196 / 255, blue: 222 / 255, alpha: 1)
 
-            return [deleteAction, favoriteAction, folderAction]
+            if Const().isLoggedInUser() {
+                return [deleteAction, favoriteAction, folderAction]
+            } else {  // 会員登録しないで使う時用
+                deleteAction = SwipeAction(
+                    style: .destructive, title: NSLocalizedString("Delete", comment: "")
+                ) { _, indexPath in
+                    self.deleteCellWithoutSignUp(at: indexPath)
+                }
+                return [deleteAction]
+            }
+
         } else {
             return []
         }
@@ -628,17 +638,19 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
 
-    /*
-     LEGACY: 後方互換を保つためのコード
-    */
-
+    //
+    //
     // MARK: 登録せずに使う用のコード
+    //
+    //
+
     var articles: [Article] = []
     let suiteName: String = "group.com.masatoraatarashi.Shiori"
     let keyName: String = "shareData"
 
     // ローカルストレージ内の記事を取得する
     @objc func getStoredDataFromUserDefault() {
+        self.contentList = []
         self.articles = []
         let sharedDefaults: UserDefaults = UserDefaults(suiteName: self.suiteName)!
         let storedArray: [[String: String]] =
@@ -704,6 +716,20 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             )
             self.contentList.append(content)
         }
+    }
+
+    // cellを削除する(会員登録していない時)
+    func deleteCellWithoutSignUp(at indexPath: IndexPath) {
+        let readContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
+            .viewContext
+        let _: NSFetchRequest<Article> = Article.fetchRequest()
+        let filteredArticles = self.articles.filter({
+            ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(folderInt)
+        })
+        readContext.delete(filteredArticles[indexPath.row])
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()
+        getStoredDataFromUserDefault()
+        self.tableView.reloadData()
     }
 
     // NOTE: 危険なコードなので呼び出さない
