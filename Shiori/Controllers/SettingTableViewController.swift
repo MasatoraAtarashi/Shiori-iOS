@@ -86,8 +86,12 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath == [1, 1] {  // データ移行
             showDataUploadConfirmAlert()
-        } else if indexPath == [1, 2] {  // ログアウト
-            showSignOutConfirmAlert()
+        } else if indexPath == [1, 2] {  // 認証
+            if Const().isLoggedInUser() {
+                showSignOutConfirmAlert()
+            } else {
+                showSignInView()
+            }
         } else if indexPath == [2, 1] {  // フィードバックを送信
             sendMail()
         } else if indexPath == [2, 2] {  // Web Shioriを評価する
@@ -284,6 +288,16 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
     // ログアウト
     func signOut() {
         keyChain.deleteKeyChain()
+    }
+
+    func showSignInView() {
+        // チュートリアル画面を表示
+        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let initialVC =
+            storyboard.instantiateViewController(withIdentifier: "InitialViewController")
+            as! InitialViewController
+        initialVC.modalPresentationStyle = .fullScreen
+        self.present(initialVC, animated: true, completion: nil)
     }
 
     // MARK: データ移行(アップロード)関連コード
