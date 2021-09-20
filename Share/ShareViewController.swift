@@ -114,8 +114,6 @@ class ShareViewController: SLComposeServiceViewController {
                                                 results["maxScrollPositionX"] as? Int ?? 0
                                             let maxScrollPositionY: Int =
                                                 results["maxScrollPositionY"] as? Int ?? 0
-                                            let videoPlaybackPosition: Int =
-                                                results["videoPlaybackPosition"] as? Int ?? 0
 
                                             let scrollPositionXString: String = String(
                                                 describing: scrollPositionX)
@@ -125,8 +123,6 @@ class ShareViewController: SLComposeServiceViewController {
                                                 describing: maxScrollPositionX)
                                             let maxScrollPositionYString: String = String(
                                                 describing: maxScrollPositionY)
-                                            let videoPlaybackPositionString: String = String(
-                                                describing: videoPlaybackPosition)
 
                                             if results["url"] != nil {
                                                 let resultsDic = [
@@ -136,11 +132,10 @@ class ShareViewController: SLComposeServiceViewController {
                                                     "positionY": scrollPositionYString,
                                                     "maxScrollPositionX": maxScrollPositionXString,
                                                     "maxScrollPositionY": maxScrollPositionYString,
-                                                    "time": results["time"],
                                                     "image": results["image"],
                                                     "date": results["date"],
                                                     "videoPlaybackPosition":
-                                                        videoPlaybackPositionString,
+                                                        results["time"],
                                                 ]
 
                                                 storedArray.append(
