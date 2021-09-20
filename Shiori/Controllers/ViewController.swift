@@ -44,6 +44,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var b: Int = UserDefaults.standard.integer(forKey: "b")
 
     // MARK: IBOutlets
+    @IBOutlet weak var sideMenuButton: UIBarButtonItem!
+
     @IBOutlet weak var tutorialTextLabel: UILabel!
 
     @IBOutlet weak var tableView: UITableView!
@@ -107,6 +109,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // NOTE: SubTableViewControllerから戻ってきたときの処理。!= nilという条件はあんまりよくない。本当は == SubTableViewControllerとかでやりたいけど、どうやるかわからない
         if navigationController?.presentedViewController != nil {
             loadFolderContentList()
+        }
+
+        // 会員登録しないで使っている時用の画面
+        if !Const().isLoggedInUser() {
+            changeViewForNotSignInUser()
         }
     }
 
@@ -500,6 +507,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
 
+    // 会員登録しないで使用している時の画面
+    func changeViewForNotSignInUser() {
+        // フォルダを開くボタンを無効化
+        sideMenuButton.isEnabled = false
+
+        // 編集ボタンを無効化
+        bottomToolbarRightItem.isEnabled = false
+
+        // 検索無効化
+        searchController.searchBar.isUserInteractionEnabled = false
+    }
+
     // フォルダ内コンテンツを取得して表示する
     func loadFolderContentList(q: String = "") {
         const.activityIndicatorView.startAnimating()
@@ -609,6 +628,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
 
+    /*
+     LEGACY: 後方互換を保つためのコード
+    */
+
     // MARK: 登録せずに使う用のコード
     var articles: [Article] = []
     let suiteName: String = "group.com.masatoraatarashi.Shiori"
@@ -682,37 +705,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             self.contentList.append(content)
         }
     }
-
-    //    let scrollPositionXString = result["positionX"] ?? "0"
-    //    let scrollPositionYString = result["positionY"] ?? "0"
-    //    let maxScrollPositionXString = result["maxScrollPositionX"] ?? "0"
-    //    let maxScrollPositionYString = result["maxScrollPositionY"] ?? "0"
-    //    let videoPlaybackPositionString = result["videoPlaybackPosition"] ?? "0"
-    //
-    //    let content = Content(
-    //        id: i,
-    //        contentType: "web",
-    //        title: result["title"] ?? "",
-    //        url: result["url"] ?? "",
-    //        sharingUrl: result["url"] ?? "",
-    //        fileUrl: nil,
-    //        thumbnailImgUrl: result["image"] ?? "",
-    //        scrollPositionX: Int(scrollPositionXString) ?? 0,
-    //        scrollPositionY: Int(scrollPositionYString) ?? 0,
-    //        maxScrollPositionX: Int(maxScrollPositionXString) ?? 0,
-    //        maxScrollPositionY: Int(maxScrollPositionYString) ?? 0,
-    //        videoPlaybackPosition: Int(videoPlaybackPositionString) ?? 0,
-    //        specifiedText: nil,
-    //        specifiedDomId: nil,
-    //        specifiedDomClass: nil,
-    //        specifiedDomTag: nil,
-    //        liked: false,
-    //        deleteFlag: false,
-    //        deletedAt: result["date"],
-    //        createdAt: result["date"] ?? "",
-    //        updatedAt: result["date"] ?? ""
-    //    )
-    //    self.contentList.append(content)
 
     // NOTE: 危険なコードなので呼び出さない
     //    // ローカルストレージ内のすべてのコンテンツを削除

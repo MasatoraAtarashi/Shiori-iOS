@@ -130,6 +130,7 @@
                         <outlet property="button" destination="B7j-xN-GSF" id="wgd-ch-EyV"/>
                         <outlet property="footerText1" destination="XGY-6s-5gq" id="OXi-w9-Ziw"/>
                         <outlet property="footerText2" destination="P1i-mP-qrN" id="Mkb-rz-NLQ"/>
+                        <outlet property="sideMenuButton" destination="Ldj-WO-auk" id="lg9-pq-FVb"/>
                         <outlet property="tableView" destination="O8m-K1-a1R" id="eKM-rb-u10"/>
                         <outlet property="text" destination="5Fg-qv-8wz" id="zJS-IY-HaM"/>
                         <outlet property="text2" destination="KiA-nX-Zp9" id="zuh-Fa-xaS"/>
@@ -493,27 +494,27 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mobile Safariの「共有」ボタンをタップ" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="72j-7g-tkS">
-                                <rect key="frame" x="20" y="84" width="335" height="14"/>
+                                <rect key="frame" x="20" y="84" width="374" height="14"/>
                                 <fontDescription key="fontDescription" name="HiraMinProN-W3" family="Hiragino Mincho ProN" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IMG_3203.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="4XN-5A-yQ7">
-                                <rect key="frame" x="20" y="114" width="335" height="50"/>
+                                <rect key="frame" x="20" y="114" width="374" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="374" id="cbo-cD-H2O"/>
                                     <constraint firstAttribute="height" constant="50" id="svq-VH-W7D"/>
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IMG_3205.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="XQ0-I5-BY9">
-                                <rect key="frame" x="20" y="184" width="335" height="260"/>
+                                <rect key="frame" x="20" y="184" width="374" height="260"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="260" id="OZa-9g-6Ae"/>
                                     <constraint firstAttribute="width" constant="374" id="au2-oX-zPh"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="※「Shiori」が表示されない場合は「その他(More)」から「Shiori」をオンにしてください" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cka-hI-r5n">
-                                <rect key="frame" x="20" y="452" width="335" height="59"/>
+                                <rect key="frame" x="20" y="452" width="374" height="59"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="59" id="qEY-ed-zc1"/>
                                 </constraints>
@@ -1247,7 +1248,7 @@
     </designables>
     <inferredMetricsTieBreakers>
         <segue reference="xvU-j9-IId"/>
-        <segue reference="9Vi-OO-DHj"/>
+        <segue reference="RrE-4R-PV5"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" systemColor="scrollViewTexturedBackgroundColor"/>
     <resources>
