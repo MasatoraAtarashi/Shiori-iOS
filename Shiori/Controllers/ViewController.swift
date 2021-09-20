@@ -74,7 +74,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         authorize()
         // ローカルにコンテンツがある場合すべてアップロードする
         if checkExistsContentInLocal() {
-            uploadAllLocalContent()
+            //            uploadAllLocalContent()
         }
         // 広告
         initAdvertisement()
@@ -714,9 +714,9 @@ extension ViewController: ContentListManagerDelegate, ContentManagerDelegate {
     func didCreateContent(_ contentManager: ContentManager, contentResponse: ContentResponse) {
         DispatchQueue.main.async {
             // すべてのローカルコンテンツをアップロードできたら、ローカルストレージ内のコンテンツを全て削除
-            if self.articles.count == 0 {
-                self.deleteAllRecords()
-            }
+            //            if self.articles.count == 0 {
+            //                self.deleteAllRecords()
+            //            }
         }
     }
 
