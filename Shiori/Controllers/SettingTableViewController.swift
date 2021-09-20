@@ -321,7 +321,6 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
                 specifiedDomTag: nil
             )
             localContentMigrationManager.postContent(content: contentRequest, localContentIndex: i)
-            articles.remove(at: i)
         }
     }
 
@@ -366,14 +365,21 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
 
 // MARK: Extensions
 extension SettingTableViewController: LocalContentMigrationManagerDelegate {
-    func didCreateContent(_ localContentMigrationManager: LocalContentMigrationManager, contentResponse: ContentResponse, localContentIndex: Int) {
+    func didCreateContent(
+        _ localContentMigrationManager: LocalContentMigrationManager,
+        contentResponse: ContentResponse, localContentIndex: Int
+    ) {
         DispatchQueue.main.async {
-            if self.articles.count == 0 {
+            if self.articles.count == 1 {
                 self.contentUploadIndicatorView.stopAnimating()
                 ConstShiori().showPopUp(
                     is_success: true, title: "Success", body: "データ移行完了しました。")
             } else {
-                self.articles.remove(at: localContentIndex)
+                if let index = self.articles.firstIndex(where: {
+                    $0.title == contentResponse.data.title
+                }) {
+                    self.articles.remove(at: index)
+                }
             }
         }
     }

@@ -9,7 +9,9 @@
 import Foundation
 
 protocol LocalContentMigrationManagerDelegate {
-    func didCreateContent(_ localContentMigrationManager: LocalContentMigrationManager, contentResponse: ContentResponse, localContentIndex: Int)
+    func didCreateContent(
+        _ localContentMigrationManager: LocalContentMigrationManager,
+        contentResponse: ContentResponse, localContentIndex: Int)
     func didFailWithError(error: Error)
 }
 
@@ -17,19 +19,21 @@ protocol LocalContentMigrationManagerDelegate {
 // TODO: refactoring
 struct LocalContentMigrationManager {
     var delegate: LocalContentMigrationManagerDelegate?
-    
+
     func postContent(content: ContentRequest, localContentIndex: Int) {
         let postContentURL = "\(const.baseURL)/v1/content"
         let encoder = JSONEncoder()
         do {
             let body = try encoder.encode(content)
-            performRequest(with: postContentURL, httpMethod: "POST", body: body, localContentIndex: localContentIndex)
+            performRequest(
+                with: postContentURL, httpMethod: "POST", body: body,
+                localContentIndex: localContentIndex)
         } catch {
             self.delegate?.didFailWithError(error: error)
             return
         }
     }
-    
+
     func performRequest(
         with urlString: String, httpMethod: String, body: Foundation.Data?, localContentIndex: Int
     ) {
@@ -51,7 +55,9 @@ struct LocalContentMigrationManager {
                 }
                 if let safeData = data {
                     if let contentResponse = self.parseJSON(safeData) {
-                        self.delegate?.didCreateContent(self, contentResponse: contentResponse, localContentIndex: localContentIndex)
+                        self.delegate?.didCreateContent(
+                            self, contentResponse: contentResponse,
+                            localContentIndex: localContentIndex)
                     }
                 }
             }
