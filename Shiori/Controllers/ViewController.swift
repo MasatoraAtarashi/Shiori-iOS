@@ -697,6 +697,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             let maxScrollPositionXString = article.maxPositionX ?? "0"
             let maxScrollPositionYString = article.maxPositionY ?? "0"
             let videoPlaybackPositionString = article.videoPlaybackPosition ?? "0"
+            
+            print(article.title)
+            print(scrollPositionYString)
 
             let content = Content(
                 id: i,
