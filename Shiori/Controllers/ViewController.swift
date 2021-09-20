@@ -671,6 +671,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             article.imageURL = result["image"]!
             article.positionX = result["positionX"]!
             article.positionY = result["positionY"]!
+            article.maxPositionX = result["maxPositionX"] ?? "0"
+            article.maxPositionY = result["maxPositionY"] ?? "0"
             article.date = result["date"]!
             article.videoPlaybackPosition = result["videoPlaybackPosition"]
             (UIApplication.shared.delegate as! AppDelegate).saveContext()
@@ -692,8 +694,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         for (i, article) in articles.enumerated() {
             let scrollPositionXString = article.positionX ?? "0"
             let scrollPositionYString = article.positionX ?? "0"
-            let maxScrollPositionXString = "0"
-            let maxScrollPositionYString = "0"
+            let maxScrollPositionXString = article.maxPositionX ?? "0"
+            let maxScrollPositionYString = article.maxPositionY ?? "0"
             let videoPlaybackPositionString = article.videoPlaybackPosition ?? "0"
 
             let content = Content(

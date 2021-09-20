@@ -5,6 +5,8 @@
         <attribute name="folderInt" optional="YES" attributeType="Transformable" customClassName="[String]"/>
         <attribute name="imageURL" optional="YES" attributeType="String"/>
         <attribute name="link" optional="YES" attributeType="String"/>
+        <attribute name="maxPositionX" optional="YES" attributeType="String"/>
+        <attribute name="maxPositionY" optional="YES" attributeType="String"/>
         <attribute name="positionX" optional="YES" attributeType="String"/>
         <attribute name="positionY" optional="YES" attributeType="String"/>
         <attribute name="subContent" optional="YES" attributeType="String"/>
@@ -12,6 +14,6 @@
         <attribute name="videoPlaybackPosition" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="Article" positionX="-45" positionY="-36" width="128" height="164"/>
+        <element name="Article" positionX="-45" positionY="-36" width="128" height="194"/>
     </elements>
 </model>
