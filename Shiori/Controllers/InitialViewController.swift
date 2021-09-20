@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 class InitialViewController: UIViewController {
-    
+
     let shioriPrimaryColor: UIColor = UIColor(
         red: CGFloat(8) / 255.0, green: CGFloat(173) / 255.0, blue: CGFloat(236) / 255.0, alpha: 1)
 

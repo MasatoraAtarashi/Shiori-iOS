@@ -72,21 +72,22 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         contentManager.delegate = self
         // 認証
         authorize()
-        // ローカルにコンテンツがある場合すべてアップロードする
-        if checkExistsContentInLocal() {
-            //            uploadAllLocalContent()
-        }
+
         // 広告
         initAdvertisement()
         self.tableView.register(
             UINib(nibName: "FeedTableViewCell", bundle: nil),
             forCellReuseIdentifier: "FeedTableViewCell")
-        // インジケータを作成
-        initIndicator()
-        // インジケータを表示
-        const.activityIndicatorView.startAnimating()
-        // コンテンツ一覧を取得
-        contentListManager.fetchContentList()
+
+        // ログインしている時
+        if Const().isLoggedInUser() {
+            initIndicator()
+            const.activityIndicatorView.startAnimating()
+            contentListManager.fetchContentList()
+        } else {  // 会員登録しないで使用
+            getStoredDataFromUserDefault()
+        }
+
         // 起動時に言語を変更する
         changeViewLanguage()
         // 記事を更新するときにクルクルするやつ
@@ -608,50 +609,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
 
-    ///
-    /// LEGACY: v2.0までの後方互換を保つためのコード
-    /// 後方互換を保つため、ローカルストレージにコンテンツが存在する場合はすべてアップロードし、その後削除する
-    ///
+    // MARK: 登録せずに使う用のコード
     var articles: [Article] = []
     let suiteName: String = "group.com.masatoraatarashi.Shiori"
     let keyName: String = "shareData"
-
-    // ローカルストレージ内にコンテンツが存在するか確認
-    func checkExistsContentInLocal() -> Bool {
-        getStoredDataFromUserDefault()
-        if articles.count != 0 {
-            return true
-        }
-        return false
-    }
-
-    // ローカルに存在するコンテンツをすべてアップロードする
-    func uploadAllLocalContent() {
-        // 作業中であることを表示する(インジケータ&メッセージ)
-        const.activityIndicatorView.startAnimating()
-
-        // コンテンツをすべてアップロード
-        for (i, article) in articles.enumerated().reversed() {
-            let contentRequest = ContentRequest(
-                title: article.title ?? "",
-                url: article.link ?? "",
-                thumbnailImgUrl: article.imageURL ?? "",
-                scrollPositionX: 0,
-                scrollPositionY: Int(article.positionY ?? "0") ?? 0,
-                maxScrollPositionX: 0,
-                maxScrollPositionY: 1000,
-                videoPlaybackPosition: Int(article.videoPlaybackPosition ?? "0") ?? 0,
-                specifiedText: nil,
-                specifiedDomId: nil,
-                specifiedDomClass: nil,
-                specifiedDomTag: nil
-            )
-            contentManager.postContent(content: contentRequest)
-            articles.remove(at: i)
-        }
-
-        const.activityIndicatorView.stopAnimating()
-    }
 
     // ローカルストレージ内の記事を取得する
     @objc func getStoredDataFromUserDefault() {
@@ -687,7 +648,71 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
 
         articles.reverse()
+
+        for (i, article) in articles.enumerated() {
+            let scrollPositionXString = article.positionX ?? "0"
+            let scrollPositionYString = article.positionX ?? "0"
+            let maxScrollPositionXString = "0"
+            let maxScrollPositionYString = "0"
+            let videoPlaybackPositionString = article.videoPlaybackPosition ?? "0"
+
+            let content = Content(
+                id: i,
+                contentType: "web",
+                title: article.title ?? "",
+                url: article.link ?? "",
+                sharingUrl: article.link ?? "",
+                fileUrl: nil,
+                thumbnailImgUrl: article.imageURL ?? "",
+                scrollPositionX: Int(scrollPositionXString) ?? 0,
+                scrollPositionY: Int(scrollPositionYString) ?? 0,
+                maxScrollPositionX: Int(maxScrollPositionXString) ?? 0,
+                maxScrollPositionY: Int(maxScrollPositionYString) ?? 0,
+                videoPlaybackPosition: Int(videoPlaybackPositionString) ?? 0,
+                specifiedText: nil,
+                specifiedDomId: nil,
+                specifiedDomClass: nil,
+                specifiedDomTag: nil,
+                liked: false,
+                deleteFlag: false,
+                deletedAt: nil,
+                createdAt: article.date ?? "",
+                updatedAt: article.date ?? ""
+            )
+            self.contentList.append(content)
+        }
     }
+
+    //    let scrollPositionXString = result["positionX"] ?? "0"
+    //    let scrollPositionYString = result["positionY"] ?? "0"
+    //    let maxScrollPositionXString = result["maxScrollPositionX"] ?? "0"
+    //    let maxScrollPositionYString = result["maxScrollPositionY"] ?? "0"
+    //    let videoPlaybackPositionString = result["videoPlaybackPosition"] ?? "0"
+    //
+    //    let content = Content(
+    //        id: i,
+    //        contentType: "web",
+    //        title: result["title"] ?? "",
+    //        url: result["url"] ?? "",
+    //        sharingUrl: result["url"] ?? "",
+    //        fileUrl: nil,
+    //        thumbnailImgUrl: result["image"] ?? "",
+    //        scrollPositionX: Int(scrollPositionXString) ?? 0,
+    //        scrollPositionY: Int(scrollPositionYString) ?? 0,
+    //        maxScrollPositionX: Int(maxScrollPositionXString) ?? 0,
+    //        maxScrollPositionY: Int(maxScrollPositionYString) ?? 0,
+    //        videoPlaybackPosition: Int(videoPlaybackPositionString) ?? 0,
+    //        specifiedText: nil,
+    //        specifiedDomId: nil,
+    //        specifiedDomClass: nil,
+    //        specifiedDomTag: nil,
+    //        liked: false,
+    //        deleteFlag: false,
+    //        deletedAt: result["date"],
+    //        createdAt: result["date"] ?? "",
+    //        updatedAt: result["date"] ?? ""
+    //    )
+    //    self.contentList.append(content)
 
     // NOTE: 危険なコードなので呼び出さない
     //    // ローカルストレージ内のすべてのコンテンツを削除
