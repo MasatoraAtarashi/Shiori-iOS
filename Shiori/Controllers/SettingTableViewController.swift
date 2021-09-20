@@ -149,7 +149,7 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
     func showCopyright() {
         copyRightLabel.text = "©Masatora Atarashi"
     }
-    
+
     // 言語を変更
     func changeLanguage() {
         text1.text = NSLocalizedString("Hide ads", comment: "")
@@ -260,11 +260,31 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
         keyChain.deleteKeyChain()
     }
 
-    
     // MARK: データ移行(アップロード)関連コード
     // データ移行を実行するか確認するアラート
     func showDataUploadConfirmAlert() {
+        let alert: UIAlertController = UIAlertController(
+            title: "データを移行しますか？", message: "データ移行を実行するとサーバにブックマークデータがアップロードされます。",
+            preferredStyle: UIAlertController.Style.actionSheet)
+        let defaultAction: UIAlertAction = UIAlertAction(
+            title: "データ移行", style: UIAlertAction.Style.destructive,
+            handler: {
+                (action: UIAlertAction!) -> Void in
+                self.uploadAllLocalContent()
+            })
+        let cancelAction: UIAlertAction = UIAlertAction(
+            title: "キャンセル", style: UIAlertAction.Style.cancel,
+            handler: {
+                (action: UIAlertAction!) -> Void in
+            })
+        alert.addAction(cancelAction)
+        alert.addAction(defaultAction)
+        present(alert, animated: true, completion: nil)
+    }
 
+    // ローカルに存在するコンテンツをすべてアップロードする
+    func uploadAllLocalContent() {
+        print("uploadAllLocalContent")
     }
 
     // MARK: Subscripts
