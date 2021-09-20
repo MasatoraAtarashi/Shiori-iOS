@@ -19,7 +19,7 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
     // MARK: Structs
     // MARK: Enums
     // MARK: Properties
-    var contentManager = ContentManager()
+    var localContentMigrationManager = LocalContentMigrationManager()
     var keyChain = KeyChain()
     var isLoggedIn = false
 
@@ -46,7 +46,7 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        contentManager.delegate = self
+        localContentMigrationManager.delegate = self
         keyChain.delegate = self
 
         // TODO: refactoring
@@ -320,7 +320,7 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
                 specifiedDomClass: nil,
                 specifiedDomTag: nil
             )
-            //                    contentManager.postContent(content: contentRequest)
+            localContentMigrationManager.postContent(content: contentRequest, localContentIndex: i)
             articles.remove(at: i)
         }
     }
@@ -365,26 +365,26 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
 }
 
 // MARK: Extensions
-extension SettingTableViewController: ContentManagerDelegate {
-    func didCreateContent(_ contentManager: ContentManager, contentResponse: ContentResponse) {
-        if self.articles.count == 0 {
-            self.contentUploadIndicatorView.stopAnimating()
-            ConstShiori().showPopUp(
-                is_success: true, title: "Success", body: "データ移行完了しました。")
+extension SettingTableViewController: LocalContentMigrationManagerDelegate {
+    func didCreateContent(_ localContentMigrationManager: LocalContentMigrationManager, contentResponse: ContentResponse, localContentIndex: Int) {
+        DispatchQueue.main.async {
+            if self.articles.count == 0 {
+                self.contentUploadIndicatorView.stopAnimating()
+                ConstShiori().showPopUp(
+                    is_success: true, title: "Success", body: "データ移行完了しました。")
+            } else {
+                self.articles.remove(at: localContentIndex)
+            }
         }
     }
 
-    func didUpdateContent(_ contentManager: ContentManager, contentResponse: ContentResponse) {
-    }
-
-    func didDeleteContent(_ contentManager: ContentManager) {
-    }
-
     func didFailWithError(error: Error) {
-        ConstShiori().showPopUp(
-            is_success: false, title: "error", body: "データ移行に失敗しました。")
-        self.contentUploadIndicatorView.stopAnimating()
-        print("Error", error)
+        DispatchQueue.main.async {
+            ConstShiori().showPopUp(
+                is_success: false, title: "error", body: "データ移行に失敗しました。")
+            self.contentUploadIndicatorView.stopAnimating()
+            print("Error", error)
+        }
     }
 
 }

@@ -13,6 +13,7 @@
 		6204CC5A26E299C2000611E1 /* ContentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6204CC5926E299C2000611E1 /* ContentManager.swift */; };
 		6204CC5C26E29B28000611E1 /* ContentRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6204CC5B26E29B28000611E1 /* ContentRequest.swift */; };
 		6218C19726F8910E002ABC50 /* DataMigrationDescriptionWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6218C19626F8910E002ABC50 /* DataMigrationDescriptionWebViewController.swift */; };
+		6218C19926F8A587002ABC50 /* LocalContentMigrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6218C19826F8A587002ABC50 /* LocalContentMigrationManager.swift */; };
 		6221558C232B79B900DD4AB4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6221558B232B79B900DD4AB4 /* AppDelegate.swift */; };
 		6221558E232B79B900DD4AB4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6221558D232B79B900DD4AB4 /* ViewController.swift */; };
 		62215591232B79B900DD4AB4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6221558F232B79B900DD4AB4 /* Main.storyboard */; };
@@ -130,6 +131,7 @@
 		6204CC5926E299C2000611E1 /* ContentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentManager.swift; sourceTree = "<group>"; };
 		6204CC5B26E29B28000611E1 /* ContentRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentRequest.swift; sourceTree = "<group>"; };
 		6218C19626F8910E002ABC50 /* DataMigrationDescriptionWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataMigrationDescriptionWebViewController.swift; sourceTree = "<group>"; };
+		6218C19826F8A587002ABC50 /* LocalContentMigrationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalContentMigrationManager.swift; sourceTree = "<group>"; };
 		62215588232B79B900DD4AB4 /* Shiori.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shiori.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6221558B232B79B900DD4AB4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6221558D232B79B900DD4AB4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -318,6 +320,7 @@
 				6204CC5B26E29B28000611E1 /* ContentRequest.swift */,
 				624D4E5B26DE55C100921FE3 /* ContentListManager.swift */,
 				62A2E49026E158CC007FD4F8 /* ContentManager.swift */,
+				6218C19826F8A587002ABC50 /* LocalContentMigrationManager.swift */,
 			);
 			path = Content;
 			sourceTree = "<group>";
@@ -693,6 +696,7 @@
 				62B8CF7F26EE5003009FB5AC /* OmniAuthWebViewController.swift in Sources */,
 				62B8CF7B26EE291B009FB5AC /* KeyChain.swift in Sources */,
 				6256E88726ECBB09007B4FCC /* FolderListManager.swift in Sources */,
+				6218C19926F8A587002ABC50 /* LocalContentMigrationManager.swift in Sources */,
 				6256E88B26ECC575007B4FCC /* Folder.swift in Sources */,
 				62B1234C232E8215007E6F61 /* Entry.swift in Sources */,
 				62B8CF8526EFBD3E009FB5AC /* SignInWithAppleIDButton.swift in Sources */,
