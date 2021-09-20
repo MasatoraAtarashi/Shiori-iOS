@@ -10,6 +10,9 @@ import Foundation
 import UIKit
 
 class InitialViewController: UIViewController {
+    
+    let shioriPrimaryColor: UIColor = UIColor(
+        red: CGFloat(8) / 255.0, green: CGFloat(173) / 255.0, blue: CGFloat(236) / 255.0, alpha: 1)
 
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var pageControll: UIPageControl!
@@ -27,7 +30,7 @@ class InitialViewController: UIViewController {
         signUpButton.layer.cornerRadius = 5
 
         signInButton.layer.borderWidth = 1
-        signInButton.layer.borderColor = UIColor.opaqueSeparator.cgColor
+        signInButton.layer.borderColor = shioriPrimaryColor.cgColor
         signInButton.layer.cornerRadius = 5
     }
 
