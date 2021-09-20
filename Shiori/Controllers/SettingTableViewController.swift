@@ -49,43 +49,6 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
         changeLanguage()
     }
 
-    // 背景色設定パネルを表示
-    func showColorSettingPanel() {
-        (segmentControl.subviews[0] as UIView).backgroundColor = UIColor.white
-        (segmentControl.subviews[1] as UIView).backgroundColor = UIColor(
-            red: 255 / 255.0, green: 222 / 255.0, blue: 173 / 255.0, alpha: 0.5)
-        (segmentControl.subviews[2] as UIView).backgroundColor = UIColor(
-            red: 169 / 255.0, green: 169 / 255.0, blue: 169 / 255.0, alpha: 0.5)
-        (segmentControl.subviews[3] as UIView).backgroundColor = UIColor.black
-        segmentControl.addTarget(
-            self, action: #selector(self.segmentChanged), for: UIControl.Event.valueChanged)
-        segmentControl.layer.borderWidth = 0.5
-        segmentControl.layer.borderColor =
-            UIColor(red: 169 / 255.0, green: 169 / 255.0, blue: 169 / 255.0, alpha: 0.5).cgColor
-    }
-
-    // 広告表示設定
-    func showAdSetting() {
-        switchAdvertisementDisplay.isOn = !UserDefaults.standard.bool(forKey: "isAdvertisementOn")
-        switchAdvertisementDisplay.addTarget(
-            self, action: #selector(self.onClickMySwicth(sender:)),
-            for: UIControl.Event.valueChanged)
-    }
-
-    // バージョンを表示
-    func showVersion() {
-        if let version: String = Bundle.main.object(
-            forInfoDictionaryKey: "CFBundleShortVersionString") as? String
-        {
-            versionLabel.text = version
-        }
-    }
-
-    // コピーライトを表示
-    func showCopyright() {
-        copyRightLabel.text = "©Masatora Atarashi"
-    }
-
     override func viewWillAppear(_ animated: Bool) {
     }
 
@@ -143,6 +106,43 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
     }
 
     // MARK: Other Methods
+    // 背景色設定パネルを表示
+    func showColorSettingPanel() {
+        (segmentControl.subviews[0] as UIView).backgroundColor = UIColor.white
+        (segmentControl.subviews[1] as UIView).backgroundColor = UIColor(
+            red: 255 / 255.0, green: 222 / 255.0, blue: 173 / 255.0, alpha: 0.5)
+        (segmentControl.subviews[2] as UIView).backgroundColor = UIColor(
+            red: 169 / 255.0, green: 169 / 255.0, blue: 169 / 255.0, alpha: 0.5)
+        (segmentControl.subviews[3] as UIView).backgroundColor = UIColor.black
+        segmentControl.addTarget(
+            self, action: #selector(self.segmentChanged), for: UIControl.Event.valueChanged)
+        segmentControl.layer.borderWidth = 0.5
+        segmentControl.layer.borderColor =
+            UIColor(red: 169 / 255.0, green: 169 / 255.0, blue: 169 / 255.0, alpha: 0.5).cgColor
+    }
+
+    // 広告表示設定
+    func showAdSetting() {
+        switchAdvertisementDisplay.isOn = !UserDefaults.standard.bool(forKey: "isAdvertisementOn")
+        switchAdvertisementDisplay.addTarget(
+            self, action: #selector(self.onClickMySwicth(sender:)),
+            for: UIControl.Event.valueChanged)
+    }
+
+    // バージョンを表示
+    func showVersion() {
+        if let version: String = Bundle.main.object(
+            forInfoDictionaryKey: "CFBundleShortVersionString") as? String
+        {
+            versionLabel.text = version
+        }
+    }
+
+    // コピーライトを表示
+    func showCopyright() {
+        copyRightLabel.text = "©Masatora Atarashi"
+    }
+    
     @objc func segmentChanged(segcon: UISegmentedControl) {
         switch segcon.selectedSegmentIndex {
         case 0:
