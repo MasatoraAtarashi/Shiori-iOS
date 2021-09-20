@@ -18,6 +18,7 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
     // MARK: Enums
     // MARK: Properties
     var keyChain = KeyChain()
+    var isLoggedIn = false
 
     // MARK: IBOutlets
     @IBOutlet weak var switchAdvertisementDisplay: UISwitch!
@@ -42,6 +43,9 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
 
         keyChain.delegate = self
 
+        // TODO: refactoring
+        isLoggedIn = Const().isLoggedInUser()
+
         showColorSettingPanel()
         showAdSetting()
         showVersion()
@@ -59,32 +63,33 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
         switch section {
         case 0:  // 「設定」のセクション
             return 2
-        case 1:  // 「その他」のセクション
-            return 6
+        case 1:  // 「アカウント」のセクション
+            return 2
+        case 2:  // 「その他」のセクション
+            return 5
         default:  // ここが実行されることはないはず
             return 0
         }
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath == [1, 2] {
+        if indexPath == [1, 1] {  // ログアウト
+            showSignOutConfirmAlert()
+        } else if indexPath == [2, 1] {  // フィードバックを送信
+            sendMail()
+        } else if indexPath == [2, 2] {  // Web Shioriを評価する
             guard
                 let writeReviewURL = URL(
                     string: "https://itunes.apple.com/app/id1480539987?action=write-review")
             else { fatalError("Expected a valid URL") }
             UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)
-        } else if indexPath == [1, 1] {
-            sendMail()
-        } else if indexPath == [1, 5] {
-            showSignOutConfirmAlert()
         }
-
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 2
+        return 3
     }
 
     // MARK: MFMailComposeViewControllerDelegate
@@ -142,7 +147,7 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
     func showCopyright() {
         copyRightLabel.text = "©Masatora Atarashi"
     }
-    
+
     @objc func segmentChanged(segcon: UISegmentedControl) {
         switch segcon.selectedSegmentIndex {
         case 0:
