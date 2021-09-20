@@ -5,8 +5,8 @@
         <attribute name="folderInt" optional="YES" attributeType="Transformable" customClassName="[String]"/>
         <attribute name="imageURL" optional="YES" attributeType="String"/>
         <attribute name="link" optional="YES" attributeType="String"/>
-        <attribute name="maxPositionX" optional="YES" attributeType="String"/>
-        <attribute name="maxPositionY" optional="YES" attributeType="String"/>
+        <attribute name="maxScrollPositionX" optional="YES" attributeType="String"/>
+        <attribute name="maxScrollPositionY" optional="YES" attributeType="String"/>
         <attribute name="positionX" optional="YES" attributeType="String"/>
         <attribute name="positionY" optional="YES" attributeType="String"/>
         <attribute name="subContent" optional="YES" attributeType="String"/>
