@@ -8,6 +8,7 @@
 
 import CoreData
 import MessageUI
+import NVActivityIndicatorView
 import StoreKit
 import UIKit
 
@@ -23,19 +24,21 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
     var isLoggedIn = false
 
     // MARK: IBOutlets
+    @IBOutlet weak var contentUploadIndicatorView: NVActivityIndicatorView!
+
+    // APPEARANCE セクション
     @IBOutlet weak var switchAdvertisementDisplay: UISwitch!
-
-    @IBOutlet weak var versionLabel: UILabel!
-    @IBOutlet weak var copyRightLabel: UILabel!
-
     @IBOutlet weak var segmentControl: UISegmentedControl!
-
     @IBOutlet weak var text1: UILabel!
+
+    // OTHER セクション
     @IBOutlet weak var text2: UILabel!
     @IBOutlet weak var text3: UILabel!
     @IBOutlet weak var text4: UILabel!
     @IBOutlet weak var text5: UILabel!
+    @IBOutlet weak var versionLabel: UILabel!
     @IBOutlet weak var text6: UILabel!
+    @IBOutlet weak var copyRightLabel: UILabel!
 
     // MARK: Initializers
     // MARK: Type Methods
@@ -117,6 +120,10 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
     }
 
     // MARK: Other Methods
+    func initIndicator() {
+        self.contentUploadIndicatorView.color = .gray
+    }
+
     // 背景色設定パネルを表示
     func showColorSettingPanel() {
         (segmentControl.subviews[0] as UIView).backgroundColor = UIColor.white
@@ -236,13 +243,6 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
         }
     }
 
-    // インジケータ
-    func initIndicator() {
-        tableView.addSubview(const.activityIndicatorView)
-        tableView.bringSubviewToFront(const.activityIndicatorView)
-        const.activityIndicatorView.center = tableView.center
-    }
-
     // MARK: アカウント関連コード
     // TODO: 実装
     // ログイン
@@ -302,8 +302,8 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
         getStoredDataFromUserDefault()
 
         // 作業中であることを表示する(インジケータ&メッセージ)
-        const.activityIndicatorView.startAnimating()
-
+        self.contentUploadIndicatorView.frame.size.height = 100
+        self.contentUploadIndicatorView.startAnimating()
         // コンテンツをすべてアップロード
         for (i, article) in articles.enumerated().reversed() {
             let contentRequest = ContentRequest(
@@ -323,8 +323,6 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
             //                    contentManager.postContent(content: contentRequest)
             articles.remove(at: i)
         }
-
-        const.activityIndicatorView.stopAnimating()
     }
 
     // ローカルストレージ内の記事を取得する
@@ -370,6 +368,7 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
 extension SettingTableViewController: ContentManagerDelegate {
     func didCreateContent(_ contentManager: ContentManager, contentResponse: ContentResponse) {
         if self.articles.count == 0 {
+            self.contentUploadIndicatorView.stopAnimating()
             ConstShiori().showPopUp(
                 is_success: true, title: "Success", body: "データ移行完了しました。")
         }
@@ -384,6 +383,7 @@ extension SettingTableViewController: ContentManagerDelegate {
     func didFailWithError(error: Error) {
         ConstShiori().showPopUp(
             is_success: false, title: "error", body: "データ移行に失敗しました。")
+        self.contentUploadIndicatorView.stopAnimating()
         print("Error", error)
     }
 
