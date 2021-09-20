@@ -64,7 +64,7 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
         case 0:  // 「設定」のセクション
             return 2
         case 1:  // 「アカウント」のセクション
-            return 2
+            return 3
         case 2:  // 「その他」のセクション
             return 5
         default:  // ここが実行されることはないはず
@@ -73,7 +73,9 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath == [1, 1] {  // ログアウト
+        if indexPath == [1, 1] {  // データ移行
+            showDataUploadConfirmAlert()
+        } else if indexPath == [1, 2] {  // ログアウト
             showSignOutConfirmAlert()
         } else if indexPath == [2, 1] {  // フィードバックを送信
             sendMail()
@@ -218,6 +220,11 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
         } else {
             print("送信できません")
         }
+    }
+
+    // データ移行を実行するか確認するアラート
+    func showDataUploadConfirmAlert() {
+
     }
 
     // ログアウトするか確認するアラート
