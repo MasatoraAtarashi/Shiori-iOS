@@ -149,6 +149,16 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
     func showCopyright() {
         copyRightLabel.text = "©Masatora Atarashi"
     }
+    
+    // 言語を変更
+    func changeLanguage() {
+        text1.text = NSLocalizedString("Hide ads", comment: "")
+        text2.text = NSLocalizedString("Usage", comment: "")
+        text3.text = NSLocalizedString("Send feedback", comment: "")
+        text4.text = NSLocalizedString("Rate Shiori web", comment: "")
+        text5.text = NSLocalizedString("Version", comment: "")
+        text6.text = NSLocalizedString("Copyright", comment: "")
+    }
 
     @objc func segmentChanged(segcon: UISegmentedControl) {
         switch segcon.selectedSegmentIndex {
@@ -222,11 +232,9 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
         }
     }
 
-    // データ移行を実行するか確認するアラート
-    func showDataUploadConfirmAlert() {
-
-    }
-
+    // MARK: アカウント関連コード
+    // TODO: 実装
+    // ログイン
     // ログアウトするか確認するアラート
     func showSignOutConfirmAlert() {
         let alert: UIAlertController = UIAlertController(
@@ -252,14 +260,11 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
         keyChain.deleteKeyChain()
     }
 
-    // 言語を変更
-    func changeLanguage() {
-        text1.text = NSLocalizedString("Hide ads", comment: "")
-        text2.text = NSLocalizedString("Usage", comment: "")
-        text3.text = NSLocalizedString("Send feedback", comment: "")
-        text4.text = NSLocalizedString("Rate Shiori web", comment: "")
-        text5.text = NSLocalizedString("Version", comment: "")
-        text6.text = NSLocalizedString("Copyright", comment: "")
+    
+    // MARK: データ移行(アップロード)関連コード
+    // データ移行を実行するか確認するアラート
+    func showDataUploadConfirmAlert() {
+
     }
 
     // MARK: Subscripts
