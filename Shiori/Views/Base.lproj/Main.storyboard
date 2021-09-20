@@ -739,6 +739,7 @@
                     <connections>
                         <outlet property="pageControll" destination="4TM-yw-Zhn" id="fGj-tn-sjh"/>
                         <outlet property="scrollView" destination="0Ab-2q-xXv" id="8e4-2Q-jbx"/>
+                        <outlet property="signInButton" destination="gcs-d2-WGu" id="Xpa-ZZ-bs7"/>
                         <outlet property="signUpButton" destination="hft-Db-vEY" id="Dbf-4l-Xn9"/>
                     </connections>
                 </viewController>

@@ -14,6 +14,7 @@ class InitialViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var pageControll: UIPageControl!
     @IBOutlet weak var signUpButton: UIButton!
+    @IBOutlet weak var signInButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +25,10 @@ class InitialViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         signUpButton.layer.borderWidth = 0
         signUpButton.layer.cornerRadius = 5
+
+        signInButton.layer.borderWidth = 1
+        signInButton.layer.borderColor = UIColor.opaqueSeparator.cgColor
+        signInButton.layer.cornerRadius = 5
     }
 }
 
