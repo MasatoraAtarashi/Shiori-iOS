@@ -30,6 +30,19 @@ class InitialViewController: UIViewController {
         signInButton.layer.borderColor = UIColor.opaqueSeparator.cgColor
         signInButton.layer.cornerRadius = 5
     }
+
+    @IBAction func useWithoutSignUp(_ sender: Any) {
+        // 「登録せずに使う」を押したかどうかを記録するフラグ
+        UserDefaults.standard.set(true, forKey: "use_without_sign_up")
+        closeView()
+    }
+
+    // 認証画面・初期画面を閉じる
+    func closeView() {
+        DispatchQueue.main.async {
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
 }
 
 extension InitialViewController: UIScrollViewDelegate {

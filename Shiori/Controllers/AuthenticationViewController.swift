@@ -140,6 +140,8 @@ extension AuthenticationViewController: AuthManagerDelegate, KeyChainDelegate {
 
     func didSaveToKeyChain() {
         DispatchQueue.main.async {
+            // ログインしたら「登録せずに使う」フラグを消す
+            UserDefaults.standard.set(false, forKey: "use_without_sign_up")
             self.closeAuthView()
         }
     }

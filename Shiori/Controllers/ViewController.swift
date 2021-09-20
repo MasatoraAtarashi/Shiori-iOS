@@ -424,8 +424,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     // 認証
     func authorize() {
-        let isAuthorized = KeyChain().getKeyChain()
-        if isAuthorized != nil { return }
+        let isAuthorized = KeyChain().getKeyChain() != nil
+        if isAuthorized || UserDefaults.standard.bool(forKey: "use_without_sign_up") { return }
 
         // 未ログインの場合チュートリアル画面を表示
         let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)

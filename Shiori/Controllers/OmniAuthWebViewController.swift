@@ -91,6 +91,9 @@ class OmniAuthWebViewController: UIViewController, WKNavigationDelegate, WKUIDel
 
 extension OmniAuthWebViewController: KeyChainDelegate {
     func didSaveToKeyChain() {
+        // ログインしたら「登録せずに使う」フラグを消す
+        UserDefaults.standard.set(false, forKey: "use_without_sign_up")
+        
         // 認証画面・初期画面を閉じる
         self.presentingViewController?.presentingViewController?.presentingViewController?.dismiss(
             animated: true, completion: nil)
