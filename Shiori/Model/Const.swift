@@ -24,4 +24,9 @@ struct Const {
     // ホームとお気に入りフォルダを識別するためのid
     let HomeFolderId = -1
     let LikedFolderId = -2
+
+    // ログインしているか判定するメソッド
+    func isLoggedInUser() -> Bool {
+        return KeyChain().getKeyChain() != nil
+    }
 }
