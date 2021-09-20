@@ -25,6 +25,9 @@ struct Const {
     let HomeFolderId = -1
     let LikedFolderId = -2
 
+    let shioriPrimaryColor: UIColor = UIColor(
+        red: CGFloat(8) / 255.0, green: CGFloat(173) / 255.0, blue: CGFloat(236) / 255.0, alpha: 1)
+
     // ログインしているか判定するメソッド
     func isLoggedInUser() -> Bool {
         return KeyChain().getKeyChain() != nil

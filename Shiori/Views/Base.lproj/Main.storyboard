@@ -452,6 +452,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Setting" id="bi0-zg-pEH"/>
                     <connections>
+                        <outlet property="authButtonLabel" destination="KWS-Fh-DfC" id="hG7-k4-weN"/>
                         <outlet property="contentUploadIndicatorView" destination="ZYd-aq-GpH" id="KgE-2e-9ED"/>
                         <outlet property="copyRightLabel" destination="1e0-4g-QaV" id="ubl-3T-XJX"/>
                         <outlet property="segmentControl" destination="YD1-Pl-oFz" id="kgE-Rc-1eo"/>
@@ -1248,7 +1249,7 @@
     </designables>
     <inferredMetricsTieBreakers>
         <segue reference="xvU-j9-IId"/>
-        <segue reference="RrE-4R-PV5"/>
+        <segue reference="9Vi-OO-DHj"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" systemColor="scrollViewTexturedBackgroundColor"/>
     <resources>

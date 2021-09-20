@@ -31,6 +31,9 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
     @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var text1: UILabel!
 
+    // ACCOUNT セクション
+    @IBOutlet weak var authButtonLabel: UILabel!
+
     // OTHER セクション
     @IBOutlet weak var text2: UILabel!
     @IBOutlet weak var text3: UILabel!
@@ -61,6 +64,7 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        changeSignInCell()
     }
 
     // MARK: IBActions
@@ -169,6 +173,17 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
         text4.text = NSLocalizedString("Rate Shiori web", comment: "")
         text5.text = NSLocalizedString("Version", comment: "")
         text6.text = NSLocalizedString("Copyright", comment: "")
+    }
+
+    // ログイン/ログアウトボタンの表示を変更
+    func changeSignInCell() {
+        if Const().isLoggedInUser() {
+            self.authButtonLabel.text = "ログアウト"
+            self.authButtonLabel.textColor = .red
+        } else {
+            self.authButtonLabel.text = "ログイン"
+            self.authButtonLabel.textColor = Const().shioriPrimaryColor
+        }
     }
 
     @objc func segmentChanged(segcon: UISegmentedControl) {
