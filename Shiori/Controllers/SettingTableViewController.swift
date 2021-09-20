@@ -6,6 +6,7 @@
 //  Copyright © 2020 Masatora Atarashi. All rights reserved.
 //
 
+import CoreData
 import MessageUI
 import StoreKit
 import UIKit
@@ -17,6 +18,7 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
     // MARK: Structs
     // MARK: Enums
     // MARK: Properties
+    var contentManager = ContentManager()
     var keyChain = KeyChain()
     var isLoggedIn = false
 
@@ -41,11 +43,13 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        contentManager.delegate = self
         keyChain.delegate = self
 
         // TODO: refactoring
         isLoggedIn = Const().isLoggedInUser()
 
+        initIndicator()
         showColorSettingPanel()
         showAdSetting()
         showVersion()
@@ -232,6 +236,13 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
         }
     }
 
+    // インジケータ
+    func initIndicator() {
+        tableView.addSubview(const.activityIndicatorView)
+        tableView.bringSubviewToFront(const.activityIndicatorView)
+        const.activityIndicatorView.center = tableView.center
+    }
+
     // MARK: アカウント関連コード
     // TODO: 実装
     // ログイン
@@ -282,15 +293,102 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
         present(alert, animated: true, completion: nil)
     }
 
+    var articles: [Article] = []
+    let suiteName: String = "group.com.masatoraatarashi.Shiori"
+    let keyName: String = "shareData"
+
     // ローカルに存在するコンテンツをすべてアップロードする
     func uploadAllLocalContent() {
-        print("uploadAllLocalContent")
+        getStoredDataFromUserDefault()
+
+        // 作業中であることを表示する(インジケータ&メッセージ)
+        const.activityIndicatorView.startAnimating()
+
+        // コンテンツをすべてアップロード
+        for (i, article) in articles.enumerated().reversed() {
+            let contentRequest = ContentRequest(
+                title: article.title ?? "",
+                url: article.link ?? "",
+                thumbnailImgUrl: article.imageURL ?? "",
+                scrollPositionX: 0,
+                scrollPositionY: Int(article.positionY ?? "0") ?? 0,
+                maxScrollPositionX: 0,
+                maxScrollPositionY: 1000,
+                videoPlaybackPosition: Int(article.videoPlaybackPosition ?? "0") ?? 0,
+                specifiedText: nil,
+                specifiedDomId: nil,
+                specifiedDomClass: nil,
+                specifiedDomTag: nil
+            )
+            //                    contentManager.postContent(content: contentRequest)
+            articles.remove(at: i)
+        }
+
+        const.activityIndicatorView.stopAnimating()
+    }
+
+    // ローカルストレージ内の記事を取得する
+    @objc func getStoredDataFromUserDefault() {
+        self.articles = []
+        let sharedDefaults: UserDefaults = UserDefaults(suiteName: self.suiteName)!
+        let storedArray: [[String: String]] =
+            sharedDefaults.array(forKey: self.keyName) as? [[String: String]] ?? []
+
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
+            .viewContext
+
+        for result in storedArray {
+            let article = Article(context: context)
+            article.title = result["title"]!
+            article.link = result["url"]!
+            article.imageURL = result["image"]!
+            article.positionX = result["positionX"]!
+            article.positionY = result["positionY"]!
+            article.date = result["date"]!
+            article.videoPlaybackPosition = result["videoPlaybackPosition"]
+            (UIApplication.shared.delegate as! AppDelegate).saveContext()
+        }
+
+        sharedDefaults.set([], forKey: self.keyName)
+
+        let readContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
+            .viewContext
+        do {
+            let fetchRequest: NSFetchRequest<Article> = Article.fetchRequest()
+            self.articles = try readContext.fetch(fetchRequest)
+        } catch {
+            print("Error")
+        }
+
+        articles.reverse()
     }
 
     // MARK: Subscripts
 }
 
 // MARK: Extensions
+extension SettingTableViewController: ContentManagerDelegate {
+    func didCreateContent(_ contentManager: ContentManager, contentResponse: ContentResponse) {
+        if self.articles.count == 0 {
+            ConstShiori().showPopUp(
+                is_success: true, title: "Success", body: "データ移行完了しました。")
+        }
+    }
+
+    func didUpdateContent(_ contentManager: ContentManager, contentResponse: ContentResponse) {
+    }
+
+    func didDeleteContent(_ contentManager: ContentManager) {
+    }
+
+    func didFailWithError(error: Error) {
+        ConstShiori().showPopUp(
+            is_success: false, title: "error", body: "データ移行に失敗しました。")
+        print("Error", error)
+    }
+
+}
+
 extension SettingTableViewController: KeyChainDelegate {
     func didSaveToKeyChain() {
     }
