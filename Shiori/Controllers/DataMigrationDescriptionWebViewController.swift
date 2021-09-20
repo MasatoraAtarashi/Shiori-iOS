@@ -15,13 +15,19 @@ class DataMigrationDescriptionWebViewController: UIViewController, WKNavigationD
 {
 
     let wkWebView = WKWebView()
-    let refreshControl = UIRefreshControl()
+    var refreshControl = UIRefreshControl()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         initWebView(
             with: URL(string: "https://web-shiori.github.io/Shiori-iOS/Usage/data-migration")!)
+
+        // TODO: リファクタリング
+        refreshControl = UIRefreshControl()
+        wkWebView.scrollView.refreshControl = refreshControl
+        refreshControl.addTarget(
+            self, action: #selector(WebViewController.refresh(sender:)), for: .valueChanged)
     }
 
     func initWebView(with targetURL: URL) {
@@ -32,5 +38,13 @@ class DataMigrationDescriptionWebViewController: UIViewController, WKNavigationD
         let URLRequest = URLRequest(url: targetURL)
         wkWebView.load(URLRequest)
         view.addSubview(wkWebView)
+
+    }
+
+    @objc func refresh(sender: UIRefreshControl) {
+        guard let url = wkWebView.url else {
+            return
+        }
+        wkWebView.load(URLRequest(url: url))
     }
 }
