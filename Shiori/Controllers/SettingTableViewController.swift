@@ -313,7 +313,7 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
                 scrollPositionX: 0,
                 scrollPositionY: Int(article.positionY ?? "0") ?? 0,
                 maxScrollPositionX: 0,
-                maxScrollPositionY: 1000,
+                maxScrollPositionY: Int(article.maxScrollPositionY ?? "0") ?? 0,
                 videoPlaybackPosition: Int(article.videoPlaybackPosition ?? "0") ?? 0,
                 specifiedText: nil,
                 specifiedDomId: nil,
@@ -341,6 +341,8 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
             article.imageURL = result["image"]!
             article.positionX = result["positionX"]!
             article.positionY = result["positionY"]!
+            article.maxScrollPositionX = result["maxScrollPositionX"] ?? "0"
+            article.maxScrollPositionY = result["maxScrollPositionY"] ?? "0"
             article.date = result["date"]!
             article.videoPlaybackPosition = result["videoPlaybackPosition"]
             (UIApplication.shared.delegate as! AppDelegate).saveContext()
