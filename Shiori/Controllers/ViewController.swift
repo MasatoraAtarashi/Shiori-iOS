@@ -627,7 +627,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     // ローカルに存在するコンテンツをすべてアップロードする
     func uploadAllLocalContent() {
-        // TODO: implements
         // 作業中であることを表示する(インジケータ&メッセージ)
         const.activityIndicatorView.startAnimating()
 
@@ -690,21 +689,22 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         articles.reverse()
     }
 
-    // ローカルストレージ内のすべてのコンテンツを削除
-    func deleteAllRecords() {
-        let delegate = UIApplication.shared.delegate as! AppDelegate
-        let context = delegate.persistentContainer.viewContext
-
-        let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Article")
-        let deleteRequest = NSBatchDeleteRequest(fetchRequest: deleteFetch)
-
-        do {
-            try context.execute(deleteRequest)
-            try context.save()
-        } catch {
-            print("There was an error")
-        }
-    }
+    // NOTE: 危険なコードなので呼び出さない
+//    // ローカルストレージ内のすべてのコンテンツを削除
+//    func deleteAllRecords() {
+//        let delegate = UIApplication.shared.delegate as! AppDelegate
+//        let context = delegate.persistentContainer.viewContext
+//
+//        let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Article")
+//        let deleteRequest = NSBatchDeleteRequest(fetchRequest: deleteFetch)
+//
+//        do {
+//            try context.execute(deleteRequest)
+//            try context.save()
+//        } catch {
+//            print("There was an error")
+//        }
+//    }
 
     // MARK: Subscripts
 }
@@ -713,10 +713,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 extension ViewController: ContentListManagerDelegate, ContentManagerDelegate {
     func didCreateContent(_ contentManager: ContentManager, contentResponse: ContentResponse) {
         DispatchQueue.main.async {
-            // すべてのローカルコンテンツをアップロードできたら、ローカルストレージ内のコンテンツを全て削除
-            //            if self.articles.count == 0 {
-            //                self.deleteAllRecords()
-            //            }
+            // すべてのローカルコンテンツをアップロードできたら通知
+            if self.articles.count == 0 {
+                // TODO: implement
+                print("全コンテンツアップロード完了")
+            }
         }
     }
 
