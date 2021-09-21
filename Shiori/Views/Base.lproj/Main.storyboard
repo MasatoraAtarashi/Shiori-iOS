@@ -212,7 +212,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="Uhw-Cw-oNT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" id="ZYd-aq-GpH" customClass="NVActivityIndicatorView" customModule="NVActivityIndicatorView">
+                        <view key="tableHeaderView" hidden="YES" contentMode="scaleToFill" id="ZYd-aq-GpH" customClass="NVActivityIndicatorView" customModule="NVActivityIndicatorView">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="68"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <viewLayoutGuide key="safeArea" id="HWw-3X-KZ0"/>
@@ -430,6 +430,7 @@
                     <connections>
                         <outlet property="authButtonLabel" destination="KWS-Fh-DfC" id="hG7-k4-weN"/>
                         <outlet property="contentUploadIndicatorView" destination="ZYd-aq-GpH" id="KgE-2e-9ED"/>
+                        <outlet property="executeDataMigrationCell" destination="fan-df-xd5" id="uJw-aa-NhJ"/>
                         <outlet property="segmentControl" destination="YD1-Pl-oFz" id="kgE-Rc-1eo"/>
                         <outlet property="switchAdvertisementDisplay" destination="jle-fp-BSy" id="MV4-wm-QiP"/>
                         <outlet property="text1" destination="tmr-IP-ELz" id="wZI-b9-FkL"/>

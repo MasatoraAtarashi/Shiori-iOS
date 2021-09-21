@@ -33,6 +33,7 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
 
     // ACCOUNT セクション
     @IBOutlet weak var authButtonLabel: UILabel!
+    @IBOutlet weak var executeDataMigrationCell: UITableViewCell!
 
     // OTHER セクション
     @IBOutlet weak var text2: UILabel!
@@ -61,6 +62,7 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        self.contentUploadIndicatorView.frame.size.height = 0
         changeSignInCell()
     }
 
@@ -82,7 +84,13 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath == [1, 1] {  // データ移行
-            showDataUploadConfirmAlert()
+            // TODO: リファクタリング Const().isLoggedInUser()をどこか一箇所に移す
+            if Const().isLoggedInUser() {
+                showDataUploadConfirmAlert()
+            } else {
+                ConstShiori().showPopUp(
+                    is_success: false, title: "error", body: "データを移行するにはログインしてください。")
+            }
         } else if indexPath == [1, 2] {  // 認証
             if Const().isLoggedInUser() {
                 showSignOutConfirmAlert()
