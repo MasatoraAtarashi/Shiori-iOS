@@ -40,8 +40,6 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
     @IBOutlet weak var text4: UILabel!
     @IBOutlet weak var text5: UILabel!
     @IBOutlet weak var versionLabel: UILabel!
-    @IBOutlet weak var text6: UILabel!
-    @IBOutlet weak var copyRightLabel: UILabel!
 
     // MARK: Initializers
     // MARK: Type Methods
@@ -59,7 +57,6 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
         showColorSettingPanel()
         showAdSetting()
         showVersion()
-        showCopyright()
         changeLanguage()
     }
 
@@ -77,7 +74,7 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
         case 1:  // 「アカウント」のセクション
             return 3
         case 2:  // 「その他」のセクション
-            return 5
+            return 4
         default:  // ここが実行されることはないはず
             return 0
         }
@@ -164,11 +161,6 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
         }
     }
 
-    // コピーライトを表示
-    func showCopyright() {
-        copyRightLabel.text = "©Masatora Atarashi"
-    }
-
     // 言語を変更
     func changeLanguage() {
         text1.text = NSLocalizedString("Hide ads", comment: "")
@@ -176,7 +168,6 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
         text3.text = NSLocalizedString("Send feedback", comment: "")
         text4.text = NSLocalizedString("Rate Shiori web", comment: "")
         text5.text = NSLocalizedString("Version", comment: "")
-        text6.text = NSLocalizedString("Copyright", comment: "")
     }
 
     // ログイン/ログアウトボタンの表示を変更

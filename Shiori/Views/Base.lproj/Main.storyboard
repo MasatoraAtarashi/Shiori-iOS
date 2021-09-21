@@ -12,7 +12,7 @@
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Shiori" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="8bC-Xf-vdC">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -28,7 +28,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gpS-rY-FFh" customClass="GADBannerView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gpS-rY-FFh" customClass="GADBannerView">
                                 <rect key="frame" x="27.5" y="568" width="320" height="50"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -418,30 +418,6 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" textLabel="Rf0-Wg-0ob" detailTextLabel="1e0-4g-QaV" style="IBUITableViewCellStyleValue1" id="9Kn-tm-gtR">
-                                        <rect key="frame" x="16" y="609" width="343" height="43.5"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9Kn-tm-gtR" id="RF5-E3-H3s">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="コピーライト" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Rf0-Wg-0ob">
-                                                    <rect key="frame" x="16" y="12" width="104" height="20.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1e0-4g-QaV">
-                                                    <rect key="frame" x="283" y="12" width="44" height="20.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -454,7 +430,6 @@
                     <connections>
                         <outlet property="authButtonLabel" destination="KWS-Fh-DfC" id="hG7-k4-weN"/>
                         <outlet property="contentUploadIndicatorView" destination="ZYd-aq-GpH" id="KgE-2e-9ED"/>
-                        <outlet property="copyRightLabel" destination="1e0-4g-QaV" id="ubl-3T-XJX"/>
                         <outlet property="segmentControl" destination="YD1-Pl-oFz" id="kgE-Rc-1eo"/>
                         <outlet property="switchAdvertisementDisplay" destination="jle-fp-BSy" id="MV4-wm-QiP"/>
                         <outlet property="text1" destination="tmr-IP-ELz" id="wZI-b9-FkL"/>
@@ -462,7 +437,6 @@
                         <outlet property="text3" destination="DZZ-uO-BOR" id="2iT-u0-KUL"/>
                         <outlet property="text4" destination="Qvx-pd-gU4" id="fwi-kE-Dnv"/>
                         <outlet property="text5" destination="GF0-28-EyF" id="Py6-iI-ZuA"/>
-                        <outlet property="text6" destination="Rf0-Wg-0ob" id="CLu-1O-1a5"/>
                         <outlet property="versionLabel" destination="jUI-3L-Aew" id="jf9-B3-Ks1"/>
                     </connections>
                 </tableViewController>
@@ -495,27 +469,27 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mobile Safariの「共有」ボタンをタップ" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="72j-7g-tkS">
-                                <rect key="frame" x="20" y="84" width="374" height="14"/>
+                                <rect key="frame" x="20" y="84" width="335" height="14"/>
                                 <fontDescription key="fontDescription" name="HiraMinProN-W3" family="Hiragino Mincho ProN" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IMG_3203.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="4XN-5A-yQ7">
-                                <rect key="frame" x="20" y="114" width="374" height="50"/>
+                                <rect key="frame" x="20" y="114" width="335" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="374" id="cbo-cD-H2O"/>
                                     <constraint firstAttribute="height" constant="50" id="svq-VH-W7D"/>
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IMG_3205.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="XQ0-I5-BY9">
-                                <rect key="frame" x="20" y="184" width="374" height="260"/>
+                                <rect key="frame" x="20" y="184" width="335" height="260"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="260" id="OZa-9g-6Ae"/>
                                     <constraint firstAttribute="width" constant="374" id="au2-oX-zPh"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="※「Shiori」が表示されない場合は「その他(More)」から「Shiori」をオンにしてください" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cka-hI-r5n">
-                                <rect key="frame" x="20" y="452" width="374" height="59"/>
+                                <rect key="frame" x="20" y="452" width="335" height="59"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="59" id="qEY-ed-zc1"/>
                                 </constraints>
