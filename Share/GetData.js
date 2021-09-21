@@ -66,9 +66,9 @@ MyPreprocessor.prototype = {
 //            image = document.images[0].src;
 //        }
         var image = ""
-        if (url?.includes('https://m.youtube.com/')) {
+        if (document.URL.match(/youtube/)) {
             // youtubeのvideo-idを取得
-            var videoId = url.split('v=')[1];
+            var videoId = document.URL.split('v=')[1];
             var ampersandPosition = videoId.indexOf('&');
             // video-idの&=以降を削除
             if (ampersandPosition != -1) {
@@ -84,6 +84,9 @@ MyPreprocessor.prototype = {
                 }
             });
             image = largestImg.src;
+        }
+        if(image == "") {
+            image = document.images[0].src;
         }
 
         var dateString = ""
