@@ -53,46 +53,102 @@ class ShareViewController: SLComposeServiceViewController {
                                             dictionary[NSExtensionJavaScriptPreprocessingResultsKey]
                                             as! NSDictionary
 
-                                        if results["url"] != nil {
-                                            let title = results["title"] as? String
-                                            let url = results["url"] as? String
-                                            let thumbnailImgUrl = results["image"] as? String
-                                            let scrollPositionXString =
-                                                results["scrollPositionX"] as? Int
-                                            let scrollPositionYString =
-                                                results["scrollPositionY"] as? Int
-                                            let maxScrollPositionXString =
-                                                results["maxScrollPositionX"] as? Int
-                                            let maxScrollPositionYString =
-                                                results["maxScrollPositionY"] as? Int
-                                            let videoPlaybackPositionString =
-                                                results["time"] as! String
-                                            let scrollPositionX = Int(scrollPositionXString ?? 0)
-                                            let scrollPositionY = Int(scrollPositionYString ?? 0)
-                                            let maxScrollPositionX = Int(
-                                                maxScrollPositionXString ?? 0)
-                                            let maxScrollPositionY = Int(
-                                                maxScrollPositionYString ?? 0)
-                                            let videoPlaybackPosition = Int(
-                                                videoPlaybackPositionString)
-                                            let contentRequest = ContentRequest(
-                                                title: title ?? "", url: url ?? "",
-                                                thumbnailImgUrl: thumbnailImgUrl ?? "",
-                                                scrollPositionX: scrollPositionX,
-                                                scrollPositionY: scrollPositionY,
-                                                maxScrollPositionX: maxScrollPositionX,
-                                                maxScrollPositionY: maxScrollPositionY,
-                                                videoPlaybackPosition: videoPlaybackPosition ?? 0,
-                                                specifiedText: nil, specifiedDomId: nil,
-                                                specifiedDomClass: nil, specifiedDomTag: nil)
+                                        if Const().isLoggedInUser() {
+                                            if results["url"] != nil {
+                                                let title = results["title"] as? String
+                                                let url = results["url"] as? String
+                                                let thumbnailImgUrl = results["image"] as? String
+                                                let scrollPositionXString =
+                                                    results["scrollPositionX"] as? Int
+                                                let scrollPositionYString =
+                                                    results["scrollPositionY"] as? Int
+                                                let maxScrollPositionXString =
+                                                    results["maxScrollPositionX"] as? Int
+                                                let maxScrollPositionYString =
+                                                    results["maxScrollPositionY"] as? Int
+                                                let videoPlaybackPositionString =
+                                                    results["time"] as! String
+                                                let scrollPositionX = Int(
+                                                    scrollPositionXString ?? 0)
+                                                let scrollPositionY = Int(
+                                                    scrollPositionYString ?? 0)
+                                                let maxScrollPositionX = Int(
+                                                    maxScrollPositionXString ?? 0)
+                                                let maxScrollPositionY = Int(
+                                                    maxScrollPositionYString ?? 0)
+                                                let videoPlaybackPosition = Int(
+                                                    videoPlaybackPositionString)
+                                                let contentRequest = ContentRequest(
+                                                    title: title ?? "", url: url ?? "",
+                                                    thumbnailImgUrl: thumbnailImgUrl ?? "",
+                                                    scrollPositionX: scrollPositionX,
+                                                    scrollPositionY: scrollPositionY,
+                                                    maxScrollPositionX: maxScrollPositionX,
+                                                    maxScrollPositionY: maxScrollPositionY,
+                                                    videoPlaybackPosition: videoPlaybackPosition
+                                                        ?? 0,
+                                                    specifiedText: nil, specifiedDomId: nil,
+                                                    specifiedDomClass: nil, specifiedDomTag: nil)
 
-                                            self.contentManager.postContent(content: contentRequest)
+                                                self.contentManager.postContent(
+                                                    content: contentRequest)
 
-                                            self.extensionContext?.completeRequest(
-                                                returningItems: nil, completionHandler: nil)
-                                        } else {
-                                            self.extensionContext?.completeRequest(
-                                                returningItems: nil, completionHandler: nil)
+                                                self.extensionContext?.completeRequest(
+                                                    returningItems: nil, completionHandler: nil)
+                                            } else {
+                                                self.extensionContext?.completeRequest(
+                                                    returningItems: nil, completionHandler: nil)
+                                            }
+                                        } else {  // 会員登録せずに使用している時の処理
+                                            let sharedDefaults: UserDefaults = UserDefaults(
+                                                suiteName: self.suiteName)!
+                                            var storedArray: [[String: String]] =
+                                                sharedDefaults.array(forKey: self.keyName)
+                                                as? [[String: String]] ?? []
+
+                                            let scrollPositionX: Int =
+                                                results["scrollPositionX"] as? Int ?? 0
+                                            let scrollPositionY: Int =
+                                                results["scrollPositionY"] as? Int ?? 0
+                                            let maxScrollPositionX: Int =
+                                                results["maxScrollPositionX"] as? Int ?? 0
+                                            let maxScrollPositionY: Int =
+                                                results["maxScrollPositionY"] as? Int ?? 0
+
+                                            let scrollPositionXString: String = String(
+                                                describing: scrollPositionX)
+                                            let scrollPositionYString: String = String(
+                                                describing: scrollPositionY)
+                                            let maxScrollPositionXString: String = String(
+                                                describing: maxScrollPositionX)
+                                            let maxScrollPositionYString: String = String(
+                                                describing: maxScrollPositionY)
+
+                                            if results["url"] != nil {
+                                                let resultsDic = [
+                                                    "url": results["url"],
+                                                    "title": results["title"],
+                                                    "positionX": scrollPositionXString,
+                                                    "positionY": scrollPositionYString,
+                                                    "maxScrollPositionX": maxScrollPositionXString,
+                                                    "maxScrollPositionY": maxScrollPositionYString,
+                                                    "image": results["image"],
+                                                    "date": results["date"],
+                                                    "videoPlaybackPosition":
+                                                        results["time"],
+                                                ]
+
+                                                storedArray.append(
+                                                    resultsDic as! [String: String])
+                                                sharedDefaults.set(
+                                                    storedArray, forKey: self.keyName)
+
+                                                self.extensionContext?.completeRequest(
+                                                    returningItems: nil, completionHandler: nil)
+                                            } else {
+                                                self.extensionContext?.completeRequest(
+                                                    returningItems: nil, completionHandler: nil)
+                                            }
                                         }
                                     })
                                 } else {

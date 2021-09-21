@@ -158,22 +158,33 @@ extension WebViewController {
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         // TODO: メソッドに切り出す
-        webView.evaluateJavaScript(
-            "document.documentElement.scrollHeight",
-            completionHandler: { (value, error) in
-                if let maxScrollPositionYThisWindow: Int = value as? Int {
-                    let scrollRateY = Float(self.positionY) / Float(self.maxScroolPositionY)
-                    let scrollPositionYThisWindow =
-                        CGFloat(Float(maxScrollPositionYThisWindow) * scrollRateY)
-                    self.webView.evaluateJavaScript(
-                        "window.scrollTo(\(0),\(scrollPositionYThisWindow))",
-                        completionHandler: { _, _ in
-                            // ユーザーがリロードしたときスクロールしないようにpositionを初期化
-                            self.positionX = 0
-                            self.positionY = 0
-                        })
-                }
-            })
+        // maxScrollPositionYが0のとき
+        if maxScroolPositionY == 0 {
+            self.webView.evaluateJavaScript(
+                "window.scrollTo(\(0),\(positionY))",
+                completionHandler: { _, _ in
+                    // ユーザーがリロードしたときスクロールしないようにpositionを初期化
+                    self.positionX = 0
+                    self.positionY = 0
+                })
+        } else {
+            webView.evaluateJavaScript(
+                "document.documentElement.scrollHeight",
+                completionHandler: { (value, error) in
+                    if let maxScrollPositionYThisWindow: Int = value as? Int {
+                        let scrollRateY = Float(self.positionY) / Float(self.maxScroolPositionY)
+                        let scrollPositionYThisWindow =
+                            CGFloat(Float(maxScrollPositionYThisWindow) * scrollRateY)
+                        self.webView.evaluateJavaScript(
+                            "window.scrollTo(\(0),\(scrollPositionYThisWindow))",
+                            completionHandler: { _, _ in
+                                // ユーザーがリロードしたときスクロールしないようにpositionを初期化
+                                self.positionX = 0
+                                self.positionY = 0
+                            })
+                    }
+                })
+        }
 
         self.refreshControll.endRefreshing()
         const.activityIndicatorView.stopAnimating()

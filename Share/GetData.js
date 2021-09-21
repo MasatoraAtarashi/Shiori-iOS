@@ -54,12 +54,36 @@ MyPreprocessor.prototype = {
             url = url + "?t=" + h + "h" + m + "m" + s + "s"
         }
         
-        var pi = document.getElementsByTagName('meta');
-        var image = "";
-        for(i=0;i<pi.length;i++){
-            if(pi[i].getAttribute("property")=="og:image"){
-                 image = pi[i].getAttribute("content");
+        // サムネイル画像を取得
+//        var pi = document.getElementsByTagName('meta');
+//        var image = "";
+//        for(i=0;i<pi.length;i++){
+//            if(pi[i].getAttribute("property")=="og:image"){
+//                 image = pi[i].getAttribute("content");
+//            }
+//        }
+//        if(image == "") {
+//            image = document.images[0].src;
+//        }
+        var image = ""
+        if (document.URL.match(/youtube/)) {
+            // youtubeのvideo-idを取得
+            var videoId = document.URL.split('v=')[1];
+            var ampersandPosition = videoId.indexOf('&');
+            // video-idの&=以降を削除
+            if (ampersandPosition != -1) {
+                videoId = videoId.substring(0, ampersandPosition);
             }
+            image = "http://img.youtube.com/vi/" + videoId + "/0.jpg";
+        } else {
+            var largest = 0;
+            var largestImg;
+            Array.from(document.body.getElementsByTagName('img')).forEach(function(e) {
+                if (largest < e.height) {
+                    largestImg = e;largest = e.height
+                }
+            });
+            image = largestImg.src;
         }
         if(image == "") {
             image = document.images[0].src;

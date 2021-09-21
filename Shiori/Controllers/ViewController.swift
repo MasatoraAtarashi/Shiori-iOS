@@ -44,6 +44,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var b: Int = UserDefaults.standard.integer(forKey: "b")
 
     // MARK: IBOutlets
+    @IBOutlet weak var sideMenuButton: UIBarButtonItem!
+
     @IBOutlet weak var tutorialTextLabel: UILabel!
 
     @IBOutlet weak var tableView: UITableView!
@@ -72,21 +74,22 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         contentManager.delegate = self
         // 認証
         authorize()
-        // ローカルにコンテンツがある場合すべてアップロードする
-        if checkExistsContentInLocal() {
-            uploadAllLocalContent()
-        }
+
         // 広告
         initAdvertisement()
         self.tableView.register(
             UINib(nibName: "FeedTableViewCell", bundle: nil),
             forCellReuseIdentifier: "FeedTableViewCell")
-        // インジケータを作成
-        initIndicator()
-        // インジケータを表示
-        const.activityIndicatorView.startAnimating()
-        // コンテンツ一覧を取得
-        contentListManager.fetchContentList()
+
+        // ログインしている時
+        if Const().isLoggedInUser() {
+            initIndicator()
+            const.activityIndicatorView.startAnimating()
+            contentListManager.fetchContentList()
+        } else {  // 会員登録しないで使用
+            getStoredDataFromUserDefault()
+        }
+
         // 起動時に言語を変更する
         changeViewLanguage()
         // 記事を更新するときにクルクルするやつ
@@ -106,6 +109,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // NOTE: SubTableViewControllerから戻ってきたときの処理。!= nilという条件はあんまりよくない。本当は == SubTableViewControllerとかでやりたいけど、どうやるかわからない
         if navigationController?.presentedViewController != nil {
             loadFolderContentList()
+        }
+
+        // 会員登録しないで使っている時用の画面
+        if !Const().isLoggedInUser() {
+            changeViewForNotSignInUser()
         }
     }
 
@@ -233,7 +241,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     ) -> [SwipeAction]? {
         if orientation == .right {
             // 削除アクション
-            let deleteAction = SwipeAction(
+            var deleteAction = SwipeAction(
                 style: .destructive, title: NSLocalizedString("Delete", comment: "")
             ) { _, indexPath in
                 self.deleteCell(at: indexPath)
@@ -280,7 +288,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             folderAction.backgroundColor = UIColor.init(
                 red: 176 / 255, green: 196 / 255, blue: 222 / 255, alpha: 1)
 
-            return [deleteAction, favoriteAction, folderAction]
+            if Const().isLoggedInUser() {
+                return [deleteAction, favoriteAction, folderAction]
+            } else {  // 会員登録しないで使う時用
+                deleteAction = SwipeAction(
+                    style: .destructive, title: NSLocalizedString("Delete", comment: "")
+                ) { _, indexPath in
+                    self.deleteCellWithoutSignUp(at: indexPath)
+                }
+                return [deleteAction]
+            }
+
         } else {
             return []
         }
@@ -424,8 +442,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     // 認証
     func authorize() {
-        let isAuthorized = KeyChain().getKeyChain()
-        if isAuthorized != nil { return }
+        let isAuthorized = KeyChain().getKeyChain() != nil
+        if isAuthorized || UserDefaults.standard.bool(forKey: "use_without_sign_up") { return }
 
         // 未ログインの場合チュートリアル画面を表示
         let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
@@ -499,15 +517,32 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
 
+    // 会員登録しないで使用している時の画面
+    func changeViewForNotSignInUser() {
+        // フォルダを開くボタンを無効化
+        sideMenuButton.isEnabled = false
+
+        // 編集ボタンを無効化
+        bottomToolbarRightItem.isEnabled = false
+
+        // 検索無効化
+        searchController.searchBar.isUserInteractionEnabled = false
+    }
+
     // フォルダ内コンテンツを取得して表示する
     func loadFolderContentList(q: String = "") {
-        const.activityIndicatorView.startAnimating()
-        if folderId == const.HomeFolderId {
-            contentListManager.fetchContentList(q: q)
-        } else if folderId == const.LikedFolderId {
-            contentListManager.fetchContentList(q: q, liked: true)
+        if Const().isLoggedInUser() {
+            const.activityIndicatorView.startAnimating()
+            if folderId == const.HomeFolderId {
+                contentListManager.fetchContentList(q: q)
+            } else if folderId == const.LikedFolderId {
+                contentListManager.fetchContentList(q: q, liked: true)
+            } else {
+                contentListManager.fetchFolderContentList(folderId: folderId, q: q)
+            }
         } else {
-            contentListManager.fetchFolderContentList(folderId: folderId, q: q)
+            getStoredDataFromUserDefault()
+            renderContentList()
         }
     }
 
@@ -608,54 +643,19 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
 
-    ///
-    /// LEGACY: v2.0までの後方互換を保つためのコード
-    /// 後方互換を保つため、ローカルストレージにコンテンツが存在する場合はすべてアップロードし、その後削除する
-    ///
+    //
+    //
+    // MARK: 登録せずに使う用のコード
+    //
+    //
+
     var articles: [Article] = []
     let suiteName: String = "group.com.masatoraatarashi.Shiori"
     let keyName: String = "shareData"
 
-    // ローカルストレージ内にコンテンツが存在するか確認
-    func checkExistsContentInLocal() -> Bool {
-        getStoredDataFromUserDefault()
-        if articles.count != 0 {
-            return true
-        }
-        return false
-    }
-
-    // ローカルに存在するコンテンツをすべてアップロードする
-    func uploadAllLocalContent() {
-        // TODO: implements
-        // 作業中であることを表示する(インジケータ&メッセージ)
-        const.activityIndicatorView.startAnimating()
-
-        // コンテンツをすべてアップロード
-        for (i, article) in articles.enumerated().reversed() {
-            let contentRequest = ContentRequest(
-                title: article.title ?? "",
-                url: article.link ?? "",
-                thumbnailImgUrl: article.imageURL ?? "",
-                scrollPositionX: 0,
-                scrollPositionY: Int(article.positionY ?? "0") ?? 0,
-                maxScrollPositionX: 0,
-                maxScrollPositionY: 1000,
-                videoPlaybackPosition: Int(article.videoPlaybackPosition ?? "0") ?? 0,
-                specifiedText: nil,
-                specifiedDomId: nil,
-                specifiedDomClass: nil,
-                specifiedDomTag: nil
-            )
-            contentManager.postContent(content: contentRequest)
-            articles.remove(at: i)
-        }
-
-        const.activityIndicatorView.stopAnimating()
-    }
-
     // ローカルストレージ内の記事を取得する
     @objc func getStoredDataFromUserDefault() {
+        self.contentList = []
         self.articles = []
         let sharedDefaults: UserDefaults = UserDefaults(suiteName: self.suiteName)!
         let storedArray: [[String: String]] =
@@ -671,6 +671,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             article.imageURL = result["image"]!
             article.positionX = result["positionX"]!
             article.positionY = result["positionY"]!
+            article.maxScrollPositionX = result["maxScrollPositionX"] ?? "0"
+            article.maxScrollPositionY = result["maxScrollPositionY"] ?? "0"
             article.date = result["date"]!
             article.videoPlaybackPosition = result["videoPlaybackPosition"]
             (UIApplication.shared.delegate as! AppDelegate).saveContext()
@@ -688,23 +690,71 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
 
         articles.reverse()
-    }
 
-    // ローカルストレージ内のすべてのコンテンツを削除
-    func deleteAllRecords() {
-        let delegate = UIApplication.shared.delegate as! AppDelegate
-        let context = delegate.persistentContainer.viewContext
+        for (i, article) in articles.enumerated() {
+            let scrollPositionXString = article.positionX ?? "0"
+            let scrollPositionYString = article.positionY ?? "0"
+            let maxScrollPositionXString = article.maxScrollPositionX ?? "0"
+            let maxScrollPositionYString = article.maxScrollPositionY ?? "0"
+            let videoPlaybackPositionString = article.videoPlaybackPosition ?? "0"
 
-        let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Article")
-        let deleteRequest = NSBatchDeleteRequest(fetchRequest: deleteFetch)
-
-        do {
-            try context.execute(deleteRequest)
-            try context.save()
-        } catch {
-            print("There was an error")
+            let content = Content(
+                id: i,
+                contentType: "web",
+                title: article.title ?? "",
+                url: article.link ?? "",
+                sharingUrl: article.link ?? "",
+                fileUrl: nil,
+                thumbnailImgUrl: article.imageURL ?? "",
+                scrollPositionX: Int(scrollPositionXString) ?? 0,
+                scrollPositionY: Int(scrollPositionYString) ?? 0,
+                maxScrollPositionX: Int(maxScrollPositionXString) ?? 0,
+                maxScrollPositionY: Int(maxScrollPositionYString) ?? 0,
+                videoPlaybackPosition: Int(videoPlaybackPositionString) ?? 0,
+                specifiedText: nil,
+                specifiedDomId: nil,
+                specifiedDomClass: nil,
+                specifiedDomTag: nil,
+                liked: false,
+                deleteFlag: false,
+                deletedAt: nil,
+                createdAt: article.date ?? "",
+                updatedAt: article.date ?? ""
+            )
+            self.contentList.append(content)
         }
     }
+
+    // cellを削除する(会員登録していない時)
+    func deleteCellWithoutSignUp(at indexPath: IndexPath) {
+        let readContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
+            .viewContext
+        let _: NSFetchRequest<Article> = Article.fetchRequest()
+        let filteredArticles = self.articles.filter({
+            ($0.folderInt ?? [NSLocalizedString("Home", comment: "")]).contains(folderInt)
+        })
+        readContext.delete(filteredArticles[indexPath.row])
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()
+        getStoredDataFromUserDefault()
+        self.tableView.reloadData()
+    }
+
+    // NOTE: 危険なコードなので呼び出さない
+    //    // ローカルストレージ内のすべてのコンテンツを削除
+    //    func deleteAllRecords() {
+    //        let delegate = UIApplication.shared.delegate as! AppDelegate
+    //        let context = delegate.persistentContainer.viewContext
+    //
+    //        let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Article")
+    //        let deleteRequest = NSBatchDeleteRequest(fetchRequest: deleteFetch)
+    //
+    //        do {
+    //            try context.execute(deleteRequest)
+    //            try context.save()
+    //        } catch {
+    //            print("There was an error")
+    //        }
+    //    }
 
     // MARK: Subscripts
 }
@@ -713,9 +763,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 extension ViewController: ContentListManagerDelegate, ContentManagerDelegate {
     func didCreateContent(_ contentManager: ContentManager, contentResponse: ContentResponse) {
         DispatchQueue.main.async {
-            // すべてのローカルコンテンツをアップロードできたら、ローカルストレージ内のコンテンツを全て削除
+            // すべてのローカルコンテンツをアップロードできたら通知
             if self.articles.count == 0 {
-                self.deleteAllRecords()
+                // TODO: implement
+                print("全コンテンツアップロード完了")
             }
         }
     }

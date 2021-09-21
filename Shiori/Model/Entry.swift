@@ -16,6 +16,8 @@ struct Entry {
     var imageURL: String
     var positionX: String
     var positionY: String
+    var maxPositionX: Int
+    var maxPositionY: Int
     var date: String
     var folderInd: Array = [] as [String]
     var videoPlaybackPosition: String
