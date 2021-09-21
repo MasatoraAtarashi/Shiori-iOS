@@ -1,5 +1,9 @@
 # Web Shiori - webにしおりをはさめるアプリ
-[![](https://img.youtube.com/vi/1DcjMwkmNvA/0.jpg)](https://www.youtube.com/watch?v=1DcjMwkmNvA)
+### スクロール位置保存・復旧機能
+[![](https://img.youtube.com/vi/TzCfDE0Fd7Q/0.jpg)](https://www.youtube.com/watch?v=TzCfDE0Fd7Q&ab_channel=mgwg.pmpwtggw)
+
+### 動画再生位置保存・復旧機能
+[![](https://img.youtube.com/vi/MJdtMNIT8Qo/0.jpg)](https://www.youtube.com/watch?v=MJdtMNIT8Qo&ab_channel=mgwg.pmpwtggw)
 
 ダウンロードは[こちら](https://apps.apple.com/jp/app/shiori-web-for-safari/id1480539987?l=ja)
 ## 特徴
