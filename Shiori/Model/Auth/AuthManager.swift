@@ -44,6 +44,15 @@ struct AuthManager {
                     return
                 }
                 if let httpResponse = response as? HTTPURLResponse {
+                    if httpResponse.statusCode == 422 && urlString == "\(const.baseURL)/v1/auth/"
+                        && isAppleAuth
+                    {  // すでに会員登録しているのに会員登録リクエストを送ったとき
+                        // ログインリクエストを送る
+                        self.performRequest(
+                            with: "\(const.baseURL)/v1/auth/sign_in", body: body,
+                            isAppleAuth: isAppleAuth)
+                        return
+                    }
                     // TODO: オリジナルのエラーを作って渡す
                     guard let uid = httpResponse.allHeaderFields["Uid"] as? String else {
                         self.delegate?.didFailWithError(error: nil)
