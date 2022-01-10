@@ -208,10 +208,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let webViewController = WebViewController()
         let selectedContent = contentList[indexPath.row]
         webViewController.targetUrl = selectedContent.url
-        webViewController.positionX = selectedContent.scrollPositionX
-        webViewController.positionY = selectedContent.scrollPositionY
-        webViewController.maxScroolPositionX = selectedContent.maxScrollPositionX
-        webViewController.maxScroolPositionY = selectedContent.maxScrollPositionY
+        webViewController.positionX = selectedContent.scrollPositionX ?? 0
+        webViewController.positionY = selectedContent.scrollPositionY ?? 0
+        webViewController.maxScroolPositionX = selectedContent.maxScrollPositionX ?? 0
+        webViewController.maxScroolPositionY = selectedContent.maxScrollPositionY ?? 0
         webViewController.videoPlaybackPosition = selectedContent.videoPlaybackPosition ?? 0
         self.navigationController!.pushViewController(webViewController, animated: true)
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
@@ -324,8 +324,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let previewProvider: () -> WebViewController? = { [unowned self] in
             let webViewController = WebViewController()
             webViewController.targetUrl = contentList[indexPath.row].url
-            webViewController.positionX = contentList[indexPath.row].scrollPositionX
-            webViewController.positionY = contentList[indexPath.row].scrollPositionY
+            webViewController.positionX = contentList[indexPath.row].scrollPositionX ?? 0
+            webViewController.positionY = contentList[indexPath.row].scrollPositionY ?? 0
             return webViewController
         }
 

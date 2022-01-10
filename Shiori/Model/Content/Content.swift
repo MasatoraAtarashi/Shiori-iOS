@@ -16,10 +16,10 @@ struct Content: Codable {
     var sharingUrl: String
     var fileUrl: String?
     var thumbnailImgUrl: String
-    var scrollPositionX: Int
-    var scrollPositionY: Int
-    let maxScrollPositionX: Int
-    let maxScrollPositionY: Int
+    var scrollPositionX: Int?
+    var scrollPositionY: Int?
+    let maxScrollPositionX: Int?
+    let maxScrollPositionY: Int?
     var videoPlaybackPosition: Int?
     var specifiedText: String?
     var specifiedDomId: String?
