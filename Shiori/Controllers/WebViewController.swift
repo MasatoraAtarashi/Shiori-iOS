@@ -161,7 +161,7 @@ extension WebViewController {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         // TODO: メソッドに切り出す
         self.webView.evaluateJavaScript(
-            "window.scrollTo(\(0),\(positionY))",
+            "window.scrollTo(\(positionX),\(positionY))",
             completionHandler: { _, _ in
                 // ユーザーがリロードしたときスクロールしないようにpositionを初期化
                 self.positionX = 0
@@ -197,8 +197,6 @@ extension WebViewController {
         //            decisionHandler(.allow)
         //        }
     }
-
-    // スクロール位置を復元する
 
     // 動画再生位置を復元する
     func setVideoPlayBackPosition(videoPlayBackPosition: Int) {
