@@ -33,6 +33,10 @@ class ShareViewController: SLComposeServiceViewController {
         // Do validation of contentText and/or NSExtensionContext attachments here
         return true
     }
+    
+    func isIPad() -> Bool {
+        return UIDevice.current.userInterfaceIdiom == .pad
+    }
 
     // TODO: リファクタリング
     override func didSelectPost() {
@@ -53,6 +57,11 @@ class ShareViewController: SLComposeServiceViewController {
                                             dictionary[NSExtensionJavaScriptPreprocessingResultsKey]
                                             as! NSDictionary
 
+                                        var device = "iPhone"
+                                        if self.isIPad() {
+                                         device = "iPad"
+                                        }
+                                        
                                         // 会員登録しているときの処理
                                         if Const().isLoggedInUser() {
                                             if results["url"] != nil {
@@ -85,6 +94,8 @@ class ShareViewController: SLComposeServiceViewController {
                                                     title: title ?? "",
                                                     url: url ?? "",
                                                     userAgent: userAgent ?? "",
+                                                    device: device,
+                                                    browser: "Safari",
                                                     thumbnailImgUrl: thumbnailImgUrl ?? "",
                                                     scrollPositionX: scrollPositionX,
                                                     scrollPositionY: scrollPositionY,

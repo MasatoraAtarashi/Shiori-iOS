@@ -14,6 +14,8 @@ struct Content: Codable {
     var title: String
     var url: String
     var userAgent: String?
+    var device: String?
+    var browser: String?
     var sharingUrl: String
     var fileUrl: String?
     var thumbnailImgUrl: String
@@ -39,6 +41,8 @@ struct Content: Codable {
         case title
         case url
         case userAgent = "user_agent"
+        case device
+        case browser
         case sharingUrl = "sharing_url"
         case fileUrl = "file_url"
         case thumbnailImgUrl = "thumbnail_img_url"
