@@ -25,6 +25,10 @@ struct ContentRequest: Codable {
     var specifiedDomId: String?
     var specifiedDomClass: String?
     var specifiedDomTag: String?
+    var windowInnerWidth: Int?
+    var windowInnerHeight: Int?
+    var windowOuterWidth: Int?
+    var windowOuterHeight: Int?
 
     enum CodingKeys: String, CodingKey {
         case title
@@ -43,5 +47,9 @@ struct ContentRequest: Codable {
         case specifiedDomId = "specified_dom_id"
         case specifiedDomClass = "specified_dom_class"
         case specifiedDomTag = "specified_dom_tag"
+        case windowInnerWidth = "window_inner_width"
+        case windowInnerHeight = "window_inner_height"
+        case windowOuterWidth = "window_outer_width"
+        case windowOuterHeight = "window_outer_height"
     }
 }

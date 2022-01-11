@@ -34,6 +34,10 @@ struct Content: Codable {
     var deletedAt: String?
     let createdAt: String
     let updatedAt: String
+    var windowInnerWidth: Int?
+    var windowInnerHeight: Int?
+    var windowOuterWidth: Int?
+    var windowOuterHeight: Int?
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -61,5 +65,9 @@ struct Content: Codable {
         case deletedAt = "deleted_at"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
+        case windowInnerWidth = "window_inner_width"
+        case windowInnerHeight = "window_inner_height"
+        case windowOuterWidth = "window_outer_width"
+        case windowOuterHeight = "window_outer_height"
     }
 }

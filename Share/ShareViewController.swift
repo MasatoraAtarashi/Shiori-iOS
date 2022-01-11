@@ -90,6 +90,10 @@ class ShareViewController: SLComposeServiceViewController {
                                                     maxScrollPositionYString ?? 0)
                                                 let videoPlaybackPosition = Int(
                                                     videoPlaybackPositionString)
+                                                let windowInnerWidth = results["windowInnerWidth"] as? Int
+                                                let windowInnerHeight = results["windowInnerHeight"] as? Int
+                                                let windowOuterWidth = results["windowOuterWidth"] as? Int
+                                                let windowOuterHeight = results["windowOuterHeight"] as? Int
                                                 let contentRequest = ContentRequest(
                                                     title: title ?? "",
                                                     url: url ?? "",
@@ -104,7 +108,13 @@ class ShareViewController: SLComposeServiceViewController {
                                                     videoPlaybackPosition: videoPlaybackPosition ?? 0,
                                                     audioPlaybackPosition: audioPlaybackPosition ,
                                                     specifiedText: nil, specifiedDomId: nil,
-                                                    specifiedDomClass: nil, specifiedDomTag: nil)
+                                                    specifiedDomClass: nil,
+                                                    specifiedDomTag: nil,
+                                                    windowInnerWidth: windowInnerWidth,
+                                                    windowInnerHeight: windowInnerHeight,
+                                                    windowOuterWidth: windowOuterWidth,
+                                                    windowOuterHeight: windowOuterHeight
+                                                )
 
                                                 self.contentManager.postContent(
                                                     content: contentRequest)

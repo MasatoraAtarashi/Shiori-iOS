@@ -110,6 +110,12 @@ MyPreprocessor.prototype = {
          title = document.title;
         }
         
+        // ウィンドウサイズ
+        var iw = window.innerWidth;
+        var ih = window.innerHeight;
+        var ow = window.outerWidth;
+        var oh = window.outerHeight;
+        
         // TODO: 変数名を合わせる
         arguments.completionFunction(
             {
@@ -124,7 +130,11 @@ MyPreprocessor.prototype = {
                 "image": image,
                 "date": dateString,
                 "videoPlaybackPosition": time,
-                "audioPlaybackPosition": audioPlaybackPosition
+                "audioPlaybackPosition": audioPlaybackPosition,
+                "windowInnerWidth": iw,
+                "windowInnerHeight": ih,
+                "windowOuterWidth": ow,
+                "windowOuterHeight": oh,
             }
          );
     },
