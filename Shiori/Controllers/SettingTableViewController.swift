@@ -337,6 +337,7 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
             let contentRequest = ContentRequest(
                 title: article.title ?? "",
                 url: article.link ?? "",
+                userAgent: article.userAgent ?? "",
                 thumbnailImgUrl: article.imageURL ?? "",
                 scrollPositionX: 0,
                 scrollPositionY: Int(article.positionY ?? "0") ?? 0,

@@ -11,6 +11,7 @@ import Foundation
 struct ContentRequest: Codable {
     var title: String
     var url: String
+    var userAgent: String?
     var thumbnailImgUrl: String
     var scrollPositionX: Int
     var scrollPositionY: Int
@@ -26,6 +27,7 @@ struct ContentRequest: Codable {
     enum CodingKeys: String, CodingKey {
         case title
         case url
+        case userAgent = "user_agent"
         case thumbnailImgUrl = "thumbnail_img_url"
         case scrollPositionX = "scroll_position_x"
         case scrollPositionY = "scroll_position_y"

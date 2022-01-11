@@ -58,6 +58,7 @@ class ShareViewController: SLComposeServiceViewController {
                                             if results["url"] != nil {
                                                 let title = results["title"] as? String
                                                 let url = results["url"] as? String
+                                                let userAgent = results["userAgent"] as? String
                                                 let thumbnailImgUrl = results["image"] as? String
                                                 let scrollPositionXString =
                                                     results["scrollPositionX"] as? Int
@@ -81,7 +82,9 @@ class ShareViewController: SLComposeServiceViewController {
                                                 let videoPlaybackPosition = Int(
                                                     videoPlaybackPositionString)
                                                 let contentRequest = ContentRequest(
-                                                    title: title ?? "", url: url ?? "",
+                                                    title: title ?? "",
+                                                    url: url ?? "",
+                                                    userAgent: userAgent ?? "",
                                                     thumbnailImgUrl: thumbnailImgUrl ?? "",
                                                     scrollPositionX: scrollPositionX,
                                                     scrollPositionY: scrollPositionY,

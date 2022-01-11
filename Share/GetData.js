@@ -4,7 +4,9 @@ var MyPreprocessor = function() {};
 MyPreprocessor.prototype = {
     run: function(arguments) {
         var body = document.body,
-            html = document.documentElement;
+            html = document.documentElement,
+            userAgent = navigator.userAgent;
+            
         var scrollPositionX = document.documentElement.scrollLeft
         var scrollPositionY = document.documentElement.scrollTop
         var maxScrollPositionX = document.documentElement.scrollWidth
@@ -112,6 +114,7 @@ MyPreprocessor.prototype = {
             {
                 "url": url,
                 "title": title,
+                "userAgent": userAgent,
                 "scrollPositionX": scrollPositionX,
                 "scrollPositionY": scrollPositionY,
                 "maxScrollPositionX": maxScrollPositionX,

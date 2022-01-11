@@ -703,6 +703,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 contentType: "web",
                 title: article.title ?? "",
                 url: article.link ?? "",
+                userAgent: article.userAgent ?? "",
                 sharingUrl: article.link ?? "",
                 fileUrl: nil,
                 thumbnailImgUrl: article.imageURL ?? "",
