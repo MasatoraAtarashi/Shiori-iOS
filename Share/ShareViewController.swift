@@ -33,6 +33,10 @@ class ShareViewController: SLComposeServiceViewController {
         // Do validation of contentText and/or NSExtensionContext attachments here
         return true
     }
+    
+    func isIPad() -> Bool {
+        return UIDevice.current.userInterfaceIdiom == .pad
+    }
 
     // TODO: リファクタリング
     override func didSelectPost() {
@@ -53,10 +57,17 @@ class ShareViewController: SLComposeServiceViewController {
                                             dictionary[NSExtensionJavaScriptPreprocessingResultsKey]
                                             as! NSDictionary
 
+                                        var device = "iPhone"
+                                        if self.isIPad() {
+                                         device = "iPad"
+                                        }
+                                        
+                                        // 会員登録しているときの処理
                                         if Const().isLoggedInUser() {
                                             if results["url"] != nil {
                                                 let title = results["title"] as? String
                                                 let url = results["url"] as? String
+                                                let userAgent = results["userAgent"] as? String
                                                 let thumbnailImgUrl = results["image"] as? String
                                                 let scrollPositionXString =
                                                     results["scrollPositionX"] as? Int
@@ -68,6 +79,7 @@ class ShareViewController: SLComposeServiceViewController {
                                                     results["maxScrollPositionY"] as? Int
                                                 let videoPlaybackPositionString =
                                                     results["time"] as! String
+                                                let audioPlaybackPosition = Int(results["audioPlaybackPosition"] as? Double ?? 0)
                                                 let scrollPositionX = Int(
                                                     scrollPositionXString ?? 0)
                                                 let scrollPositionY = Int(
@@ -78,17 +90,31 @@ class ShareViewController: SLComposeServiceViewController {
                                                     maxScrollPositionYString ?? 0)
                                                 let videoPlaybackPosition = Int(
                                                     videoPlaybackPositionString)
+                                                let windowInnerWidth = results["windowInnerWidth"] as? Int
+                                                let windowInnerHeight = results["windowInnerHeight"] as? Int
+                                                let windowOuterWidth = results["windowOuterWidth"] as? Int
+                                                let windowOuterHeight = results["windowOuterHeight"] as? Int
                                                 let contentRequest = ContentRequest(
-                                                    title: title ?? "", url: url ?? "",
+                                                    title: title ?? "",
+                                                    url: url ?? "",
+                                                    userAgent: userAgent ?? "",
+                                                    device: device,
+                                                    browser: "Safari",
                                                     thumbnailImgUrl: thumbnailImgUrl ?? "",
                                                     scrollPositionX: scrollPositionX,
                                                     scrollPositionY: scrollPositionY,
                                                     maxScrollPositionX: maxScrollPositionX,
                                                     maxScrollPositionY: maxScrollPositionY,
-                                                    videoPlaybackPosition: videoPlaybackPosition
-                                                        ?? 0,
+                                                    videoPlaybackPosition: videoPlaybackPosition ?? 0,
+                                                    audioPlaybackPosition: audioPlaybackPosition ,
                                                     specifiedText: nil, specifiedDomId: nil,
-                                                    specifiedDomClass: nil, specifiedDomTag: nil)
+                                                    specifiedDomClass: nil,
+                                                    specifiedDomTag: nil,
+                                                    windowInnerWidth: windowInnerWidth,
+                                                    windowInnerHeight: windowInnerHeight,
+                                                    windowOuterWidth: windowOuterWidth,
+                                                    windowOuterHeight: windowOuterHeight
+                                                )
 
                                                 self.contentManager.postContent(
                                                     content: contentRequest)

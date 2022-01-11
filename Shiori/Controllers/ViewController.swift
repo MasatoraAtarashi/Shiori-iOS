@@ -14,6 +14,7 @@ import SDWebImage
 import SwiftMessages
 import SwipeCellKit
 import UIKit
+import SafariServices
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate,
     SwipeTableViewCellDelegate,
@@ -205,14 +206,26 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // セルをタップしたときの処理
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView.isEditing { return }
-        let webViewController = WebViewController()
         let selectedContent = contentList[indexPath.row]
+        
+//        // PDFの場合
+//        if selectedContent.contentType.lowercased() == "pdf" {
+//            if let url = URL(string: selectedContent.sharingUrl) {
+//                let safariVC = SFSafariViewController(url: url)
+//                present(safariVC, animated: true, completion: nil)
+//            }
+//            return
+//        }
+        
+        // その他の場合
+        let webViewController = WebViewController()
         webViewController.targetUrl = selectedContent.url
-        webViewController.positionX = selectedContent.scrollPositionX
-        webViewController.positionY = selectedContent.scrollPositionY
-        webViewController.maxScroolPositionX = selectedContent.maxScrollPositionX
-        webViewController.maxScroolPositionY = selectedContent.maxScrollPositionY
+        webViewController.positionX = selectedContent.scrollPositionX ?? 0
+        webViewController.positionY = selectedContent.scrollPositionY ?? 0
+        webViewController.maxScroolPositionX = selectedContent.maxScrollPositionX ?? 0
+        webViewController.maxScroolPositionY = selectedContent.maxScrollPositionY ?? 0
         webViewController.videoPlaybackPosition = selectedContent.videoPlaybackPosition ?? 0
+        webViewController.audioPlaybackPosition = selectedContent.audioPlaybackPosition ?? 0
         self.navigationController!.pushViewController(webViewController, animated: true)
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
     }
@@ -324,8 +337,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let previewProvider: () -> WebViewController? = { [unowned self] in
             let webViewController = WebViewController()
             webViewController.targetUrl = contentList[indexPath.row].url
-            webViewController.positionX = contentList[indexPath.row].scrollPositionX
-            webViewController.positionY = contentList[indexPath.row].scrollPositionY
+            webViewController.positionX = contentList[indexPath.row].scrollPositionX ?? 0
+            webViewController.positionY = contentList[indexPath.row].scrollPositionY ?? 0
             return webViewController
         }
 
@@ -703,6 +716,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 contentType: "web",
                 title: article.title ?? "",
                 url: article.link ?? "",
+                userAgent: article.userAgent ?? "",
                 sharingUrl: article.link ?? "",
                 fileUrl: nil,
                 thumbnailImgUrl: article.imageURL ?? "",

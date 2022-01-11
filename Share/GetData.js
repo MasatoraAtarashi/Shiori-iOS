@@ -4,7 +4,9 @@ var MyPreprocessor = function() {};
 MyPreprocessor.prototype = {
     run: function(arguments) {
         var body = document.body,
-            html = document.documentElement;
+            html = document.documentElement,
+            userAgent = navigator.userAgent;
+            
         var scrollPositionX = document.documentElement.scrollLeft
         var scrollPositionY = document.documentElement.scrollTop
         var maxScrollPositionX = document.documentElement.scrollWidth
@@ -54,6 +56,13 @@ MyPreprocessor.prototype = {
             url = url + "?t=" + h + "h" + m + "m" + s + "s"
         }
         
+        // 音声の再生位置を取得
+        var audio= document.getElementsByTagName('audio')[0]
+        var audioPlaybackPosition= 0;
+        if (audio) {
+            audioPlaybackPosition = audio.currentTime;
+        }
+        
         // サムネイル画像を取得
 //        var pi = document.getElementsByTagName('meta');
 //        var image = "";
@@ -100,11 +109,19 @@ MyPreprocessor.prototype = {
         if(document.title) {
          title = document.title;
         }
+        
+        // ウィンドウサイズ
+        var iw = window.innerWidth;
+        var ih = window.innerHeight;
+        var ow = window.outerWidth;
+        var oh = window.outerHeight;
+        
         // TODO: 変数名を合わせる
         arguments.completionFunction(
             {
                 "url": url,
                 "title": title,
+                "userAgent": userAgent,
                 "scrollPositionX": scrollPositionX,
                 "scrollPositionY": scrollPositionY,
                 "maxScrollPositionX": maxScrollPositionX,
@@ -112,7 +129,12 @@ MyPreprocessor.prototype = {
                 "time": time,
                 "image": image,
                 "date": dateString,
-                "videoPlaybackPosition": time
+                "videoPlaybackPosition": time,
+                "audioPlaybackPosition": audioPlaybackPosition,
+                "windowInnerWidth": iw,
+                "windowInnerHeight": ih,
+                "windowOuterWidth": ow,
+                "windowOuterHeight": oh,
             }
          );
     },

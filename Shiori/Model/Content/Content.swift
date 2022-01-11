@@ -13,14 +13,18 @@ struct Content: Codable {
     let contentType: String
     var title: String
     var url: String
+    var userAgent: String?
+    var device: String?
+    var browser: String?
     var sharingUrl: String
     var fileUrl: String?
     var thumbnailImgUrl: String
-    var scrollPositionX: Int
-    var scrollPositionY: Int
-    let maxScrollPositionX: Int
-    let maxScrollPositionY: Int
+    var scrollPositionX: Int?
+    var scrollPositionY: Int?
+    let maxScrollPositionX: Int?
+    let maxScrollPositionY: Int?
     var videoPlaybackPosition: Int?
+    var audioPlaybackPosition: Int?
     var specifiedText: String?
     var specifiedDomId: String?
     var specifiedDomClass: String?
@@ -30,12 +34,19 @@ struct Content: Codable {
     var deletedAt: String?
     let createdAt: String
     let updatedAt: String
+    var windowInnerWidth: Int?
+    var windowInnerHeight: Int?
+    var windowOuterWidth: Int?
+    var windowOuterHeight: Int?
 
     enum CodingKeys: String, CodingKey {
         case id
         case contentType = "content_type"
         case title
         case url
+        case userAgent = "user_agent"
+        case device
+        case browser
         case sharingUrl = "sharing_url"
         case fileUrl = "file_url"
         case thumbnailImgUrl = "thumbnail_img_url"
@@ -44,6 +55,7 @@ struct Content: Codable {
         case maxScrollPositionX = "max_scroll_position_x"
         case maxScrollPositionY = "max_scroll_position_y"
         case videoPlaybackPosition = "video_playback_position"
+        case audioPlaybackPosition = "audio_playback_position"
         case specifiedText = "specified_text"
         case specifiedDomId = "specified_dom_id"
         case specifiedDomClass = "specified_dom_class"
@@ -53,5 +65,9 @@ struct Content: Codable {
         case deletedAt = "deleted_at"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
+        case windowInnerWidth = "window_inner_width"
+        case windowInnerHeight = "window_inner_height"
+        case windowOuterWidth = "window_outer_width"
+        case windowOuterHeight = "window_outer_height"
     }
 }
