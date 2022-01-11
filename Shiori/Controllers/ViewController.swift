@@ -14,6 +14,7 @@ import SDWebImage
 import SwiftMessages
 import SwipeCellKit
 import UIKit
+import SafariServices
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate,
     SwipeTableViewCellDelegate,
@@ -205,8 +206,19 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // セルをタップしたときの処理
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView.isEditing { return }
-        let webViewController = WebViewController()
         let selectedContent = contentList[indexPath.row]
+        
+//        // PDFの場合
+//        if selectedContent.contentType.lowercased() == "pdf" {
+//            if let url = URL(string: selectedContent.sharingUrl) {
+//                let safariVC = SFSafariViewController(url: url)
+//                present(safariVC, animated: true, completion: nil)
+//            }
+//            return
+//        }
+        
+        // その他の場合
+        let webViewController = WebViewController()
         webViewController.targetUrl = selectedContent.url
         webViewController.positionX = selectedContent.scrollPositionX ?? 0
         webViewController.positionY = selectedContent.scrollPositionY ?? 0
