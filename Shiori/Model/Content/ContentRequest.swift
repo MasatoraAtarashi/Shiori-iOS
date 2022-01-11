@@ -17,6 +17,7 @@ struct ContentRequest: Codable {
     let maxScrollPositionX: Int
     let maxScrollPositionY: Int
     var videoPlaybackPosition: Int
+    var audioPlaybackPosition: Int
     var specifiedText: String?
     var specifiedDomId: String?
     var specifiedDomClass: String?
@@ -31,6 +32,7 @@ struct ContentRequest: Codable {
         case maxScrollPositionX = "max_scroll_position_x"
         case maxScrollPositionY = "max_scroll_position_y"
         case videoPlaybackPosition = "video_playback_position"
+        case audioPlaybackPosition = "audio_playback_position"
         case specifiedText = "specified_text"
         case specifiedDomId = "specified_dom_id"
         case specifiedDomClass = "specified_dom_class"

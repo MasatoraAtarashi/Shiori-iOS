@@ -29,6 +29,7 @@ class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
     var maxScroolPositionX: Int = 0
     var maxScroolPositionY: Int = 0
     var videoPlaybackPosition: Int = 0
+    var audioPlaybackPosition: Int = 0
 
     let preferences = WKPreferences()
     let segment: UISegmentedControl = UISegmentedControl(items: ["web", "smart"])
@@ -155,6 +156,7 @@ extension WebViewController {
         const.activityIndicatorView.center = webView.center
         const.activityIndicatorView.startAnimating()
     }
+    
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         // TODO: メソッドに切り出す
@@ -166,10 +168,7 @@ extension WebViewController {
                 self.positionY = 0
             }
         )
-
-        self.refreshControll.endRefreshing()
-        const.activityIndicatorView.stopAnimating()
-
+        
         if let url = targetUrl {
             if url.hasPrefix("https://youtu.be/") || url.contains("pornhub")
                 || url.contains("nicovideo") || url.contains("dailymotion") || url.contains("tube8")
@@ -179,6 +178,10 @@ extension WebViewController {
             }
             setVideoPlayBackPosition(videoPlayBackPosition: videoPlaybackPosition)
         }
+        setAudioPlayBackPosition(audioPlayBackPosition: audioPlaybackPosition)
+
+        self.refreshControll.endRefreshing()
+        const.activityIndicatorView.stopAnimating()
     }
 
     func webView(
@@ -200,10 +203,23 @@ extension WebViewController {
     // 動画再生位置を復元する
     func setVideoPlayBackPosition(videoPlayBackPosition: Int) {
         let setVideoPlaybackPositionScript = """
-                var htmlVideoPlayer = document.getElementsByTagName('video')[0];
-                htmlVideoPlayer.currentTime += \(videoPlaybackPosition);
+                var video = document.getElementsByTagName('video')[0];
+                if (video) {
+                    video.currentTime = \(videoPlayBackPosition);
+                }
             """
         webView.evaluateJavaScript(setVideoPlaybackPositionScript, completionHandler: nil)
+    }
+    
+    // 音声再生位置を復元する
+    func setAudioPlayBackPosition(audioPlayBackPosition: Int) {
+        let setAudioPlaybackPositionScript = """
+                var audio = document.getElementsByTagName('audio')[0];
+                if (audio) {
+                    audio.currentTime = \(audioPlaybackPosition);
+                };
+            """
+        webView.evaluateJavaScript(setAudioPlaybackPositionScript, completionHandler: nil)
     }
 }
 

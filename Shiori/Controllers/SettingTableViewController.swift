@@ -343,6 +343,7 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
                 maxScrollPositionX: 0,
                 maxScrollPositionY: Int(article.maxScrollPositionY ?? "0") ?? 0,
                 videoPlaybackPosition: Int(article.videoPlaybackPosition ?? "0") ?? 0,
+                audioPlaybackPosition: Int(article.audioPlaybackPosition),
                 specifiedText: nil,
                 specifiedDomId: nil,
                 specifiedDomClass: nil,

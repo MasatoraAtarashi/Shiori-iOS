@@ -53,6 +53,7 @@ class ShareViewController: SLComposeServiceViewController {
                                             dictionary[NSExtensionJavaScriptPreprocessingResultsKey]
                                             as! NSDictionary
 
+                                        // 会員登録しているときの処理
                                         if Const().isLoggedInUser() {
                                             if results["url"] != nil {
                                                 let title = results["title"] as? String
@@ -68,6 +69,7 @@ class ShareViewController: SLComposeServiceViewController {
                                                     results["maxScrollPositionY"] as? Int
                                                 let videoPlaybackPositionString =
                                                     results["time"] as! String
+                                                let audioPlaybackPosition = Int(results["audioPlaybackPosition"] as? Double ?? 0)
                                                 let scrollPositionX = Int(
                                                     scrollPositionXString ?? 0)
                                                 let scrollPositionY = Int(
@@ -85,8 +87,8 @@ class ShareViewController: SLComposeServiceViewController {
                                                     scrollPositionY: scrollPositionY,
                                                     maxScrollPositionX: maxScrollPositionX,
                                                     maxScrollPositionY: maxScrollPositionY,
-                                                    videoPlaybackPosition: videoPlaybackPosition
-                                                        ?? 0,
+                                                    videoPlaybackPosition: videoPlaybackPosition ?? 0,
+                                                    audioPlaybackPosition: audioPlaybackPosition ,
                                                     specifiedText: nil, specifiedDomId: nil,
                                                     specifiedDomClass: nil, specifiedDomTag: nil)
 

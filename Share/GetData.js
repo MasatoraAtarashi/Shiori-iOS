@@ -54,6 +54,13 @@ MyPreprocessor.prototype = {
             url = url + "?t=" + h + "h" + m + "m" + s + "s"
         }
         
+        // 音声の再生位置を取得
+        var audio= document.getElementsByTagName('audio')[0]
+        var audioPlaybackPosition= 0;
+        if (audio) {
+            audioPlaybackPosition = audio.currentTime;
+        }
+        
         // サムネイル画像を取得
 //        var pi = document.getElementsByTagName('meta');
 //        var image = "";
@@ -112,7 +119,8 @@ MyPreprocessor.prototype = {
                 "time": time,
                 "image": image,
                 "date": dateString,
-                "videoPlaybackPosition": time
+                "videoPlaybackPosition": time,
+                "audioPlaybackPosition": audioPlaybackPosition
             }
          );
     },
