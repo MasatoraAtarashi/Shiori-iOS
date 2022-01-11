@@ -213,6 +213,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         webViewController.maxScroolPositionX = selectedContent.maxScrollPositionX ?? 0
         webViewController.maxScroolPositionY = selectedContent.maxScrollPositionY ?? 0
         webViewController.videoPlaybackPosition = selectedContent.videoPlaybackPosition ?? 0
+        webViewController.audioPlaybackPosition = selectedContent.audioPlaybackPosition ?? 0
         self.navigationController!.pushViewController(webViewController, animated: true)
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
     }
