@@ -94,6 +94,8 @@ class ShareViewController: SLComposeServiceViewController {
                                                 let windowInnerHeight = results["windowInnerHeight"] as? Int
                                                 let windowOuterWidth = results["windowOuterWidth"] as? Int
                                                 let windowOuterHeight = results["windowOuterHeight"] as? Int
+                                                let offsetWidth = results["offsetWidth"] as? Int
+                                                let offsetHeight = results["offsetHeight"] as? Int
                                                 let contentRequest = ContentRequest(
                                                     title: title ?? "",
                                                     url: url ?? "",
@@ -113,7 +115,9 @@ class ShareViewController: SLComposeServiceViewController {
                                                     windowInnerWidth: windowInnerWidth,
                                                     windowInnerHeight: windowInnerHeight,
                                                     windowOuterWidth: windowOuterWidth,
-                                                    windowOuterHeight: windowOuterHeight
+                                                    windowOuterHeight: windowOuterHeight,
+                                                    offsetWidth: offsetWidth,
+                                                    offsetHeight: offsetHeight
                                                 )
 
                                                 self.contentManager.postContent(

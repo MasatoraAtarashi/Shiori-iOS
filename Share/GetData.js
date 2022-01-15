@@ -111,10 +111,14 @@ MyPreprocessor.prototype = {
         }
         
         // ウィンドウサイズ
-        var iw = window.innerWidth;
-        var ih = window.innerHeight;
-        var ow = window.outerWidth;
-        var oh = window.outerHeight;
+        var wiw = window.innerWidth;
+        var wih = window.innerHeight;
+        var wow = window.outerWidth;
+        var woh = window.outerHeight;
+        
+        // オフセットサイズ
+        var ow = document.documentElement.offsetWidth;
+        var oh = document.documentElement.offsetHeight;
         
         // TODO: 変数名を合わせる
         arguments.completionFunction(
@@ -131,10 +135,12 @@ MyPreprocessor.prototype = {
                 "date": dateString,
                 "videoPlaybackPosition": time,
                 "audioPlaybackPosition": audioPlaybackPosition,
-                "windowInnerWidth": iw,
-                "windowInnerHeight": ih,
-                "windowOuterWidth": ow,
-                "windowOuterHeight": oh,
+                "windowInnerWidth": wiw,
+                "windowInnerHeight": wih,
+                "windowOuterWidth": wow,
+                "windowOuterHeight": woh,
+                "offsetWidth": ow,
+                "offsetHeight": oh,
             }
          );
     },
