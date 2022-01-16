@@ -219,7 +219,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         // その他の場合
         let webViewController = WebViewController()
-        webViewController.targetUrl = selectedContent.url
+        webViewController.targetUrl = selectedContent.sharingUrl
         webViewController.positionX = selectedContent.scrollPositionX ?? 0
         webViewController.positionY = selectedContent.scrollPositionY ?? 0
         webViewController.maxScroolPositionX = selectedContent.maxScrollPositionX ?? 0

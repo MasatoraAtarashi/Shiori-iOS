@@ -154,9 +154,9 @@ class ShareViewController: SLComposeServiceViewController {
                                             let maxScrollPositionYString: String = String(
                                                 describing: maxScrollPositionY)
 
-                                            if results["url"] != nil {
+                                            if results["urlForLocalOnlyUser"] != nil {
                                                 let resultsDic = [
-                                                    "url": results["url"],
+                                                    "url": results["urlForLocalOnlyUser"],
                                                     "title": results["title"],
                                                     "positionX": scrollPositionXString,
                                                     "positionY": scrollPositionYString,
