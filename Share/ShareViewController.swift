@@ -94,6 +94,8 @@ class ShareViewController: SLComposeServiceViewController {
                                                 let windowInnerHeight = results["windowInnerHeight"] as? Int
                                                 let windowOuterWidth = results["windowOuterWidth"] as? Int
                                                 let windowOuterHeight = results["windowOuterHeight"] as? Int
+                                                let offsetWidth = results["offsetWidth"] as? Int
+                                                let offsetHeight = results["offsetHeight"] as? Int
                                                 let contentRequest = ContentRequest(
                                                     title: title ?? "",
                                                     url: url ?? "",
@@ -113,7 +115,9 @@ class ShareViewController: SLComposeServiceViewController {
                                                     windowInnerWidth: windowInnerWidth,
                                                     windowInnerHeight: windowInnerHeight,
                                                     windowOuterWidth: windowOuterWidth,
-                                                    windowOuterHeight: windowOuterHeight
+                                                    windowOuterHeight: windowOuterHeight,
+                                                    offsetWidth: offsetWidth,
+                                                    offsetHeight: offsetHeight
                                                 )
 
                                                 self.contentManager.postContent(
@@ -150,9 +154,9 @@ class ShareViewController: SLComposeServiceViewController {
                                             let maxScrollPositionYString: String = String(
                                                 describing: maxScrollPositionY)
 
-                                            if results["url"] != nil {
+                                            if results["urlForLocalOnlyUser"] != nil {
                                                 let resultsDic = [
-                                                    "url": results["url"],
+                                                    "url": results["urlForLocalOnlyUser"],
                                                     "title": results["title"],
                                                     "positionX": scrollPositionXString,
                                                     "positionY": scrollPositionYString,

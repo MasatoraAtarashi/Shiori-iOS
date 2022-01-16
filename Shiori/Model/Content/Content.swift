@@ -38,6 +38,8 @@ struct Content: Codable {
     var windowInnerHeight: Int?
     var windowOuterWidth: Int?
     var windowOuterHeight: Int?
+    var offsetWidth: Int?
+    var offsetHeight: Int?
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -69,5 +71,7 @@ struct Content: Codable {
         case windowInnerHeight = "window_inner_height"
         case windowOuterWidth = "window_outer_width"
         case windowOuterHeight = "window_outer_height"
+        case offsetWidth = "offset_width"
+        case offsetHeight = "offset_height"
     }
 }

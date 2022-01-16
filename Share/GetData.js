@@ -21,39 +21,42 @@ MyPreprocessor.prototype = {
         }
 
         var url = document.URL
-        if (url.match(/youtube/) && time != "0") {
+        
+        // ログインせずに利用している人向け。ログインして使用している人の場合、↓の処理はバックエンドでやるのでいらない。
+        var urlForLocalOnlyUser = document.URL
+        if (urlForLocalOnlyUser.match(/youtube/) && time != "0") {
             var video_id = document.URL.split('v=')[1];
             var ampersandPosition = video_id.indexOf('&');
             if(ampersandPosition != -1) {
                 video_id = video_id.substring(0, ampersandPosition);
             }
-            url = "https://youtu.be/" + video_id + "?t=" + time;
-        } else if (url.match(/pornhub/) && time != "0") {
-            url = url + "&t=" + time
-        } else if (url.match(/nicovideo/) && time != "0") {
-            url = url + "?from=" + time
-        } else if (url.match(/dailymotion/) && time != "0") {
-            url = url + "?start=" + time
+            urlForLocalOnlyUser = "https://youtu.be/" + video_id + "?t=" + time;
+        } else if (urlForLocalOnlyUser.match(/pornhub/) && time != "0") {
+            urlForLocalOnlyUser = urlForLocalOnlyUser + "&t=" + time
+        } else if (urlForLocalOnlyUser.match(/nicovideo/) && time != "0") {
+            urlForLocalOnlyUser = urlForLocalOnlyUser + "?from=" + time
+        } else if (urlForLocalOnlyUser.match(/dailymotion/) && time != "0") {
+            urlForLocalOnlyUser = urlForLocalOnlyUser + "?start=" + time
 //        } else if (url.match(/bilibili/) && time != "0") {
 //            //機能しない
 //            var video_id = document.URL.split('video/')[1];
 //            video_id = video_id.split('.html')[0];
 //            url = 'https://www.bilibili.com/video/' + video_id + "?t=" + time
-        } else if (url.match(/redtube/) && time != "0") {
-            url = url + "?t=" + time
-        } else if (url.match(/xhamster/) && time != "0") {
+        } else if (urlForLocalOnlyUser.match(/redtube/) && time != "0") {
+            urlForLocalOnlyUser = urlForLocalOnlyUser + "?t=" + time
+        } else if (urlForLocalOnlyUser.match(/xhamster/) && time != "0") {
             //アプリでは機能しない。safariで開くと機能する
             time = parseFloat(time)
             time = time.toFixed(2)
-            url = url + "?t=" + time
-        } else if (url.match(/tube8/) && time != "0") {
-            url = url + "?t=" + time
-        } else if (url.match(/twitch/) && time != "0") {
+            urlForLocalOnlyUser = urlForLocalOnlyUser + "?t=" + time
+        } else if (urlForLocalOnlyUser.match(/tube8/) && time != "0") {
+            urlForLocalOnlyUser = urlForLocalOnlyUser + "?t=" + time
+        } else if (urlForLocalOnlyUser.match(/twitch/) && time != "0") {
             // PCだといけるけどスマホだと機能しない
             var h = Math.floor(time / 3600);
             var m = Math.floor((time % 3600) / 60);
             var s = time % 60
-            url = url + "?t=" + h + "h" + m + "m" + s + "s"
+            urlForLocalOnlyUser = urlForLocalOnlyUser + "?t=" + h + "h" + m + "m" + s + "s"
         }
         
         // 音声の再生位置を取得
@@ -111,10 +114,14 @@ MyPreprocessor.prototype = {
         }
         
         // ウィンドウサイズ
-        var iw = window.innerWidth;
-        var ih = window.innerHeight;
-        var ow = window.outerWidth;
-        var oh = window.outerHeight;
+        var wiw = window.innerWidth;
+        var wih = window.innerHeight;
+        var wow = window.outerWidth;
+        var woh = window.outerHeight;
+        
+        // オフセットサイズ
+        var ow = document.documentElement.offsetWidth;
+        var oh = document.documentElement.offsetHeight;
         
         // TODO: 変数名を合わせる
         arguments.completionFunction(
@@ -131,10 +138,13 @@ MyPreprocessor.prototype = {
                 "date": dateString,
                 "videoPlaybackPosition": time,
                 "audioPlaybackPosition": audioPlaybackPosition,
-                "windowInnerWidth": iw,
-                "windowInnerHeight": ih,
-                "windowOuterWidth": ow,
-                "windowOuterHeight": oh,
+                "windowInnerWidth": wiw,
+                "windowInnerHeight": wih,
+                "windowOuterWidth": wow,
+                "windowOuterHeight": woh,
+                "offsetWidth": ow,
+                "offsetHeight": oh,
+                "urlForLocalOnlyUser": urlForLocalOnlyUser,
             }
          );
     },
